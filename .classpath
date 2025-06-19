@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="datastructures-library/src/main/java"/>
+	<classpathentry kind="src" path="incremento-Enzo/src"/>
+	<classpathentry kind="src" path="simulador-colectivos/src/main/java"/>
+	<classpathentry kind="src" path="simulador-colectivos/src/main/resources/old_documents/subte"/>
+	<classpathentry kind="src" path="simulador-colectivos/src/main/resources/subte"/>
+	<classpathentry kind="src" path="simulador-colectivos/src/test/java"/>
+	<classpathentry kind="src" path="simulador-colectivos/target/classes/old_documents/subte"/>
+	<classpathentry kind="src" path="simulador-colectivos/target/classes/subte"/>
+	<classpathentry kind="src" path="simulador-colectivos2/src/main/java"/>
+	<classpathentry kind="src" path="simulador-colectivos2/src/main/resources/documents_viejos/subte"/>
+	<classpathentry kind="src" path="simulador-colectivos2/src/test/java"/>
+	<classpathentry kind="src" path="simulador-colectivos2/src/test/resources"/>
+	<classpathentry kind="output" path="incremento-Enzo/bin"/>
+</classpath>
