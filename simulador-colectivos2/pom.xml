@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Coordenadas del Proyecto Integrador -->
+  <groupId>ar.edu.unpsjb.ayp2.proyectointegrador</groupId>
+  <artifactId>simulador-colectivos2</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Proyecto Integrador - Simulador de Colectivos Urbanos V2</name>
+  <description>Sistema para simular el funcionamiento de líneas de colectivos urbanos para la materia Algoritmica y Programacion II.</description>
+  
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<!-- Definimos java.version para que el plugin de compilación lo use -->
+		<java.version>21</java.version>
+	</properties>
+
+	<dependencies>
+		<!-- JUnit para pruebas unitarias -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Librería de Estructuras de Datos (TADs) -->
+		<dependency>
+			<groupId>net.datastructures</groupId>
+			<artifactId>datastructures-library</artifactId>
+			<version>6.0.0-custom</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<!-- Usamos la propiedad definida arriba -->
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- Puedes configurar la clase principal aquí si lo deseas más adelante -->
+							<!-- <mainClass>ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp</mainClass> -->
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

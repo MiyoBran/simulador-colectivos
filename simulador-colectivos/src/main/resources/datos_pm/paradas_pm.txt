@@ -1,0 +1,104 @@
+1;Rivadavia, 2496;0.0;0.0
+2;Santa Fe, 795;0.0;0.0
+3;España, 1660;0.0;0.0
+4;España, 1450;0.0;0.0
+5;España, 928;0.0;0.0
+6;Juan B. Justo, 1172;0.0;0.0
+7;Dorrego, 416;0.0;0.0
+8;Marcos A. Zar, 1998;0.0;0.0
+9;Mariano Moreno, 193;0.0;0.0
+10;Bartolomé Mitre, 610;0.0;0.0
+11;Bartolomé Mitre, 401;0.0;0.0
+12;28 De Julio, 200;0.0;0.0
+13;General Mosconi, 100;0.0;0.0
+14;Avenida Domec García Norte, 239;0.0;0.0
+15;Julián Murga, 950;0.0;0.0
+16;Comodoro Martín Rivadavia, 750;0.0;0.0
+17;Comodoro Martín Rivadavia, 602;0.0;0.0
+18;Roberto Gómez, 1017;0.0;0.0
+19;Pedro Derbes, 816;0.0;0.0
+20;Pedro Derbes, 660;0.0;0.0
+21;Roberto Gómez, 550;0.0;0.0
+22;Avenida Juan Muzzio, 258;0.0;0.0
+23;Avenida Juan Muzzio, 482;0.0;0.0
+24;Gobernador Alejandro Maiz, 315;0.0;0.0
+25;Belgrano, 314;0.0;0.0
+26;25 De Mayo, 299;0.0;0.0
+27;25 De Mayo, 693;0.0;0.0
+28;Dorrego, 109;0.0;0.0
+29;Marcos A. Zar, 1980;0.0;0.0
+30;San Martín, 1400;0.0;0.0
+31;San Martín, 1220;0.0;0.0
+32;España, 485;0.0;0.0
+33;Villegas, 700;0.0;0.0
+34;España, 1431;0.0;0.0
+35;La Pampa, 698;0.0;0.0
+36;España, 2375;0.0;0.0
+37;Soldado Desconocido, 1265;0.0;0.0
+38;Esquel, 1352;0.0;0.0
+39;Alto Río Senguer, 1311;0.0;0.0
+40;Pasaje 22 De Abril, 167;0.0;0.0
+41;8 De Marzo, 385;0.0;0.0
+42;Hipólito Yrigoyen, 802;0.0;0.0
+43;Avenida Julio Argentino Roca, 1567;0.0;0.0
+44;Avenida Julio Argentino Roca, 2251;0.0;0.0
+45;Abraham Mathews, 2525;0.0;0.0
+46;Bv. Almirante Brown, 2925;0.0;0.0
+47;Bv. Almirante Brown, 3053;0.0;0.0
+48;Aarón Jenkins, 219;0.0;0.0
+49;Chiquichan, 22;0.0;0.0
+50;Avenida Julio Argentino Roca, 1615;0.0;0.0
+51;Hipólito Yrigoyen, 457;0.0;0.0
+52;1 De Marzo, 499;0.0;0.0
+53;Fuerte San José, 742;0.0;0.0
+54;Avenida Juan Muzzio, 15-198;0.0;0.0
+55;Pedro Derbes, 1040;0.0;0.0
+56;Pedro Derbes, 1102;0.0;0.0
+57;Pasaje 22 De Abril, 308;0.0;0.0
+58;Ruta Provincial 1;0.0;0.0
+59;Manuel Carrera, 1534;0.0;0.0
+60;Agustín Pujol, 374;0.0;0.0
+61;1 De Marzo, 405;0.0;0.0
+62;28 De Julio, 311;0.0;0.0
+63;Marcos A. Zar, 461;0.0;0.0
+64;Marcos A. Zar, 691;0.0;0.0
+65;Dorrego, 700;0.0;0.0
+66;Fournier, 1090;0.0;0.0
+67;San Juan, 896;0.0;0.0
+68;Ruperto Gimenez, 678;0.0;0.0
+69;Periodistas Chubutenses, 500;0.0;0.0
+70;Santiago Del Estero, 727;0.0;0.0
+71;San Juan, 891;0.0;0.0
+72;Fournier, 1187;0.0;0.0
+73;Agustín Pujol, 284;0.0;0.0
+74;Bouchard, 880;0.0;0.0
+75;Bouchard, 1285;0.0;0.0
+76;Rivadavia, 2476;0.0;0.0
+77;Rivadavia 2950;0.0;0.0
+78;Vito Roca 1106;0.0;0.0
+79;Manuel Alsua, 1086;0.0;0.0
+80;Juan Jose Meangolarra Y Moreno, 1005;0.0;0.0
+81;Lewis Jones, 1336;0.0;0.0
+82;Lewis Jones, 919;0.0;0.0
+83;Lewis Jones, 200;0.0;0.0
+84;Magallanes, 883;0.0;0.0
+85;Juan Bautista Alberdi, 1240;0.0;0.0
+86;Luis Urtazun, 624;0.0;0.0
+87;Luis Urtazun, 1005;0.0;0.0
+88;Vito Roca 705;0.0;0.0
+89;Manuel García 705;0.0;0.0
+90;José Contin 712;0.0;0.0
+91;José Alberdi 720;0.0;0.0
+92;España 2451;0.0;0.0
+93;Sarmiento, 229;0.0;0.0
+94;Bouchard, 400;0.0;0.0
+95;Vicente López Y Planes, 315;0.0;0.0
+96;Avenida Juan Xxiii, 1708;0.0;0.0
+97;Necochea, 1022;0.0;0.0
+98;Dorrego, 669;0.0;0.0
+99;El Jariyal, 1725;0.0;0.0
+100;Los Alamos, 3900;0.0;0.0
+101;Caña Colihue, 1184;0.0;0.0
+102;Alsua De Corbetto, 638;0.0;0.0
+103;Avenida Julio Argentino Roca, 2599;0.0;0.0
+104;Avenida Julio Argentino Roca, 936;0.0;0.0

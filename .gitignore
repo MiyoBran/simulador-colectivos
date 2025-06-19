@@ -1,0 +1,124 @@
+# Configuración de Eclipse
+# Archivos de configuración del IDE (Eclipse)
+# .project, .classpath, y .settings/ PUEDEN ser versionados si todos usan m2e y la misma versión de IDE
+# ya que m2e los usa para la configuración específica del proyecto Maven.
+# Si decides ignorarlos, cada desarrollador debe reimportar los proyectos como "Existing Maven Projects".
+# Por ahora, los comentaré. Si ves que causan problemas de merge, puedes descomentarlos.
+# .project
+# .classpath
+# .settings/
+
+.recommenders/
+RemoteSystemsTempFiles/
+
+.settings/
+.metadata/
+local.properties
+*.swp
+*~.nib
+.loadpath
+
+# Archivos de configuración de ejecución de Eclipse
+*.launch
+
+# Archivos de configuración local de Maven (si se usan fuera del settings.xml global)
+mvnw
+mvnw.cmd
+.mvn/
+
+# Archivos específicos de Maven que no deben ir al repo
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.gradletasknamecache
+
+# Archivos de IDEs (IntelliJ IDEA)
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Archivos de IDEs (NetBeans)
+nbproject/
+build/
+dist/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Documentos generados localmente (ej: Javadoc local, reportes)
+javadoc/
+docs/api/
+site/ # Usado por `mvn site`
+
+# Dependencias descargadas por Node/npm (si alguna vez usaras herramientas frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Archivos de Scene Builder (si genera backups o configuraciones locales)
+# Usualmente Scene Builder modifica directamente el FXML, pero por si acaso.
+*.scenebuilder-backup
+
+# Archivos específicos de VS Code
+.vscode/
+
+# Paquetes de Python (si se usara)
+__pycache__/
+*.pyc
+*.pyo
+.Python
+env/
+venv/
+
+# Archivos de SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# Salidas de compilación y directorios de destino
+bin/
+target/
+
+# Archivos temporales y de backup
+*.tmp
+*.bak
+*.swp
+*~
+# Patch files
+*.patch
+*.diff
+
+
+
+# Configuraciones de otros IDE (por ejemplo, VSCode, IntelliJ)
+.vscode/
+.idea/
+
+# Archivos y carpetas generados por Maven (si aplica)
+logs/
+*.log
+
+# Archivos compilados
+*.class
+
+# Archivos empaquetados (si se generan)
+*.jar
+*.war
+*.ear
+*.tar.gz
+*.zip
+*.rar
+
+# virtual machine crash logs
+hs_err_pid*
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini

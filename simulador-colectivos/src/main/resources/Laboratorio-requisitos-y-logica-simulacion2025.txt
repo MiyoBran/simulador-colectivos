@@ -1,0 +1,31 @@
+Título: Requisitos y Lógica de Simulación del Proyecto
+
+Objetivo General: Desarrollar un sistema para simular el funcionamiento de líneas de colectivos urbanos, con entregas incrementales.
+
+##Incremento 1 (Entrega: 11/06/25)
+---
+Inicialización:
+Cargar la información de Lineas (desde el archivo especificado en config.properties como linea, ej: lineas_pm_mapeadas.txt) y Paradas (desde el archivo especificado como parada, ej: paradas_pm_mapeadas.txt).
+Crear un único Colectivo por cada Linea existente. La capacidad de estos colectivos (parámetro capacidadColectivo) también se define en config.properties.
+Generar la cantidad de Pasajeros especificada en config.properties (parámetro cantidadPasajeros) y distribuirlos aleatoriamente en las colas de espera de las Paradas.
+---
+Lógica de Simulación:
+Cada Colectivo debe realizar un solo recorrido completo de su Linea asignada (desde la primera hasta la última parada de la lista recorrido).
+En cada Parada del recorrido, el Colectivo debe:
+Primero, bajar a los Pasajeros a bordo cuyo paradaDestino sea la paradaActual.
+Luego, subir a los Pasajeros que están en la pasajerosEsperando de esa paradaActual.
+---
+Salida Esperada:
+Mostrar por consola un informe por cada colectivo, detallando:
+Las paradas por las que va pasando en orden.
+Para cada parada, los pasajeros que suben y los que bajan.
+---
+##Incremento 2 (Entrega: 24/06/25)
+---
+Nuevas Funcionalidades:
+Los Colectivos pueden realizar múltiples recorridos por su línea.
+Se debe respetar la capacidadMaxima de cada Colectivo. Si un colectivo llega a una parada y está lleno, no puede subir más pasajeros, y estos deben esperar al siguiente.
+---
+Métricas a Calcular:
+Índice de Satisfacción del Cliente: Se calcula al final de la simulación. Se basa en cuántos colectivos tuvo que esperar un pasajero para poder subir. (Ver Anexo I para la fórmula).
+Ocupación Promedio de Colectivos: Se calcula para cada colectivo. Es el promedio de la ocupación (pasajeros a bordo / capacidad máxima) que tuvo el colectivo en cada tramo entre paradas. (Ver Anexo II para la fórmula).
