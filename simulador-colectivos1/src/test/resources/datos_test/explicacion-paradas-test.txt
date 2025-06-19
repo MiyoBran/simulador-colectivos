@@ -1,0 +1,12 @@
+P06;Latitud No Numerica;ERROR;20.6
+Explicación de paradas_test.txt:
+
+P01, P02, P03, P09: Paradas válidas que esperamos se carguen.
+P01;Parada Duplicada P01;...: ID duplicado, LectorArchivos debería ignorar esta segunda entrada para P01.
+P05;Formato Incorrecto Menos Campos: Menos de 4 campos, LectorArchivos debería ignorarla.
+P06;Latitud No Numerica;ERROR;...: Latitud no es un número, LectorArchivos debería manejar el NumberFormatException e ignorar la línea.
+;Nombre Parada ID Vacio;...: ID vacío, LectorArchivos debería ignorarla (o Parada lanzar IllegalArgumentException si la validación de ID vacío está en el constructor y LectorArchivos la captura).
+P08;;10.8;20.8: Nombre vacío, el constructor de Parada lanzará IllegalArgumentException, LectorArchivos debería capturarla e ignorar la línea.
+Línea vacía (entre P09 y P10): LectorArchivos debería ignorarla.
+P10;...;EXTRA: Más de 4 campos, LectorArchivos debería ignorarla (o tomar solo los primeros 4, dependiendo de cómo split maneje esto, pero nuestra implementación actual espera exactamente 4).
+P11;...;ERROR: Longitud no es un número, LectorArchivos debería manejar el NumberFormatException e ignorar la línea.

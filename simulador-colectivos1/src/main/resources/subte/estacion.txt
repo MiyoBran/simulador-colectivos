@@ -1,0 +1,18 @@
+a1;Plaza de Mayo;A;
+a2;Peru;A;
+a3;Piedras;A;
+a4;Lima;A;
+a5;Avenida de Mayo;A;
+b1;Leandro N Alem;B;
+b2;Florida;B;
+b3;Carlos Pellegrini;B;
+b4;Uruguay;B;
+c1;Retiro;C;
+c2;San Martin;C;
+c3;Lavalle;C;
+c4;Diagonal Norte;C;
+c5;Av. de Mayo;C;
+c6;Moreno;C;
+c7;Independencia;C;
+c8;San Juan;C;
+c9;Constitucion;C;

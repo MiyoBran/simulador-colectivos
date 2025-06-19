@@ -1,0 +1,363 @@
+Cambios propuestos para el Incremento 2
+
+Para preparar tu sistema para el Incremento 2, donde necesitarás implementar múltiples colectivos por línea con diferentes frecuencias y calcular la satisfacción de los pasajeros, te recomiendo las siguientes mejoras:
+
+1. Ampliar el Modelo de Pasajero
+public class Pasajero {
+    // Atributos existentes...
+    private double tiempoTotalEspera; // En minutos
+    private double tiempoInicioEspera; // Timestamp cuando empezó a esperar
+    private List<ColectivoObservado> colectivosObservados; // Registra colectivos vistos
+    
+    // Constructor - agregar inicialización para nuevos campos
+    public Pasajero(String id, Parada paradaOrigen, Parada paradaDestino) {
+        // Código existente...
+        this.colectivosObservados = new ArrayList<>();
+        this.tiempoTotalEspera = 0.0;
+        this.tiempoInicioEspera = 0.0;
+    }
+    
+    // Clase interna para colectivos observados
+    public static class ColectivoObservado {
+        private String idColectivo;
+        private String lineaId;
+        private double tiempoObservacion;
+        private boolean estabaLleno;
+        
+        public ColectivoObservado(String idColectivo, String lineaId, double tiempo, boolean lleno) {
+            this.idColectivo = idColectivo;
+            this.lineaId = lineaId;
+            this.tiempoObservacion = tiempo;
+            this.estabaLleno = lleno;
+        }
+        
+        // Getters
+    }
+    
+    // Registrar un colectivo que pasó y si estaba lleno
+    public void registrarColectivoPasado(Colectivo colectivo, double tiempoActual, boolean estabaLleno) {
+        this.colectivosObservados.add(new ColectivoObservado(
+            colectivo.getIdColectivo(), 
+            colectivo.getLineaAsignada().getId(), 
+            tiempoActual, 
+            estabaLleno
+        ));
+        
+        if (estabaLleno) {
+            this.colectivosEsperados++;
+        }
+    }
+    
+    // Iniciar registro de tiempo de espera
+    public void iniciarEspera(double tiempoActual) {
+        this.tiempoInicioEspera = tiempoActual;
+    }
+    
+    // Finalizar espera y calcular tiempo total
+    public void finalizarEspera(double tiempoActual) {
+        this.tiempoTotalEspera += (tiempoActual - this.tiempoInicioEspera);
+    }
+    
+    // Calcular satisfacción del pasajero
+    public int calcularSatisfaccion() {
+        // Base: 100% satisfacción
+        int satisfaccion = 100;
+        
+        // Penalización por colectivos llenos que pasaron (máx 50 puntos)
+        satisfaccion -= Math.min(50, colectivosEsperados * 10);
+        
+        // Penalización por tiempo de espera excesivo (más de 20 min es malo)
+        double factorTiempoEspera = Math.min(50, tiempoTotalEspera > 20 ? 
+                                         (tiempoTotalEspera - 20) * 2.5 : 0);
+        satisfaccion -= factorTiempoEspera;
+        
+        return Math.max(0, satisfaccion);
+    }
+    
+    // Getters y setters para nuevos campos...
+}
+---
+2. Agregar Modelo de Tiempo al Simulador
+
+public class Simulador {
+    // Atributos existentes...
+    private double tiempoActualSimulacion; // Tiempo en minutos
+    private Map<String, Double> frecuenciasColectivos; // Minutos entre colectivos por línea
+    
+    // Constructor - agregar inicialización para nuevos campos
+    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros) {
+        // Código existente...
+        this.tiempoActualSimulacion = 0.0;
+        this.frecuenciasColectivos = new HashMap<>();
+    }
+    
+    // Configurar frecuencias de paso de colectivos
+    public void configurarFrecuencias(Map<String, Double> frecuenciasPorLinea) {
+        this.frecuenciasColectivos = new HashMap<>(frecuenciasPorLinea);
+    }
+    
+    // Crear múltiples colectivos para una simulación con frecuencias
+    public void inicializarMultiplesColectivos(int capacidadColectivo, double tiempoTotalRecorrido) {
+        // Limpiar colectivos existentes
+        this.colectivosEnSimulacion.clear();
+        
+        int colectivoGlobalId = 1;
+        for (Linea linea : lineasDisponibles.values()) {
+            // Determinar frecuencia para esta línea (default: 20 min)
+            double frecuencia = frecuenciasColectivos.getOrDefault(linea.getId(), 20.0);
+            
+            // Calcular cuántos colectivos necesitamos para esta línea
+            int cantidadColectivos = Math.max(1, (int)(tiempoTotalRecorrido / frecuencia));
+            
+            for (int i = 0; i < cantidadColectivos; i++) {
+                String idColectivo = "C" + colectivoGlobalId + "-" + linea.getId();
+                Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo);
+                
+                // Asignar tiempo de inicio (distribuidos uniformemente)
+                double offsetTiempo = i * frecuencia;
+                nuevoColectivo.setTiempoInicio(offsetTiempo);
+                
+                this.colectivosEnSimulacion.add(nuevoColectivo);
+                colectivoGlobalId++;
+            }
+        }
+        System.out.println("Se han inicializado " + colectivosEnSimulacion.size() + " colectivos.");
+    }
+    
+    // Método de simulación avanzada con manejo de tiempo
+    public void ejecutarSimulacionAvanzada(double tiempoMaximoSimulacion) {
+        System.out.println("\n--- INICIANDO SIMULACIÓN AVANZADA ---");
+        
+        tiempoActualSimulacion = 0;
+        boolean simulacionActiva = true;
+        
+        while (simulacionActiva && tiempoActualSimulacion <= tiempoMaximoSimulacion) {
+            System.out.println("\n--- Tiempo de Simulación: " + 
+                             String.format("%.2f", tiempoActualSimulacion) + " minutos ---");
+            
+            // Para cada colectivo activo en este instante
+            for (Colectivo colectivo : colectivosEnSimulacion) {
+                if (!colectivo.estaActivo(tiempoActualSimulacion)) {
+                    continue; // Este colectivo aún no ha comenzado su recorrido
+                }
+                
+                // Código similar a ejecutarSimulacionIncremento1, adaptado con tiempos
+                procesarColectivoEnParada(colectivo);
+            }
+            
+            // Avanzar el tiempo de simulación (por ejemplo, 5 minutos por paso)
+            tiempoActualSimulacion += 5;
+            
+            // Verificar condición de finalización
+            if (todosPasajerosAtendidos()) {
+                simulacionActiva = false;
+                System.out.println("\nTodos los pasajeros han llegado a su destino.");
+            }
+        }
+        
+        generarEstadisticasSimulacion();
+        System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
+    }
+    
+    // Nuevo método para procesar un colectivo en su parada actual
+    private void procesarColectivoEnParada(Colectivo colectivo) {
+        // Si el colectivo llegó al final, procesarlo igual que antes
+        if (colectivo.estaEnTerminal()) {
+            // Código para gestionar terminal...
+            return;
+        }
+        
+        Parada paradaActual = colectivo.getParadaActual();
+        System.out.println("Colectivo " + colectivo.getIdColectivo() + 
+                         " en parada: " + paradaActual.getId() + 
+                         " (tiempo: " + String.format("%.2f", tiempoActualSimulacion) + " min)");
+        
+        // 1. Bajar pasajeros - similar al código existente
+        // ...
+        
+        // 2. Subir pasajeros - con registro de tiempo y satisfacción
+        while (colectivo.getCapacidadDisponible() > 0 && paradaActual.hayPasajerosEsperando()) {
+            Pasajero pasajero = paradaActual.removerSiguientePasajero();
+            
+            if (pasajero.getParadaOrigen().equals(paradaActual)) {
+                if (colectivo.subirPasajero(pasajero)) {
+                    // El pasajero pudo subir
+                    pasajero.setPudoSubir(true);
+                    pasajero.finalizarEspera(tiempoActualSimulacion);
+                    System.out.println("  + Pasajero " + pasajero.getId() + " subió después de esperar " + 
+                                     String.format("%.2f", pasajero.getTiempoTotalEspera()) + " minutos");
+                } else {
+                    // El pasajero no pudo subir - registrar el colectivo lleno
+                    boolean colectivoLleno = colectivo.getCapacidadDisponible() <= 0;
+                    pasajero.registrarColectivoPasado(colectivo, tiempoActualSimulacion, colectivoLleno);
+                    paradaActual.agregarPasajero(pasajero);
+                    
+                    if (colectivoLleno) {
+                        System.out.println("  - Pasajero " + pasajero.getId() + 
+                                         " no pudo subir (colectivo lleno). Colectivos esperados: " + 
+                                         pasajero.getColectivosEsperados());
+                        break;
+                    }
+                }
+            } else {
+                // Si no es su parada de origen, devolverlo a la cola
+                paradaActual.agregarPasajero(pasajero);
+            }
+        }
+        
+        // 3. Avanzar colectivo con tiempo
+        Parada proximaParada = colectivo.avanzarAProximaParada(tiempoActualSimulacion);
+        
+        // Mostrar información de avance
+        // ...
+    }
+    
+    // Verificar si todos los pasajeros fueron atendidos
+    private boolean todosPasajerosAtendidos() {
+        // Verificar si todos los pasajeros pudieron subir y bajar
+        for (Pasajero p : pasajerosGenerados) {
+            if (!p.isPudoSubir()) {
+                return false; // Todavía hay pasajeros esperando
+            }
+        }
+        
+        // También verificar que no queden pasajeros en colectivos
+        for (Colectivo c : colectivosEnSimulacion) {
+            if (c.getCantidadPasajerosABordo() > 0) {
+                return false; // Todavía hay pasajeros viajando
+            }
+        }
+        
+        return true;
+    }
+    
+    // Generar estadísticas finales de la simulación
+    private void generarEstadisticasSimulacion() {
+        System.out.println("\n=== ESTADÍSTICAS DE SIMULACIÓN ===");
+        
+        // Estadísticas de pasajeros
+        int totalPasajeros = pasajerosGenerados.size();
+        int pasajerosAtendidos = (int) pasajerosGenerados.stream()
+                                  .filter(Pasajero::isPudoSubir)
+                                  .count();
+        
+        System.out.println("Pasajeros atendidos: " + pasajerosAtendidos + "/" + totalPasajeros + 
+                         " (" + String.format("%.2f", 
+                           (double)pasajerosAtendidos/totalPasajeros*100) + "%)");
+        
+        // Tiempo promedio de espera
+        double tiempoPromedioEspera = pasajerosGenerados.stream()
+                                      .filter(Pasajero::isPudoSubir)
+                                      .mapToDouble(Pasajero::getTiempoTotalEspera)
+                                      .average()
+                                      .orElse(0);
+        
+        System.out.println("Tiempo promedio de espera: " + 
+                          String.format("%.2f", tiempoPromedioEspera) + " minutos");
+        
+        // Nivel de satisfacción promedio
+        double satisfaccionPromedio = pasajerosGenerados.stream()
+                                     .filter(Pasajero::isPudoSubir)
+                                     .mapToInt(Pasajero::calcularSatisfaccion)
+                                     .average()
+                                     .orElse(0);
+        
+        System.out.println("Nivel de satisfacción promedio: " + 
+                          String.format("%.2f", satisfaccionPromedio) + "/100");
+        
+        // Estadísticas por línea
+        // ...
+    }
+}
+
+----
+3. Ampliar el Modelo de Colectivo
+
+public class Colectivo {
+    // Atributos existentes...
+    private double tiempoInicio; // Minutos desde inicio de simulación para comenzar recorrido
+    private Map<String, Double> tiemposPorTramo; // Minutos entre paradas
+    private boolean activo; // Si está en servicio
+    
+    // Constructor - actualizar inicialización
+    public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima) {
+        // Código existente...
+        this.tiempoInicio = 0.0;
+        this.tiemposPorTramo = new HashMap<>();
+        this.activo = true;
+    }
+    
+    // Establecer tiempo de inicio
+    public void setTiempoInicio(double tiempoInicio) {
+        this.tiempoInicio = tiempoInicio;
+    }
+    
+    // Configurar tiempos de viaje entre paradas
+    public void configurarTiemposEntreParadas(Map<String, Double> tiemposTramos) {
+        this.tiemposPorTramo = new HashMap<>(tiemposTramos);
+    }
+    
+    // Verificar si el colectivo está activo en el tiempo actual
+    public boolean estaActivo(double tiempoActual) {
+        return activo && tiempoActual >= tiempoInicio;
+    }
+    
+    // Avanzar con modelo de tiempo
+    public Parada avanzarAProximaParada(double tiempoActual) {
+        // Similar al avanzarAProximaParada() actual pero con tiempo
+        // Si no puede avanzar, retorna null o la parada actual
+        
+        if (this.paradaActual == null || estaEnTerminal()) {
+            return this.paradaActual; 
+        }
+        
+        List<Parada> recorridoLinea = this.lineaAsignada.getRecorrido();
+        if (this.indiceParadaActualEnRecorrido < recorridoLinea.size() - 1) {
+            this.indiceParadaActualEnRecorrido++;
+            this.paradaActual = recorridoLinea.get(this.indiceParadaActualEnRecorrido);
+            return this.paradaActual;
+        }
+        
+        return this.paradaActual;
+    }
+    
+    // Obtener tiempo estimado a la próxima parada
+    public double getTiempoAProximaParada() {
+        if (estaEnTerminal() || paradaActual == null) {
+            return 0;
+        }
+        
+        List<Parada> recorrido = lineaAsignada.getRecorrido();
+        if (indiceParadaActualEnRecorrido >= recorrido.size() - 1) {
+            return 0; // Ya en la última parada
+        }
+        
+        Parada proxima = recorrido.get(indiceParadaActualEnRecorrido + 1);
+        String claveTramo = paradaActual.getId() + "-" + proxima.getId();
+        
+        // Tiempo predeterminado: 5 minutos si no está configurado
+        return tiemposPorTramo.getOrDefault(claveTramo, 5.0);
+    }
+}
+
+-------
+Notas de Implementación para Incremento 2:
+
+	1. Medición de Satisfacción: La satisfacción se basará en dos factores principales:
+	2. Cuántos colectivos llenos pasaron sin que el pasajero pudiera subir
+	3. Cuánto tiempo esperó el pasajero en la parada
+	4. Gestión de Múltiples Colectivos:
+	5. Cada línea tendrá múltiples colectivos que comienzan su recorrido en diferentes momentos
+	6. La frecuencia determinará cada cuántos minutos sale un nuevo colectivo
+	7. El sistema podrá simular una jornada completa con salidas programadas
+	8. Sistema de Tiempo:
+	9. La simulación avanzará en incrementos de tiempo (ej. 5 minutos)
+	10. Cada paso, se procesarán los colectivos que están activos en ese momento
+	11. Se registrarán tiempos de espera, llegada y partida
+	12. Reportes Avanzados:
+	13. Análisis de ocupación de colectivos por hora
+	14. Tiempos de espera promedio por parada
+	15. Identificación de líneas sobrecargadas
+	16. Sugerencias de ajuste de frecuencias basadas en la demanda
+
+Estas mejoras te permitirán tener un sistema mucho más sofisticado para la segunda fase del proyecto, con capacidad para generar insights valiosos sobre el servicio de transporte.
