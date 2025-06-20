@@ -304,134 +304,148 @@ Implementar una primera versión funcional del sistema de simulación de colecti
 * **Manejo de Errores:** Usar excepciones.
 * **JavaDoc:** Para clases y métodos públicos (especialmente en Incremento 2).
 
-## **6. Plan de Desarrollo – Incremento 2**
+## 6. Plan de Desarrollo – Incremento 2 (Versión Mejorada)
 
 **Fecha Límite Estimada:** 2025-06-24
 
-### **6.1. Objetivos Principales del Incremento 2**
+### 6.1. Objetivos Principales del Incremento 2
 
-* Permitir que los colectivos realicen **múltiples recorridos** (controlado por parámetro) y gestionen su estado.
-* Introducir una noción de **tiempo en la simulación**.
-* Implementar **control de capacidad estricto** en los colectivos (total y **sentados**).
-* Recolectar y mostrar **estadísticas básicas**: pasajeros transportados, tiempo promedio de espera, ocupación promedio, índice de satisfacción del pasajero.
-* Implementar la red de transporte como un **grafo** (`net.datastructures.AdjacencyMapGraph`).
-* Implementar funcionalidad de **cálculo de rutas básicas** (`GraphAlgorithms`).
-* Documentación completa (JavaDoc).
+* Soportar múltiples recorridos por colectivo y gestión de estado.
+* Introducir noción de tiempo en la simulación.
+* Implementar control estricto de capacidad, diferenciando pasajeros sentados y de pie.
+* Recolectar y mostrar estadísticas: pasajeros transportados, tiempo de espera, ocupación, satisfacción.
+* Modelar la red de transporte como grafo (`AdjacencyMapGraph`), con rutas óptimas para pasajeros.
+* Refactorizar y modularizar la lógica de simulación y exportación de resultados.
+* Garantizar documentación, cobertura de tests y estructura limpia por capas.
 
+---
 
-### **6.2. Nuevos Parámetros en `config.properties` para Incremento 2**
+### 6.2. Parámetros y Configuración para Incremento 2
 
-Se añadirán los siguientes parámetros a `config.properties`, que `LectorArchivos.java` deberá cargar:
-* `capacidadSentadosColectivo=15` (Ej: capacidad de pasajeros sentados)
-* `cantidad_de_colectivos_simultaneos_por_linea=3` (Ej: cuántos buses operan por cada línea-sentido)
-* `recorridos_por_colectivo=4` (Ej: cuántos segmentos (ida o vuelta) hace cada bus antes de finalizar)
-* `frecuencia_salida_colectivos_minutos=20` (Ej: para escalonar la salida inicial de los múltiples buses de una misma línea-sentido)
+Se agregarán los siguientes parámetros a `config.properties` (leer desde `LectorArchivos`):
 
+- `capacidadSentadosColectivo`
+- `cantidad_de_colectivos_simultaneos_por_linea`
+- `recorridos_por_colectivo`
+- `frecuencia_salida_colectivos_minutos`
 
-### **6.3. Tareas Detalladas por Paquete para Incremento 2**
+---
 
-#### **6.3.1. Paquete `modelo` (Refinamientos y Adiciones)**
+### 6.3. Estructura y Detalle de Nuevas Clases y Refactorización
 
-* **`Pasajero.java`**:
-    * **Atributos a Añadir:** `double tiempoTotalEspera`, `double tiempoInicioEspera`, `List<Pasajero.ColectivoObservado> colectivosObservados`, `boolean tieneAsiento`.
-    * **Clase Interna:** `public static class ColectivoObservado { String idColectivoObservado; double tiempoObservacion; boolean estabaLleno; /* Constructor y getters */ }`
-    * **Métodos:**
-        * `void iniciarEspera(double tiempoActual)`
-        * `void finalizarEspera(double tiempoActual)`
-        * `void registrarColectivoPasado(Colectivo colectivo, double tiempoActual, boolean estabaLleno)`
-        * `int calcularSatisfaccion()`: Implementar según Anexo I de la consigna, considerando `colectivosObservados` (para # de buses esperados) y `tieneAsiento`.
-        * Getters/Setters para nuevos campos (ej. `setTieneAsiento(boolean)`).
-    * **Tests Unitarios:** Actualizar y verificar `PasajeroTest.java`.
-* **`Colectivo.java`**:
-    * **Atributos a Añadir:** `int capacidadSentados` (del config), `int pasajerosSentadosActuales`, `double tiempoActualEnSimulacionInterno`, `double tiempoInicioServicioProgramado`, `EstadoColectivo estado` (Enum: `EN_RUTA`, `EN_PARADA`, `EN_TERMINAL_ESPERANDO`, `FINALIZADO`), `int recorridosRestantes`.
-    * **Métodos a Implementar/Ajustar:**
-        * Constructor modificado para recibir `capacidadSentados`.
-        * `void setTiempoInicioServicioProgramado(double tiempo)`
-        * `boolean estaActivo(double tiempoSimulador)`: Verifica si `tiempoSimulador >= tiempoInicioServicioProgramado` y `recorridosRestantes > 0`.
-        * `Parada avanzarAProximaParada(double tiempoViajeTramo)`: Actualiza `paradaActual`, `tiempoActualEnSimulacionInterno += tiempoViajeTramo`. Si llega a la última parada del recorrido, cambia `estado` a `EN_TERMINAL_ESPERANDO`.
-        * Lógica de `subirPasajero(Pasajero p)`: Verificar `capacidadMaxima` y `capacidadSentados`. Asignar `p.setTieneAsiento(true/false)`. Actualizar `pasajerosSentadosActuales`.
-        * `void procesarLlegadaATerminal()`: Vaciar todos los pasajeros a bordo. Decrementar `recorridosRestantes`.
-        * Getters/Setters para nuevos campos y estado.
-    * **Tests Unitarios:** Actualizar y verificar `ColectivoTest.java`.
-* **`Parada.java`**:
-    * **Atributos (Opcional, para estadísticas locales):** `double maxTiempoEsperaPasajero`, `int maxPersonasEnCola`.
-    * **Tests Unitarios:** Revisar `ParadaTest.java`.
+#### 6.3.1. Refinamiento por Capas
 
-#### **6.3.2. Paquete `datos`**
+**Modelo (`modelo`):**
+- Extender `Colectivo`, `Pasajero` y `Parada` con nuevos atributos y métodos (ver checklist de Incremento 2).
+- Ejemplo: `Pasajero` ahora incluye tiempos de espera, lista de colectivos observados, y método `calcularSatisfaccion()`.
 
-* **`LectorArchivos.java`**:
-    * Refactorizar el almacenamiento de `paradasCargadas` y `lineasCargadas` para usar `java.util.TreeMap<String, Parada>` y `java.util.TreeMap<String, Linea>` respectivamente. Justificación: ordenamiento intrínseco útil para reportes y depuración.
-    * Extender para leer los nuevos parámetros de `config.properties`: `capacidadSentadosColectivo`, `cantidad_de_colectivos_simultaneos_por_linea`, `recorridos_por_colectivo`, `frecuencia_salida_colectivos_minutos`.
-    * Método para leer `horarios_pm.txt` (ubicado en `src/main/resources/datos_pm/`). Para Incremento 2, este archivo podría usarse de forma simplificada para obtener tiempos de viaje entre paradas (si no se calculan de otra forma) o confirmar frecuencias básicas. Su uso detallado para horarios complejos se considera futuro (ver Sección 9).
-    * **Tests Unitarios:** Actualizar y verificar `LectorArchivosTest.java` para `TreeMap` y nuevos parámetros.
+**Datos (`datos`):**
+- `LectorArchivos` debe soportar nuevos parámetros y uso de `TreeMap` para ordenamiento.
+- Agregar métodos para lectura de horarios y rutas.
 
-#### **6.3.3. Paquete `logica`**
+**Lógica (`logica`):**
+- **Refactorización Crítica:**  
+    - Separar la lógica de simulación del manejo de reportes y exportación.
+    - La clase `Simulador` solo gestiona el flujo y estado de la simulación.
+    - Lógica de generación o formateo de reportes se traslada a clases específicas.
+- **Nuevas Clases:**
+    - `GestorEstadisticas`: Centraliza la recolección de métricas y cálculo de estadísticas.
+    - `PlanificadorRutas`: Encapsula la construcción y consulta del grafo de la red de transporte.
+    - **Exportadores de Resultados:**
+        - Crear una interfaz `ExportadorResultadosSimulacion` (ejemplo):
+            ```java
+            public interface ExportadorResultadosSimulacion {
+                void exportar(List<String> eventos);
+            }
+            ```
+        - Implementaciones:
+            - `ExportadorConsola`: Muestra los eventos en consola.
+            - `ExportadorArchivo`: Guarda reportes en archivos de texto.
+            - (Opcional) `ExportadorCSV`, `ExportadorHTML`, etc.
+        - El `Simulador` solo genera los eventos como datos, la "visualización" se delega al exportador.
+    - Crear servicios auxiliares si corresponde (ej. para agrupación de eventos, generación de reportes por colectivo, etc.).
 
-* **`Simulador.java` (Extensión Mayor):**
-    * **Atributos:** `double tiempoActualSimulacionGlobal`.
-    * **Métodos a Implementar/Ajustar:**
-        * `inicializarMultiplesColectivos()`:
-            * Lee parámetros de configuración relevantes de `LectorArchivos`.
-            * Para cada `Linea` (sentido):
-                * Crear `N` (`cantidad_de_colectivos_simultaneos_por_linea`) instancias de `Colectivo`.
-                * Asignarles un ID único (ej. "L1-Ida-Bus1").
-                * Asignarles `recorridos_por_colectivo`.
-                * Escalonar sus `tiempoInicioServicioProgramado` usando `frecuencia_salida_colectivos_minutos` (ej. 0, 20, 40 min).
-        * `ejecutarSimulacionAvanzada(double tiempoMaximoSimulacion)`:
-            * Bucle principal que avanza `tiempoActualSimulacionGlobal`.
-            * En cada paso, iterar sobre todos los `Colectivo`s.
-            * Procesar colectivos `activos` cuyo `tiempoActualEnSimulacionInterno <= tiempoActualSimulacionGlobal`.
-            * Para un colectivo en una parada:
-                * Llamar a `procesarColectivoEnParada(Colectivo colectivo, double tiempoActualSimulacionGlobal)`.
-            * Para un colectivo listo para avanzar entre paradas:
-                * Estimar/obtener `tiempoViajeTramo` (podría ser fijo, o de `horarios_pm.txt` de forma simplificada, o calculado por distancia si se implementa).
-                * Llamar a `colectivo.avanzarAProximaParada(tiempoViajeTramo)`.
-            * Para un colectivo en `EN_TERMINAL_ESPERANDO`:
-                * Llamar a `colectivo.procesarLlegadaATerminal()` (vacía pasajeros, decrementa recorridos).
-                * Si `colectivo.recorridosRestantes > 0`: Asignarle la `Linea` del sentido opuesto. El colectivo estará listo para su nuevo `tiempoInicioServicioProgramado` (que será su `tiempoActualEnSimulacionInterno` actual).
-                * Si `colectivo.recorridosRestantes == 0`: Cambiar su estado a `FINALIZADO`.
-        * `private void procesarColectivoEnParada(Colectivo colectivo, double tiempoActual)`: Lógica de bajada/subida (considerando capacidad total y sentados), actualizando tiempos y estados de `Pasajero` y `Colectivo`.
-    * **Tests Unitarios:** Extender `SimuladorTest.java` masivamente.
-* **`GestorEstadisticas.java` (Nueva Clase):**
-    * **Propósito:** Centralizar recolección y cálculo de métricas.
-    * **Métodos:** `registrarEventoSubida(Pasajero p, Colectivo c, double tiempo, boolean conAsiento)`, `registrarEventoBajada(...)`, `calcularTiempoPromedioEspera(List<Pasajero> pasajerosCompletados)`, `calcularOcupacionPromedioColectivos(List<Colectivo> colectivos, double tiempoTotalSimulacion)`, `calcularSatisfaccionPromedio(List<Pasajero> pasajerosCompletados)`, `generarReporteConsola()`.
-    * **Tests Unitarios:** Crear `GestorEstadisticasTest.java`.
-* **`PlanificadorRutas.java` (Nueva Clase Central de Grafos):**
-    * **Propósito:** Modelar red como grafo (`net.datastructures.AdjacencyMapGraph<Parada, Double>`) y encontrar rutas. `Double` para el peso (ej. tiempo estimado de viaje o número de paradas).
-    * **Constructor:** `PlanificadorRutas(Map<String, Parada> todasLasParadas, Map<String, Linea> todasLasLineas)`: Construye el grafo. Las aristas se crean a partir de los `recorrido`s de las `Linea`s. El peso podría ser 1 (nro. paradas) o un tiempo estimado (a definir).
-    * **Método:** `public List<Parada> encontrarRuta(Parada origen, Parada destino)`: Usa `GraphAlgorithms.shortestPath()`.
-    * **Tests Unitarios:** Crear `PlanificadorRutasTest.java`.
+**Interfaz (`interfaz`):**
+- `SimuladorColectivosApp` se simplifica:
+    - Orquesta la simulación.
+    - Solicita reportes/exportaciones a los exportadores.
+    - Implementa menú para usuario, invoca al `PlanificadorRutas` si es necesario.
 
-#### **6.3.4. Paquete `interfaz`**
+**Test (`test`):**
+- Actualizar tests existentes por cambios en lógica.
+- Crear nuevos tests para:  
+    - `GestorEstadisticas`
+    - `PlanificadorRutas`
+    - Exportadores de resultados
 
-* **`SimuladorColectivosApp.java` (Mejoras):**
-    * Usar `ejecutarSimulacionAvanzada`.
-    * Obtener todos los parámetros de simulación de `LectorArchivos`.
-    * Mostrar estadísticas de `GestorEstadisticas`.
-    * Opción de menú para usar `PlanificadorRutas`.
+---
+ar.edu.unpsjb.ayp2.proyectointegrador/
+├── modelo/
+│ ├── Colectivo.java
+│ ├── Pasajero.java
+│ └── Parada.java
+├── datos/
+│ └── LectorArchivos.java
+├── logica/
+│ ├── Simulador.java
+│ ├── GestorEstadisticas.java
+│ ├── PlanificadorRutas.java
+│ ├── exportacion/
+│ │ ├── ExportadorResultadosSimulacion.java
+│ │ ├── ExportadorConsola.java
+│ │ └── ExportadorArchivo.java
+│ └── (otros servicios auxiliares)
+├── interfaz/
+│ └── SimuladorColectivosApp.java
+└── test/
+└── (tests actualizados y nuevos)
 
-#### **6.3.5. Paquete `test`**
+---
 
-* Actualizar todos los tests existentes para reflejar cambios en clases del Inc. 1.
-* Crear nuevas clases de test para `GestorEstadisticas` y `PlanificadorRutas`.
-* Asegurar cobertura de la nueva lógica en `SimuladorTest.java`.
+#### 6.3.3. Detalle de responsabilidades principales
 
-## **7. Checklist Previo a Entrega (General para cada Incremento)**
+- **Simulador**: Solo gestiona el estado y lógica central de la simulación.
+- **GestorEstadisticas**: Lleva registro de eventos y calcula métricas.
+- **PlanificadorRutas**: Construye y consulta rutas óptimas usando grafos.
+- **ExportadorResultadosSimulacion**: Interfaz para mostrar/guardar resultados.
+    - Implementaciones permiten cambiar el modo de salida sin modificar la lógica de simulación.
+- **SimuladorColectivosApp**: Se encarga de la interacción con usuario y orquestar el flujo.
+
+---
+
+### 6.4. Plan de Trabajo y Priorización
+
+1. Implementar y testear los nuevos atributos y métodos en entidades del modelo.
+2. Refactorización de `Simulador`, separando la generación de eventos y su visualización/exportación.
+3. Implementar exportadores según la interfaz definida.
+4. Completar `GestorEstadisticas` y `PlanificadorRutas`.
+5. Integrar todo en `SimuladorColectivosApp` con menú y opciones ampliadas.
+6. Refrescar y ampliar los tests unitarios.
+7. Mantener documentación y JavaDoc actualizados.
+
+---
+
+## 7. Checklist Previo a Entrega (Actualizado)
 
 * Modelo de clases implementado correctamente.
 * Carga de archivos y configuración robusta.
-* Lógica de simulación funcional según objetivos del incremento.
-* Interfaz de usuario (consola) funcional.
-* Sin `System.out.println` indebidos.
-* Tests unitarios (JUnit) exhaustivos.
-* Estructura de carpetas respetada.
-* Código bien comentado y legible (JavaDoc para métodos públicos, especialmente en Inc. 2).
-* `README.md` actualizado.
-## **8. Actualización Continua del Proyecto y Documentación**
+* Simulación y lógica funcional según objetivos del incremento.
+* Interfaz (consola) funcional, modular y desacoplada de la lógica.
+* Resultados/exportación desacoplados y flexibles (consola, archivo, etc.).
+* Sin `System.out.println` indebidos (solo en exportadores autorizados).
+* Tests unitarios exhaustivos para componentes nuevos y refactorizados.
+* Estructura de carpetas y paquetes respeta arquitectura.
+* Código bien comentado, con JavaDoc para métodos públicos.
+* `README.md` y este roadmap actualizados.
 
-* Este `roadmap-proyecto.md` es un documento vivo y debe ser actualizado por MiyoBran para reflejar el progreso y cambios.
-* El "Estado Actual" en `prompt-proyecto.md` debe mantenerse sincronizado.
+---
 
+## 8. Actualización Continua del Proyecto y Documentación
+
+* Este `roadmap-proyecto.md` es un documento vivo y debe actualizarse para reflejar el progreso, cambios de arquitectura y nuevas decisiones de diseño.
+* Mantener el “Estado Actual” en `prompt-proyecto.md` sincronizado con el roadmap.
+
+---
 ## **9. Posibles Mejoras y Extensiones Futuras (Post-Incremento 2)**
 
 Las siguientes funcionalidades se consideran fuera del alcance del Incremento 2 y se dejan para futuras extensiones:
