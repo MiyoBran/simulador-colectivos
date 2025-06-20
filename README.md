@@ -16,6 +16,58 @@ Este repositorio contiene dos proyectos Maven:
 
 ---
 
+## Primeros Pasos y Onboarding para Colaboradores
+
+1. **Clona el repositorio:**
+   ```sh
+   git clone git@github.com:MiyoBran/simulador-colectivos.git
+   ```
+2. **Instala la librería `datastructures-library` en tu Maven local:**
+   ```sh
+   cd simulador-colectivos/datastructures-library
+   mvn clean install
+   ```
+3. **Importa ambos proyectos en tu IDE (Eclipse/VS Code):**
+   - Eclipse: `File > Import... > Maven > Existing Maven Projects`.
+   - VS Code: Abre la carpeta raíz y asegúrate de tener la extensión de Java y Maven.
+4. **Crea tu rama de trabajo:**
+   ```sh
+   git checkout -b trabajo-tu-nombre
+   git push -u origin trabajo-tu-nombre
+   ```
+5. **Ejecuta los tests:**
+   ```sh
+   cd simulador-colectivos/simulador-colectivos1
+   mvn test
+   ```
+   Todos los tests deben pasar antes de proponer cambios.
+6. **Ejecuta la aplicación:**
+   - Desde el IDE: Ejecuta `SimuladorColectivosApp.java` como aplicación Java.
+   - Desde terminal:
+     ```sh
+     mvn compile exec:java -Dexec.mainClass="ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp"
+     ```
+
+---
+
+## Buenas Prácticas de Colaboración
+
+- Trabaja siempre en una rama propia.
+- Haz commits y PRs descriptivos.
+- Consulta y actualiza la documentación (`instructions-proyecto.md`, `roadmap-proyecto.md`, `prompt-proyecto.md`).
+- Usa issues para dudas, sugerencias o reportes.
+- Lee y sigue las convenciones en `conventions-proyecto.md`.
+
+---
+
+## Estado actual del proyecto
+
+- Refactor y limpieza completa de código, tests y estructura.
+- Todos los tests pasan correctamente (ver instrucciones-proyecto.md para checklist y avances).
+- Próximo objetivo: avanzar con nuevas funcionalidades y documentación colaborativa.
+
+---
+
 ## 1. Clonar el Repositorio
 
 Abre una terminal (Git Bash, CMD o PowerShell) y ejecuta:
