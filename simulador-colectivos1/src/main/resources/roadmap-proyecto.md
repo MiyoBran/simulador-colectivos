@@ -4,6 +4,14 @@
 Desarrollador: MiyoBran  
 Documento de Contexto Principal: prompt-proyecto.md (ubicado en src/main/resources/)
 
+## Estado actualizado (junio 2025)
+
+- Refactor y limpieza completa de los paquetes `modelo`, `datos`, `logica`, `interfaz` y tests.
+- Todos los tests pasan correctamente (101/101).
+- Estructura de carpetas y dependencias revisadas.
+- Documentación y archivos de configuración actualizados.
+- Próximos pasos: avanzar con nuevas funcionalidades y mantener la documentación colaborativa.
+
 ## **0\. Etapa 0: Configuración Inicial del Proyecto y Entorno**
 
 Esta etapa detalla los pasos para crear y configurar el proyecto Java con Maven en el IDE Eclipse, asegurando una estructura correcta desde el inicio.
