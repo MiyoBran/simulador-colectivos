@@ -7,6 +7,15 @@ Fecha de última actualización: 2025-06-20
 
 ---
 
+## Estado actualizado (junio 2025)
+
+- Refactor y limpieza completa de código, estructura y tests.
+- Todos los tests pasan correctamente.
+- Documentación y archivos de configuración revisados.
+- Próximos pasos: nuevas funcionalidades y colaboración activa.
+
+---
+
 ## 1. Contexto y Objetivo
 
 Este proyecto simula el funcionamiento de líneas de colectivos urbanos en Java para la ciudad de Puerto Madryn. Se desarrolla en dos incrementos principales y sigue una arquitectura por capas estricta:
