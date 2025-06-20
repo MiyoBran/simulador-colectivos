@@ -1,5 +1,12 @@
 # Instrucciones para el Desarrollo y Colaboración
 
+## Estado actual del workspace y objetivo de la rama `miyo-workspace`
+
+Este workspace y la rama `miyo-workspace` fueron creados para abordar la **Fase 2: Refactor y Mejoras Iniciales** del proyecto, según el plan general detallado en `roadmap-proyecto.md` (ver sección 6). Aquí se documentarán los avances, decisiones y tareas específicas de esta fase, así como las instrucciones para los colaboradores que se sumen a este proceso.
+
+- En este archivo (`instructions-proyecto.md`) se irá reflejando el avance concreto, los acuerdos de trabajo y las instrucciones prácticas para la colaboración en la Fase 2.
+- Para el desarrollo completo, la planificación a largo plazo y la arquitectura general, consulta siempre `roadmap-proyecto.md`.
+
 ## Tareas Previas a Compartir el Repositorio
 
 1. **Limpieza de Código**
