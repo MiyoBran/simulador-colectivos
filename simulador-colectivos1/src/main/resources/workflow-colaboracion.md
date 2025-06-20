@@ -6,6 +6,14 @@ Definir el flujo de trabajo recomendado para la colaboración en el proyecto, el
 
 ---
 
+## 0. Requisitos de Entorno
+
+- **Java 21 es obligatorio** para todo el desarrollo, tanto en Codespaces como en entornos personales.
+- En el workspace colaborativo (Codespace), JAVA_HOME y PATH se configuran automáticamente para usar Java 21 en cada terminal.
+- Cada colaborador debe asegurarse de tener Java 21 instalado y configurado en su entorno local para evitar incompatibilidades.
+
+---
+
 ## 1. Ramas Principales
 
 - **main**: Rama principal y estable del proyecto. Solo se fusionan (merge) Pull Requests revisados.
