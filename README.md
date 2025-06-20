@@ -6,6 +6,16 @@ Este repositorio contiene dos proyectos Maven:
 
 ---
 
+## Requisitos del Sistema
+
+- **Java Development Kit (JDK):** Versión 21 (obligatorio para todos los entornos, tanto locales como Codespaces).
+- **Apache Maven:** Versión 3.x o superior.
+- **IDE (Recomendado):** Eclipse (versión reciente) o VS Code.
+
+> **Nota:** En el workspace colaborativo (Codespace), la configuración de JAVA_HOME y PATH para Java 21 se aplica automáticamente en cada terminal. Si trabajas en tu entorno local, asegúrate de tener Java 21 instalado y configurado.
+
+---
+
 ## 1. Clonar el Repositorio
 
 Abre una terminal (Git Bash, CMD o PowerShell) y ejecuta:

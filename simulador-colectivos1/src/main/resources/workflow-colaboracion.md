@@ -1,8 +1,20 @@
 # Flujo de Trabajo Colaborativo y Uso de Copilot
 
+> **Sobre la documentación:**
+> - El archivo `instructions-proyecto.md` se utiliza para documentar el avance concreto, acuerdos y tareas específicas de la fase actual de trabajo colaborativo (por ejemplo, la Fase 2 en la rama `miyo-workspace`).
+> - El archivo `roadmap-proyecto.md` contiene la planificación general, la arquitectura y el desarrollo completo del proyecto a largo plazo. Siempre consulta ambos para tener el panorama completo y actualizado.
+
 ## Objetivo
 
 Definir el flujo de trabajo recomendado para la colaboración en el proyecto, el manejo de ramas y el uso eficiente de GitHub Copilot y Pull Requests.
+
+---
+
+## 0. Requisitos de Entorno
+
+- **Java 21 es obligatorio** para todo el desarrollo, tanto en Codespaces como en entornos personales.
+- En el workspace colaborativo (Codespace), JAVA_HOME y PATH se configuran automáticamente para usar Java 21 en cada terminal.
+- Cada colaborador debe asegurarse de tener Java 21 instalado y configurado en su entorno local para evitar incompatibilidades.
 
 ---
 
@@ -71,7 +83,7 @@ Definir el flujo de trabajo recomendado para la colaboración en el proyecto, el
    - `prompt-proyecto.md`
    - `conventions-proyecto.md`
    - `instructions-proyecto.md`
-   - `workflow-copilot.txt` (este mismo)
+   - `workflow-colaboracion.md` (este mismo)
 
 2. Clona el repo y crea tu rama de trabajo.
 3. Trabaja, haz commits y solicita PRs según el flujo arriba.
