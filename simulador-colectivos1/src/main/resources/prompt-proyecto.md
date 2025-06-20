@@ -1,97 +1,138 @@
-Contexto del Proyecto: Simulador de Colectivos Urbanos (Algoritmica y Programacion II)
+# Roadmap del Proyecto: Simulador de Colectivos Urbanos
 
-Desarrollador: MiyoBran
-**Fecha de última actualización de este prompt:** 2025-06-06
-Establecer rápidamente el contexto para asistentes de IA sobre el proyecto "Simulador de Colectivos Urbanos", su planificación, su arquitectura final tras el refactoring del Incremento 1, y su relación con el material de referencia de la cátedra.
-Descripción General del Proyecto: Estamos desarrollando un sistema en Java para simular el funcionamiento de líneas de colectivos urbanos. El proyecto se divide en dos incrementos principales y sigue una estricta arquitectura por capas (`modelo`, `datos`, `logica`, `interfaz`, `test`). El objetivo es simular el movimiento de colectivos, la subida y bajada de pasajeros, y, para el Incremento 2, analizar la eficiencia del sistema y calcular rutas óptimas.
+**Proyecto Integrador: Algorítmica y Programación II**  
+Desarrollador : MiyoBran  
+Desarrollador: Enzo  
+Fecha de última actualización: 2025-06-20
 
-**Principio de Diseño Clave: Separación de Lógica e Interfaz**
-Como resultado de un profundo proceso de refactoring al finalizar el Incremento 1, el proyecto adhiere estrictamente al principio de separación de capas:
-* La capa de **`logica`** (ej. `Simulador.java`) es "silenciosa". Contiene toda la lógica de negocio pero **no realiza ninguna impresión en consola**. Sus métodos procesan el estado y devuelven datos o listas de eventos.
-* La capa de **`interfaz`** (ej. `SimuladorColectivosApp.java`) es la única responsable de la interacción con el usuario. Orquesta la simulación, llama a los métodos de la capa de lógica y se encarga de presentar los resultados en la consola.
+---
 
+## 1. Contexto y Objetivo
 
+Este proyecto simula el funcionamiento de líneas de colectivos urbanos en Java para la ciudad de Puerto Madryn. Se desarrolla en dos incrementos principales y sigue una arquitectura por capas estricta:
 
-Datos del Mundo Real (Puerto Madryn):
+- **modelo**: entidades del dominio (Parada, Pasajero, Linea, Colectivo)
+- **datos**: carga y gestión de datos (LectorArchivos, manejo de config.properties, etc)
+- **logica**: simulación y procesamiento central (Simulador, GeneradorPasajeros, y para Inc.2: GestorEstadisticas, PlanificadorRutas, exportadores)
+- **interfaz**: interacción con el usuario (SimuladorColectivosApp)
+- **test**: pruebas automatizadas
 
-* Líneas de Colectivo: El sistema modelará los recorridos, paradas y (para Incremento 2) horarios de las líneas de colectivo de Puerto Madryn.
-* Mapa de la Ciudad: Se busca integrar o referenciar datos del mapa, especialmente para la ubicación de paradas y potencialmente para el cálculo de distancias en Incremento 2.
-* Impacto: Esta orientación influirá en el diseño de las clases de la capa datos y en la información que manejan las entidades del modelo.
+Los objetivos principales:
+- Simular el movimiento y la interacción de colectivos y pasajeros.
+- Analizar la eficiencia, calcular rutas óptimas y proporcionar estadísticas relevantes.
 
-Tecnologías y Herramientas Clave:
+---
 
-* Lenguaje: Java (JDK 21)
-* Gestor de Proyecto: Maven
-* Pruebas: JUnit 5
-* IDE: Eclipse
-* Librería de TADs Principal (para entidades de simulación y colecciones generales en Inc. 1): Java Collections Framework (java.util).
-* Librería de TADs Secundaria (para funcionalidad de grafos en Inc. 2 y potencialmente almacenamiento global de datos): net.datastructures-library (versión 6.0.0-custom).
+## 2. Principios de Diseño y Referencias
 
-**Política de Uso de Colecciones/TADs (Enfoque Híbrido)**
-* **Java Collections Framework (`java.util`):** Se utiliza para todas las colecciones internas de las entidades del modelo (`ArrayList`, `LinkedList` como `Queue`) y para el almacenamiento de datos globales. Para el Incremento 2, se ha decidido que `LectorArchivos` utilizará **`java.util.TreeMap`** para las colecciones de paradas y líneas, con el fin de aprovechar el ordenamiento intrínseco de las claves, lo cual facilita la depuración y la generación de reportes.
-* **`net.datastructures`:** Su uso está reservado para la funcionalidad de grafos en el Incremento 2 (`AdjacencyMapGraph` y `GraphAlgorithms`), alineándose así con el material de la cátedra para tareas algorítmicas complejas.
+- **Separación de lógica e interfaz**: la lógica (Simulador, etc.) es "silenciosa" y nunca imprime en consola, sólo devuelve datos/eventos. La interfaz (SimuladorColectivosApp) maneja toda la presentación.
+- **Inspiración en el proyecto "subte" de la cátedra**, especialmente para el manejo de grafos y estructura de datos.
+- **Uso de TADs híbridos**:  
+  - Colecciones internas: Java Collections (`ArrayList`, `LinkedList`, etc.)
+  - Colecciones globales de datos: Java `TreeMap` (Inc. 2)
+  - Grafos y rutas: `net.datastructures.AdjacencyMapGraph`, `GraphAlgorithms` (Inc. 2)
 
-Referencia del Ejemplo "subte" de la Cátedra: El proyecto "subte" proporcionado por la cátedra sirve como un importante material de referencia. Sus características principales y cómo informan nuestro proyecto son:
+---
 
-* Uso de net.datastructures: "Subte" utiliza intensivamente net.datastructures para:
-    * TreeMap: Almacenar las colecciones principales de estaciones y líneas cargadas desde archivos.
-    * AdjacencyMapGraph y GraphAlgorithms: Modelar la red de subtes como un grafo y calcular la ruta más rápida entre estaciones.
-* Enfoque Principal: El proyecto "subte" se centra en el cálculo de rutas óptimas (pathfinding) sobre un grafo estático.
-* Modelo de Datos Simplificado: Sus clases de modelo (Estacion, Linea, Tramo) son principalmente POJOs que sirven para alimentar el grafo y las colecciones principales. No usan net.datastructures para colecciones internas.
+## 3. Estado Actual
 
-Nuestro Enfoque en Relación a "subte":
+- **Incremento 1**: COMPLETADO
+    - Refactoring finalizado. Arquitectura por capas respetada.
+    - Pruebas unitarias implementadas.
+    - Documentación y estructura de carpetas limpia.
+    - Prompt y roadmap actualizados.
+- **Incremento 2**: EN PROGRESO
+    - Se inicia la refactorización previa y limpieza del código para facilitar la colaboración.
+    - Enzo se suma al equipo y realizará onboarding y primeras tareas de comprensión/documentación.
 
-* Simulación vs. Pathfinding: Nuestro proyecto se enfoca primordialmente en la simulación dinámica del movimiento de colectivos y la interacción con pasajeros. El pathfinding se considera una funcionalidad avanzada para el Incremento 2.
-* TADs: Adoptamos el enfoque híbrido descrito arriba. Usamos java.util para las colecciones internas de nuestras entidades de simulación y para la gestión de datos en Incremento 1. Reservamos net.datastructures para funcionalidades análogas a donde "subte" las usa (gestión global de datos cargados si se opta por TreeMap en Inc. 2, y especialmente para grafos en Inc. 2).
-* Clase Tramo: La clase Tramo en "subte" es crucial para definir las aristas del grafo. Si implementamos una funcionalidad de grafo similar en Incremento 2, consideraremos una entidad análoga para los pesos de las aristas si es necesario (e.g., un objeto que contenga distancia y tiempo).
+---
 
-Estructura del Proyecto:
+## 4. Pasos Inmediatos para la Colaboración
 
-* **Paquetes principales (`src/main/java/ar/edu/unpsjb/ayp2/proyectointegrador/`):**
-    * `modelo`: Clases de entidad (`Parada`, `Pasajero`, `Linea`, `Colectivo`).
-    * `datos`: Carga de datos desde archivos (`LectorArchivos`, que también maneja `config.properties`).
-    * `logica`: Lógica de negocio y simulación (`Simulador`, `GeneradorPasajeros`). Para Inc. 2: `PlanificadorRutas`, `GestorEstadisticas`.
-    * `interfaz`: Interacción con el usuario (`SimuladorColectivosApp`).
+### 4.1. Limpieza y Preparación
 
-* pom.xml: Define dependencias (Java 21, JUnit 5, net.datastructures-library 6.0.0-custom) y configuración de build.
-* Pruebas en src/test/java/ar/edu/unpsjb/ayp2/proyectointegrador/ (con subpaquetes análogos).
-* Archivos de recursos (datos de Puerto Madryn, config.properties, este prompt, roadmap) en src/main/resources/.
+- Eliminar código y archivos obsoletos.
+- Revisar nombres, JavaDoc, y estructura de paquetes.
+- Asegurarse de que los tests existentes pasen (`mvn test`).
 
-Recordatorio de Identificadores Clave:
-"Las entidades principales del modelo son Parada (id: String), Linea (codigo: String), Colectivo (idColectivo: String), y Pasajero (id: String), como se detalla en diagramaUML-descripcion.txt."
+### 4.2. Documentación y Onboarding
 
-***REFERENCIA PRINCIPAL Y ESTADO ACTUAL:**
-**Roadmap Detallado:** El plan de trabajo completo se encuentra en: `src/main/resources/roadmap-proyecto.md`
+- Actualizar README.md, roadmap-proyecto.md y prompt-proyecto.md con el estado real y guías para colaborar.
+- Crear/actualizar:
+  - `conventions-proyecto.md`: convenciones de codificación y estilo.
+  - `instructions-proyecto.md`: instrucciones y tareas a seguir para onboarding y colaboración.
+- Asegurarse de que los archivos de configuración y dependencias estén claros y actualizados.
 
-**Estado Actual:** Se ha completado exitosamente el **Incremento 1**, incluyendo un ciclo completo de refactoring y depuración. La base de código es robusta y respeta la arquitectura de capas. Estamos comenzando el desarrollo del **Incremento 2**.
+### 4.3. Primeras tareas para Enzo
 
-* **Completado (Etapa 0 - Configuración y Planificación):**
-    * Definición del `pom.xml` y configuración de dependencias (Java 21, JUnit 5, net.datastructures).
-    * Creación de la estructura de carpetas y paquetes base (`ar.edu.unpsjb.ayp2.proyectointegrador` y subpaquetes).
-    * Ubicación de archivos de datos iniciales (`paradas_pm_mapeadas.txt`, `lineas_pm_mapeadas.txt`, `config.properties`) en `src/main/resources/`.
-    * Definición de la Política de TADs (enfoque híbrido).
-    * Análisis del ejemplo "subte" de la cátedra completado e incorporado a la planificación conceptual.
-    * Finalización y revisión del `roadmap-proyecto.md`.
-    * Revisión y finalización inicial de este `prompt-proyecto.md`.
-* **Completado (Incremento 1):**
-    * Implementación y pruebas de las capas `modelo`, `datos`, `logica` e `interfaz`.
-    * Implementación de las clases del paquete `modelo` (Pasajero, Parada, Linea, Colectivo) con su lógica básica.
-    * Implementación del paquete `datos` (`LectorArchivos`) para cargar paradas, líneas y configuración desde archivos.
-    * Implementación del paquete `logica` (`GeneradorPasajeros`, `Simulador`) para manejar la creación de pasajeros, asignación de colectivos y la simulación de un único recorrido por colectivo.
-    * Implementación del paquete `interfaz` (`SimuladorColectivosApp`) para la interacción básica por consola.    
-    * Separación exitosa de la lógica de simulación de la presentación en consola.
-    * Desarrollo de pruebas unitarias (JUnit) para las clases implementadas.	
-    * Resolución de bugs de lógica y temporización en el bucle de la simulación.
-    * Creación de la documentación para la presentación del Incremento 1.
-    
-* **Siguiente paso inmediato:** Comenzar con las tareas del **Incremento 2** según el `roadmap-proyecto.md`. Esto incluye los refinamientos a las clases del paquete `modelo` para incorporar la gestión del tiempo y estados, extender `LectorArchivos` para nuevos formatos de datos (como `horarios_pm.txt`), y comenzar el desarrollo de `Simulador.java` para manejar múltiples recorridos, la lógica temporal, y la gestión de capacidad estricta. Posteriormente se abordará `GestorEstadisticas.java` y `PlanificadorRutas.java`.
-* **Pendiente (Incremento 2):** Todas las tareas de desarrollo y refinamiento para el Incremento 2, como se detalla en el `roadmap-proyecto.md` (principalmente Sección 6), incluyendo múltiples recorridos, gestión del tiempo, control de capacidad, cálculo de estadísticas, modelado de grafos con `net.datastructures` y funcionalidad de cálculo de rutas.
+- Leer roadmap, prompt y convenciones.
+- Ejecutar el proyecto y los tests localmente.
+- Navegar el código, proponiendo dudas en issues/discusiones.
+- Mejorar la documentación desde la perspectiva de un nuevo colaborador.
 
-MANTENIMIENTO DE ESTE PROMPT Y EL ROADMAP:
+---
 
-**Instrucción para el Asistente de IA:** Si nuestra conversación indica que hemos completado una tarea significativa del `roadmap-proyecto.md`, hemos decidido cambiar una parte del plan, o si el "Estado Actual" descrito arriba ya no es preciso, por favor, **sugiéreme explícitamente que actualice el archivo `src/main/resources/roadmap-proyecto.md` y/o esta sección de "Estado Actual" en `src/main/resources/prompt-proyecto.md`**.
+## 5. Plan de Desarrollo – Incremento 2
 
-**Instrucción para el Asistente de IA (General):** Por favor, considera toda esta información para nuestras interacciones. Cuando tengas dudas sobre los próximos pasos, la estructura de una clase, los objetivos de un incremento, o los TADs a utilizar, **consulta (conceptualmente) el contenido del `roadmap-proyecto.md` como guía principal.** Si te pido ayuda para una nueva clase o funcionalidad, asume que debe alinearse con este contexto y el roadmap.
+### 5.1. Objetivos
 
-Mi nombre de usuario es MiyoBran.
-Pregunta/Tarea Actual: (Aquí es donde MiyoBran añadirá su pregunta específica después de pegar este prompt)
+- Colectivos con múltiples recorridos y gestión de estado.
+- Noción de tiempo en la simulación.
+- Control estricto de capacidad (sentados/parados).
+- Estadísticas: pasajeros, tiempos, ocupación, satisfacción.
+- Red de transporte como grafo, cálculo de rutas óptimas.
+- Refactorización para separar lógica de simulación y exportación/presentación.
+- Tests y documentación ampliados.
+
+### 5.2. Cambios técnicos
+
+- **Nuevos parámetros en config.properties** para capacidades, frecuencias, recorridos, etc.
+- **Refactor de Simulador**: separar generación de eventos/resultados y visualización/exportación.
+- **Nuevos módulos/classes**:
+  - `GestorEstadisticas` (métricas y reportes)
+  - `PlanificadorRutas` (grafos y rutas óptimas)
+  - `ExportadorResultadosSimulacion` (interfaz para mostrar/guardar resultados; implementaciones: consola, archivo, etc.)
+- **Extensión de clases modelo** con atributos y métodos para estados, tiempos, satisfacción, etc.
+- **Ampliación y refactor de tests**.
+
+### 5.3. Fases tentativas
+
+1. Limpieza y documentación
+2. Onboarding colaborador
+3. Refactorización de Simulador y separación de exportadores
+4. Implementación de funcionalidades nuevas (estadísticas, rutas, etc.)
+5. Testing y documentación final
+
+---
+
+## 6. Checklist previo a cada entrega
+
+- [ ] Código limpio, comentado y sin impresiones indebidas
+- [ ] Tests automáticos completos y exitosos
+- [ ] Documentación y archivos de instrucciones claros
+- [ ] README actualizado y útil para nuevos colaboradores
+- [ ] Estructura de carpetas y dependencias respetadas
+- [ ] Estado actual reflejado en roadmap y prompt
+
+---
+
+## 7. Mantenimiento y Mejora Continua
+
+- Si se completa una etapa importante o se cambia el plan, actualizar este roadmap y el prompt.
+- Usar issues y PRs para gestionar tareas y discutir cambios.
+- Toda instrucción central para el desarrollo debe quedar documentada en los archivos de resources.
+
+---
+
+## 8. Mejoras Futuras (Post-Incremento 2)
+
+- Gestión avanzada de horarios y demoras
+- Estadísticas por chofer y colectivo
+- Generación dinámica de pasajeros
+- Cálculo de rutas avanzadas (distancia, tiempo real)
+- Interfaz gráfica de usuario
+
+---
+
+> **Nota:**  
+> Este archivo debe ser el punto de referencia principal para la planificación y organización del proyecto, tanto para el desarrollador original como para nuevos colaboradores.
