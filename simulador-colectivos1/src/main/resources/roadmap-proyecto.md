@@ -1,16 +1,15 @@
 # **Roadmap del Proyecto: Simulador de Colectivos Urbanos (Definitivo)**
 
-Última Actualización: 2025-06-05 (Actualizado con detalles del Incremento 2\)  
-Desarrollador: MiyoBran  
+Última Actualización: 2025-06-21 (Versión final del Incremento 2)
+Desarrollador: MiyoBran
 Documento de Contexto Principal: prompt-proyecto.md (ubicado en src/main/resources/)
 
 ## Estado actualizado (junio 2025)
 
-- Refactor y limpieza completa de los paquetes `modelo`, `datos`, `logica`, `interfaz` y tests.
-- Todos los tests pasan correctamente (101/101).
-- Estructura de carpetas y dependencias revisadas.
-- Documentación y archivos de configuración actualizados.
-- Próximos pasos: avanzar con nuevas funcionalidades y mantener la documentación colaborativa.
+- **Desarrollo del Incremento 2 Finalizado:** Se implementaron y probaron exitosamente las funcionalidades de cálculo de rutas con grafos y gestión de estadísticas.
+- **Integración Completa:** Los nuevos módulos de lógica fueron integrados en el simulador principal y son accesibles a través de un menú de usuario interactivo.
+- **Proyecto Estable:** Todos los tests unitarios (nuevos y existentes) pasan correctamente.
+- **Próximos pasos:** Revisión final de la documentación y preparación para la entrega del proyecto.
 
 ## **0\. Etapa 0: Configuración Inicial del Proyecto y Entorno**
 
@@ -312,124 +311,59 @@ Implementar una primera versión funcional del sistema de simulación de colecti
 * **Manejo de Errores:** Usar excepciones.
 * **JavaDoc:** Para clases y métodos públicos (especialmente en Incremento 2).
 
-## 6. Plan de Desarrollo – Incremento 2 (Versión Mejorada)
+## 6. Log de Desarrollo – Incremento 2 (COMPLETADO)
 
-**Fecha Límite Estimada:** 2025-06-24
+**Fecha de Finalización:** 2025-06-21
 
-### 6.1. Objetivos Principales del Incremento 2
+### 6.1. Objetivos Principales Alcanzados
 
-* Soportar múltiples recorridos por colectivo y gestión de estado.
-* Introducir noción de tiempo en la simulación.
-* Implementar control estricto de capacidad, diferenciando pasajeros sentados y de pie.
-* Recolectar y mostrar estadísticas: pasajeros transportados, tiempo de espera, ocupación, satisfacción.
-* Modelar la red de transporte como grafo (`AdjacencyMapGraph`), con rutas óptimas para pasajeros.
-* Refactorizar y modularizar la lógica de simulación y exportación de resultados.
-* Garantizar documentación, cobertura de tests y estructura limpia por capas.
+* Se logró soportar múltiples recorridos por colectivo y una gestión de estado básica.
+* Se introdujo la noción de tiempo en la simulación (tiempos de espera, viaje, etc.).
+* Se implementó un control estricto de capacidad, diferenciando pasajeros sentados y de pie.
+* Se recolectan y muestran estadísticas detalladas sobre la simulación (pasajeros, tiempos, ocupación, satisfacción) a través del `GestorEstadisticas`.
+* Se modeló la red de transporte como un grafo dirigido (`AdjacencyMapGraph`) y se implementó el cálculo de rutas óptimas para pasajeros con `PlanificadorRutas`.
+* Se mantuvo una estructura limpia por capas y se amplió la cobertura de tests.
 
 ---
 
 ### 6.2. Parámetros y Configuración para Incremento 2
 
-Se agregarán los siguientes parámetros a `config.properties` (leer desde `LectorArchivos`):
+Se agregaron y utilizaron exitosamente los siguientes parámetros en `config.properties`:
 
-- `capacidadSentadosColectivo`
-- `cantidad_de_colectivos_simultaneos_por_linea`
-- `recorridos_por_colectivo`
-- `frecuencia_salida_colectivos_minutos`
+-   `capacidadSentadosColectivo`
+-   `cantidad_de_colectivos_simultaneos_por_linea`
+-   `recorridos_por_colectivo`
+-   `frecuencia_salida_colectivos_minutos`
 
 ---
 
-### 6.3. Estructura y Detalle de Nuevas Clases y Refactorización
+### 6.3. Estructura Final y Clases Implementadas
 
-#### 6.3.1. Refinamiento por Capas
+La arquitectura final del proyecto consolidó la separación por capas, resultando en la siguiente estructura para las nuevas funcionalidades:
 
 **Modelo (`modelo`):**
-- Extender `Colectivo`, `Pasajero` y `Parada` con nuevos atributos y métodos (ver checklist de Incremento 2).
-- Ejemplo: `Pasajero` ahora incluye tiempos de espera, lista de colectivos observados, y método `calcularSatisfaccion()`.
-
-**Datos (`datos`):**
-- `LectorArchivos` debe soportar nuevos parámetros y uso de `TreeMap` para ordenamiento.
-- Agregar métodos para lectura de horarios y rutas.
+-   Se extendieron las clases `Colectivo`, `Pasajero` y `Parada` con nuevos atributos y métodos para soportar las funcionalidades de estado, tiempo y estadísticas.
 
 **Lógica (`logica`):**
-- **Refactorización Crítica:**  
-    - Separar la lógica de simulación del manejo de reportes y exportación.
-    - La clase `Simulador` solo gestiona el flujo y estado de la simulación.
-    - Lógica de generación o formateo de reportes se traslada a clases específicas.
-- **Nuevas Clases:**
-    - `GestorEstadisticas`: Centraliza la recolección de métricas y cálculo de estadísticas.
-    - `PlanificadorRutas`: Encapsula la construcción y consulta del grafo de la red de transporte.
-    - **Exportadores de Resultados:**
-        - Crear una interfaz `ExportadorResultadosSimulacion` (ejemplo):
-            ```java
-            public interface ExportadorResultadosSimulacion {
-                void exportar(List<String> eventos);
-            }
-            ```
-        - Implementaciones:
-            - `ExportadorConsola`: Muestra los eventos en consola.
-            - `ExportadorArchivo`: Guarda reportes en archivos de texto.
-            - (Opcional) `ExportadorCSV`, `ExportadorHTML`, etc.
-        - El `Simulador` solo genera los eventos como datos, la "visualización" se delega al exportador.
-    - Crear servicios auxiliares si corresponde (ej. para agrupación de eventos, generación de reportes por colectivo, etc.).
+-   **`GestorEstadisticas`**: Se implementó y testeó esta clase para centralizar la recolección de métricas.
+-   **`PlanificadorRutas`**: Se implementó y testeó esta clase para encapsular la construcción del grafo dirigido y el cálculo de rutas óptimas con Dijkstra.
+-   **`Simulador`**: Se modificó para integrar y utilizar instancias de los nuevos componentes de lógica.
 
 **Interfaz (`interfaz`):**
-- `SimuladorColectivosApp` se simplifica:
-    - Orquesta la simulación.
-    - Solicita reportes/exportaciones a los exportadores.
-    - Implementa menú para usuario, invoca al `PlanificadorRutas` si es necesario.
+-   `SimuladorColectivosApp` se actualizó con un menú de usuario interactivo para ejecutar la simulación y acceder a las nuevas funcionalidades de planificación y estadísticas.
 
 **Test (`test`):**
-- Actualizar tests existentes por cambios en lógica.
-- Crear nuevos tests para:  
-    - `GestorEstadisticas`
-    - `PlanificadorRutas`
-    - Exportadores de resultados
-
----
-ar.edu.unpsjb.ayp2.proyectointegrador/
-├── modelo/
-│ ├── Colectivo.java
-│ ├── Pasajero.java
-│ └── Parada.java
-├── datos/
-│ └── LectorArchivos.java
-├── logica/
-│ ├── Simulador.java
-│ ├── GestorEstadisticas.java
-│ ├── PlanificadorRutas.java
-│ ├── exportacion/
-│ │ ├── ExportadorResultadosSimulacion.java
-│ │ ├── ExportadorConsola.java
-│ │ └── ExportadorArchivo.java
-│ └── (otros servicios auxiliares)
-├── interfaz/
-│ └── SimuladorColectivosApp.java
-└── test/
-└── (tests actualizados y nuevos)
+-   Se crearon las clases `GestorEstadisticasTest` y `PlanificadorRutasTest` para garantizar el correcto funcionamiento de los nuevos componentes.
 
 ---
 
-#### 6.3.3. Detalle de responsabilidades principales
+### 6.4. Resumen del Proceso de Desarrollo
 
-- **Simulador**: Solo gestiona el estado y lógica central de la simulación.
-- **GestorEstadisticas**: Lleva registro de eventos y calcula métricas.
-- **PlanificadorRutas**: Construye y consulta rutas óptimas usando grafos.
-- **ExportadorResultadosSimulacion**: Interfaz para mostrar/guardar resultados.
-    - Implementaciones permiten cambiar el modo de salida sin modificar la lógica de simulación.
-- **SimuladorColectivosApp**: Se encarga de la interacción con usuario y orquestar el flujo.
-
----
-
-### 6.4. Plan de Trabajo y Priorización
-
-1. Implementar y testear los nuevos atributos y métodos en entidades del modelo.
-2. Refactorización de `Simulador`, separando la generación de eventos y su visualización/exportación.
-3. Implementar exportadores según la interfaz definida.
-4. Completar `GestorEstadisticas` y `PlanificadorRutas`.
-5. Integrar todo en `SimuladorColectivosApp` con menú y opciones ampliadas.
-6. Refrescar y ampliar los tests unitarios.
-7. Mantener documentación y JavaDoc actualizados.
+El desarrollo del incremento siguió un flujo de trabajo iterativo y basado en componentes:
+1.  **Extensión del Modelo:** Se modificaron las clases de dominio para soportar los nuevos datos.
+2.  **Implementación de Lógica:** Se desarrollaron y testearon de forma aislada los componentes `GestorEstadisticas` y `PlanificadorRutas`.
+3.  **Fase de Integración:** Se unificaron los nuevos componentes en la clase `Simulador` y se expusieron las funcionalidades en la `SimuladorColectivosApp`.
+4.  **Consolidación y Documentación:** Se unificó el trabajo en una única rama de proyecto y se actualizó toda la documentación para reflejar el estado final.
 
 ---
 
