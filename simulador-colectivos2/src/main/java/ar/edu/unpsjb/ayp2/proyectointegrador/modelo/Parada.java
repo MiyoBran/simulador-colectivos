@@ -21,6 +21,19 @@ public class Parada {
 	private double longitud;
 
 	/**
+	 * Tiempo promedio de espera de los pasajeros en esta parada (para estadísticas).
+	 */
+	private double tiempoEsperaPromedio;
+	/**
+	 * Cantidad de pasajeros que han abordado en esta parada (para estadísticas).
+	 */
+	private int pasajerosAbordados;
+	/**
+	 * Cantidad de colectivos que han pasado por esta parada (para estadísticas).
+	 */
+	private int colectivosPasados;
+
+	/**
 	 * Constructor principal.
 	 * 
 	 * @param id        El identificador único de la parada.
@@ -41,6 +54,9 @@ public class Parada {
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.pasajerosEsperando = new LinkedList<>();
+		this.tiempoEsperaPromedio = 0.0;
+		this.pasajerosAbordados = 0;
+		this.colectivosPasados = 0;
 	}
 
 	/**
@@ -119,6 +135,61 @@ public class Parada {
 	 */
 	public boolean tienePasajeroEnCola(Pasajero pasajero) {
 		return this.pasajerosEsperando.contains(pasajero);
+	}
+
+	/**
+	 * Incrementa la cantidad de pasajeros que han abordado en esta parada.
+	 */
+	public void incrementarPasajerosAbordados() {
+		this.pasajerosAbordados++;
+	}
+
+	/**
+	 * Incrementa la cantidad de colectivos que han pasado por esta parada.
+	 */
+	public void incrementarColectivosPasados() {
+		this.colectivosPasados++;
+	}
+
+	/**
+	 * Actualiza el tiempo promedio de espera de los pasajeros en esta parada.
+	 * 
+	 * @param nuevoTiempoEspera tiempo de espera del pasajero que abordó.
+	 */
+	public void actualizarTiempoEsperaPromedio(double nuevoTiempoEspera) {
+		if (pasajerosAbordados == 0) {
+			this.tiempoEsperaPromedio = nuevoTiempoEspera;
+		} else {
+			this.tiempoEsperaPromedio = ((this.tiempoEsperaPromedio * (pasajerosAbordados - 1)) + nuevoTiempoEspera)
+					/ pasajerosAbordados;
+		}
+	}
+
+	/**
+	 * Devuelve el tiempo promedio de espera en la parada.
+	 * 
+	 * @return tiempo promedio de espera.
+	 */
+	public double getTiempoEsperaPromedio() {
+		return tiempoEsperaPromedio;
+	}
+
+	/**
+	 * Devuelve la cantidad de pasajeros que han abordado en esta parada.
+	 * 
+	 * @return cantidad de pasajeros abordados.
+	 */
+	public int getPasajerosAbordados() {
+		return pasajerosAbordados;
+	}
+
+	/**
+	 * Devuelve la cantidad de colectivos que han pasado por esta parada.
+	 * 
+	 * @return cantidad de colectivos pasados.
+	 */
+	public int getColectivosPasados() {
+		return colectivosPasados;
 	}
 
 	@Override
