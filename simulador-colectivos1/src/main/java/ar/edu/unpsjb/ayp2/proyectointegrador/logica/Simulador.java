@@ -25,6 +25,8 @@ public class Simulador {
 	private List<Colectivo> colectivosEnSimulacion;
 	private Set<String> colectivosPendientesDeAvanzar; // IDs de colectivos que deben avanzar en el próximo paso
 	private Map<String, Linea> lineasDisponibles;
+    private GestorEstadisticas gestorEstadisticas;
+    private PlanificadorRutas planificadorRutas;
 
 	/**
 	 * Constructor del simulador. * Requiere líneas y paradas previamente cargadas.
@@ -46,6 +48,8 @@ public class Simulador {
 		this.lineasDisponibles = lineas;
 		this.colectivosEnSimulacion = new ArrayList<>();
 		this.colectivosPendientesDeAvanzar = new HashSet<>();
+        this.gestorEstadisticas = new GestorEstadisticas();
+        this.planificadorRutas = new PlanificadorRutas();
 	}
 
 	/**
@@ -256,6 +260,13 @@ public class Simulador {
 	public Map<String, Linea> getLineasDisponibles() {
 		return this.lineasDisponibles;
 	}
+
+    public GestorEstadisticas getGestorEstadisticas() {
+        return gestorEstadisticas;
+    }
+    public PlanificadorRutas getPlanificadorRutas() {
+        return planificadorRutas;
+    }
 
 	/**
 	 * Busca un colectivo por su identificador.

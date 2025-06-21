@@ -10,7 +10,7 @@ import java.util.Objects;
  * capacidad y su posición actual dentro del recorrido de la línea asignada.
  *
  * @author Miyo
- * @version 1.0
+ * @version 2.0
  * 
  */
 public class Colectivo {

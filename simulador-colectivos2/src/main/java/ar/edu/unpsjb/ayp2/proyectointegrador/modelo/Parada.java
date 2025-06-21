@@ -10,7 +10,7 @@ import java.util.Queue;
  * abordar.
  * 
  * @author Miyo
- * @version 1.0
+ * @version 1.1
  * 
  */
 public class Parada {

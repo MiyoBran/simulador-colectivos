@@ -10,7 +10,7 @@ import java.util.Objects;
  * capacidad y su posición actual dentro del recorrido de la línea asignada.
  *
  * @author Miyo
- * @version 1.0
+ * @version 2.1
  * 
  */
 public class Colectivo {
@@ -20,6 +20,17 @@ public class Colectivo {
 	private List<Pasajero> pasajerosABordo;
 	private Parada paradaActual;
 	private int indiceParadaActualEnRecorrido; // Índice de la paradaActual en el recorrido de la línea
+
+	/** Capacidad máxima de pasajeros sentados en el colectivo. */
+    private int capacidadSentados;
+    /** Capacidad máxima de pasajeros de pie en el colectivo. */
+    private int capacidadParados;
+    /** Cantidad de recorridos que debe realizar este colectivo en la simulación. */
+    private int recorridosRestantes;
+    /** Estado del colectivo: EN_SERVICIO, FUERA_DE_SERVICIO, EN_ESPERA, etc. */
+    private String estado;
+    /** Tiempo (en minutos) hasta la próxima salida, útil para la simulación. */
+    private int tiempoHastaProximaSalida;
 
 	/**
 	 * Constructor para un Colectivo.
@@ -95,6 +106,70 @@ public class Colectivo {
 	public int getCapacidadDisponible() {
 		return this.capacidadMaxima - getCantidadPasajerosABordo();
 	}
+
+	/**
+	 * Devuelve la capacidad máxima de pasajeros sentados.
+	 * @return Capacidad de sentados.
+	 */
+	public int getCapacidadSentados() {
+        return capacidadSentados;
+    }
+
+    /**
+     * Devuelve la capacidad máxima de pasajeros de pie.
+     * @return Capacidad de parados.
+     */
+    public int getCapacidadParados() {
+        return capacidadParados;
+    }
+
+    /**
+     * Establece la cantidad de recorridos restantes para este colectivo.
+     * @param recorridosRestantes cantidad de recorridos.
+     */
+    public void setRecorridosRestantes(int recorridosRestantes) {
+        this.recorridosRestantes = recorridosRestantes;
+    }
+
+    /**
+     * Devuelve la cantidad de recorridos restantes.
+     * @return recorridos restantes.
+     */
+    public int getRecorridosRestantes() {
+        return recorridosRestantes;
+    }
+
+    /**
+     * Devuelve el estado actual del colectivo.
+     * @return estado.
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * Establece el estado del colectivo.
+     * @param estado nuevo estado.
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * Devuelve el tiempo hasta la próxima salida.
+     * @return tiempo en minutos.
+     */
+    public int getTiempoHastaProximaSalida() {
+        return tiempoHastaProximaSalida;
+    }
+
+    /**
+     * Establece el tiempo hasta la próxima salida.
+     * @param tiempo minutos hasta la próxima salida.
+     */
+    public void setTiempoHastaProximaSalida(int tiempo) {
+        this.tiempoHastaProximaSalida = tiempo;
+    }
 
 	/**
 	 * Intenta subir un pasajero al colectivo.
