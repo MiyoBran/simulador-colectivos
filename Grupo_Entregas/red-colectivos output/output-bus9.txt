@@ -1,0 +1,754 @@
+===== Stop 1 =====
+Bus 9 is at standby
+
+Next stop: Stop 48, address: Esquel, 1352
+===== Stop 2 =====
+Bus 9, current stop: Stop 48, address: Esquel, 1352
+[Passengers waiting on the stop]
+Passenger id: 2003, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 2004, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 2005, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 2006, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 2007, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2008, destination: Stop 6, address: 28 De Julio, 311
+[No passengers are riding the bus]
+[No passengers got on the bus]
+
+Next stop: Stop 69, address: Magallanes, 883
+===== Stop 3 =====
+Bus 9, current stop: Stop 69, address: Magallanes, 883
+[Passengers waiting on the stop]
+Passenger id: 2840, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 2841, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2842, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 2843, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2845, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2846, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2848, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 2849, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 2850, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2851, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 2852, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 2853, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 2854, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 2855, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 2856, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2859, destination: Stop 41, address: Espa�a 2451
+Passenger id: 2860, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2862, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 2863, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2865, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 2866, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 2867, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 2868, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 2869, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 2870, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2872, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2873, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 2874, destination: Stop 104, address: Vito Roca 705
+[No passengers are riding the bus]
+[Passengers who got on the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+
+Next stop: Stop 59, address: Juan Bautista Alberdi, 1240
+===== Stop 4 =====
+Bus 9, current stop: Stop 59, address: Juan Bautista Alberdi, 1240
+[Passengers waiting on the stop]
+Passenger id: 2370, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 2371, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 2372, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2374, destination: Stop 50, address: Fournier, 1187
+Passenger id: 2375, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 2376, destination: Stop 103, address: Vito Roca 1106
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+[No passengers got off the bus]
+[Passengers who got on the bus]
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+
+Next stop: Stop 55, address: Hip�lito Yrigoyen, 802
+===== Stop 5 =====
+Bus 9, current stop: Stop 55, address: Hip�lito Yrigoyen, 802
+[Passengers waiting on the stop]
+Passenger id: 2294, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 2295, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 2297, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2298, destination: Stop 47, address: Espa�a, 928
+Passenger id: 2299, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 2300, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 2301, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 2302, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 2303, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2304, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 2305, destination: Stop 49, address: Fournier, 1090
+Passenger id: 2306, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 2307, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2309, destination: Stop 78, address: Necochea, 1022
+Passenger id: 2310, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 2312, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 2313, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2316, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 2317, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 2318, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 2320, destination: Stop 38, address: Dorrego, 669
+Passenger id: 2322, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 2323, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 2324, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 2325, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 2326, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2328, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 2329, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 2330, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 2331, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 2332, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 2333, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2335, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 2336, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 2337, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 2338, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 2339, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2342, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 2343, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2345, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 2348, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 2349, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 2350, destination: Stop 2, address: 1 De Marzo, 499
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+[No passengers got off the bus]
+[Passengers who got on the bus]
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+
+Next stop: Stop 53, address: Gobernador Alejandro Maiz, 315
+===== Stop 6 =====
+Bus 9, current stop: Stop 53, address: Gobernador Alejandro Maiz, 315
+[Passengers waiting on the stop]
+Passenger id: 2139, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 2140, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 2142, destination: Stop 93, address: San Juan, 891
+Passenger id: 2145, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 2146, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2147, destination: Stop 38, address: Dorrego, 669
+Passenger id: 2148, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 2150, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2151, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 2153, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 2154, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 2157, destination: Stop 94, address: San Juan, 896
+Passenger id: 2158, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 2159, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 2162, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2163, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 2164, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2165, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 2166, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 2167, destination: Stop 78, address: Necochea, 1022
+Passenger id: 2168, destination: Stop 94, address: San Juan, 896
+Passenger id: 2169, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 2171, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 2173, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 2174, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 2175, destination: Stop 104, address: Vito Roca 705
+Passenger id: 2176, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 2177, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 2178, destination: Stop 28, address: Bouchard, 400
+Passenger id: 2181, destination: Stop 38, address: Dorrego, 669
+Passenger id: 2183, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 2187, destination: Stop 28, address: Bouchard, 400
+Passenger id: 2188, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 2189, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 2190, destination: Stop 39, address: Dorrego, 700
+Passenger id: 2192, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2194, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 2198, destination: Stop 104, address: Vito Roca 705
+Passenger id: 2199, destination: Stop 37, address: Dorrego, 416
+Passenger id: 2200, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 2201, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 2202, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 2203, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2204, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 2205, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 2206, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 2207, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 2209, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2212, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 2213, destination: Stop 80, address: Pasaje 22 De Abril, 308
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+[No passengers got off the bus]
+[Passengers who got on the bus]
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+
+Next stop: Stop 26, address: Belgrano, 314
+===== Stop 7 =====
+Bus 9, current stop: Stop 26, address: Belgrano, 314
+[Passengers waiting on the stop]
+Passenger id: 982, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 985, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 986, destination: Stop 41, address: Espa�a 2451
+Passenger id: 988, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 989, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 990, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 991, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 992, destination: Stop 104, address: Vito Roca 705
+Passenger id: 995, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 997, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 998, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 999, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 1000, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 1002, destination: Stop 28, address: Bouchard, 400
+Passenger id: 1003, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1004, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1006, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 1007, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 1009, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1010, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 1012, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1013, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1015, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 1017, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1019, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1020, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 1024, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 1027, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1030, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 1032, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 1033, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 1038, destination: Stop 28, address: Bouchard, 400
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+[Passengers who got off the bus]
+Passenger id: 2847, destination: Stop 26, address: Belgrano, 314
+[Passengers who got on the bus]
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+
+Next stop: Stop 3, address: 25 De Mayo, 299
+===== Stop 8 =====
+Bus 9, current stop: Stop 3, address: 25 De Mayo, 299
+[Passengers waiting on the stop]
+Passenger id: 123, destination: Stop 39, address: Dorrego, 700
+Passenger id: 124, destination: Stop 39, address: Dorrego, 700
+Passenger id: 125, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 126, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 130, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 131, destination: Stop 37, address: Dorrego, 416
+Passenger id: 138, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 139, destination: Stop 104, address: Vito Roca 705
+Passenger id: 140, destination: Stop 78, address: Necochea, 1022
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 143, destination: Stop 29, address: Bouchard, 880
+Passenger id: 144, destination: Stop 94, address: San Juan, 896
+Passenger id: 145, destination: Stop 49, address: Fournier, 1090
+Passenger id: 146, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 147, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 152, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 154, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 155, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 156, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 157, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 158, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 159, destination: Stop 93, address: San Juan, 891
+Passenger id: 160, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 161, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 162, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 163, destination: Stop 37, address: Dorrego, 416
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+[No passengers got off the bus]
+[Passengers who got on the bus]
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+
+Next stop: Stop 4, address: 25 De Mayo, 693
+===== Stop 9 =====
+Bus 9, current stop: Stop 4, address: 25 De Mayo, 693
+[Passengers waiting on the stop]
+Passenger id: 168, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 170, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 172, destination: Stop 29, address: Bouchard, 880
+Passenger id: 173, destination: Stop 28, address: Bouchard, 400
+Passenger id: 174, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 175, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 178, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 179, destination: Stop 29, address: Bouchard, 880
+Passenger id: 180, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 182, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 188, destination: Stop 38, address: Dorrego, 669
+Passenger id: 189, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 190, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 191, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 192, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 193, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 194, destination: Stop 49, address: Fournier, 1090
+Passenger id: 197, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 198, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 199, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 200, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 201, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 203, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 204, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 207, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 208, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 209, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 210, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 211, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 212, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 217, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 218, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 220, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 221, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 222, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 224, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 225, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 227, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 228, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 229, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 230, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 232, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 233, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 234, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 235, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 236, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 237, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 238, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 242, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 243, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 244, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 245, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+[Passengers who got off the bus]
+Passenger id: 2858, destination: Stop 4, address: 25 De Mayo, 693
+[No passengers got on the bus]
+
+Next stop: Stop 46, address: Espa�a, 485
+===== Stop 10 =====
+Bus 9, current stop: Stop 46, address: Espa�a, 485
+[Passengers waiting on the stop]
+Passenger id: 1873, destination: Stop 50, address: Fournier, 1187
+Passenger id: 1875, destination: Stop 93, address: San Juan, 891
+Passenger id: 1876, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 1877, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1878, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1880, destination: Stop 38, address: Dorrego, 669
+Passenger id: 1882, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 1885, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 1887, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 1888, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 1889, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1890, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1891, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 1892, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 1893, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 1894, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 1895, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1897, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 1898, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 1899, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1902, destination: Stop 47, address: Espa�a, 928
+Passenger id: 1903, destination: Stop 47, address: Espa�a, 928
+Passenger id: 1906, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 1907, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1908, destination: Stop 29, address: Bouchard, 880
+Passenger id: 1909, destination: Stop 69, address: Magallanes, 883
+Passenger id: 1910, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1911, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 1912, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 1914, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 1916, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 1917, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1918, destination: Stop 38, address: Dorrego, 669
+Passenger id: 1919, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1920, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 1922, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+[Passengers who got off the bus]
+Passenger id: 2857, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2861, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2308, destination: Stop 46, address: Espa�a, 485
+[Passengers who got on the bus]
+Passenger id: 1909, destination: Stop 69, address: Magallanes, 883
+
+Next stop: Stop 102, address: Villegas, 700
+===== Stop 11 =====
+Bus 9, current stop: Stop 102, address: Villegas, 700
+[Passengers waiting on the stop]
+Passenger id: 4604, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 4605, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 4606, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 4607, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 4608, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4609, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 4610, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 4612, destination: Stop 94, address: San Juan, 896
+Passenger id: 4613, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 4615, destination: Stop 104, address: Vito Roca 705
+Passenger id: 4616, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 4617, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 4618, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4619, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4620, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 4621, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 4623, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 4624, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 4627, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 4628, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 4629, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 4630, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 4631, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 4632, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 4633, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 4634, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 4635, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 4636, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 4637, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 4638, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 4639, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 4640, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 4641, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 4642, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 4645, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 4647, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 4648, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 4649, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 4650, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 4651, destination: Stop 29, address: Bouchard, 880
+Passenger id: 4653, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 4654, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 4655, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 4656, destination: Stop 48, address: Esquel, 1352
+Passenger id: 4657, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 4659, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 4660, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 4661, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 4662, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 4663, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 4664, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 4665, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 4666, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 4668, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 4669, destination: Stop 61, address: Juli�n Murga, 950
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1909, destination: Stop 69, address: Magallanes, 883
+[Passengers who got off the bus]
+Passenger id: 2315, destination: Stop 102, address: Villegas, 700
+Passenger id: 2334, destination: Stop 102, address: Villegas, 700
+Passenger id: 2340, destination: Stop 102, address: Villegas, 700
+[Passengers who got on the bus]
+Passenger id: 4619, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4656, destination: Stop 48, address: Esquel, 1352
+
+Next stop: Stop 42, address: Espa�a, 1431
+===== Stop 12 =====
+Bus 9, current stop: Stop 42, address: Espa�a, 1431
+[Passengers waiting on the stop]
+Passenger id: 1735, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1736, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1737, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1738, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 1739, destination: Stop 30, address: Bv. Almirante Brown, 2925
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1909, destination: Stop 69, address: Magallanes, 883
+Passenger id: 4619, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4656, destination: Stop 48, address: Esquel, 1352
+[No passengers got off the bus]
+[Passengers who got on the bus]
+Passenger id: 1736, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1737, destination: Stop 68, address: Luis Urtazun, 624
+
+Next stop: Stop 62, address: La Pampa, 698
+===== Stop 13 =====
+Bus 9, current stop: Stop 62, address: La Pampa, 698
+[Passengers waiting on the stop]
+Passenger id: 2458, destination: Stop 71, address: Manuel Carrera, 1534
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1909, destination: Stop 69, address: Magallanes, 883
+Passenger id: 4619, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4656, destination: Stop 48, address: Esquel, 1352
+Passenger id: 1736, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1737, destination: Stop 68, address: Luis Urtazun, 624
+[Passengers who got off the bus]
+Passenger id: 2373, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2314, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2344, destination: Stop 62, address: La Pampa, 698
+[No passengers got on the bus]
+
+Next stop: Stop 68, address: Luis Urtazun, 624
+===== Stop 14 =====
+Bus 9, current stop: Stop 68, address: Luis Urtazun, 624
+[Passengers waiting on the stop]
+Passenger id: 2744, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 2745, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 2746, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 2747, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 2748, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 2749, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 2750, destination: Stop 50, address: Fournier, 1187
+Passenger id: 2751, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 2752, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 2753, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 2754, destination: Stop 47, address: Espa�a, 928
+Passenger id: 2755, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 2756, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 2757, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2758, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 2759, destination: Stop 28, address: Bouchard, 400
+Passenger id: 2760, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 2761, destination: Stop 104, address: Vito Roca 705
+Passenger id: 2762, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 2763, destination: Stop 39, address: Dorrego, 700
+Passenger id: 2764, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 2765, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 2766, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 2767, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 2768, destination: Stop 41, address: Espa�a 2451
+Passenger id: 2769, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2770, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 2771, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 2772, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 2773, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 2774, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 2775, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2776, destination: Stop 93, address: San Juan, 891
+Passenger id: 2777, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 2778, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2779, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 2780, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 2781, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 2782, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 2783, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 2784, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2785, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 2786, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 2787, destination: Stop 38, address: Dorrego, 669
+Passenger id: 2788, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 2789, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 2790, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 2791, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2792, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 2793, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 2794, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2795, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 2796, destination: Stop 93, address: San Juan, 891
+Passenger id: 2797, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2798, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 2799, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 2800, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 2801, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2802, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 2803, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 2804, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 2805, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2806, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2807, destination: Stop 49, address: Fournier, 1090
+Passenger id: 2808, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 2809, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 2810, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 2811, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2812, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2813, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2814, destination: Stop 90, address: Roberto G�mez, 550
+Passenger id: 2815, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 2816, destination: Stop 90, address: Roberto G�mez, 550
+Passenger id: 2817, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 2818, destination: Stop 41, address: Espa�a 2451
+Passenger id: 2819, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 2820, destination: Stop 37, address: Dorrego, 416
+Passenger id: 2821, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 2822, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2823, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 2824, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 2825, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 2826, destination: Stop 102, address: Villegas, 700
+Passenger id: 2827, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 2828, destination: Stop 102, address: Villegas, 700
+Passenger id: 2829, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 2830, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 2831, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 2832, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 2833, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2834, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2835, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 2836, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 2837, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2838, destination: Stop 39, address: Dorrego, 700
+Passenger id: 2839, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+[Passengers riding the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2871, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1029, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 142, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 149, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1909, destination: Stop 69, address: Magallanes, 883
+Passenger id: 4619, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4656, destination: Stop 48, address: Esquel, 1352
+Passenger id: 1736, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1737, destination: Stop 68, address: Luis Urtazun, 624
+[Passengers who got off the bus]
+Passenger id: 2844, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2864, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 2210, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1737, destination: Stop 68, address: Luis Urtazun, 624
+[Passengers who got on the bus]
+Passenger id: 2755, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 2775, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2778, destination: Stop 26, address: Belgrano, 314
+Passenger id: 2789, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 2794, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2797, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2812, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2823, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 2826, destination: Stop 102, address: Villegas, 700
+Passenger id: 2828, destination: Stop 102, address: Villegas, 700
+Passenger id: 2830, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 2834, destination: Stop 62, address: La Pampa, 698
+===== The bus 9 has ended its route =====

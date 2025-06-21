@@ -1,0 +1,1808 @@
+===== Stop 1 =====
+Bus 1 is at standby
+
+Next stop: Stop 88, address: Rivadavia, 2496
+===== Stop 2 =====
+Bus 1, current stop: Stop 88, address: Rivadavia, 2496
+[Passengers waiting on the stop]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3793, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3794, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 3795, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 3796, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3797, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 3798, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3799, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 3800, destination: Stop 104, address: Vito Roca 705
+Passenger id: 3801, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 3802, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 3803, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3804, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 3805, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 3806, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 3807, destination: Stop 29, address: Bouchard, 880
+Passenger id: 3808, destination: Stop 104, address: Vito Roca 705
+Passenger id: 3809, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 3810, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3812, destination: Stop 36, address: Dorrego, 109
+Passenger id: 3813, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 3814, destination: Stop 38, address: Dorrego, 669
+Passenger id: 3815, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 3816, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 3817, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 3818, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 3819, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 3820, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 3821, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 3822, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 3823, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 3824, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 3825, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 3826, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 3827, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 3828, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 3829, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3830, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 3831, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 3832, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 3833, destination: Stop 104, address: Vito Roca 705
+Passenger id: 3834, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 3835, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3837, destination: Stop 104, address: Vito Roca 705
+Passenger id: 3838, destination: Stop 90, address: Roberto G�mez, 550
+Passenger id: 3839, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 3840, destination: Stop 39, address: Dorrego, 700
+Passenger id: 3841, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3842, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 3843, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 3844, destination: Stop 102, address: Villegas, 700
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3846, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 3847, destination: Stop 104, address: Vito Roca 705
+Passenger id: 3848, destination: Stop 39, address: Dorrego, 700
+Passenger id: 3849, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 3850, destination: Stop 7, address: 8 De Marzo, 385
+Passenger id: 3851, destination: Stop 50, address: Fournier, 1187
+Passenger id: 3852, destination: Stop 36, address: Dorrego, 109
+Passenger id: 3853, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3854, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3855, destination: Stop 48, address: Esquel, 1352
+Passenger id: 3856, destination: Stop 39, address: Dorrego, 700
+Passenger id: 3857, destination: Stop 78, address: Necochea, 1022
+Passenger id: 3858, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 3859, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 3860, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 3861, destination: Stop 90, address: Roberto G�mez, 550
+Passenger id: 3862, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 3863, destination: Stop 38, address: Dorrego, 669
+Passenger id: 3864, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 3865, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 3866, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 3867, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 3868, destination: Stop 41, address: Espa�a 2451
+Passenger id: 3869, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 3870, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3871, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 3872, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 3873, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 3874, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 3875, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 3876, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3877, destination: Stop 84, address: Pedro Derbes, 816
+Passenger id: 3878, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 3879, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 3880, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 3881, destination: Stop 62, address: La Pampa, 698
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3883, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3884, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 3885, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 3886, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 3887, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 3888, destination: Stop 65, address: Lewis Jones, 919
+[No passengers are riding the bus]
+[Passengers who got on the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3796, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3798, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3803, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3854, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3876, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+
+Next stop: Stop 97, address: Santa Fe, 795
+===== Stop 3 =====
+Bus 1, current stop: Stop 97, address: Santa Fe, 795
+[Passengers waiting on the stop]
+Passenger id: 4307, destination: Stop 46, address: Espa�a, 485
+Passenger id: 4308, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4311, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 4312, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4313, destination: Stop 26, address: Belgrano, 314
+Passenger id: 4314, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 4315, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 4316, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 4317, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 4318, destination: Stop 26, address: Belgrano, 314
+Passenger id: 4319, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 4320, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 4321, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 4322, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 4323, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 4324, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 4325, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 4326, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 4327, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 4328, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 4329, destination: Stop 42, address: Espa�a, 1431
+Passenger id: 4330, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 4331, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 4332, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 4333, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 4334, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 4335, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 4336, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 4337, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 4338, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 4339, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 4340, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 4341, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 4342, destination: Stop 93, address: San Juan, 891
+Passenger id: 4343, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4344, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 4345, destination: Stop 69, address: Magallanes, 883
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4347, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 4348, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 4349, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 4350, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 4351, destination: Stop 26, address: Belgrano, 314
+Passenger id: 4352, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 4353, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4355, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 4356, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 4357, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 4358, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 4359, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 4360, destination: Stop 36, address: Dorrego, 109
+Passenger id: 4361, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4363, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 4364, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 4365, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 4366, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 4367, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 4368, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 4369, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 4370, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4371, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 4372, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 4373, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 4374, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 4375, destination: Stop 62, address: La Pampa, 698
+Passenger id: 4376, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4378, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 4379, destination: Stop 49, address: Fournier, 1090
+Passenger id: 4380, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 4381, destination: Stop 29, address: Bouchard, 880
+Passenger id: 4382, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 4383, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 4384, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 4385, destination: Stop 50, address: Fournier, 1187
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 4387, destination: Stop 104, address: Vito Roca 705
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3796, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3798, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3803, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3854, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3876, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+[No passengers got off the bus]
+[Passengers who got on the bus]
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4312, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4370, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+
+Next stop: Stop 44, address: Espa�a, 1660
+===== Stop 4 =====
+Bus 1, current stop: Stop 44, address: Espa�a, 1660
+[Passengers waiting on the stop]
+Passenger id: 1766, destination: Stop 28, address: Bouchard, 400
+Passenger id: 1767, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 1768, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 1769, destination: Stop 48, address: Esquel, 1352
+Passenger id: 1770, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 1771, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 1772, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1773, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1774, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1775, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1776, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 1777, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 1778, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 1779, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1781, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 1782, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1784, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 1785, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 1786, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 1787, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1788, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1789, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 1790, destination: Stop 79, address: Pasaje 22 De Abril, 167
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3796, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3798, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3803, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3854, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3876, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4312, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4370, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+[Passengers who got off the bus]
+Passenger id: 3796, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3803, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3854, destination: Stop 44, address: Espa�a, 1660
+[Passengers who got on the bus]
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+
+Next stop: Stop 43, address: Espa�a, 1450
+===== Stop 5 =====
+Bus 1, current stop: Stop 43, address: Espa�a, 1450
+[Passengers waiting on the stop]
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1741, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1742, destination: Stop 26, address: Belgrano, 314
+Passenger id: 1743, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 1744, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 1745, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 1746, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1748, destination: Stop 84, address: Pedro Derbes, 816
+Passenger id: 1749, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 1750, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 1751, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 1752, destination: Stop 93, address: San Juan, 891
+Passenger id: 1753, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 1754, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1756, destination: Stop 26, address: Belgrano, 314
+Passenger id: 1757, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1758, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 1759, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1761, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1762, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 1763, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 1764, destination: Stop 48, address: Esquel, 1352
+Passenger id: 1765, destination: Stop 94, address: San Juan, 896
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3798, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3876, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4312, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4370, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+[Passengers who got off the bus]
+Passenger id: 3798, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3876, destination: Stop 43, address: Espa�a, 1450
+[Passengers who got on the bus]
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+
+Next stop: Stop 47, address: Espa�a, 928
+===== Stop 6 =====
+Bus 1, current stop: Stop 47, address: Espa�a, 928
+[Passengers waiting on the stop]
+Passenger id: 1924, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1926, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 1927, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1930, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 1931, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 1932, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 1933, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 1934, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1935, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 1936, destination: Stop 42, address: Espa�a, 1431
+Passenger id: 1937, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 1938, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 1939, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 1940, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 1941, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 1942, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1943, destination: Stop 38, address: Dorrego, 669
+Passenger id: 1944, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 1945, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 1946, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 1947, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 1948, destination: Stop 50, address: Fournier, 1187
+Passenger id: 1949, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1950, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 1951, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 1952, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1953, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 1954, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 1955, destination: Stop 29, address: Bouchard, 880
+Passenger id: 1956, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1957, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 1958, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1959, destination: Stop 28, address: Bouchard, 400
+Passenger id: 1960, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 1961, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1963, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 1964, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 1965, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1968, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1969, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 1970, destination: Stop 41, address: Espa�a 2451
+Passenger id: 1971, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 1972, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 1973, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 1974, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 1975, destination: Stop 48, address: Esquel, 1352
+Passenger id: 1976, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1977, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 1978, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1980, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 1981, destination: Stop 93, address: San Juan, 891
+Passenger id: 1982, destination: Stop 41, address: Espa�a 2451
+Passenger id: 1983, destination: Stop 7, address: 8 De Marzo, 385
+Passenger id: 1984, destination: Stop 68, address: Luis Urtazun, 624
+Passenger id: 1985, destination: Stop 102, address: Villegas, 700
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1987, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1988, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1989, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 1990, destination: Stop 41, address: Espa�a 2451
+Passenger id: 1991, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1992, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 1993, destination: Stop 102, address: Villegas, 700
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1995, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 1996, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 1997, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 1998, destination: Stop 69, address: Magallanes, 883
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 2000, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 2001, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 2002, destination: Stop 90, address: Roberto G�mez, 550
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4312, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4370, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+[Passengers who got off the bus]
+Passenger id: 4312, destination: Stop 47, address: Espa�a, 928
+Passenger id: 4370, destination: Stop 47, address: Espa�a, 928
+[Passengers who got on the bus]
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1952, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1978, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+
+Next stop: Stop 58, address: Juan B. Justo, 1172
+===== Stop 7 =====
+Bus 1, current stop: Stop 58, address: Juan B. Justo, 1172
+[Passengers waiting on the stop]
+Passenger id: 2368, destination: Stop 36, address: Dorrego, 109
+Passenger id: 2369, destination: Stop 16, address: Avenida Juan Muzzio, 258
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1952, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1978, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+[No passengers got off the bus]
+[No passengers got on the bus]
+
+Next stop: Stop 37, address: Dorrego, 416
+===== Stop 8 =====
+Bus 1, current stop: Stop 37, address: Dorrego, 416
+[Passengers waiting on the stop]
+Passenger id: 1487, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1490, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 1491, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 1492, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 1493, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 1494, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1495, destination: Stop 94, address: San Juan, 896
+Passenger id: 1496, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 1497, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 1498, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 1499, destination: Stop 38, address: Dorrego, 669
+Passenger id: 1500, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 1501, destination: Stop 66, address: Los Alamos, 3900
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1952, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1978, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+[Passengers who got off the bus]
+Passenger id: 4310, destination: Stop 37, address: Dorrego, 416
+Passenger id: 1780, destination: Stop 37, address: Dorrego, 416
+[Passengers who got on the bus]
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+
+Next stop: Stop 74, address: Marcos A. Zar, 1998
+===== Stop 9 =====
+Bus 1, current stop: Stop 74, address: Marcos A. Zar, 1998
+[Passengers waiting on the stop]
+Passenger id: 3060, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 3061, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 3062, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3063, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 3064, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 3065, destination: Stop 50, address: Fournier, 1187
+Passenger id: 3066, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 3067, destination: Stop 98, address: Santiago Del Estero, 727
+Passenger id: 3068, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3070, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 3071, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 3072, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3074, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 3075, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 3076, destination: Stop 62, address: La Pampa, 698
+Passenger id: 3077, destination: Stop 29, address: Bouchard, 880
+Passenger id: 3078, destination: Stop 28, address: Bouchard, 400
+Passenger id: 3079, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 3080, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 3081, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 3082, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 3083, destination: Stop 96, address: San Mart�n, 1400
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1952, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1978, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+[Passengers who got off the bus]
+Passenger id: 1952, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 1978, destination: Stop 74, address: Marcos A. Zar, 1998
+[Passengers who got on the bus]
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+
+Next stop: Stop 77, address: Mariano Moreno, 193
+===== Stop 10 =====
+Bus 1, current stop: Stop 77, address: Mariano Moreno, 193
+[Passengers waiting on the stop]
+Passenger id: 3216, destination: Stop 69, address: Magallanes, 883
+Passenger id: 3217, destination: Stop 38, address: Dorrego, 669
+Passenger id: 3218, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 3219, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3221, destination: Stop 39, address: Dorrego, 700
+Passenger id: 3222, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 3223, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 3224, destination: Stop 49, address: Fournier, 1090
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3226, destination: Stop 41, address: Espa�a 2451
+Passenger id: 3227, destination: Stop 39, address: Dorrego, 700
+Passenger id: 3228, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 3229, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 3230, destination: Stop 78, address: Necochea, 1022
+Passenger id: 3231, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 3232, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 3233, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 3234, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 3235, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 3236, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 3237, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 3238, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 3239, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 3240, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 3241, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 3242, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 3243, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 3244, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 3245, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 3246, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 3247, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 3248, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3250, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 3251, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3252, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 3253, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3254, destination: Stop 36, address: Dorrego, 109
+Passenger id: 3255, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3256, destination: Stop 38, address: Dorrego, 669
+Passenger id: 3257, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 3258, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 3259, destination: Stop 28, address: Bouchard, 400
+Passenger id: 3260, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 3261, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 3262, destination: Stop 49, address: Fournier, 1090
+Passenger id: 3263, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 3264, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 3265, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 3266, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3267, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3269, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 3270, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3272, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 3273, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3275, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 3276, destination: Stop 29, address: Bouchard, 880
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3278, destination: Stop 80, address: Pasaje 22 De Abril, 308
+Passenger id: 3279, destination: Stop 94, address: San Juan, 896
+Passenger id: 3280, destination: Stop 7, address: 8 De Marzo, 385
+Passenger id: 3281, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3282, destination: Stop 41, address: Espa�a 2451
+Passenger id: 3283, destination: Stop 41, address: Espa�a 2451
+Passenger id: 3284, destination: Stop 28, address: Bouchard, 400
+Passenger id: 3285, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3287, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3289, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 3290, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 3291, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3292, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 3293, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 3294, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3295, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 3296, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 3297, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 3298, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3301, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 3302, destination: Stop 94, address: San Juan, 896
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3304, destination: Stop 49, address: Fournier, 1090
+Passenger id: 3305, destination: Stop 94, address: San Juan, 896
+Passenger id: 3306, destination: Stop 36, address: Dorrego, 109
+Passenger id: 3307, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 3308, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 3309, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3312, destination: Stop 104, address: Vito Roca 705
+Passenger id: 3313, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+[Passengers who got off the bus]
+Passenger id: 4346, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4354, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 4362, destination: Stop 77, address: Mariano Moreno, 193
+[Passengers who got on the bus]
+Passenger id: 3219, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3253, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3266, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3281, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3294, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+
+Next stop: Stop 25, address: Bartolom� Mitre, 610
+===== Stop 11 =====
+Bus 1, current stop: Stop 25, address: Bartolom� Mitre, 610
+[Passengers waiting on the stop]
+Passenger id: 947, destination: Stop 104, address: Vito Roca 705
+Passenger id: 948, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 949, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 950, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 951, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 952, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 953, destination: Stop 28, address: Bouchard, 400
+Passenger id: 954, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 955, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 956, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 957, destination: Stop 41, address: Espa�a 2451
+Passenger id: 958, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 959, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 961, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 962, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 964, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 965, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 966, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 967, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 968, destination: Stop 49, address: Fournier, 1090
+Passenger id: 969, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 970, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 971, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 972, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 973, destination: Stop 104, address: Vito Roca 705
+Passenger id: 974, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 975, destination: Stop 26, address: Belgrano, 314
+Passenger id: 976, destination: Stop 102, address: Villegas, 700
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3219, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3253, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3266, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3281, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3294, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+[Passengers who got off the bus]
+Passenger id: 3792, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 1967, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3219, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3253, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 3281, destination: Stop 25, address: Bartolom� Mitre, 610
+[Passengers who got on the bus]
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+
+Next stop: Stop 24, address: Bartolom� Mitre, 401
+===== Stop 12 =====
+Bus 1, current stop: Stop 24, address: Bartolom� Mitre, 401
+[Passengers waiting on the stop]
+Passenger id: 925, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 926, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 927, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 928, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 930, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 931, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 932, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 933, destination: Stop 49, address: Fournier, 1090
+Passenger id: 934, destination: Stop 50, address: Fournier, 1187
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 936, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 937, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 938, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 940, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 941, destination: Stop 36, address: Dorrego, 109
+Passenger id: 942, destination: Stop 41, address: Espa�a 2451
+Passenger id: 943, destination: Stop 104, address: Vito Roca 705
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 945, destination: Stop 90, address: Roberto G�mez, 550
+Passenger id: 946, destination: Stop 5, address: 28 De Julio, 200
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3266, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3294, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+[Passengers who got off the bus]
+Passenger id: 4309, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3266, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 3294, destination: Stop 24, address: Bartolom� Mitre, 401
+[Passengers who got on the bus]
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 946, destination: Stop 5, address: 28 De Julio, 200
+
+Next stop: Stop 5, address: 28 De Julio, 200
+===== Stop 13 =====
+Bus 1, current stop: Stop 5, address: 28 De Julio, 200
+[Passengers waiting on the stop]
+Passenger id: 246, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 248, destination: Stop 93, address: San Juan, 891
+Passenger id: 249, destination: Stop 36, address: Dorrego, 109
+Passenger id: 250, destination: Stop 39, address: Dorrego, 700
+Passenger id: 251, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 252, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 253, destination: Stop 30, address: Bv. Almirante Brown, 2925
+Passenger id: 254, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 255, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 946, destination: Stop 5, address: 28 De Julio, 200
+[Passengers who got off the bus]
+Passenger id: 3811, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 4386, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1783, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1740, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 1999, destination: Stop 5, address: 28 De Julio, 200
+Passenger id: 946, destination: Stop 5, address: 28 De Julio, 200
+[Passengers who got on the bus]
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+
+Next stop: Stop 52, address: General Mosconi, 100
+===== Stop 14 =====
+Bus 1, current stop: Stop 52, address: General Mosconi, 100
+[Passengers waiting on the stop]
+Passenger id: 2126, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2128, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 2129, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 2130, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 2131, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 2132, destination: Stop 49, address: Fournier, 1090
+Passenger id: 2133, destination: Stop 94, address: San Juan, 896
+Passenger id: 2134, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 2135, destination: Stop 7, address: 8 De Marzo, 385
+Passenger id: 2136, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 2137, destination: Stop 84, address: Pedro Derbes, 816
+Passenger id: 2138, destination: Stop 17, address: Avenida Juan Muzzio, 482
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+[Passengers who got off the bus]
+Passenger id: 3836, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 4377, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3073, destination: Stop 52, address: General Mosconi, 100
+[Passengers who got on the bus]
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2130, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+
+Next stop: Stop 14, address: Avenida Domec Garc�a Norte, 239
+===== Stop 15 =====
+Bus 1, current stop: Stop 14, address: Avenida Domec Garc�a Norte, 239
+[Passengers waiting on the stop]
+Passenger id: 515, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 516, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 517, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 518, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 519, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 520, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 521, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 522, destination: Stop 46, address: Espa�a, 485
+Passenger id: 523, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 524, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 525, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 526, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 527, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 528, destination: Stop 12, address: Alsua De Corbetto, 638
+Passenger id: 529, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 530, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 531, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 532, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 534, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 535, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 536, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 537, destination: Stop 84, address: Pedro Derbes, 816
+Passenger id: 538, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 539, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 540, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 541, destination: Stop 46, address: Espa�a, 485
+Passenger id: 542, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 543, destination: Stop 28, address: Bouchard, 400
+Passenger id: 544, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 545, destination: Stop 48, address: Esquel, 1352
+Passenger id: 546, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 547, destination: Stop 75, address: Marcos A. Zar, 461
+Passenger id: 548, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 549, destination: Stop 13, address: Alto R�o Senguer, 1311
+Passenger id: 550, destination: Stop 16, address: Avenida Juan Muzzio, 258
+Passenger id: 551, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 552, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 553, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 554, destination: Stop 69, address: Magallanes, 883
+Passenger id: 555, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 556, destination: Stop 38, address: Dorrego, 669
+Passenger id: 557, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 558, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 559, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 561, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 562, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 563, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 564, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 565, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 566, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 567, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 568, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 569, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 570, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 571, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 572, destination: Stop 93, address: San Juan, 891
+Passenger id: 573, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 574, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 575, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 576, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 577, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 578, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 579, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 580, destination: Stop 46, address: Espa�a, 485
+Passenger id: 581, destination: Stop 42, address: Espa�a, 1431
+Passenger id: 582, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 583, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 584, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 585, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 586, destination: Stop 94, address: San Juan, 896
+Passenger id: 587, destination: Stop 38, address: Dorrego, 669
+Passenger id: 588, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 589, destination: Stop 94, address: San Juan, 896
+Passenger id: 590, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 591, destination: Stop 28, address: Bouchard, 400
+Passenger id: 592, destination: Stop 47, address: Espa�a, 928
+Passenger id: 593, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 594, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 595, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 596, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 597, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 598, destination: Stop 76, address: Marcos A. Zar, 691
+Passenger id: 599, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 600, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 601, destination: Stop 43, address: Espa�a, 1450
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2130, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+[Passengers who got off the bus]
+Passenger id: 3882, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1747, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1929, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1986, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 1488, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3303, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 2130, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+[Passengers who got on the bus]
+Passenger id: 515, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 516, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 517, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 519, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 524, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 526, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 532, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 534, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 544, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 558, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 563, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 568, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 571, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 584, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 588, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 592, destination: Stop 47, address: Espa�a, 928
+Passenger id: 599, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 601, destination: Stop 43, address: Espa�a, 1450
+
+Next stop: Stop 61, address: Juli�n Murga, 950
+===== Stop 16 =====
+Bus 1, current stop: Stop 61, address: Juli�n Murga, 950
+[Passengers waiting on the stop]
+Passenger id: 2419, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 2420, destination: Stop 29, address: Bouchard, 880
+Passenger id: 2421, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 2422, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 2423, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2424, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 2425, destination: Stop 48, address: Esquel, 1352
+Passenger id: 2426, destination: Stop 99, address: Sarmiento, 229
+Passenger id: 2427, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 2428, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2429, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 2430, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 2431, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2432, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 2433, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 2434, destination: Stop 46, address: Espa�a, 485
+Passenger id: 2435, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 2436, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2437, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 2438, destination: Stop 19, address: Avenida Julio Argentino Roca, 1567
+Passenger id: 2439, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 2440, destination: Stop 78, address: Necochea, 1022
+Passenger id: 2441, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 2442, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2443, destination: Stop 41, address: Espa�a 2451
+Passenger id: 2444, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 2445, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 2446, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 2447, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2448, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 2449, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 2450, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2451, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 2452, destination: Stop 50, address: Fournier, 1187
+Passenger id: 2453, destination: Stop 103, address: Vito Roca 1106
+Passenger id: 2454, destination: Stop 62, address: La Pampa, 698
+Passenger id: 2455, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 2456, destination: Stop 104, address: Vito Roca 705
+Passenger id: 2457, destination: Stop 24, address: Bartolom� Mitre, 401
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 515, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 516, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 517, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 519, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 524, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 526, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 532, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 534, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 544, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 558, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 563, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 568, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 571, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 584, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 588, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 592, destination: Stop 47, address: Espa�a, 928
+Passenger id: 599, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 601, destination: Stop 43, address: Espa�a, 1450
+[Passengers who got off the bus]
+Passenger id: 1760, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1966, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1994, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1489, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3299, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 519, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 558, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 599, destination: Stop 61, address: Juli�n Murga, 950
+[Passengers who got on the bus]
+Passenger id: 2423, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2428, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2431, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2436, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2442, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2447, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2450, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2455, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 2457, destination: Stop 24, address: Bartolom� Mitre, 401
+
+Next stop: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+===== Stop 17 =====
+Bus 1, current stop: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+[Passengers waiting on the stop]
+Passenger id: 1396, destination: Stop 7, address: 8 De Marzo, 385
+Passenger id: 1397, destination: Stop 50, address: Fournier, 1187
+Passenger id: 1398, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1399, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 1400, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 1401, destination: Stop 83, address: Pedro Derbes, 660
+Passenger id: 1402, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 1403, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1404, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 1405, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 1406, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1407, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 1408, destination: Stop 47, address: Espa�a, 928
+Passenger id: 1409, destination: Stop 102, address: Villegas, 700
+Passenger id: 1410, destination: Stop 62, address: La Pampa, 698
+Passenger id: 1411, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 1412, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1413, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1414, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 1415, destination: Stop 84, address: Pedro Derbes, 816
+Passenger id: 1416, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 1417, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 1418, destination: Stop 96, address: San Mart�n, 1400
+Passenger id: 1419, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 1420, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 1421, destination: Stop 36, address: Dorrego, 109
+Passenger id: 1422, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 1423, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 1424, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1425, destination: Stop 27, address: Bouchard, 1285
+Passenger id: 1426, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 1427, destination: Stop 41, address: Espa�a 2451
+Passenger id: 1428, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1429, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 1430, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 1431, destination: Stop 38, address: Dorrego, 669
+Passenger id: 1432, destination: Stop 94, address: San Juan, 896
+Passenger id: 1433, destination: Stop 23, address: Avenida Julio Argentino Roca, 936
+Passenger id: 1434, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 1435, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 1436, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 1437, destination: Stop 49, address: Fournier, 1090
+Passenger id: 1438, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 1439, destination: Stop 64, address: Lewis Jones, 200
+Passenger id: 1440, destination: Stop 104, address: Vito Roca 705
+Passenger id: 1441, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 1442, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1443, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 1444, destination: Stop 32, address: Ca�a Colihue, 1184
+Passenger id: 1445, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1446, destination: Stop 94, address: San Juan, 896
+Passenger id: 1447, destination: Stop 26, address: Belgrano, 314
+Passenger id: 1448, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 1449, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 1450, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 1451, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 1452, destination: Stop 101, address: Vicente L�pez Y Planes, 315
+Passenger id: 1453, destination: Stop 78, address: Necochea, 1022
+Passenger id: 1454, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 1455, destination: Stop 18, address: Avenida Juan Xxiii, 1708
+Passenger id: 1456, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 1457, destination: Stop 70, address: Manuel Alsua, 1086
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 515, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 516, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 517, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 524, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 526, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 532, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 534, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 544, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 563, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 568, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 571, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 584, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 588, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 592, destination: Stop 47, address: Espa�a, 928
+Passenger id: 601, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 2423, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2428, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2431, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2436, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2442, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2447, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2450, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2455, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 2457, destination: Stop 24, address: Bartolom� Mitre, 401
+[Passengers who got off the bus]
+Passenger id: 3845, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 935, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 944, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 526, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 563, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+[Passengers who got on the bus]
+Passenger id: 1398, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1405, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 1406, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1408, destination: Stop 47, address: Espa�a, 928
+Passenger id: 1412, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1423, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 1428, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1438, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 1449, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+
+Next stop: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+===== Stop 18 =====
+Bus 1, current stop: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+[Passengers waiting on the stop]
+Passenger id: 1349, destination: Stop 39, address: Dorrego, 700
+Passenger id: 1350, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 1351, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 1352, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 1353, destination: Stop 39, address: Dorrego, 700
+Passenger id: 1354, destination: Stop 26, address: Belgrano, 314
+Passenger id: 1355, destination: Stop 84, address: Pedro Derbes, 816
+Passenger id: 1356, destination: Stop 93, address: San Juan, 891
+Passenger id: 1357, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 1358, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 1359, destination: Stop 28, address: Bouchard, 400
+Passenger id: 1360, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1361, destination: Stop 95, address: San Mart�n, 1220
+Passenger id: 1362, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 1363, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 1364, destination: Stop 36, address: Dorrego, 109
+Passenger id: 1365, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 1366, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 1367, destination: Stop 67, address: Luis Urtazun, 1005
+Passenger id: 1368, destination: Stop 91, address: Ruperto Gimenez, 678
+Passenger id: 1369, destination: Stop 41, address: Espa�a 2451
+Passenger id: 1370, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 1371, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 1372, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 1373, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1374, destination: Stop 63, address: Lewis Jones, 1336
+Passenger id: 1375, destination: Stop 36, address: Dorrego, 109
+Passenger id: 1376, destination: Stop 42, address: Espa�a, 1431
+Passenger id: 1377, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 1378, destination: Stop 29, address: Bouchard, 880
+Passenger id: 1379, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1380, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 1381, destination: Stop 17, address: Avenida Juan Muzzio, 482
+Passenger id: 1382, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 1383, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 1384, destination: Stop 57, address: Jos� Contin 712
+Passenger id: 1385, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 1386, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1387, destination: Stop 50, address: Fournier, 1187
+Passenger id: 1388, destination: Stop 40, address: El Jariyal, 1725
+Passenger id: 1389, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 1390, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 1391, destination: Stop 71, address: Manuel Carrera, 1534
+Passenger id: 1392, destination: Stop 29, address: Bouchard, 880
+Passenger id: 1393, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 1394, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 1395, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 515, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 516, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 517, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 524, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 532, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 534, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 544, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 568, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 571, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 584, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 588, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 592, destination: Stop 47, address: Espa�a, 928
+Passenger id: 601, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 2423, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2428, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2431, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2436, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2442, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2447, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2450, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2455, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 2457, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 1398, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1405, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 1406, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1408, destination: Stop 47, address: Espa�a, 928
+Passenger id: 1412, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1423, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 1428, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1438, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 1449, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+[Passengers who got off the bus]
+Passenger id: 3069, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2428, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 2447, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 1438, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+Passenger id: 1449, destination: Stop 34, address: Comodoro Mart�n Rivadavia, 602
+[Passengers who got on the bus]
+Passenger id: 1363, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 1373, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1379, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1386, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1395, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+
+Next stop: Stop 89, address: Roberto G�mez, 1017
+===== Stop 19 =====
+Bus 1, current stop: Stop 89, address: Roberto G�mez, 1017
+[Passengers waiting on the stop]
+Passenger id: 3889, destination: Stop 15, address: Avenida Juan Muzzio, 15-198
+Passenger id: 3890, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3891, destination: Stop 66, address: Los Alamos, 3900
+Passenger id: 3892, destination: Stop 39, address: Dorrego, 700
+Passenger id: 3893, destination: Stop 41, address: Espa�a 2451
+Passenger id: 3894, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3895, destination: Stop 11, address: Agust�n Pujol, 374
+Passenger id: 3896, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 3897, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 3898, destination: Stop 8, address: Aar�n Jenkins, 219
+Passenger id: 3899, destination: Stop 28, address: Bouchard, 400
+Passenger id: 3900, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 3901, destination: Stop 65, address: Lewis Jones, 919
+Passenger id: 3902, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3903, destination: Stop 54, address: Hip�lito Yrigoyen, 457
+Passenger id: 3904, destination: Stop 38, address: Dorrego, 669
+Passenger id: 3905, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 3906, destination: Stop 36, address: Dorrego, 109
+Passenger id: 3907, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 3908, destination: Stop 29, address: Bouchard, 880
+Passenger id: 3909, destination: Stop 9, address: Abraham Mathews, 2525
+Passenger id: 3910, destination: Stop 53, address: Gobernador Alejandro Maiz, 315
+Passenger id: 3911, destination: Stop 21, address: Avenida Julio Argentino Roca, 2251
+Passenger id: 3912, destination: Stop 48, address: Esquel, 1352
+Passenger id: 3913, destination: Stop 94, address: San Juan, 896
+Passenger id: 3914, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3915, destination: Stop 20, address: Avenida Julio Argentino Roca, 1615
+Passenger id: 3916, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3917, destination: Stop 31, address: Bv. Almirante Brown, 3053
+Passenger id: 3918, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3919, destination: Stop 10, address: Agust�n Pujol, 284
+Passenger id: 3920, destination: Stop 33, address: Chiquichan, 22
+Passenger id: 3921, destination: Stop 56, address: Jos� Alberdi 720
+Passenger id: 3922, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3923, destination: Stop 28, address: Bouchard, 400
+Passenger id: 3924, destination: Stop 51, address: Fuerte San Jos�, 742
+Passenger id: 3925, destination: Stop 62, address: La Pampa, 698
+Passenger id: 3926, destination: Stop 60, address: Juan Jose Meangolarra Y Moreno, 1005
+Passenger id: 3927, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 3928, destination: Stop 29, address: Bouchard, 880
+Passenger id: 3929, destination: Stop 73, address: Marcos A. Zar, 1980
+Passenger id: 3930, destination: Stop 28, address: Bouchard, 400
+Passenger id: 3931, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 3932, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3933, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3934, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3935, destination: Stop 2, address: 1 De Marzo, 499
+Passenger id: 3936, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 3937, destination: Stop 38, address: Dorrego, 669
+Passenger id: 3938, destination: Stop 69, address: Magallanes, 883
+Passenger id: 3939, destination: Stop 82, address: Pedro Derbes, 1102
+Passenger id: 3940, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3941, destination: Stop 49, address: Fournier, 1090
+Passenger id: 3942, destination: Stop 6, address: 28 De Julio, 311
+Passenger id: 3943, destination: Stop 45, address: Espa�a, 2375
+Passenger id: 3944, destination: Stop 81, address: Pedro Derbes, 1040
+Passenger id: 3945, destination: Stop 102, address: Villegas, 700
+Passenger id: 3946, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 3947, destination: Stop 79, address: Pasaje 22 De Abril, 167
+Passenger id: 3948, destination: Stop 70, address: Manuel Alsua, 1086
+Passenger id: 3949, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3950, destination: Stop 1, address: 1 De Marzo, 405
+Passenger id: 3951, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 3952, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 3953, destination: Stop 72, address: Manuel Garc�a 705
+Passenger id: 3954, destination: Stop 85, address: Periodistas Chubutenses, 500
+Passenger id: 3955, destination: Stop 3, address: 25 De Mayo, 299
+Passenger id: 3956, destination: Stop 59, address: Juan Bautista Alberdi, 1240
+Passenger id: 3957, destination: Stop 87, address: Rivadavia, 2476
+Passenger id: 3958, destination: Stop 42, address: Espa�a, 1431
+Passenger id: 3959, destination: Stop 92, address: Ruta Provincial 1
+Passenger id: 3960, destination: Stop 22, address: Avenida Julio Argentino Roca, 2599
+Passenger id: 3961, destination: Stop 55, address: Hip�lito Yrigoyen, 802
+Passenger id: 3962, destination: Stop 4, address: 25 De Mayo, 693
+Passenger id: 3963, destination: Stop 86, address: Rivadavia 2950
+Passenger id: 3964, destination: Stop 100, address: Soldado Desconocido, 1265
+Passenger id: 3965, destination: Stop 61, address: Juli�n Murga, 950
+[Passengers riding the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1925, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1928, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 1962, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 1979, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3220, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3225, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3249, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3268, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3271, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3274, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 3277, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3286, destination: Stop 47, address: Espa�a, 928
+Passenger id: 3288, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3300, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3310, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3311, destination: Stop 47, address: Espa�a, 928
+Passenger id: 960, destination: Stop 47, address: Espa�a, 928
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 929, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 939, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 515, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 516, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 517, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 524, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 532, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 534, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 544, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 568, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 571, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 584, destination: Stop 25, address: Bartolom� Mitre, 610
+Passenger id: 588, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 592, destination: Stop 47, address: Espa�a, 928
+Passenger id: 601, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 2423, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2431, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2436, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2442, destination: Stop 97, address: Santa Fe, 795
+Passenger id: 2450, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 2455, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 2457, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 1398, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1405, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 1406, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 1408, destination: Stop 47, address: Espa�a, 928
+Passenger id: 1412, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1423, destination: Stop 24, address: Bartolom� Mitre, 401
+Passenger id: 1428, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 1363, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 1373, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1379, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 1386, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 1395, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+[Passengers who got off the bus]
+Passenger id: 3791, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 1755, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 963, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 247, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2127, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 533, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 560, destination: Stop 89, address: Roberto G�mez, 1017
+Passenger id: 2423, destination: Stop 89, address: Roberto G�mez, 1017
+[Passengers who got on the bus]
+Passenger id: 3890, destination: Stop 44, address: Espa�a, 1660
+Passenger id: 3894, destination: Stop 37, address: Dorrego, 416
+Passenger id: 3897, destination: Stop 58, address: Juan B. Justo, 1172
+Passenger id: 3916, destination: Stop 35, address: Comodoro Mart�n Rivadavia, 750
+Passenger id: 3918, destination: Stop 43, address: Espa�a, 1450
+Passenger id: 3922, destination: Stop 14, address: Avenida Domec Garc�a Norte, 239
+Passenger id: 3931, destination: Stop 77, address: Mariano Moreno, 193
+Passenger id: 3932, destination: Stop 52, address: General Mosconi, 100
+Passenger id: 3933, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3934, destination: Stop 61, address: Juli�n Murga, 950
+Passenger id: 3940, destination: Stop 88, address: Rivadavia, 2496
+Passenger id: 3949, destination: Stop 74, address: Marcos A. Zar, 1998
+Passenger id: 3965, destination: Stop 61, address: Juli�n Murga, 950
+===== The bus 1 has ended its route =====
