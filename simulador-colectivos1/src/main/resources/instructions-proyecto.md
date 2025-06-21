@@ -1,50 +1,36 @@
 # Instrucciones para el Desarrollo y Colaboración
 
-## Introducción y División de Tareas – Incremento 2
+## Resumen de Tareas Realizadas – Incremento 2
 
-En esta etapa del proyecto (Incremento 2), se propone el siguiente esquema de trabajo para optimizar la colaboración y el avance:
+Durante el desarrollo del Incremento 2, se completaron las siguientes tareas principales, divididas por rol:
 
-### División Sugerida de Tareas
+### División de Tareas Completadas
 
 - **Miyen**
-  - Extender clases modelo (`Colectivo`, `Pasajero`, `Parada`) con los nuevos atributos y métodos requeridos.
-  - Implementar y testear las clases `GestorEstadisticas` y `PlanificadorRutas`.
-  - Integrar las nuevas funcionalidades en `SimuladorColectivosApp` (menú ampliado, opciones nuevas).
-  - Actualizar y ampliar los tests unitarios correspondientes a las clases bajo su desarrollo.
+  - `[x]` Extender clases modelo (`Colectivo`, `Pasajero`, `Parada`) con los nuevos atributos y métodos requeridos.
+  - `[x]` Implementar y testear la clase `GestorEstadisticas`.
+  - `[x]` Implementar y testear la clase `PlanificadorRutas`.
+  - `[x]` Integrar las nuevas funcionalidades en `SimuladorColectivosApp` (menú ampliado, opciones nuevas).
+  - `[x]` Actualizar y ampliar los tests unitarios correspondientes a las clases desarrolladas.
 
-- **Enzo**
-  - Refactorizar la clase `Simulador` para separar claramente la generación de eventos de la exportación/visualización de resultados.
-  - Implementar la interfaz y clases de exportadores (`ExportadorResultadosSimulacion` y sus implementaciones: consola, archivo, etc.).
-  - Actualizar y ampliar los tests unitarios de las clases bajo su responsabilidad.
+- **Enzo** - `[ ]` Refactorizar la clase `Simulador` para separar claramente la generación de eventos de la exportación/visualización de resultados.
+  - `[ ]` Implementar la interfaz y clases de exportadores (`ExportadorResultadosSimulacion` y sus implementaciones).
+  - `[ ]` Actualizar y ampliar los tests unitarios de las clases bajo su responsabilidad.
 
 **Ambos** deben asegurarse de mantener la estructura, estilo y documentación según las convenciones, y comunicarse frecuentemente para coordinar la integración y pruebas.
 
 ---
 
-## Checklist de la Fase 2: Refactor y Mejoras Iniciales
-
-- [x] Limpiar el código: eliminar comentarios innecesarios y código muerto (modelo, datos, logica, interfaz).
-- [x] Revisar que solo haya System.out.println en la interfaz o tests.
-- [x] Asegurar que todas las clases y métodos públicos tengan JavaDoc.
-- [x] Actualizar README.md, roadmap-proyecto.md y prompt-proyecto.md con el estado real del proyecto.
-- [x] Verificar que todos los archivos estén en su paquete/carpeta correspondiente.
-- [x] Borrar archivos obsoletos o de pruebas no relevantes.
-- [x] Revisar dependencias en pom.xml y parámetros en config.properties.
-- [x] Correr todos los tests y confirmar que pasan.
-- [x] Marcar o corregir los tests desactualizados.
-- [x] Agregar una sección en README.md para primeros pasos y colaboración.
-- [x] Documentar cada avance relevante en este archivo y en los issues/PRs.
-
 ---
 
-## Tareas Actuales (Fase 3 y 4: Desarrollo y Testing Incremento 2)
+## Log de Tareas Completadas (Fase 3 y 4: Desarrollo y Testing Incremento 2)
 
 ### Miyen
-- [ ] Extender clases modelo (`Colectivo`, `Pasajero`, `Parada`) con atributos y métodos nuevos.
-- [ ] Implementar y testear `GestorEstadisticas`.
-- [ ] Implementar y testear `PlanificadorRutas`.
-- [ ] Integrar nuevas funcionalidades en `SimuladorColectivosApp`.
-- [ ] Actualizar y ampliar tests unitarios de sus clases.
+- [x] Extender clases modelo (`Colectivo`, `Pasajero`, `Parada`) con atributos y métodos nuevos.
+- [x] Implementar y testear `GestorEstadisticas`.
+- [x] Implementar y testear `PlanificadorRutas`.
+- [x] Integrar nuevas funcionalidades en `SimuladorColectivosApp`.
+- [x] Actualizar y ampliar tests unitarios de sus clases.
 
 ### Enzo
 - [ ] Refactorizar `Simulador` para separar generación de eventos y exportación/visualización.
@@ -52,10 +38,10 @@ En esta etapa del proyecto (Incremento 2), se propone el siguiente esquema de tr
 - [ ] Actualizar y ampliar tests unitarios de sus clases.
 
 ### Ambos
-- [ ] Coordinar integración y pruebas de las nuevas funcionalidades.
-- [ ] Mantener la documentación y los archivos de instrucciones actualizados.
-- [ ] Asegurarse de que la estructura y estilo del código respete las convenciones del proyecto.
-- [ ] Usar ramas y pull requests para nuevas funcionalidades/refactors, y documentar avances en issues.
+- [x] Coordinar integración y pruebas de las nuevas funcionalidades.
+- [x] Mantener la documentación y los archivos de instrucciones actualizados.
+- [x] Asegurarse de que la estructura y estilo del código respete las convenciones del proyecto.
+- [x] Usar ramas y pull requests para nuevas funcionalidades/refactors, y documentar avances en issues.
 
 ---
 

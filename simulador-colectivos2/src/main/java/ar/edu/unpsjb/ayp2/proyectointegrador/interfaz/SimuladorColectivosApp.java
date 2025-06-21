@@ -53,6 +53,7 @@ public class SimuladorColectivosApp {
             // 5. Reporte Final
             System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
             System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
+
         } catch (Exception e) {
             System.err.println("Ocurrió un error durante la simulación: " + e.getMessage());
             e.printStackTrace();

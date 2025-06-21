@@ -10,13 +10,10 @@ import java.util.Random;
 import java.util.Properties;
 
 /**
- * Responsable de crear instancias de Pasajero para la simulación. Genera una
- * cantidad específica de pasajeros, asignándoles aleatoriamente una línea, una
- * parada de origen y una de destino, y los añade a la cola de espera de su
- * parada de origen correspondiente.
- * 
- * @author Miyen
- * @version 1.0
+ * Responsable de crear instancias de Pasajero para la simulación.
+ * Genera una cantidad específica de pasajeros, asignándoles aleatoriamente
+ * una línea, una parada de origen y una de destino, y los añade a la cola
+ * de espera de su parada de origen correspondiente.
  */
 public class GeneradorPasajeros {
 
