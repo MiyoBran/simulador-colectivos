@@ -9,6 +9,9 @@ import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros;
 
 import java.util.*;
 
+/**
+ * @version 1.0
+ */
 public class SimuladorColectivosApp {
 
     public static void main(String[] args) {
