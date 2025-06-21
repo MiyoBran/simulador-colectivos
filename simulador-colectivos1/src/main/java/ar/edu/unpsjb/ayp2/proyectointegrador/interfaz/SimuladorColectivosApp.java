@@ -48,6 +48,7 @@ public class SimuladorColectivosApp {
             Scanner scanner = new Scanner(System.in);
             boolean salir = false;
             int paso = 1;
+            Map<String, List<String>> simulacionColectivo = new LinkedHashMap<>();
             while (!salir) {
                 System.out.println("\n--- MENÚ PRINCIPAL ---");
                 System.out.println("1. Ejecutar paso de simulación");
@@ -60,21 +61,57 @@ public class SimuladorColectivosApp {
                 switch (opcion) {
                     case "1":
                         if (!simulador.isSimulacionTerminada()) {
-                            List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
-                            System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
-                            mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
-                            paso++;
+                        	List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
+                        	Map<String, List<String>> eventosPorColectivo= mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+                            for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
+                            	
+                       	
+            					simulacionColectivo.putIfAbsent(entry.getKey(),new ArrayList<String>());
+            					
+            					simulacionColectivo.get(entry.getKey()).addAll(entry.getValue());
+                                
+                            }
+                            System.out.println(); // Separador entre colectivos
+                            //paso++;
+                        
+                        for (Map.Entry<String, List<String>> entry : simulacionColectivo.entrySet()) {
+            				System.out.println("Colectivo " + entry.getKey() + ":");
+            				for (String evento : entry.getValue()) {
+            					System.out.println("  " + evento);
+            				}
+            			}
+                            
                         } else {
                             System.out.println("La simulación ya ha finalizado.");
                         }
                         break;
                     case "2":
-                        while (!simulador.isSimulacionTerminada()) {
-                            List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
-                            System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
-                            mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
-                            paso++;
-                        }
+                        
+                        	
+                            //int paso = 1;
+                            while (!simulador.isSimulacionTerminada()) {
+                                List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
+                                //System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
+                                Map<String, List<String>> eventosPorColectivo= mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+                                for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
+                                	
+                           	
+                					simulacionColectivo.putIfAbsent(entry.getKey(),new ArrayList<String>());
+                					
+                					simulacionColectivo.get(entry.getKey()).addAll(entry.getValue());
+                                    
+                                }
+                                System.out.println(); // Separador entre colectivos
+                                //paso++;
+                            }
+                            for (Map.Entry<String, List<String>> entry : simulacionColectivo.entrySet()) {
+                				System.out.println("Colectivo " + entry.getKey() + ":");
+                				for (String evento : entry.getValue()) {
+                					System.out.println("  " + evento);
+                				}
+                			}
+
+                        
                         System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
                         System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
                         break;
@@ -136,8 +173,9 @@ public class SimuladorColectivosApp {
     /**
      * Agrupa y muestra los eventos de la simulación por colectivo, mejorando la legibilidad.
      * Cada bloque de eventos comienza con el nombre del colectivo, seguido de los eventos de ese colectivo.
+     * @return 
      */
-    private static void mostrarEventosAgrupadosPorColectivo(List<String> eventos) {
+    private static Map<String, List<String>> mostrarEventosAgrupadosPorColectivo(List<String> eventos) {
         // Mapa: Colectivo ID -> Lista de eventos
         LinkedHashMap<String, List<String>> eventosPorColectivo = new LinkedHashMap<>();
         String colectivoActual = null;
@@ -158,12 +196,13 @@ public class SimuladorColectivosApp {
         }
 
         // Mostrar eventos agrupados
-        for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
+       /* for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
             for (String linea : entry.getValue()) {
                 System.out.println(linea);
             }
             System.out.println(); // Separador entre colectivos
-        }
+        }*/
+        return eventosPorColectivo;
     }
 
     /**

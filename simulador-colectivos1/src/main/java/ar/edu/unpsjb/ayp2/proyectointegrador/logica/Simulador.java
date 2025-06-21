@@ -81,7 +81,10 @@ public class Simulador {
 	 * @return Lista de eventos generados en este paso de simulación. *
 	 *
 	 */
-	public List<String> ejecutarPasoDeSimulacion() {
+public List<String> ejecutarPasoDeSimulacion() {
+		
+		//Map<String, List<String>> eventosPorColectivo = new LinkedHashMap<>();
+		
 		List<String> eventosDelPaso = new ArrayList<>();
 
 		// 1. Avanzar colectivos pendientes (deben avanzar al inicio del paso)
@@ -91,10 +94,15 @@ public class Simulador {
 				if (colectivo != null) {
 					colectivo.avanzarAProximaParada();
 					if (colectivo.estaEnTerminal()) {
+						
 						eventosDelPaso.add("  Colectivo " + colectivo.getIdColectivo() + " ha llegado a la terminal.");
+						procesarLogicaTerminal(colectivo, eventosDelPaso);
 					} else {
+						
 						eventosDelPaso
+						
 								.add("  Colectivo " + colectivo.getIdColectivo() + " avanza a la próxima parada.");
+						
 					}
 				}
 			}
@@ -105,7 +113,7 @@ public class Simulador {
 		for (Colectivo colectivo : colectivosEnSimulacion) {
 			if (colectivo.estaEnTerminal()) {
 				// Procesar colectivos que YA están en terminal desde el paso anterior
-				procesarLogicaTerminal(colectivo, eventosDelPaso);
+				//procesarLogicaTerminal(colectivo, eventosDelPaso);
 			} else {
 				// Procesar parada actual
 				procesarPasoParaColectivo(colectivo, eventosDelPaso);
@@ -114,6 +122,7 @@ public class Simulador {
 
 		return eventosDelPaso;
 	}
+
 
 	/**
 	 * Verifica si la simulación ha terminado. La simulación se considera terminada
