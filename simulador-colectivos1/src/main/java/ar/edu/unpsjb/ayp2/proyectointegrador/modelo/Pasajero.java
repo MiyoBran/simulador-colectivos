@@ -1,5 +1,7 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -10,7 +12,7 @@ import java.util.UUID;
  * del viaje.
  * 
  * @author Miyo
- * @version 1.0
+ * @version 1.1
  * 
  */
 public class Pasajero {
@@ -27,6 +29,14 @@ public class Pasajero {
 													// primero que esperaba si hubo llenos)
 	private boolean viajoSentado; // Simplificación, se podría determinar de otra forma
 	private boolean pudoSubir; // Si finalmente logró subir a algún colectivo
+
+	// Incremento 2: atributos para simulación avanzada
+	/** Tiempo total de espera en minutos antes de abordar un colectivo. */
+	private int tiempoEspera;
+	/** Lista de IDs de colectivos observados mientras esperaba. */
+	private List<String> colectivosObservados;
+	/** Tiempo total de viaje en minutos. */
+	private int tiempoViaje;
 
 	/**
 	 * Constructor para crear un pasajero con un ID aleatorio.
@@ -70,6 +80,11 @@ public class Pasajero {
 		this.subioAlPrimerColectivoQuePaso = false;
 		this.viajoSentado = false;
 		this.pudoSubir = false;
+
+		// Inicialización para simulación avanzada
+		this.tiempoEspera = 0;
+		this.colectivosObservados = new ArrayList<>();
+		this.tiempoViaje = 0;
 	}
 
 	// --- GETTERS Y SETTERS ---
@@ -118,6 +133,83 @@ public class Pasajero {
 	}
 
 	/**
+	 * Devuelve el tiempo total de espera del pasajero.
+	 * 
+	 * @return tiempo de espera en minutos.
+	 */
+	public int getTiempoEspera() {
+		return tiempoEspera;
+	}
+
+	/**
+	 * Suma minutos al tiempo de espera del pasajero.
+	 * 
+	 * @param minutos minutos a sumar.
+	 */
+	public void agregarTiempoEspera(int minutos) {
+		this.tiempoEspera += minutos;
+	}
+
+	/**
+	 * Devuelve la lista de IDs de colectivos observados.
+	 * 
+	 * @return lista de IDs.
+	 */
+	public List<String> getColectivosObservados() {
+		return new ArrayList<>(colectivosObservados);
+	}
+
+	/**
+	 * Agrega un colectivo observado a la lista.
+	 * 
+	 * @param idColectivo ID del colectivo observado.
+	 */
+	public void agregarColectivoObservado(String idColectivo) {
+		this.colectivosObservados.add(idColectivo);
+	}
+
+	/**
+	 * Devuelve el tiempo total de viaje del pasajero.
+	 * 
+	 * @return tiempo de viaje en minutos.
+	 */
+	public int getTiempoViaje() {
+		return tiempoViaje;
+	}
+
+	/**
+	 * Suma minutos al tiempo de viaje del pasajero.
+	 * 
+	 * @param minutos minutos a sumar.
+	 */
+	public void agregarTiempoViaje(int minutos) {
+		this.tiempoViaje += minutos;
+	}
+
+	/**
+	 * Calcula el índice de satisfacción del pasajero según criterios de la simulación.
+	 * 
+	 * @return valor de satisfacción (0-100).
+	 */
+	public int calcularSatisfaccion() {
+		int satisfaccion = 100;
+		if (!pudoSubir) {
+			satisfaccion = 0;
+		} else {
+			satisfaccion -= colectivosEsperados * 10;
+			if (!viajoSentado)
+				satisfaccion -= 15;
+			if (!subioAlPrimerColectivoQuePaso)
+				satisfaccion -= 10;
+			satisfaccion -= tiempoEspera / 2;
+			satisfaccion -= tiempoViaje / 3;
+			if (satisfaccion < 0)
+				satisfaccion = 0;
+		}
+		return satisfaccion;
+	}
+
+	/**
 	 * Reinicia el estado del pasajero para una nueva simulación o intento de viaje.
 	 * Útil si los mismos objetos Pasajero se reutilizan.
 	 */
@@ -126,6 +218,10 @@ public class Pasajero {
 		this.subioAlPrimerColectivoQuePaso = false;
 		this.viajoSentado = false;
 		this.pudoSubir = false;
+
+		this.tiempoEspera = 0;
+		this.colectivosObservados.clear();
+		this.tiempoViaje = 0;
 	}
 
 	// --- MÉTODOS DE OBJECT ---

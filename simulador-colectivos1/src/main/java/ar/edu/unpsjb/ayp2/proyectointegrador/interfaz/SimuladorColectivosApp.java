@@ -9,6 +9,9 @@ import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros;
 
 import java.util.*;
 
+/**
+ * @version 1.0
+ */
 public class SimuladorColectivosApp {
 
     public static void main(String[] args) {
@@ -41,18 +44,88 @@ public class SimuladorColectivosApp {
             simulador.inicializarColectivos(capacidadColectivo);
             System.out.println("Se han inicializado " + simulador.getColectivosEnSimulacion().size() + " colectivos.");
 
-            // 4. Ejecución de la Simulación con Salida Mejorada
+            // 4. Menú interactivo para nuevas funcionalidades
+            Scanner scanner = new Scanner(System.in);
+            boolean salir = false;
             int paso = 1;
-            while (!simulador.isSimulacionTerminada()) {
-                List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
-                System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
-                mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
-                paso++;
+            while (!salir) {
+                System.out.println("\n--- MENÚ PRINCIPAL ---");
+                System.out.println("1. Ejecutar paso de simulación");
+                System.out.println("2. Ejecutar simulación completa");
+                System.out.println("3. Calcular ruta óptima entre paradas");
+                System.out.println("4. Ver estadísticas de la simulación");
+                System.out.println("0. Salir");
+                System.out.print("Seleccione una opción: ");
+                String opcion = scanner.nextLine();
+                switch (opcion) {
+                    case "1":
+                        if (!simulador.isSimulacionTerminada()) {
+                            List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
+                            System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
+                            mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+                            paso++;
+                        } else {
+                            System.out.println("La simulación ya ha finalizado.");
+                        }
+                        break;
+                    case "2":
+                        while (!simulador.isSimulacionTerminada()) {
+                            List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
+                            System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
+                            mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+                            paso++;
+                        }
+                        System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
+                        System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
+                        break;
+                    case "3":
+                        System.out.print("Ingrese ID de parada origen: ");
+                        String idOrigen = scanner.nextLine();
+                        System.out.print("Ingrese ID de parada destino: ");
+                        String idDestino = scanner.nextLine();
+                        Parada origen = paradasCargadas.get(idOrigen);
+                        Parada destino = paradasCargadas.get(idDestino);
+                        if (origen == null || destino == null) {
+                            System.out.println("Parada origen o destino no encontrada.");
+                        } else if (simulador.getPlanificadorRutas() == null) {
+                            System.out.println("Funcionalidad de rutas no disponible en este simulador.");
+                        } else {
+                            List<Parada> ruta = simulador.getPlanificadorRutas().calcularRutaOptima(origen, destino);
+                            if (ruta.isEmpty()) {
+                                System.out.println("No existe ruta entre las paradas seleccionadas.");
+                            } else {
+                                System.out.println("Ruta óptima: ");
+                                for (Parada p : ruta) {
+                                    System.out.println("- " + p.getId() + " | " + p.getDireccion());
+                                }
+                            }
+                        }
+                        break;
+                    case "4":
+                        if (simulador.getGestorEstadisticas() == null) {
+                            System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
+                        } else {
+                            var gestor = simulador.getGestorEstadisticas();
+                            System.out.println("\n--- Estadísticas de la Simulación ---");
+                            System.out.println("Pasajeros transportados: " + gestor.getPasajerosTransportados());
+                            System.out.println("Tiempo promedio de espera: " + gestor.getTiempoEsperaPromedio());
+                            System.out.println("Tiempo promedio de viaje: " + gestor.getTiempoViajePromedio());
+                            System.out.println("Satisfacción promedio: " + gestor.getSatisfaccionPromedio());
+                            System.out.println("% Satisfechos: " + gestor.getPorcentajeSatisfechos());
+                            System.out.println("% Insatisfechos: " + gestor.getPorcentajeInsatisfechos());
+                        }
+                        break;
+                    case "0":
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intente nuevamente.");
+                }
+                if (simulador.isSimulacionTerminada()) {
+                    System.out.println("\nLa simulación ha finalizado. Puede consultar estadísticas o salir.");
+                }
             }
-
-            // 5. Reporte Final
-            System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
-            System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
+            scanner.close();
 
         } catch (Exception e) {
             System.err.println("Ocurrió un error durante la simulación: " + e.getMessage());
