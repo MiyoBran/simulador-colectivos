@@ -1,4 +1,4 @@
-# Roadmap del Proyecto: Simulador de Colectivos Urbanos
+# Prompt del Proyecto: Simulador de Colectivos Urbanos
 
 **Proyecto Integrador: Algorítmica y Programación II**  
 Desarrollador : MiyoBran  
