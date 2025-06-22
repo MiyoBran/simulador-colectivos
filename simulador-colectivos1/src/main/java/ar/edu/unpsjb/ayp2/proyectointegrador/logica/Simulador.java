@@ -28,29 +28,40 @@ public class Simulador {
     private GestorEstadisticas gestorEstadisticas;
     private PlanificadorRutas planificadorRutas;
 
-	/**
-	 * Constructor del simulador. * Requiere líneas y paradas previamente cargadas.
-	 * 
-	 * @param lineas    Mapa de líneas disponibles para la simulación.
-	 * @param paradas   Mapa de paradas disponibles para la simulación.
-	 * @param pasajeros Lista de pasajeros que participarán en la simulación.
-	 */
-	public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros) {
-		if (lineas == null || lineas.isEmpty()) {
-			throw new IllegalArgumentException("El simulador requiere líneas cargadas.");
-		}
-		if (paradas == null || paradas.isEmpty()) {
-			throw new IllegalArgumentException("El simulador requiere paradas cargadas.");
-		}
-		if (pasajeros == null) {
-			throw new IllegalArgumentException("La lista de pasajeros no puede ser nula.");
-		}
-		this.lineasDisponibles = lineas;
-		this.colectivosEnSimulacion = new ArrayList<>();
-		this.colectivosPendientesDeAvanzar = new HashSet<>();
-        this.gestorEstadisticas = new GestorEstadisticas();
-        this.planificadorRutas = new PlanificadorRutas();
-	}
+    /**
+     * Constructor del simulador. Permite inyectar dependencias para facilitar el testeo.
+     * Si gestorEstadisticas o planificadorRutas son nulos, se crean instancias por defecto.
+     *
+     * @param lineas    Mapa de líneas disponibles para la simulación.
+     * @param paradas   Mapa de paradas disponibles para la simulación.
+     * @param pasajeros Lista de pasajeros que participarán en la simulación.
+     * @param gestorEstadisticas (opcional) Gestor de estadísticas a utilizar.
+     * @param planificadorRutas (opcional) Planificador de rutas a utilizar.
+     */
+    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros,
+                     GestorEstadisticas gestorEstadisticas, PlanificadorRutas planificadorRutas) {
+        if (lineas == null || lineas.isEmpty()) {
+            throw new IllegalArgumentException("El simulador requiere líneas cargadas.");
+        }
+        if (paradas == null || paradas.isEmpty()) {
+            throw new IllegalArgumentException("El simulador requiere paradas cargadas.");
+        }
+        if (pasajeros == null) {
+            throw new IllegalArgumentException("La lista de pasajeros no puede ser nula.");
+        }
+        this.lineasDisponibles = lineas;
+        this.colectivosEnSimulacion = new ArrayList<>();
+        this.colectivosPendientesDeAvanzar = new HashSet<>();
+        this.gestorEstadisticas = (gestorEstadisticas != null) ? gestorEstadisticas : new GestorEstadisticas();
+        this.planificadorRutas = (planificadorRutas != null) ? planificadorRutas : new PlanificadorRutas();
+    }
+
+    /**
+     * Constructor original para compatibilidad: instancia dependencias por defecto.
+     */
+    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros) {
+        this(lineas, paradas, pasajeros, null, null);
+    }
 
 	/**
 	 * Inicializa los colectivos en la simulación con las capacidades y recorridos dados.
