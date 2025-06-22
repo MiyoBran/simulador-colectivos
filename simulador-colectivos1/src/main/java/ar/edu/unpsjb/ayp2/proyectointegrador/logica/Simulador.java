@@ -439,7 +439,7 @@ public List<String> ejecutarPasoDeSimulacion() {
             System.out.println(String.format("Pasajeros bajados forzosamente en terminal: %d", bajadosForzosamente));
             System.out.println(String.format("Pasajeros que nunca subieron a un colectivo: %d", nuncaSubieron));
             if (suma != totalGenerados) {
-                System.err.println(String.format("[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: " + suma + ", Total generados: " + totalGenerados));
+                System.err.println(String.format("[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: %d, Total generados: %d", suma, totalGenerados));
             }
         } else {
             System.out.println(String.format("[ERROR] No hay gestor de estadísticas disponible para el reporte de pasajeros."));
