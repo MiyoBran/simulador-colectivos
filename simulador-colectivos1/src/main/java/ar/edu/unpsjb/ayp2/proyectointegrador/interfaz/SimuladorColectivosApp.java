@@ -74,27 +74,14 @@ public class SimuladorColectivosApp {
 				case "1":
 					if (!simulador.isSimulacionTerminada()) {
 						List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
-						Map<String, List<String>> eventosPorColectivo = mostrarEventosAgrupadosPorColectivo(
-								eventosDelPaso);
+						Map<String, List<String>> eventosPorColectivo = mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+						// Mostrar solo los eventos del paso actual
 						for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
-
-							simulacionColectivo.putIfAbsent(entry.getKey(), new ArrayList<String>());
-
-							simulacionColectivo.get(entry.getKey()).addAll(entry.getValue());
-
-						}
-						System.out.println(); // Separador entre colectivos
-						// Descomentar la siguiente línea si se quiere ver el paso actual
-						// System.out.println("\n--- Paso de Simulación " + paso + " ---\n");
-						// paso++; // Incrementar el paso solo si se ejecuta un paso de simulación
-
-						for (Map.Entry<String, List<String>> entry : simulacionColectivo.entrySet()) {
 							System.out.println("Colectivo " + entry.getKey() + ":");
 							for (String evento : entry.getValue()) {
 								System.out.println("  " + evento);
 							}
 						}
-
 					} else {
 						System.out.println("La simulación ya ha finalizado.");
 					}
@@ -126,6 +113,20 @@ public class SimuladorColectivosApp {
 
 					System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
 					System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
+
+					// Mostrar estadísticas de satisfacción y ocupación (Anexo I y II)
+					System.out.println("\n--- Estadísticas de Satisfacción (Anexo I) ---");
+					System.out.printf("Índice de satisfacción: %.2f\n", simulador.getGestorEstadisticas().getIndiceSatisfaccion());
+					System.out.println("Desglose de calificaciones:");
+					for (int cal = 5; cal >= 1; cal--) {
+						int count = simulador.getGestorEstadisticas().getDesgloseCalificaciones().getOrDefault(cal, 0);
+						System.out.println("  Calificación " + cal + ": " + count + " pasajeros");
+					}
+					System.out.println("\n--- Ocupación promedio de colectivos (Anexo II) ---");
+					for (var entry : simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo().entrySet()) {
+						System.out.printf("Colectivo %s: %.2f\n", entry.getKey(), entry.getValue());
+					}
+
 					break;
 				case "3":
 					System.out.print("Ingrese ID de parada origen: ");
@@ -154,14 +155,13 @@ public class SimuladorColectivosApp {
 					if (simulador.getGestorEstadisticas() == null) {
 						System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
 					} else {
-						var gestor = simulador.getGestorEstadisticas();
 						System.out.println("\n--- Estadísticas de la Simulación ---");
-						System.out.println("Pasajeros transportados: " + gestor.getPasajerosTransportados());
-						System.out.println("Tiempo promedio de espera: " + gestor.getTiempoEsperaPromedio());
-						System.out.println("Tiempo promedio de viaje: " + gestor.getTiempoViajePromedio());
-						System.out.println("Satisfacción promedio: " + gestor.getSatisfaccionPromedio());
-						System.out.println("% Satisfechos: " + gestor.getPorcentajeSatisfechos());
-						System.out.println("% Insatisfechos: " + gestor.getPorcentajeInsatisfechos());
+						System.out.println("Pasajeros transportados: " + simulador.getGestorEstadisticas().getPasajerosTransportados());
+						System.out.println("Tiempo promedio de espera: " + simulador.getGestorEstadisticas().getTiempoEsperaPromedio());
+						System.out.println("Tiempo promedio de viaje: " + simulador.getGestorEstadisticas().getTiempoViajePromedio());
+						System.out.println("Satisfacción promedio: " + simulador.getGestorEstadisticas().getSatisfaccionPromedio());
+						System.out.println("% Satisfechos: " + simulador.getGestorEstadisticas().getPorcentajeSatisfechos());
+						System.out.println("% Insatisfechos: " + simulador.getGestorEstadisticas().getPorcentajeInsatisfechos());
 					}
 					break;
 				case "0":

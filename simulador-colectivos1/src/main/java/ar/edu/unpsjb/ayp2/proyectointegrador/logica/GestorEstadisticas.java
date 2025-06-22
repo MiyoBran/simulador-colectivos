@@ -28,6 +28,15 @@ public class GestorEstadisticas {
     private List<Pasajero> pasajeros;
     private Map<String, Integer> ocupacionPorColectivo;
 
+    // Para índice de satisfacción (Anexo I)
+    private final Map<Integer, Integer> conteoCalificaciones; // calificación (1-5) -> cantidad
+    private int sumaCalificaciones;
+    private int totalPasajerosCalificados;
+
+    // Para ocupación promedio (Anexo II)
+    private final Map<String, List<Double>> ocupacionesPorColectivo; // idColectivo -> lista de ocupaciones por tramo
+    private final Map<String, Integer> capacidadPorColectivo;
+
     public GestorEstadisticas() {
         this.pasajerosTransportados = 0;
         this.pasajerosTotales = 0;
@@ -40,6 +49,12 @@ public class GestorEstadisticas {
         this.sumaSatisfaccion = 0;
         this.pasajeros = new ArrayList<>();
         this.ocupacionPorColectivo = new HashMap<>();
+
+        this.conteoCalificaciones = new HashMap<>();
+        this.sumaCalificaciones = 0;
+        this.totalPasajerosCalificados = 0;
+        this.ocupacionesPorColectivo = new HashMap<>();
+        this.capacidadPorColectivo = new HashMap<>();
     }
 
     /** Registrar un pasajero en la simulación. */
@@ -118,6 +133,52 @@ public class GestorEstadisticas {
         return colectivosTotales;
     }
 
+    /** Registrar la calificación de satisfacción de un pasajero (Anexo I). */
+    public void registrarCalificacionSatisfaccion(int calificacion) {
+        if (calificacion < 1 || calificacion > 5) return;
+        conteoCalificaciones.put(calificacion, conteoCalificaciones.getOrDefault(calificacion, 0) + 1);
+        sumaCalificaciones += calificacion;
+        totalPasajerosCalificados++;
+    }
+
+    /** Devuelve el índice de satisfacción según Anexo I. */
+    public double getIndiceSatisfaccion() {
+        if (totalPasajerosCalificados == 0) return 0.0;
+        return (double) sumaCalificaciones / (totalPasajerosCalificados * 5);
+    }
+
+    /** Devuelve el desglose de calificaciones. */
+    public Map<Integer, Integer> getDesgloseCalificaciones() {
+        return new HashMap<>(conteoCalificaciones);
+    }
+
+    /** Registrar la capacidad máxima de un colectivo (para ocupación promedio). */
+    public void registrarCapacidadColectivo(String idColectivo, int capacidadMaxima) {
+        capacidadPorColectivo.put(idColectivo, capacidadMaxima);
+    }
+
+    /** Registrar ocupación de un colectivo en un tramo (Anexo II). */
+    public void registrarOcupacionTramo(String idColectivo, int pasajerosEnTramo) {
+        Integer capacidad = capacidadPorColectivo.get(idColectivo);
+        if (capacidad == null || capacidad == 0) return;
+        double ocupacion = (double) pasajerosEnTramo / capacidad;
+        ocupacionesPorColectivo.computeIfAbsent(idColectivo, k -> new ArrayList<>()).add(ocupacion);
+    }
+
+    /** Devuelve el promedio de ocupación por colectivo (Anexo II). */
+    public Map<String, Double> getOcupacionPromedioPorColectivo() {
+        Map<String, Double> promedios = new HashMap<>();
+        for (Map.Entry<String, List<Double>> entry : ocupacionesPorColectivo.entrySet()) {
+            List<Double> lista = entry.getValue();
+            if (!lista.isEmpty()) {
+                double suma = 0.0;
+                for (double o : lista) suma += o;
+                promedios.put(entry.getKey(), suma / lista.size());
+            }
+        }
+        return promedios;
+    }
+
     /** Resetear todas las estadísticas (útil para nuevas simulaciones). */
     public void reset() {
         pasajerosTransportados = 0;
@@ -131,5 +192,10 @@ public class GestorEstadisticas {
         sumaSatisfaccion = 0;
         pasajeros.clear();
         ocupacionPorColectivo.clear();
+        conteoCalificaciones.clear();
+        sumaCalificaciones = 0;
+        totalPasajerosCalificados = 0;
+        ocupacionesPorColectivo.clear();
+        capacidadPorColectivo.clear();
     }
 }

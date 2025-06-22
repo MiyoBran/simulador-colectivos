@@ -164,18 +164,52 @@ public List<String> ejecutarPasoDeSimulacion() {
 	 * 
 	 * @return Lista de strings con el reporte final.
 	 */
-	public List<String> getReporteFinal() {
-		List<String> reporte = new ArrayList<>();
-		reporte.add("Todos los colectivos han completado su primer recorrido.");
-		// Verificación final de pasajeros que quedaron a bordo
-		for (Colectivo colectivo : colectivosEnSimulacion) {
-			if (colectivo.getCantidadPasajerosABordo() > 0) {
-				reporte.add(
-						"ADVERTENCIA: El colectivo " + colectivo.getIdColectivo() + " terminó con pasajeros a bordo.");
-			}
-		}
-		return reporte;
-	}
+    public List<String> getReporteFinal() {
+        List<String> reporte = new ArrayList<>();
+        reporte.add("Todos los colectivos han completado su primer recorrido.");
+        // Verificación final de pasajeros que quedaron a bordo
+        for (Colectivo colectivo : colectivosEnSimulacion) {
+            if (colectivo.getCantidadPasajerosABordo() > 0) {
+                reporte.add(
+                        "ADVERTENCIA: El colectivo " + colectivo.getIdColectivo() + " terminó con pasajeros a bordo.");
+            }
+        }
+        // --- NUEVO: Registrar calificaciones de satisfacción de pasajeros ---
+        for (Colectivo colectivo : colectivosEnSimulacion) {
+            gestorEstadisticas.registrarCapacidadColectivo(colectivo.getIdColectivo(), colectivo.getCapacidadMaxima());
+        }
+        for (Linea linea : lineasDisponibles.values()) {
+            for (Parada parada : linea.getRecorrido()) {
+                // Aquí podrías registrar ocupación por tramo si tienes esa lógica
+            }
+        }
+        // Calcular y registrar la calificación de satisfacción de cada pasajero
+        for (Colectivo colectivo : colectivosEnSimulacion) {
+            for (Pasajero pasajero : colectivo.getPasajerosABordo()) {
+                int calificacion = calcularCalificacionSatisfaccion(pasajero);
+                gestorEstadisticas.registrarCalificacionSatisfaccion(calificacion);
+            }
+        }
+        return reporte;
+    }
+
+    /**
+     * Calcula la calificación de satisfacción de un pasajero según Anexo I.
+     */
+    private int calcularCalificacionSatisfaccion(Pasajero pasajero) {
+        if (!pasajero.isPudoSubir()) {
+            return 1; // No pudo subir a ningún colectivo
+        } else if (pasajero.isSubioAlPrimerColectivoQuePaso() && pasajero.isViajoSentado()) {
+            return 5; // Subió en el primer colectivo y consiguió asiento
+        } else if (pasajero.isSubioAlPrimerColectivoQuePaso() && !pasajero.isViajoSentado()) {
+            return 4; // Subió en el primer colectivo, pero viajó parado
+        } else if (pasajero.getColectivosEsperados() == 1) {
+            return 3; // Tuvo que esperar el segundo colectivo para poder subir
+        } else if (pasajero.getColectivosEsperados() > 1) {
+            return 2; // Tuvo que esperar más de dos colectivos para poder subir
+        }
+        return 1; // Caso por defecto
+    }
 
 	/**
 	 * Procesa la lógica de un paso para un colectivo en su parada actual. Incluye
