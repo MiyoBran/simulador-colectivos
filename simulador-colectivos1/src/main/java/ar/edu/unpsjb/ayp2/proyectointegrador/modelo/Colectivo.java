@@ -294,4 +294,14 @@ public class Colectivo {
         int ocupados = Math.min(pasajerosABordo.size(), capacidadSentados);
         return capacidadSentados - ocupados;
     }
+
+    /**
+     * Devuelve una etiqueta descriptiva del colectivo, incluyendo su ID y el nombre de la línea.
+     * Ejemplo: C3-1 (Línea 1 - Regreso)
+     *
+     * @return Etiqueta descriptiva del colectivo.
+     */
+    public String getEtiqueta() {
+        return idColectivo + " (" + lineaAsignada.getNombre() + ")";
+    }
 }

@@ -11,10 +11,6 @@ public class ReporteSimulacion {
             int count = simulador.getGestorEstadisticas().getDesgloseCalificaciones().getOrDefault(cal, 0);
             System.out.println("  Calificación " + cal + ": " + count + " pasajeros");
         }
-        System.out.println("\n--- Ocupación promedio de colectivos (Anexo II) ---");
-        for (var entry : simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo().entrySet()) {
-            System.out.printf("Colectivo %s: %.2f\n", entry.getKey(), entry.getValue());
-        }
         System.out.println("\n--- Estadísticas de la Simulación ---");
         System.out.println("Pasajeros transportados: " + simulador.getGestorEstadisticas().getPasajerosTransportados());
         System.out.println("Tiempo promedio de espera: " + String.format("%.2f", simulador.getGestorEstadisticas().getTiempoEsperaPromedio()) + " minutos");
@@ -22,6 +18,18 @@ public class ReporteSimulacion {
         System.out.println("Satisfacción promedio: " + String.format("%.1f", simulador.getGestorEstadisticas().getSatisfaccionPromedio()));
         System.out.println("% Satisfechos: " + String.format("%.1f", simulador.getGestorEstadisticas().getPorcentajeSatisfechos()) + "%");
         System.out.println("% Insatisfechos: " + String.format("%.1f", simulador.getGestorEstadisticas().getPorcentajeInsatisfechos()) + "%");
+        // Agregar ocupación promedio general de colectivos
+        var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
+        if (!ocupaciones.isEmpty()) {
+            double suma = 0.0;
+            int cantidad = 0;
+            for (var entry : ocupaciones.entrySet()) {
+                suma += entry.getValue();
+                cantidad++;
+            }
+            double promedioGeneral = cantidad > 0 ? (suma / cantidad) * 100 : 0.0;
+            System.out.printf("\nOcupación promedio general de colectivos: %.2f%%\n", promedioGeneral);
+        }
     }
 
     public static void verificarConsistenciaEstadisticas(Simulador simulador) {

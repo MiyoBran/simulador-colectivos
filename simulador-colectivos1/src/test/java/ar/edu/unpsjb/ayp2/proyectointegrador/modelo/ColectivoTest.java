@@ -268,4 +268,13 @@ class ColectivoTest {
         assertTrue(str.contains(lineaConRecorrido.getId()));
         assertTrue(str.contains(p1.getId()));
     }
+
+    @Test
+    @DisplayName("getEtiqueta: debería devolver la etiqueta descriptiva correcta")
+    void testGetEtiqueta() {
+        Colectivo c = new Colectivo("C10-LCR", lineaConRecorrido, 10, 5, 5, 2);
+        assertEquals("C10-LCR (Linea Con Recorrido)", c.getEtiqueta(), "La etiqueta debe incluir el id y el nombre de la línea");
+        Colectivo c2 = new Colectivo("C2-LSR", lineaSinRecorrido, 8, 4, 4, 1);
+        assertEquals("C2-LSR (Linea Sin Recorrido)", c2.getEtiqueta(), "La etiqueta debe funcionar también para líneas sin recorrido");
+    }
 }
