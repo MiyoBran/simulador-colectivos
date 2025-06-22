@@ -433,16 +433,16 @@ public List<String> ejecutarPasoDeSimulacion() {
             int bajadosForzosamente = desglose.getOrDefault("bajadosForzosamente", 0);
             int nuncaSubieron = desglose.getOrDefault("nuncaSubieron", 0);
             int suma = transportados + bajadosForzosamente + nuncaSubieron;
-            System.out.println("\n--- Reporte de Pasajeros ---");
-            System.out.println("Total de pasajeros generados: " + totalGenerados);
-            System.out.println("Pasajeros transportados: " + transportados);
-            System.out.println("Pasajeros bajados forzosamente en terminal: " + bajadosForzosamente);
-            System.out.println("Pasajeros que nunca subieron a un colectivo: " + nuncaSubieron);
+            System.out.println(String.format("\n--- Reporte de Pasajeros ---"));
+            System.out.println(String.format("Total de pasajeros generados: %d", totalGenerados));
+            System.out.println(String.format("Pasajeros transportados: %d", transportados));
+            System.out.println(String.format("Pasajeros bajados forzosamente en terminal: %d", bajadosForzosamente));
+            System.out.println(String.format("Pasajeros que nunca subieron a un colectivo: %d", nuncaSubieron));
             if (suma != totalGenerados) {
-                System.err.println("[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: " + suma + ", Total generados: " + totalGenerados);
+                System.err.println(String.format("[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: " + suma + ", Total generados: " + totalGenerados));
             }
         } else {
-            System.out.println("[ERROR] No hay gestor de estadísticas disponible para el reporte de pasajeros.");
+            System.out.println(String.format("[ERROR] No hay gestor de estadísticas disponible para el reporte de pasajeros."));
         }
     }
 
@@ -451,7 +451,7 @@ public List<String> ejecutarPasoDeSimulacion() {
      * Quitar o comentar este método cuando no se necesite más debug.
      */
     public void imprimirDebugPasajerosEsperandoPorParada() {
-        System.out.println("\n--- DEBUG: Pasajeros esperando por parada ---");
+        System.out.println(String.format("\n--- DEBUG: Pasajeros esperando por parada ---"));
         Set<String> idsVistos = new HashSet<>();
         boolean hayDuplicados = false;
         Set<Parada> paradasUnicas = new HashSet<>();
@@ -461,18 +461,18 @@ public List<String> ejecutarPasoDeSimulacion() {
         for (Parada parada : paradasUnicas) {
             List<Pasajero> esperando = new ArrayList<>(parada.getPasajerosEsperando());
             if (!esperando.isEmpty()) {
-                System.out.println("Parada " + parada.getId() + " (" + parada.getDireccion() + "):");
+                System.out.println(String.format("Parada %s (%s):", parada.getId(), parada.getDireccion()));
                 for (Pasajero p : esperando) {
-                    System.out.println("  - " + p.getId());
+                    System.out.println(String.format("  - %s", p.getId()));
                     if (!idsVistos.add(p.getId())) {
-                        System.out.println("    [DUPLICADO] El pasajero " + p.getId() + " ya fue listado en otra parada!");
+                        System.out.println(String.format("    [DUPLICADO] El pasajero %s ya fue listado en otra parada!", p.getId()));
                         hayDuplicados = true;
                     }
                 }
             }
         }
         if (!hayDuplicados) {
-            System.out.println("No se detectaron pasajeros duplicados en las paradas.");
+            System.out.println(String.format("No se detectaron pasajeros duplicados en las paradas."));
         }
     }
 }
