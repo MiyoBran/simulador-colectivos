@@ -1,15 +1,15 @@
 # **Roadmap del Proyecto: Simulador de Colectivos Urbanos (Definitivo)**
 
-Última Actualización: 2025-06-21 (Versión final del Incremento 2)
+Última Actualización: 2025-06-22 (Entrega Final del Proyecto)
 Desarrollador: MiyoBran
 Documento de Contexto Principal: prompt-proyecto.md (ubicado en src/main/resources/)
 
 ## Estado actualizado (junio 2025)
 
-- **Desarrollo del Incremento 2 Finalizado:** Se implementaron y probaron exitosamente las funcionalidades de cálculo de rutas con grafos y gestión de estadísticas.
-- **Integración Completa:** Los nuevos módulos de lógica fueron integrados en el simulador principal y son accesibles a través de un menú de usuario interactivo.
-- **Proyecto Estable:** Todos los tests unitarios (nuevos y existentes) pasan correctamente.
-- **Próximos pasos:** Revisión final de la documentación y preparación para la entrega del proyecto.
+- **Proyecto Finalizado:** Se completaron y probaron todas las funcionalidades de los Incrementos 1 y 2. El sistema es estable y cumple con todos los requisitos de la consigna.
+- **Arquitectura Robusta:** Se implementó una separación clara de responsabilidades, incluyendo una refactorización de la capa de interfaz a un patrón Controlador-UI.
+- **Suite de Pruebas Completa:** El proyecto está validado por una suite de más de 100 tests unitarios que aseguran su correcto funcionamiento.
+- **Próximos pasos:** Entrega final del proyecto.
 
 ## **0\. Etapa 0: Configuración Inicial del Proyecto y Entorno**
 
@@ -313,73 +313,76 @@ Implementar una primera versión funcional del sistema de simulación de colecti
 
 ## 6. Log de Desarrollo – Incremento 2 (COMPLETADO)
 
-**Fecha de Finalización:** 2025-06-21
+**Fecha de Finalización:** 2025-06-22
 
 ### 6.1. Objetivos Principales Alcanzados
 
-* Se logró soportar múltiples recorridos por colectivo y una gestión de estado básica.
-* Se introdujo la noción de tiempo en la simulación (tiempos de espera, viaje, etc.).
-* Se implementó un control estricto de capacidad, diferenciando pasajeros sentados y de pie.
-* Se recolectan y muestran estadísticas detalladas sobre la simulación (pasajeros, tiempos, ocupación, satisfacción) a través del `GestorEstadisticas`.
-* Se modeló la red de transporte como un grafo dirigido (`AdjacencyMapGraph`) y se implementó el cálculo de rutas óptimas para pasajeros con `PlanificadorRutas`.
-* Se mantuvo una estructura limpia por capas y se amplió la cobertura de tests.
+* **Gestión de Estado y Capacidad:** Los colectivos manejan múltiples recorridos, un estado (ej: EN_RUTA) y capacidad diferenciada (sentados/parados).
+* **Simulación con Noción de Tiempo:** El sistema incorpora la gestión de tiempos de espera y viaje, calculados en cada paso de la simulación.
+* **Módulo de Estadísticas (`GestorEstadisticas`):** Se implementó y probó exitosamente el cálculo y reporte del Índice de Satisfacción (Anexo I) y la Ocupación Promedio de Colectivos (Anexo II).
+* **Red de Transporte como Grafo (`PlanificadorRutas`):** Se utiliza un grafo dirigido para modelar la red, permitiendo el cálculo de rutas óptimas con el algoritmo de Dijkstra.
+* **Refactorización de Arquitectura:** La capa de interfaz fue completamente reestructurada en `SimuladorController`, `SimuladorUI` y `SimuladorConfig`, mejorando la separación de responsabilidades y la mantenibilidad.
+* **Suite de Pruebas Robusta:** Se actualizaron todos los tests, se introdujo Mockito para un testing más aislado y se aseguró la compatibilidad con Java 21.
+
+### 6.2. Estructura Final y Clases Implementadas
+
+La arquitectura final del proyecto consolidó la separación por capas, con la siguiente estructura destacada para el Incremento 2:
+
+* **Modelo (`modelo`):**
+    * Se extendieron las clases `Colectivo`, `Pasajero` y `Parada` con nuevos atributos y métodos para soportar las funcionalidades de estado, tiempo y estadísticas.
+* **Lógica (`logica`):**
+    * **`GestorEstadisticas`**: Implementado y testeado para centralizar la recolección de métricas.
+    * **`PlanificadorRutas`**: Implementado y testeado para encapsular la construcción del grafo dirigido y el cálculo de rutas.
+    * **`Simulador`**: Modificado para integrar y orquestar los nuevos componentes de lógica.
+* **Interfaz (`interfaz`):**
+    * **`SimuladorController`**, **`SimuladorUI`**, **`SimuladorConfig`**: Nuevas clases resultado de la refactorización, que manejan el control, la vista y la configuración de forma separada.
+    * **`SimuladorColectivosApp`**: Simplificada a un mero punto de entrada que inicializa y lanza la aplicación.
+* **Test (`test`):**
+    * Se crearon las clases `GestorEstadisticasTest` y `PlanificadorRutasTest`.
+    * Se actualizaron todos los tests existentes, añadiendo el uso de Mockito para manejar las nuevas dependencias.
+
+### 6.3. Resumen del Proceso de Desarrollo y Depuración
+
+1.  **Desarrollo por Componentes:** Se implementaron `GestorEstadisticas` y `PlanificadorRutas` de forma aislada, cada uno con su suite de tests.
+2.  **Depuración Basada en Tests:** Se resolvieron bugs críticos gracias a las pruebas unitarias, como la necesidad de un grafo dirigido en `PlanificadorRutas` y la correcta inicialización de dependencias en los tests.
+3.  **Resolución de Problemas de Entorno:** Se solucionó una incompatibilidad entre la versión de Mockito y Java 21 actualizando las dependencias en el `pom.xml`.
+4.  **Pruebas de Estrés:** Se realizaron pruebas con alta carga de pasajeros (hasta 2000) para validar la robustez del sistema y depurar los cálculos finales de tiempo y ocupación.
+5.  **Refactorización Final:** Se reestructuró la capa de interfaz para mejorar la calidad del diseño antes de la entrega.
+
+### 6.4. Resumen del Proceso de Desarrollo y Refactorización
+
+El desarrollo del incremento no fue lineal, sino un proceso iterativo de implementación, prueba y refactorización continua, enfocado en mejorar la calidad y la arquitectura del código.
+
+1.  **Implementación de la Lógica Central:** El primer paso fue desarrollar los nuevos componentes de lógica de forma aislada (`GestorEstadisticas` y `PlanificadorRutas`), cada uno con su propia suite de tests unitarios para validar su comportamiento individual.
+
+2.  **Refactorización del Manejo de Eventos:** Durante la integración inicial, se detectó la necesidad de desacoplar la generación de eventos de su presentación. Se refactorizó la clase `Simulador` para que, en lugar de imprimir en consola, devolviera una estructura de datos (`Map<String, List<String>>`) con los eventos del paso, delegando la responsabilidad de la visualización a la capa superior.
+
+3.  **Refactorización Arquitectónica de la Interfaz:** Para mejorar drásticamente la mantenibilidad y la separación de responsabilidades, se reestructuró por completo la capa de `interfaz`. La clase monolítica `SimuladorColectivosApp` se dividió en tres componentes especializados:
+    * **`SimuladorConfig`**: Para manejar la carga de la configuración.
+    * **`SimuladorController`**: Para orquestar la inicialización y el flujo de la aplicación.
+    * **`SimuladorUI`**: Para gestionar toda la interacción con el usuario (menú, entrada y salida).
+
+4.  **Ciclo de Depuración y Pruebas de Estrés:** A lo largo del proceso, la suite de tests fue crucial para detectar y solucionar problemas:
+    * Se resolvió una incompatibilidad entre **Mockito y Java 21** actualizando las dependencias del proyecto.
+    * Se corrigió un error de modelado al cambiar el grafo del `PlanificadorRutas` a **dirigido**.
+    * Las pruebas de estrés finales permitieron encontrar y corregir los bugs en los cálculos de **tiempos de simulación** y el reporte de **ocupación promedio**.
+
+5.  **Consolidación y Documentación Final:** El proceso culminó con una limpieza general del código, la estandarización de los mensajes de salida y la actualización completa de toda la documentación del proyecto para reflejar el estado final.
 
 ---
 
-### 6.2. Parámetros y Configuración para Incremento 2
+## 7. Checklist Previo a Entrega (Finalizado)
 
-Se agregaron y utilizaron exitosamente los siguientes parámetros en `config.properties`:
-
--   `capacidadSentadosColectivo`
--   `cantidad_de_colectivos_simultaneos_por_linea`
--   `recorridos_por_colectivo`
--   `frecuencia_salida_colectivos_minutos`
-
----
-
-### 6.3. Estructura Final y Clases Implementadas
-
-La arquitectura final del proyecto consolidó la separación por capas, resultando en la siguiente estructura para las nuevas funcionalidades:
-
-**Modelo (`modelo`):**
--   Se extendieron las clases `Colectivo`, `Pasajero` y `Parada` con nuevos atributos y métodos para soportar las funcionalidades de estado, tiempo y estadísticas.
-
-**Lógica (`logica`):**
--   **`GestorEstadisticas`**: Se implementó y testeó esta clase para centralizar la recolección de métricas.
--   **`PlanificadorRutas`**: Se implementó y testeó esta clase para encapsular la construcción del grafo dirigido y el cálculo de rutas óptimas con Dijkstra.
--   **`Simulador`**: Se modificó para integrar y utilizar instancias de los nuevos componentes de lógica.
-
-**Interfaz (`interfaz`):**
--   `SimuladorColectivosApp` se actualizó con un menú de usuario interactivo para ejecutar la simulación y acceder a las nuevas funcionalidades de planificación y estadísticas.
-
-**Test (`test`):**
--   Se crearon las clases `GestorEstadisticasTest` y `PlanificadorRutasTest` para garantizar el correcto funcionamiento de los nuevos componentes.
-
----
-
-### 6.4. Resumen del Proceso de Desarrollo
-
-El desarrollo del incremento siguió un flujo de trabajo iterativo y basado en componentes:
-1.  **Extensión del Modelo:** Se modificaron las clases de dominio para soportar los nuevos datos.
-2.  **Implementación de Lógica:** Se desarrollaron y testearon de forma aislada los componentes `GestorEstadisticas` y `PlanificadorRutas`.
-3.  **Fase de Integración:** Se unificaron los nuevos componentes en la clase `Simulador` y se expusieron las funcionalidades en la `SimuladorColectivosApp`.
-4.  **Consolidación y Documentación:** Se unificó el trabajo en una única rama de proyecto y se actualizó toda la documentación para reflejar el estado final.
-
----
-
-## 7. Checklist Previo a Entrega (Actualizado)
-
-* Modelo de clases implementado correctamente.
-* Carga de archivos y configuración robusta.
-* Simulación y lógica funcional según objetivos del incremento.
-* Interfaz (consola) funcional, modular y desacoplada de la lógica.
-* Resultados/exportación desacoplados y flexibles (consola, archivo, etc.).
-* Sin `System.out.println` indebidos (solo en exportadores autorizados).
-* Tests unitarios exhaustivos para componentes nuevos y refactorizados.
-* Estructura de carpetas y paquetes respeta arquitectura.
-* Código bien comentado, con JavaDoc para métodos públicos.
-* `README.md` y este roadmap actualizados.
-
+* [x] Modelo de clases implementado correctamente.
+* [x] Carga de archivos y configuración robusta.
+* [x] Simulación y lógica funcional según objetivos del incremento.
+* [x] Interfaz (consola) funcional, modular y desacoplada de la lógica.
+* [x] Resultados/exportación desacoplados y flexibles.
+* [x] Sin `System.out.println` indebidos (solo en clases de UI/Reporte).
+* [x] Tests unitarios exhaustivos para componentes nuevos y refactorizados (113 tests pasan).
+* [x] Estructura de carpetas y paquetes respeta arquitectura.
+* [x] Código bien comentado, con JavaDoc para métodos públicos.
+* [x] `README.md` y toda la documentación interna actualizada.
 ---
 
 ## 8. Actualización Continua del Proyecto y Documentación

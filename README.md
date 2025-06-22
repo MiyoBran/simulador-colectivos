@@ -1,154 +1,118 @@
 # Simulador de Colectivos Urbanos
 
-Este repositorio contiene dos proyectos Maven:
-1. **datastructures-library**: Librería de estructuras de datos utilizada por el simulador.
-2. **simulador-colectivos**: Proyecto principal del simulador.
+**Proyecto final para la materia Algorítmica y Programación II**  
+**Licenciatura en Informática - UNPSJB**
+
+El sistema simula el funcionamiento de líneas de colectivos urbanos, permitiendo analizar su eficiencia a través de un completo módulo de estadísticas y planificación de rutas.
+
+El proyecto se encuentra funcionalmente completo, habiendo cumplido todos los objetivos de los Incrementos 1 y 2, y ha sido validado por una suite de más de 100 pruebas unitarias.
 
 ---
 
-## Requisitos del Sistema
+## Características Principales
 
-- **Java Development Kit (JDK):** Versión 21 (obligatorio para todos los entornos, tanto locales como Codespaces).
-- **Apache Maven:** Versión 3.x o superior.
-- **IDE (Recomendado):** Eclipse (versión reciente) o VS Code.
+- **Simulación Basada en Eventos**  
+  El motor de la simulación procesa paso a paso el movimiento de múltiples colectivos, así como la subida y bajada de pasajeros en cada parada.
 
-> **Nota:** En el workspace colaborativo (Codespace), la configuración de JAVA_HOME y PATH para Java 21 se aplica automáticamente en cada terminal. Si trabajas en tu entorno local, asegúrate de tener Java 21 instalado y configurado.
+- **Gestión de Capacidad**  
+  Los colectivos respetan una capacidad máxima (diferenciada entre pasajeros sentados y parados), dejando pasajeros en espera si se llenan.
 
----
+- **Cálculo de Rutas Óptimas**  
+  Utiliza un grafo dirigido para modelar la red de transporte y el algoritmo de Dijkstra para encontrar el camino más corto entre dos paradas.
 
-## Primeros Pasos y Onboarding para Colaboradores
+- **Módulo de Estadísticas Detalladas**
+  - **Índice de Satisfacción del Cliente** *(ver Anexo I)*: Calcula la satisfacción de los pasajeros basándose en si consiguieron asiento o si tuvieron que esperar a más de un colectivo.
+  - **Ocupación Promedio de Colectivos** *(ver Anexo II)*: Reporta el porcentaje de ocupación promedio para cada colectivo a lo largo de sus recorridos.
+  - **Métricas de Tiempos**: Reportes de tiempo promedio de espera y viaje.
 
-1. **Clona el repositorio:**
-   ```sh
-   git clone git@github.com:MiyoBran/simulador-colectivos.git
-   ```
-2. **Instala la librería `datastructures-library` en tu Maven local:**
-   ```sh
-   cd simulador-colectivos/datastructures-library
-   mvn clean install
-   ```
-3. **Importa ambos proyectos en tu IDE (Eclipse/VS Code):**
-   - Eclipse: `File > Import... > Maven > Existing Maven Projects`.
-   - VS Code: Abre la carpeta raíz y asegúrate de tener la extensión de Java y Maven.
-4. **Crea tu rama de trabajo:**
-   ```sh
-   git checkout -b trabajo-tu-nombre
-   git push -u origin trabajo-tu-nombre
-   ```
-5. **Ejecuta los tests:**
-   ```sh
-   cd simulador-colectivos/simulador-colectivos1
-   mvn test
-   ```
-   Todos los tests deben pasar antes de proponer cambios.
-6. **Ejecuta la aplicación:**
-   - Desde el IDE: Ejecuta `SimuladorColectivosApp.java` como aplicación Java.
-   - Desde terminal:
-     ```sh
-     mvn compile exec:java -Dexec.mainClass="ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp"
-     ```
+- **Interfaz de Usuario por Consola**  
+  Un menú interactivo permite controlar la simulación, solicitar reportes y calcular rutas.
+
+- **Arquitectura por Capas**  
+  Separación estricta entre modelo, datos, lógica e interfaz. La interfaz fue refactorizada siguiendo el patrón *Controlador-UI* para mayor mantenibilidad.
 
 ---
 
-## Buenas Prácticas de Colaboración
+## Tecnologías Utilizadas
 
-- Trabaja siempre en una rama propia.
-- Haz commits y PRs descriptivos.
-- Consulta y actualiza la documentación (`instructions-proyecto.md`, `roadmap-proyecto.md`, `prompt-proyecto.md`).
-- Usa issues para dudas, sugerencias o reportes.
-- Lee y sigue las convenciones en `conventions-proyecto.md`.
-
----
-
-## Estado actual del proyecto
-
-- Refactor y limpieza completa de código, tests y estructura.
-- Todos los tests pasan correctamente (ver instrucciones-proyecto.md para checklist y avances).
-- Próximo objetivo: avanzar con nuevas funcionalidades y documentación colaborativa.
+- **Lenguaje:** Java 21  
+- **Gestor de Dependencias:** Apache Maven  
+- **Pruebas Unitarias:** JUnit 5  
+- **Mocks para Pruebas:** Mockito  
+- **Estructuras de Datos:** Java Collections Framework y librería `net.datastructures` (para grafos)
 
 ---
 
-## 1. Clonar el Repositorio
+## Instalación y Configuración
 
-Abre una terminal (Git Bash, CMD o PowerShell) y ejecuta:
+Sigue estos pasos para configurar el proyecto en tu entorno local.
 
-```sh
-git clone git@github.com:MiyoBran/simulador-colectivos.git
+### 1. Requisitos Previos
+
+- Java Development Kit (JDK) versión 21  
+- Apache Maven 3.x o superior  
+- Un IDE compatible con Maven (como Eclipse o IntelliJ IDEA)
+
+### 2. Clonar el Repositorio
+
+```bash
+git clone https://github.com/MiyoBran/simulador-colectivos.git
+cd simulador-colectivos
+```
+---
+3. Instalar la Librería Local (datastructures-library)
+El proyecto depende de una librería de estructuras de datos que no está en los repositorios públicos. Primero debes instalarla en tu repositorio local de Maven:
+
+```bash
+cd datastructures-library
+mvn clean install
+```
+---
+4. Configuración Recomendada para Eclipse
+Si utilizas Eclipse, activa las siguientes opciones para que Maven gestione las dependencias automáticamente:
+
+Ve a Window -> Preferences
+
+Navega a Maven
+
+Asegúrate de marcar:
+
+Download Artifact Sources
+
+Download Artifact Javadoc
+
+Download repository index updates on startup
+
+Haz clic en Apply and Close
+
+5. Importar y Construir el Proyecto Principal
+Importa el proyecto simulador-colectivos1 como un proyecto Maven existente. Luego construye el proyecto:
+```bash
+cd ../simulador-colectivos1
+mvn clean package
+
+```
+---------------
+Cómo Ejecutar la Aplicación
+Puedes ejecutar la simulación de dos maneras:
+
+1. Desde tu IDE (Eclipse, IntelliJ, etc.)
+Importa el proyecto simulador-colectivos1 como un proyecto Maven existente.
+Localiza la clase ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp.java.
+Ejecútala como una aplicación Java.
+2. Desde la Terminal
+Después de haber construido el proyecto con mvn clean package, ejecuta el siguiente comando desde la carpeta simulador-colectivos1:
+```bash
+java -jar target/simulador-colectivos1-0.0.1-SNAPSHOT.jar
 ```
 
-Esto descargará el repositorio en una nueva carpeta llamada `simulador-colectivos`.
+Documentación Detallada del Proyecto
+Para un entendimiento profundo del diseño, la arquitectura, las decisiones tomadas y el plan de desarrollo, consulta los siguientes documentos ubicados en la carpeta simulador-colectivos1/src/main/resources/:
 
----
+prompt-proyecto.md: El resumen general del proyecto, sus objetivos y estado final.
 
-## 2. Instalar la Librería `datastructures-library` en Maven Local
+roadmap-proyecto.md: El plan de desarrollo detallado y el log de los incrementos.
 
-La librería **no** se encuentra en los repositorios públicos de Maven. Por eso, primero debes instalarla localmente:
+instructions-proyecto.md: El registro de las tareas de colaboración.
 
-1. Abre una terminal.
-2. Navega a la carpeta `datastructures-library` dentro del repo clonado:
-
-    ```sh
-    cd simulador-colectivos/datastructures-library
-    ```
-
-3. Ejecuta el siguiente comando para compilar e instalar la librería:
-
-    ```sh
-    mvn clean install
-    ```
-
-Esto instalará el artefacto en tu repositorio Maven local (`~/.m2/repository/`).
-
----
-
-## 3. Importar los Proyectos en Eclipse
-
-1. Abre Eclipse.
-2. Ve a `File > Import...`.
-3. Selecciona `Maven > Existing Maven Projects` y haz clic en `Next`.
-4. En "Root Directory", haz clic en `Browse...` y navega hasta la carpeta del repo clonado (`simulador-colectivos`).
-5. Eclipse detectará ambos proyectos (`datastructures-library` y `simulador-colectivos`). Asegúrate de que ambos estén seleccionados y haz clic en `Finish`.
-
----
-
-## 4. Actualizar Dependencias Maven
-
-Para asegurarte de que Eclipse reconoce la librería instalada:
-
-1. En el `Package Explorer`, haz clic derecho sobre el proyecto `simulador-colectivos`.
-2. Selecciona `Maven > Update Project...`.
-3. Marca `simulador-colectivos` y activa la casilla **"Force Update of Snapshots/Releases"**.
-4. Haz clic en `OK`.
-
----
-
-## 5. Crear una Rama para Trabajar
-
-Por buenas prácticas, cada colaborador debe trabajar en su propia rama. Para crear una rama nueva desde Eclipse:
-
-1. Abre la vista **Git** (Window > Show View > Other... > Git > Git Repositories).
-2. Haz clic derecho sobre el repo `simulador-colectivos` y selecciona `Switch To > New Branch...`.
-3. Nombra la rama, por ejemplo, `trabajo-tu-nombre` y confirma.
-4. Trabaja normalmente en esta rama. Para subir tus cambios ejecuta:
-    - `Add` y `Commit` desde el panel Git Staging.
-    - Luego `Push` para subir la rama al remoto.
-
-Si prefieres hacerlo desde consola:
-
-```sh
-git checkout -b trabajo-tu-nombre
-git push -u origin trabajo-tu-nombre
-```
-
----
-
-## 6. (Opcional) Ejecutar Pruebas y la Aplicación
-
-Para verificar que todo funciona:
-
-- Ejecuta las pruebas unitarias (`src/test/java/.../LectorArchivosTest.java`) con `Run As > JUnit Test`.
-- Ejecuta la app principal (`src/main/java/.../SimuladorColectivosApp.java`) con `Run As > Java Application`.
-
----
-
-**¡Listo! Ya puedes trabajar colaborativamente sobre el repositorio.**
+conventions-proyecto.md: Las convenciones de código y estilo seguidas.
