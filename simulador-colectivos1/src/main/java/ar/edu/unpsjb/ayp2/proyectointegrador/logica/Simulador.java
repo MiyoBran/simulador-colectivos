@@ -27,6 +27,7 @@ public class Simulador {
 	private Map<String, Linea> lineasDisponibles;
     private GestorEstadisticas gestorEstadisticas;
     private PlanificadorRutas planificadorRutas;
+    private List<Pasajero> pasajerosSimulados;
 
     /**
      * Constructor del simulador. Permite inyectar dependencias para facilitar el testeo.
@@ -54,6 +55,7 @@ public class Simulador {
         this.colectivosPendientesDeAvanzar = new HashSet<>();
         this.gestorEstadisticas = (gestorEstadisticas != null) ? gestorEstadisticas : new GestorEstadisticas();
         this.planificadorRutas = (planificadorRutas != null) ? planificadorRutas : new PlanificadorRutas();
+        this.pasajerosSimulados = pasajeros; // Guardar referencia a todos los pasajeros simulados
     }
 
     /**
@@ -83,6 +85,32 @@ public class Simulador {
             Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
             this.colectivosEnSimulacion.add(nuevoColectivo);
             colectivoCounter++;
+        }
+        this.colectivosPendientesDeAvanzar.clear();
+    }
+
+    /**
+     * Inicializa los colectivos en la simulación según la cantidad de colectivos simultáneos por línea.
+     *
+     * @param capacidadColectivo Capacidad máxima de pasajeros por colectivo.
+     * @param capacidadSentados Capacidad máxima de pasajeros sentados.
+     * @param capacidadParados Capacidad máxima de pasajeros parados.
+     * @param recorridosRestantes Cantidad de recorridos que debe realizar el colectivo.
+     * @param cantidadColectivosPorLinea Cantidad de colectivos simultáneos por línea.
+     */
+    public void inicializarColectivos(int capacidadColectivo, int capacidadSentados, int capacidadParados, int recorridosRestantes, int cantidadColectivosPorLinea) {
+        if (capacidadColectivo <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes <= 0 || cantidadColectivosPorLinea <= 0) {
+            throw new IllegalArgumentException("Las capacidades, recorridos y cantidad de colectivos deben ser positivos.");
+        }
+        this.colectivosEnSimulacion.clear();
+        int colectivoCounter = 1;
+        for (Linea linea : lineasDisponibles.values()) {
+            for (int i = 0; i < cantidadColectivosPorLinea; i++) {
+                String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
+                Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
+                this.colectivosEnSimulacion.add(nuevoColectivo);
+                colectivoCounter++;
+            }
         }
         this.colectivosPendientesDeAvanzar.clear();
     }
@@ -132,6 +160,8 @@ public List<String> ejecutarPasoDeSimulacion() {
 				// en este paso ya se procesan en el primer bucle.
 				// procesarLogicaTerminal(colectivo, eventosDelPaso);
 			} else {
+				// Registrar ocupación por tramo antes de procesar el paso
+				gestorEstadisticas.registrarOcupacionTramo(colectivo.getIdColectivo(), colectivo.getCantidadPasajerosABordo());
 				// Procesar parada actual
 				procesarPasoParaColectivo(colectivo, eventosDelPaso);
 			}
@@ -167,25 +197,19 @@ public List<String> ejecutarPasoDeSimulacion() {
     public List<String> getReporteFinal() {
         List<String> reporte = new ArrayList<>();
         reporte.add("Todos los colectivos han completado su primer recorrido.");
-        // Verificación final de pasajeros que quedaron a bordo
         for (Colectivo colectivo : colectivosEnSimulacion) {
             if (colectivo.getCantidadPasajerosABordo() > 0) {
                 reporte.add(
                         "ADVERTENCIA: El colectivo " + colectivo.getIdColectivo() + " terminó con pasajeros a bordo.");
             }
         }
-        // --- NUEVO: Registrar calificaciones de satisfacción de pasajeros ---
+        // Registrar capacidad de cada colectivo para ocupación promedio
         for (Colectivo colectivo : colectivosEnSimulacion) {
             gestorEstadisticas.registrarCapacidadColectivo(colectivo.getIdColectivo(), colectivo.getCapacidadMaxima());
         }
-        for (Linea linea : lineasDisponibles.values()) {
-            for (Parada parada : linea.getRecorrido()) {
-                // Aquí podrías registrar ocupación por tramo si tienes esa lógica
-            }
-        }
-        // Calcular y registrar la calificación de satisfacción de cada pasajero
-        for (Colectivo colectivo : colectivosEnSimulacion) {
-            for (Pasajero pasajero : colectivo.getPasajerosABordo()) {
+        // Registrar calificación de satisfacción de TODOS los pasajeros simulados
+        if (pasajerosSimulados != null) {
+            for (Pasajero pasajero : pasajerosSimulados) {
                 int calificacion = calcularCalificacionSatisfaccion(pasajero);
                 gestorEstadisticas.registrarCalificacionSatisfaccion(calificacion);
             }
@@ -246,6 +270,7 @@ public List<String> ejecutarPasoDeSimulacion() {
 		for (Pasajero p : pasajerosABajar) {
 			if (colectivo.bajarPasajero(p)) {
 				eventos.add("  - Bajó " + p + " en su destino.");
+				gestorEstadisticas.registrarTransporte(p); // Registrar transporte del pasajero
 			}
 		}
 	}
