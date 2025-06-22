@@ -10,6 +10,11 @@ import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros;
 import java.util.*;
 
 /**
+ * Clase principal de la aplicación del Simulador de Colectivos Urbanos. Se
+ * encarga de la carga de datos, configuración de la simulación y la interacción
+ * con el usuario a través de un menú por consola.
+ * 
+ * @author MiyoBran
  * @version 1.0
  */
 public class SimuladorColectivosApp {
@@ -38,10 +43,13 @@ public class SimuladorColectivosApp {
 			System.out.println("Simulación lista para comenzar con " + pasajerosGenerados.size() + " pasajeros.");
 
 			int capacidadColectivo = obtenerCapacidadColectivo(configProperties);
+			int capacidadSentadosColectivo = Integer.parseInt(configProperties.getProperty("capacidadSentadosColectivo", "0"));
+			int recorridosPorColectivo = Integer.parseInt(configProperties.getProperty("recorridos_por_colectivo", "1"));
+			int capacidadParados = capacidadColectivo - capacidadSentadosColectivo;
 
 			// 3. Creación e Inicialización del Simulador
 			Simulador simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados);
-			simulador.inicializarColectivos(capacidadColectivo);
+			simulador.inicializarColectivos(capacidadColectivo, capacidadSentadosColectivo, capacidadParados, recorridosPorColectivo);
 			System.out.println("Se han inicializado " + simulador.getColectivosEnSimulacion().size() + " colectivos.");
 
 			// 4. Menú interactivo para nuevas funcionalidades

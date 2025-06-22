@@ -53,25 +53,28 @@ public class Simulador {
 	}
 
 	/**
-	 * Inicializa los colectivos en la simulación con una capacidad dada. * Cada
-	 * colectivo se asigna a una línea disponible y se le asigna un ID único.
-	 * 
+	 * Inicializa los colectivos en la simulación con las capacidades y recorridos dados.
+	 * Cada colectivo se asigna a una línea disponible y se le asigna un ID único.
+	 *
 	 * @param capacidadColectivo Capacidad máxima de pasajeros por colectivo.
+	 * @param capacidadSentados Capacidad máxima de pasajeros sentados.
+	 * @param capacidadParados Capacidad máxima de pasajeros parados.
+	 * @param recorridosRestantes Cantidad de recorridos que debe realizar el colectivo.
 	 */
-	public void inicializarColectivos(int capacidadColectivo) {
-		if (capacidadColectivo <= 0) {
-			throw new IllegalArgumentException("La capacidad de los colectivos debe ser positiva.");
-		}
-		this.colectivosEnSimulacion.clear();
-		int colectivoCounter = 1;
-		for (Linea linea : lineasDisponibles.values()) {
-			String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
-			Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo);
-			this.colectivosEnSimulacion.add(nuevoColectivo);
-			colectivoCounter++;
-		}
-		this.colectivosPendientesDeAvanzar.clear();
-	}
+	public void inicializarColectivos(int capacidadColectivo, int capacidadSentados, int capacidadParados, int recorridosRestantes) {
+        if (capacidadColectivo <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes <= 0) {
+            throw new IllegalArgumentException("Las capacidades y recorridos deben ser positivos.");
+        }
+        this.colectivosEnSimulacion.clear();
+        int colectivoCounter = 1;
+        for (Linea linea : lineasDisponibles.values()) {
+            String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
+            Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
+            this.colectivosEnSimulacion.add(nuevoColectivo);
+            colectivoCounter++;
+        }
+        this.colectivosPendientesDeAvanzar.clear();
+    }
 
 	/**
 	 * Ejecuta un paso de simulación. Este método avanza los colectivos pendientes

@@ -93,7 +93,12 @@ class SimuladorTest {
     @DisplayName("Inicialización: debería crear un colectivo por línea con los datos correctos")
     void testInicializarColectivosExitoso() {
         Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
-        simulador.inicializarColectivos(10);
+        // Usar valores de ejemplo para sentados, parados y recorridos
+        int capacidadMaxima = 10;
+        int capacidadSentados = 6;
+        int capacidadParados = 4;
+        int recorridosRestantes = 1;
+        simulador.inicializarColectivos(capacidadMaxima, capacidadSentados, capacidadParados, recorridosRestantes);
 
         List<Colectivo> colectivos = simulador.getColectivosEnSimulacion();
         assertNotNull(colectivos);
@@ -101,12 +106,18 @@ class SimuladorTest {
 
         Colectivo c1 = colectivos.stream().filter(c -> c.getLineaAsignada().equals(l1)).findFirst().orElseThrow();
         assertEquals(l1, c1.getLineaAsignada());
-        assertEquals(10, c1.getCapacidadMaxima());
+        assertEquals(capacidadMaxima, c1.getCapacidadMaxima());
+        assertEquals(capacidadSentados, c1.getCapacidadSentados());
+        assertEquals(capacidadParados, c1.getCapacidadParados());
+        assertEquals(recorridosRestantes, c1.getRecorridosRestantes());
         assertEquals(p1, c1.getParadaActual());
 
         Colectivo c2 = colectivos.stream().filter(c -> c.getLineaAsignada().equals(l2)).findFirst().orElseThrow();
         assertEquals(l2, c2.getLineaAsignada());
-        assertEquals(10, c2.getCapacidadMaxima());
+        assertEquals(capacidadMaxima, c2.getCapacidadMaxima());
+        assertEquals(capacidadSentados, c2.getCapacidadSentados());
+        assertEquals(capacidadParados, c2.getCapacidadParados());
+        assertEquals(recorridosRestantes, c2.getRecorridosRestantes());
         assertEquals(p3, c2.getParadaActual());
     }
     
@@ -115,11 +126,9 @@ class SimuladorTest {
     @DisplayName("Simulación: debería completarse sin errores cuando no hay pasajeros")
     void testEjecutarSimulacionSinPasajeros() {
         Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, new ArrayList<>());
-        simulador.inicializarColectivos(10);
-
+        simulador.inicializarColectivos(10, 6, 4, 1);
         // Ejecuta la simulación completa
         ejecutarSimulacionCompleta(simulador);
-
         // Verifica el estado final
         for (Colectivo c : simulador.getColectivosEnSimulacion()) {
             assertTrue(c.estaEnTerminal(), "Colectivo " + c.getIdColectivo() + " debería haber terminado su recorrido.");
@@ -140,7 +149,7 @@ class SimuladorTest {
         pasajerosDePrueba.add(pB);
 
         Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
-        simulador.inicializarColectivos(2); // Capacidad suficiente
+        simulador.inicializarColectivos(2, 1, 1, 1); // Capacidad suficiente
 
         // Act: ejecutar la simulación
         ejecutarSimulacionCompleta(simulador);
@@ -169,7 +178,7 @@ class SimuladorTest {
         pasajerosDePrueba.add(pB);
 
         Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
-        simulador.inicializarColectivos(1); // Capacidad de solo 1 para el colectivo de L1
+        simulador.inicializarColectivos(1, 1, 0, 1); // Capacidad de solo 1 para el colectivo de L1
 
         // Act
         ejecutarSimulacionCompleta(simulador);
