@@ -113,6 +113,9 @@ public List<String> ejecutarPasoDeSimulacion() {
 		for (Colectivo colectivo : colectivosEnSimulacion) {
 			if (colectivo.estaEnTerminal()) {
 				// Procesar colectivos que YA están en terminal desde el paso anterior
+				// Nota: La lógica de procesamiento de terminal se excluye aquí intencionalmente
+				// para evitar mensajes duplicados, ya que los colectivos que llegan a la terminal
+				// en este paso ya se procesan en el primer bucle.
 				//procesarLogicaTerminal(colectivo, eventosDelPaso);
 			} else {
 				// Procesar parada actual
