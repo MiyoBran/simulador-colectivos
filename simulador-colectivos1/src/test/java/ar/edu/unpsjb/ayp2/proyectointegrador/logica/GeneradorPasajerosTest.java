@@ -26,6 +26,7 @@ class GeneradorPasajerosTest {
     private Map<String, Linea> lineasDePrueba;
     private Map<String, Parada> paradasDePrueba;
     private Properties configDePrueba;
+    private GestorEstadisticasStub gestorEstadisticasStub;
 
     private Parada p1, p2, p3, p4, p5, p6, p7, p8, p9, p10; // Más paradas para líneas largas
     private Linea lCorta, lMediana, lLarga;
@@ -86,6 +87,7 @@ class GeneradorPasajerosTest {
         lineasDePrueba.put("LL - Linea Larga", lLarga);
         
         configDePrueba = new Properties();
+        gestorEstadisticasStub = new GestorEstadisticasStub();
     }
 
     // --- Tests para el Constructor ---
@@ -93,7 +95,7 @@ class GeneradorPasajerosTest {
     @DisplayName("Constructor: Debe inicializar correctamente con propiedades válidas")
     void testConstructorExitoso() {
         configDePrueba.setProperty("cantidadPasajeros", "5");
-        assertDoesNotThrow(() -> new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba));
+        assertDoesNotThrow(() -> new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub));
     }
 
     @Test
@@ -101,7 +103,7 @@ class GeneradorPasajerosTest {
     void testConstructorLineasNulas() {
         configDePrueba.setProperty("cantidadPasajeros", "5");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(null, paradasDePrueba, configDePrueba);
+            new GeneradorPasajeros(null, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         });
         assertEquals("Las líneas disponibles no pueden ser nulas o vacías.", thrown.getMessage());
     }
@@ -111,7 +113,7 @@ class GeneradorPasajerosTest {
     void testConstructorLineasVacias() {
         configDePrueba.setProperty("cantidadPasajeros", "5");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(new HashMap<>(), paradasDePrueba, configDePrueba);
+            new GeneradorPasajeros(new HashMap<>(), paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         });
         assertEquals("Las líneas disponibles no pueden ser nulas o vacías.", thrown.getMessage());
     }
@@ -121,7 +123,7 @@ class GeneradorPasajerosTest {
     void testConstructorParadasNulas() {
         configDePrueba.setProperty("cantidadPasajeros", "5");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(lineasDePrueba, null, configDePrueba);
+            new GeneradorPasajeros(lineasDePrueba, null, configDePrueba, gestorEstadisticasStub);
         });
         assertEquals("Las paradas disponibles no pueden ser nulas o vacías.", thrown.getMessage());
     }
@@ -131,7 +133,7 @@ class GeneradorPasajerosTest {
     void testConstructorParadasVacias() {
         configDePrueba.setProperty("cantidadPasajeros", "5");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(lineasDePrueba, new HashMap<>(), configDePrueba);
+            new GeneradorPasajeros(lineasDePrueba, new HashMap<>(), configDePrueba, gestorEstadisticasStub);
         });
         assertEquals("Las paradas disponibles no pueden ser nulas o vacías.", thrown.getMessage());
     }
@@ -140,16 +142,26 @@ class GeneradorPasajerosTest {
     @DisplayName("Constructor: Debe lanzar excepción si las propiedades de configuración son nulas")
     void testConstructorConfigNulas() {
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, null);
+            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, null, gestorEstadisticasStub);
         });
         assertEquals("Las propiedades de configuración no pueden ser nulas.", thrown.getMessage());
+    }
+
+    @Test
+    @DisplayName("Constructor: Debe lanzar excepción si el gestor de estadísticas es nulo")
+    void testConstructorGestorEstadisticasNulo() {
+        configDePrueba.setProperty("cantidadPasajeros", "5");
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, null);
+        });
+        assertEquals("El gestor de estadísticas no puede ser nulo.", thrown.getMessage());
     }
 
     @Test
     void testConstructorCantidadPasajerosNoDefinida() {
         // No se setea "cantidadPasajeros" en configDePrueba
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba);
+            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         });
         assertEquals("La propiedad 'cantidadPasajeros' no está definida o está vacía en config.properties.", thrown.getMessage());
     }
@@ -159,13 +171,13 @@ class GeneradorPasajerosTest {
     void testConstructorCantidadPasajerosNoValida() {
         configDePrueba.setProperty("cantidadPasajeros", "-10");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba);
+            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         });
         assertEquals("La cantidad de pasajeros a generar debe ser un número positivo.", thrown.getMessage());
 
         configDePrueba.setProperty("cantidadPasajeros", "cero");
         thrown = assertThrows(IllegalArgumentException.class, () -> {
-            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba);
+            new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         });
         assertTrue(thrown.getMessage().contains("no es un número válido."));
     }
@@ -176,7 +188,7 @@ class GeneradorPasajerosTest {
     void testGenerarPasajerosCantidadCorrecta() {
         int cantidadEsperada = 10;
         configDePrueba.setProperty("cantidadPasajeros", String.valueOf(cantidadEsperada));
-        GeneradorPasajeros generador = new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba);
+        GeneradorPasajeros generador = new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         
         List<Pasajero> pasajerosGenerados = generador.generarPasajeros();
         
@@ -193,7 +205,7 @@ class GeneradorPasajerosTest {
         lineasSoloDosParadas.put("LC - Linea Corta", lCorta); // lCorta tiene solo 2 paradas
 
         configDePrueba.setProperty("cantidadPasajeros", "10");
-        GeneradorPasajeros generador = new GeneradorPasajeros(lineasSoloDosParadas, paradasDePrueba, configDePrueba);
+        GeneradorPasajeros generador = new GeneradorPasajeros(lineasSoloDosParadas, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
 
         // Act
         List<Pasajero> pasajerosGenerados = generador.generarPasajeros();
@@ -208,7 +220,7 @@ class GeneradorPasajerosTest {
         // Arrange: Preparamos la configuración para generar 50 pasajeros.
         int cantidad = 50;
         configDePrueba.setProperty("cantidadPasajeros", String.valueOf(cantidad));
-        GeneradorPasajeros generador = new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba);
+        GeneradorPasajeros generador = new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
 
         // Act: Ejecutamos la generación.
         List<Pasajero> pasajerosGenerados = generador.generarPasajeros();
@@ -251,7 +263,7 @@ class GeneradorPasajerosTest {
         // Arrange
         int cantidad = 5;
         configDePrueba.setProperty("cantidadPasajeros", String.valueOf(cantidad));
-        GeneradorPasajeros generador = new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba);
+        GeneradorPasajeros generador = new GeneradorPasajeros(lineasDePrueba, paradasDePrueba, configDePrueba, gestorEstadisticasStub);
         
         // Act
         List<Pasajero> pasajerosGenerados = generador.generarPasajeros();
@@ -269,6 +281,14 @@ class GeneradorPasajerosTest {
             // Usamos el nuevo método que no rompe el encapsulamiento.
             assertTrue(pasajero.getParadaOrigen().tienePasajeroEnCola(pasajero),
                        "El pasajero " + pasajero.getId() + " debería estar en la cola de su parada de origen.");
+        }
+    }
+
+    // --- Stub para GestorEstadisticas ---
+    static class GestorEstadisticasStub extends GestorEstadisticas {
+        @Override
+        public void registrarPasajero(Pasajero pasajero) {
+            // No hace nada, solo permite la llamada
         }
     }
 }

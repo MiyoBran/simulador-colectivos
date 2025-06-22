@@ -38,6 +38,20 @@
 			<artifactId>datastructures-library</artifactId>
 			<version>6.0.0-custom</version>
 		</dependency>
+
+		<!-- DEPENDENCIAS PARA TESTING - ACTUALIZADAS PARA JAVA 21 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>

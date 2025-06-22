@@ -67,8 +67,8 @@ class SimuladorUITest {
     }
 
     @Test
-    @DisplayName("Debería mostrar mensaje de simulación finalizada si ya terminó")
-    void testSimulacionFinalizadaMensaje() {
+    @DisplayName("No debe mostrar mensaje redundante de simulación finalizada")
+    void testNoSimulacionFinalizadaMensaje() {
         SimuladorControllerStub controller = new SimuladorControllerStub() {
             @Override
             public Simulador getSimulador() {
@@ -85,7 +85,8 @@ class SimuladorUITest {
         SimuladorUI ui = new SimuladorUI(controller);
         ui.start();
         String salida = salidaConsola.toString();
-        assertTrue(salida.contains("La simulación ha finalizado. Puede consultar estadísticas o salir."));
+        assertFalse(salida.contains("La simulación ha finalizado. Puede consultar estadísticas o salir."),
+            "No debe imprimirse el mensaje redundante de simulación finalizada");
     }
 
     @Test
@@ -108,6 +109,15 @@ class SimuladorUITest {
         ui.start();
         String salida = salidaConsola.toString();
         assertTrue(salida.contains("Parada origen o destino no encontrada."));
+    }
+
+    @Test
+    @DisplayName("Debería generar la etiqueta descriptiva correcta para un colectivo")
+    void testEtiquetaColectivo() {
+        Linea linea = new Linea("1", "Línea 1 - Ida");
+        Colectivo colectivo = new Colectivo("C3-1", linea, 40, 20, 20, 2);
+        String etiqueta = colectivo.getEtiqueta();
+        assertEquals("C3-1 (Línea 1 - Ida)", etiqueta, "La etiqueta del colectivo debe ser descriptiva y contener el nombre de la línea");
     }
     // Se eliminaron los tests testCalcularRutaNoDisponible y testEstadisticasNoDisponible por problemas persistentes.
 }

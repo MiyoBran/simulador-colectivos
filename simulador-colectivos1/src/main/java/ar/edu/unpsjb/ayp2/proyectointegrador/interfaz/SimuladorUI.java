@@ -95,6 +95,7 @@ public class SimuladorUI {
                         ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
                         ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
                         ReporteSimulacion.imprimirReportePasajeros(simulador);
+                        ReporteSimulacion.imprimirOcupacionPromedioColectivos(simulador);
                         // DEBUG: Listar pasajeros esperando en cada parada y detectar duplicados
                         simulador.imprimirDebugPasajerosEsperandoPorParada();
                     }
@@ -106,7 +107,7 @@ public class SimuladorUI {
                     System.out.println("Opción no válida. Intente nuevamente.");
             }
             if (simulador.isSimulacionTerminada()) {
-                System.out.println("\nLa simulación ha finalizado. Puede consultar estadísticas o salir.");
+                // Eliminado mensaje redundante al finalizar la simulación
             }
         }
     }
