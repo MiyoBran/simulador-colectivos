@@ -92,6 +92,7 @@ public class SimuladorUI {
                         System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
                     } else {
                         ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
+                        simulador.imprimirReportePasajeros();
                     }
                     break;
                 case "0":

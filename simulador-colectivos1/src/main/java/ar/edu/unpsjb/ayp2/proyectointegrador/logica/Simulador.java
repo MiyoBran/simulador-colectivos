@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -28,6 +29,9 @@ public class Simulador {
     private GestorEstadisticas gestorEstadisticas;
     private PlanificadorRutas planificadorRutas;
     private List<Pasajero> pasajerosSimulados;
+    private int pasoActual = 0;
+    private int pasosPorFrecuencia = 1;
+    private Properties configProperties;
 
     /**
      * Constructor del simulador. Permite inyectar dependencias para facilitar el testeo.
@@ -38,9 +42,10 @@ public class Simulador {
      * @param pasajeros Lista de pasajeros que participarán en la simulación.
      * @param gestorEstadisticas (opcional) Gestor de estadísticas a utilizar.
      * @param planificadorRutas (opcional) Planificador de rutas a utilizar.
+     * @param configProperties Propiedades de configuración para la simulación.
      */
     public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros,
-                     GestorEstadisticas gestorEstadisticas, PlanificadorRutas planificadorRutas) {
+                     GestorEstadisticas gestorEstadisticas, PlanificadorRutas planificadorRutas, Properties configProperties) {
         if (lineas == null || lineas.isEmpty()) {
             throw new IllegalArgumentException("El simulador requiere líneas cargadas.");
         }
@@ -56,13 +61,14 @@ public class Simulador {
         this.gestorEstadisticas = (gestorEstadisticas != null) ? gestorEstadisticas : new GestorEstadisticas();
         this.planificadorRutas = (planificadorRutas != null) ? planificadorRutas : new PlanificadorRutas();
         this.pasajerosSimulados = pasajeros; // Guardar referencia a todos los pasajeros simulados
+        this.configProperties = configProperties;
     }
 
     /**
      * Constructor original para compatibilidad: instancia dependencias por defecto.
      */
-    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros) {
-        this(lineas, paradas, pasajeros, null, null);
+    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros, Properties configProperties) {
+        this(lineas, paradas, pasajeros, null, null, configProperties);
     }
 
 	/**
@@ -102,17 +108,21 @@ public class Simulador {
         if (capacidadColectivo <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes <= 0 || cantidadColectivosPorLinea <= 0) {
             throw new IllegalArgumentException("Las capacidades, recorridos y cantidad de colectivos deben ser positivos.");
         }
+        int frecuenciaMin = ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorConfig.obtenerFrecuenciaSalidaColectivosMinutos(this.configProperties);
+        this.pasosPorFrecuencia = (int) Math.ceil(frecuenciaMin / 2.0);
         this.colectivosEnSimulacion.clear();
         int colectivoCounter = 1;
         for (Linea linea : lineasDisponibles.values()) {
             for (int i = 0; i < cantidadColectivosPorLinea; i++) {
+                int pasoDeSalida = i * pasosPorFrecuencia;
                 String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
-                Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
+                Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes, pasoDeSalida);
                 this.colectivosEnSimulacion.add(nuevoColectivo);
                 colectivoCounter++;
             }
         }
         this.colectivosPendientesDeAvanzar.clear();
+        this.pasoActual = 0;
     }
 
 	/**
@@ -124,51 +134,41 @@ public class Simulador {
 	 *
 	 */
 public List<String> ejecutarPasoDeSimulacion() {
-		
-		//Map<String, List<String>> eventosPorColectivo = new LinkedHashMap<>();
-		
-		List<String> eventosDelPaso = new ArrayList<>();
-
-		// 1. Avanzar colectivos pendientes (deben avanzar al inicio del paso)
-		if (!colectivosPendientesDeAvanzar.isEmpty()) {
-			for (String id : colectivosPendientesDeAvanzar) {
-				Colectivo colectivo = buscaColectivoPorId(id);
-				if (colectivo != null) {
-					colectivo.avanzarAProximaParada();
-					if (colectivo.estaEnTerminal()) {
-						
-						eventosDelPaso.add("  Colectivo " + colectivo.getIdColectivo() + " ha llegado a la terminal.");
-						procesarLogicaTerminal(colectivo, eventosDelPaso);
-					} else {
-						
-						eventosDelPaso
-						
-								.add("  Colectivo " + colectivo.getIdColectivo() + " avanza a la próxima parada.");
-						
-					}
-				}
-			}
-			colectivosPendientesDeAvanzar.clear();
-		}
-
-		// 2. Procesar colectivos en su parada actual (puede ser la terminal)
-		for (Colectivo colectivo : colectivosEnSimulacion) {
-			if (colectivo.estaEnTerminal()) {
-				// Procesar colectivos que YA están en terminal desde el paso anterior
-				// Nota: La lógica de procesamiento de terminal se excluye aquí intencionalmente
-				// para evitar mensajes duplicados, ya que los colectivos que llegan a la terminal
-				// en este paso ya se procesan en el primer bucle.
-				// procesarLogicaTerminal(colectivo, eventosDelPaso);
-			} else {
-				// Registrar ocupación por tramo antes de procesar el paso
-				gestorEstadisticas.registrarOcupacionTramo(colectivo.getIdColectivo(), colectivo.getCantidadPasajerosABordo());
-				// Procesar parada actual
-				procesarPasoParaColectivo(colectivo, eventosDelPaso);
-			}
-		}
-
-		return eventosDelPaso;
-	}
+        List<String> eventosDelPaso = new ArrayList<>();
+        // 1. Avanzar colectivos pendientes (deben avanzar al inicio del paso)
+        if (!colectivosPendientesDeAvanzar.isEmpty()) {
+            for (String id : colectivosPendientesDeAvanzar) {
+                Colectivo colectivo = buscaColectivoPorId(id);
+                if (colectivo != null && colectivo.getPasoDeSalida() <= pasoActual) {
+                    colectivo.avanzarAProximaParada();
+                    if (colectivo.estaEnTerminal()) {
+                        eventosDelPaso.add("  Colectivo " + colectivo.getIdColectivo() + " ha llegado a la terminal.");
+                        procesarLogicaTerminal(colectivo, eventosDelPaso);
+                    } else {
+                        eventosDelPaso.add("  Colectivo " + colectivo.getIdColectivo() + " avanza a la próxima parada.");
+                    }
+                }
+            }
+            colectivosPendientesDeAvanzar.clear();
+        }
+        // 2. Procesar colectivos en su parada actual (puede ser la terminal)
+        for (Colectivo colectivo : colectivosEnSimulacion) {
+            if (colectivo.estaEnTerminal()) {
+                // Procesar colectivos que YA están en terminal desde el paso anterior
+                // Nota: La lógica de procesamiento de terminal se excluye aquí intencionalmente
+                // para evitar mensajes duplicados, ya que los colectivos que llegan a la terminal
+                // en este paso ya se procesan en el primer bucle.
+                // procesarLogicaTerminal(colectivo, eventosDelPaso);
+            } else {
+                // Registrar ocupación por tramo antes de procesar el paso
+                gestorEstadisticas.registrarOcupacionTramo(colectivo.getIdColectivo(), colectivo.getCantidadPasajerosABordo());
+                // Procesar parada actual
+                procesarPasoParaColectivo(colectivo, eventosDelPaso);
+            }
+        }
+        pasoActual++;
+        return eventosDelPaso;
+    }
 
 
 	/**
@@ -331,6 +331,7 @@ public List<String> ejecutarPasoDeSimulacion() {
 				if (p.getParadaDestino().equals(paradaFinal)) {
 					eventos.add("  - Bajó " + p + " en su destino (terminal).");
 				} else {
+					p.setBajadaForzosa(true);
 					eventos.add("  - BAJADA FORZOSA: " + p + " no llegó a su destino ("
 							+ p.getParadaDestino().getDireccion() + ").");
 				}
@@ -364,4 +365,38 @@ public List<String> ejecutarPasoDeSimulacion() {
 		}
 		return null;
 	}
+
+    /**
+     * Reporte extendido para depuración: muestra el total de pasajeros generados,
+     * los que quedaron esperando en paradas y los que bajaron forzosamente en la terminal.
+     */
+    public void imprimirReportePasajeros() {
+        int totalGenerados = pasajerosSimulados != null ? pasajerosSimulados.size() : 0;
+        int esperandoEnParada = 0;
+        int bajadosForzosamente = 0;
+        int nuncaSubieron = 0;
+        // Usar un Set para evitar contar la misma parada varias veces
+        Set<Parada> paradasUnicas = new HashSet<>();
+        for (Linea linea : lineasDisponibles.values()) {
+            paradasUnicas.addAll(linea.getRecorrido());
+        }
+        for (Parada parada : paradasUnicas) {
+            esperandoEnParada += parada.cantidadPasajerosEsperando();
+        }
+        // Contar pasajeros que bajaron forzosamente o nunca subieron
+        if (pasajerosSimulados != null) {
+            for (Pasajero p : pasajerosSimulados) {
+                if (!p.isPudoSubir()) {
+                    nuncaSubieron++;
+                } else if (p.isBajadaForzosa()) {
+                    bajadosForzosamente++;
+                }
+            }
+        }
+        System.out.println("\n--- Reporte de Pasajeros ---");
+        System.out.println("Total de pasajeros generados: " + totalGenerados);
+        System.out.println("Pasajeros esperando en paradas: " + esperandoEnParada);
+        System.out.println("Pasajeros bajados forzosamente en terminal: " + bajadosForzosamente);
+        System.out.println("Pasajeros que nunca subieron a un colectivo: " + nuncaSubieron);
+    }
 }

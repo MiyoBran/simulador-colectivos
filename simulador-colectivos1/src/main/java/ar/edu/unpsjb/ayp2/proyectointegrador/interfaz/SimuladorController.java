@@ -30,7 +30,7 @@ public class SimuladorController {
                 new ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros(lineasCargadas, paradasCargadas, configProperties);
             pasajerosGenerados = generador.generarPasajeros();
             // Crear simulador
-            simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados);
+            simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados, configProperties);
             int capacidadColectivo = SimuladorConfig.obtenerCapacidadColectivo(configProperties);
             int capacidadSentadosColectivo = SimuladorConfig.obtenerCapacidadSentadosColectivo(configProperties);
             int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
