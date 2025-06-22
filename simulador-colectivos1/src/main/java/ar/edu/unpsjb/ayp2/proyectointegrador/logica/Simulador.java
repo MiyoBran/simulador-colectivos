@@ -130,7 +130,7 @@ public List<String> ejecutarPasoDeSimulacion() {
 				// Nota: La lógica de procesamiento de terminal se excluye aquí intencionalmente
 				// para evitar mensajes duplicados, ya que los colectivos que llegan a la terminal
 				// en este paso ya se procesan en el primer bucle.
-				//procesarLogicaTerminal(colectivo, eventosDelPaso);
+				// procesarLogicaTerminal(colectivo, eventosDelPaso);
 			} else {
 				// Procesar parada actual
 				procesarPasoParaColectivo(colectivo, eventosDelPaso);

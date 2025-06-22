@@ -182,8 +182,11 @@ public class SimuladorColectivosApp {
 	 * Agrupa y muestra los eventos de la simulación por colectivo, mejorando la
 	 * legibilidad. Cada bloque de eventos comienza con el nombre del colectivo,
 	 * seguido de los eventos de ese colectivo.
-	 * 
-	 * @return
+	 *
+	 * @param eventos Lista de eventos generados durante la simulación.
+	 * @return Un mapa donde la clave es el ID del colectivo (String) y el valor es una lista de eventos (List<String>)
+	 *         asociados a ese colectivo. Los eventos generales o de sistema se agrupan bajo la clave "GENERAL".
+	 *         Este mapa permite acceder fácilmente a todos los eventos relacionados con cada colectivo para su presentación o análisis.
 	 */
 	private static Map<String, List<String>> mostrarEventosAgrupadosPorColectivo(List<String> eventos) {
 		// Mapa: Colectivo ID -> Lista de eventos
