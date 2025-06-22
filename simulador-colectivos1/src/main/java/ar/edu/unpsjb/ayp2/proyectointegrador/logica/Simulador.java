@@ -144,10 +144,15 @@ public class Simulador {
 	 * @return Lista de eventos generados en este paso de simulación. *
 	 *
 	 */
+    /**
+     * Minutos que representa cada paso/ciclo de simulación.
+     */
+    private static final int MINUTOS_POR_PASO_POR_CICLO = 2;
+
 public List<String> ejecutarPasoDeSimulacion() {
         List<String> eventosDelPaso = new ArrayList<>();
         // --- NUEVO: Actualizar tiempos de espera y viaje ---
-        final int MINUTOS_POR_PASO = 2;
+        final int MINUTOS_POR_PASO = MINUTOS_POR_PASO_POR_CICLO;
         // 1. Incrementar tiempo de espera de pasajeros en paradas
         for (Linea linea : lineasDisponibles.values()) {
             for (Parada parada : linea.getRecorrido()) {
