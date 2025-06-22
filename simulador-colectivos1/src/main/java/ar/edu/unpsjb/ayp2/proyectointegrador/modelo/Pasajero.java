@@ -51,6 +51,20 @@ public class Pasajero {
         return this.satisfaccion;
     }
 
+	// --- Métodos para tiempo de espera y viaje (en minutos, cada paso de simulación equivale a 2 minutos) ---
+    public int getTiempoEspera() {
+        return this.tiempoEspera;
+    }
+    public void setTiempoEspera(int minutos) {
+        this.tiempoEspera = minutos;
+    }
+    public int getTiempoViaje() {
+        return this.tiempoViaje;
+    }
+    public void setTiempoViaje(int minutos) {
+        this.tiempoViaje = minutos;
+    }
+
 	/**
 	 * Constructor para crear un pasajero con un ID aleatorio.
 	 * 
@@ -152,15 +166,6 @@ public class Pasajero {
 	}
 
 	/**
-	 * Devuelve el tiempo total de espera del pasajero.
-	 * 
-	 * @return tiempo de espera en minutos.
-	 */
-	public int getTiempoEspera() {
-		return tiempoEspera;
-	}
-
-	/**
 	 * Suma minutos al tiempo de espera del pasajero.
 	 * 
 	 * @param minutos minutos a sumar.
@@ -185,15 +190,6 @@ public class Pasajero {
 	 */
 	public void agregarColectivoObservado(String idColectivo) {
 		this.colectivosObservados.add(idColectivo);
-	}
-
-	/**
-	 * Devuelve el tiempo total de viaje del pasajero.
-	 * 
-	 * @return tiempo de viaje en minutos.
-	 */
-	public int getTiempoViaje() {
-		return tiempoViaje;
 	}
 
 	/**

@@ -17,11 +17,11 @@ public class ReporteSimulacion {
         }
         System.out.println("\n--- Estadísticas de la Simulación ---");
         System.out.println("Pasajeros transportados: " + simulador.getGestorEstadisticas().getPasajerosTransportados());
-        System.out.println("Tiempo promedio de espera: " + simulador.getGestorEstadisticas().getTiempoEsperaPromedio());
-        System.out.println("Tiempo promedio de viaje: " + simulador.getGestorEstadisticas().getTiempoViajePromedio());
-        System.out.println("Satisfacción promedio: " + simulador.getGestorEstadisticas().getSatisfaccionPromedio());
-        System.out.println("% Satisfechos: " + simulador.getGestorEstadisticas().getPorcentajeSatisfechos());
-        System.out.println("% Insatisfechos: " + simulador.getGestorEstadisticas().getPorcentajeInsatisfechos());
+        System.out.println("Tiempo promedio de espera: " + String.format("%.2f", simulador.getGestorEstadisticas().getTiempoEsperaPromedio()) + " minutos");
+        System.out.println("Tiempo promedio de viaje: " + String.format("%.2f", simulador.getGestorEstadisticas().getTiempoViajePromedio()) + " minutos");
+        System.out.println("Satisfacción promedio: " + String.format("%.1f", simulador.getGestorEstadisticas().getSatisfaccionPromedio()));
+        System.out.println("% Satisfechos: " + String.format("%.1f", simulador.getGestorEstadisticas().getPorcentajeSatisfechos()) + "%");
+        System.out.println("% Insatisfechos: " + String.format("%.1f", simulador.getGestorEstadisticas().getPorcentajeInsatisfechos()) + "%");
     }
 
     public static void verificarConsistenciaEstadisticas(Simulador simulador) {

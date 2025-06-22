@@ -138,6 +138,22 @@ public class Simulador {
 	 */
 public List<String> ejecutarPasoDeSimulacion() {
         List<String> eventosDelPaso = new ArrayList<>();
+        // --- NUEVO: Actualizar tiempos de espera y viaje ---
+        final int MINUTOS_POR_PASO = 2;
+        // 1. Incrementar tiempo de espera de pasajeros en paradas
+        for (Linea linea : lineasDisponibles.values()) {
+            for (Parada parada : linea.getRecorrido()) {
+                for (Pasajero pasajero : parada.getPasajerosEsperando()) {
+                    pasajero.setTiempoEspera(pasajero.getTiempoEspera() + MINUTOS_POR_PASO);
+                }
+            }
+        }
+        // 2. Incrementar tiempo de viaje de pasajeros a bordo de colectivos
+        for (Colectivo colectivo : colectivosEnSimulacion) {
+            for (Pasajero pasajero : colectivo.getPasajerosABordo()) {
+                pasajero.setTiempoViaje(pasajero.getTiempoViaje() + MINUTOS_POR_PASO);
+            }
+        }
         // 1. Avanzar colectivos pendientes (deben avanzar al inicio del paso)
         if (!colectivosPendientesDeAvanzar.isEmpty()) {
             for (String id : colectivosPendientesDeAvanzar) {
