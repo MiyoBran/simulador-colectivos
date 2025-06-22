@@ -93,6 +93,19 @@ class ColectivoTest {
         assertThrows(IllegalArgumentException.class, () -> new Colectivo("C04", lineaConRecorrido, -1, 0, 0, 1));
     }
 
+    @Test
+    @DisplayName("Constructor: debería inicializar correctamente el pasoDeSalida por defecto (0)")
+    void testConstructorPasoDeSalidaPorDefecto() {
+        assertEquals(0, colectivoSUT.getPasoDeSalida(), "El pasoDeSalida por defecto debe ser 0");
+    }
+
+    @Test
+    @DisplayName("Constructor: debería inicializar correctamente el pasoDeSalida personalizado")
+    void testConstructorPasoDeSalidaPersonalizado() {
+        Colectivo c = new Colectivo("C10", lineaConRecorrido, 10, 5, 5, 2, 7);
+        assertEquals(7, c.getPasoDeSalida(), "El pasoDeSalida debe ser el valor pasado por parámetro");
+    }
+
     // --- Pruebas de Gestión de Pasajeros ---
     @Test
     @DisplayName("Pasajeros: debería permitir subir pasajeros hasta llenar la capacidad")

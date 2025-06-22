@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 @DisplayName("Tests para la clase Simulador")
 class SimuladorTest {
@@ -76,7 +77,7 @@ class SimuladorTest {
     @DisplayName("Constructor: debería crearse exitosamente con datos válidos")
     void testSimuladorConstructorExitoso() {
         assertDoesNotThrow(() -> {
-            new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
+            new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
         });
     }
 
@@ -84,7 +85,7 @@ class SimuladorTest {
     @DisplayName("Constructor: debería lanzar excepción si las líneas son nulas")
     void testSimuladorConstructorLineasNulas() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Simulador(null, paradasDePrueba, pasajerosDePrueba);
+            new Simulador(null, paradasDePrueba, pasajerosDePrueba, new Properties());
         }, "El simulador requiere líneas cargadas.");
     }
     
@@ -92,7 +93,7 @@ class SimuladorTest {
     @Test
     @DisplayName("Inicialización: debería crear un colectivo por línea con los datos correctos")
     void testInicializarColectivosExitoso() {
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
+        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
         // Usar valores de ejemplo para sentados, parados y recorridos
         int capacidadMaxima = 10;
         int capacidadSentados = 6;
@@ -125,7 +126,7 @@ class SimuladorTest {
     @Test
     @DisplayName("Simulación: debería completarse sin errores cuando no hay pasajeros")
     void testEjecutarSimulacionSinPasajeros() {
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, new ArrayList<>());
+        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, new ArrayList<>(), new Properties());
         simulador.inicializarColectivos(10, 6, 4, 1);
         // Ejecuta la simulación completa
         ejecutarSimulacionCompleta(simulador);
@@ -148,7 +149,7 @@ class SimuladorTest {
         pasajerosDePrueba.add(pA);
         pasajerosDePrueba.add(pB);
 
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
+        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
         simulador.inicializarColectivos(2, 1, 1, 1); // Capacidad suficiente
 
         // Act: ejecutar la simulación
@@ -177,7 +178,7 @@ class SimuladorTest {
         pasajerosDePrueba.add(pA);
         pasajerosDePrueba.add(pB);
 
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba);
+        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
         simulador.inicializarColectivos(1, 1, 0, 1); // Capacidad de solo 1 para el colectivo de L1
 
         // Act

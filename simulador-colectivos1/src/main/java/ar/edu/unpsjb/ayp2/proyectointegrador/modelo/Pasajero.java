@@ -30,6 +30,9 @@ public class Pasajero {
 	private boolean viajoSentado; // Simplificación, se podría determinar de otra forma
 	private boolean pudoSubir; // Si finalmente logró subir a algún colectivo
 
+	// Indica si el pasajero fue bajado forzosamente en la terminal (no llegó a su destino)
+	private boolean bajadaForzosa = false;
+
 	// Incremento 2: atributos para simulación avanzada
 	/** Tiempo total de espera en minutos antes de abordar un colectivo. */
 	private int tiempoEspera;
@@ -37,6 +40,16 @@ public class Pasajero {
 	private List<String> colectivosObservados;
 	/** Tiempo total de viaje en minutos. */
 	private int tiempoViaje;
+
+	// --- GETTERS Y SETTERS ---
+    // Satisfacción del pasajero (0-100)
+    private int satisfaccion = 100;
+    public void setSatisfaccion(int valor) {
+        this.satisfaccion = valor;
+    }
+    public int getSatisfaccion() {
+        return this.satisfaccion;
+    }
 
 	/**
 	 * Constructor para crear un pasajero con un ID aleatorio.
@@ -87,7 +100,6 @@ public class Pasajero {
 		this.tiempoViaje = 0;
 	}
 
-	// --- GETTERS Y SETTERS ---
 	public String getId() {
 		return id;
 	}
@@ -130,6 +142,13 @@ public class Pasajero {
 
 	public void setPudoSubir(boolean pudoSubir) {
 		this.pudoSubir = pudoSubir;
+	}
+
+	public boolean isBajadaForzosa() {
+		return bajadaForzosa;
+	}
+	public void setBajadaForzosa(boolean valor) {
+		this.bajadaForzosa = valor;
 	}
 
 	/**

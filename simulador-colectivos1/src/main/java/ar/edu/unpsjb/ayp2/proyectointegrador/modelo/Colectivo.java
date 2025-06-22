@@ -31,6 +31,8 @@ public class Colectivo {
 	private String estado;
 	/** Tiempo (en minutos) hasta la próxima salida, útil para la simulación. */
 	private int tiempoHastaProximaSalida;
+	/** Paso de simulación en el que este colectivo puede salir de la terminal (según frecuencia de salida). */
+	private int pasoDeSalida = 0;
 
 	/**
 	 * Constructor para un Colectivo.
@@ -71,6 +73,13 @@ public class Colectivo {
 			this.paradaActual = null;
 			this.indiceParadaActualEnRecorrido = -1;
 		}
+	}
+
+	// Nuevo constructor para permitir setear pasoDeSalida
+	public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima, int capacidadSentados,
+			int capacidadParados, int recorridosRestantes, int pasoDeSalida) {
+		this(idColectivo, lineaAsignada, capacidadMaxima, capacidadSentados, capacidadParados, recorridosRestantes);
+		this.pasoDeSalida = pasoDeSalida;
 	}
 
 	// Getters
@@ -268,4 +277,21 @@ public class Colectivo {
 	public int hashCode() {
 		return Objects.hash(idColectivo);
 	}
+
+	public int getPasoDeSalida() {
+		return pasoDeSalida;
+	}
+
+	public void setPasoDeSalida(int pasoDeSalida) {
+		this.pasoDeSalida = pasoDeSalida;
+	}
+
+	/**
+     * Devuelve la cantidad de asientos disponibles en el colectivo.
+     * Se asume que los primeros 'capacidadSentados' pasajeros van sentados.
+     */
+    public int getCantidadSentadosDisponibles() {
+        int ocupados = Math.min(pasajerosABordo.size(), capacidadSentados);
+        return capacidadSentados - ocupados;
+    }
 }
