@@ -90,6 +90,10 @@ public class Simulador {
             String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
             Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
             this.colectivosEnSimulacion.add(nuevoColectivo);
+            // Registrar capacidad máxima para estadísticas de ocupación promedio (Anexo II)
+            if (gestorEstadisticas != null) {
+                gestorEstadisticas.registrarCapacidadColectivo(idColectivo, capacidadColectivo);
+            }
             colectivoCounter++;
         }
         this.colectivosPendientesDeAvanzar.clear();
@@ -121,6 +125,10 @@ public class Simulador {
                 String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
                 Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes, pasoDeSalida);
                 this.colectivosEnSimulacion.add(nuevoColectivo);
+                // Registrar capacidad máxima para estadísticas de ocupación promedio (Anexo II)
+                if (gestorEstadisticas != null) {
+                    gestorEstadisticas.registrarCapacidadColectivo(idColectivo, capacidadColectivo);
+                }
                 colectivoCounter++;
             }
         }

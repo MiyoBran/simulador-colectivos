@@ -97,6 +97,16 @@ public class SimuladorUI {
                         ReporteSimulacion.imprimirReportePasajeros(simulador);
                         // DEBUG: Listar pasajeros esperando en cada parada y detectar duplicados
                         simulador.imprimirDebugPasajerosEsperandoPorParada();
+                        // --- NUEVO: Reporte de ocupación promedio de colectivos (Anexo II) ---
+                        var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
+                        System.out.println("\n--- OCUPACIÓN PROMEDIO DE COLECTIVOS (Anexo II) ---");
+                        if (ocupaciones.isEmpty()) {
+                            System.out.println("No hay datos de ocupación registrados.");
+                        } else {
+                            for (var entry : ocupaciones.entrySet()) {
+                                System.out.printf("Colectivo %s: %.2f%%\n", entry.getKey(), entry.getValue() * 100);
+                            }
+                        }
                     }
                     break;
                 case "0":
