@@ -21,7 +21,8 @@ public class GestorEstadisticasTest {
         Parada destino = new Parada("P2", "Destino");
         pasajero = new Pasajero("1", origen, destino);
         linea = new Linea("L1", "Linea Test");
-        colectivo = new Colectivo("C1", linea, 30);
+        // Colectivo actualizado con los nuevos parámetros requeridos
+        colectivo = new Colectivo("C1", linea, 30, 20, 10, 1);
     }
 
     @Test

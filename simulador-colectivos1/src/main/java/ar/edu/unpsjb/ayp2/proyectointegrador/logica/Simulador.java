@@ -28,50 +28,64 @@ public class Simulador {
     private GestorEstadisticas gestorEstadisticas;
     private PlanificadorRutas planificadorRutas;
 
-	/**
-	 * Constructor del simulador. * Requiere líneas y paradas previamente cargadas.
-	 * 
-	 * @param lineas    Mapa de líneas disponibles para la simulación.
-	 * @param paradas   Mapa de paradas disponibles para la simulación.
-	 * @param pasajeros Lista de pasajeros que participarán en la simulación.
-	 */
-	public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros) {
-		if (lineas == null || lineas.isEmpty()) {
-			throw new IllegalArgumentException("El simulador requiere líneas cargadas.");
-		}
-		if (paradas == null || paradas.isEmpty()) {
-			throw new IllegalArgumentException("El simulador requiere paradas cargadas.");
-		}
-		if (pasajeros == null) {
-			throw new IllegalArgumentException("La lista de pasajeros no puede ser nula.");
-		}
-		this.lineasDisponibles = lineas;
-		this.colectivosEnSimulacion = new ArrayList<>();
-		this.colectivosPendientesDeAvanzar = new HashSet<>();
-        this.gestorEstadisticas = new GestorEstadisticas();
-        this.planificadorRutas = new PlanificadorRutas();
-	}
+    /**
+     * Constructor del simulador. Permite inyectar dependencias para facilitar el testeo.
+     * Si gestorEstadisticas o planificadorRutas son nulos, se crean instancias por defecto.
+     *
+     * @param lineas    Mapa de líneas disponibles para la simulación.
+     * @param paradas   Mapa de paradas disponibles para la simulación.
+     * @param pasajeros Lista de pasajeros que participarán en la simulación.
+     * @param gestorEstadisticas (opcional) Gestor de estadísticas a utilizar.
+     * @param planificadorRutas (opcional) Planificador de rutas a utilizar.
+     */
+    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros,
+                     GestorEstadisticas gestorEstadisticas, PlanificadorRutas planificadorRutas) {
+        if (lineas == null || lineas.isEmpty()) {
+            throw new IllegalArgumentException("El simulador requiere líneas cargadas.");
+        }
+        if (paradas == null || paradas.isEmpty()) {
+            throw new IllegalArgumentException("El simulador requiere paradas cargadas.");
+        }
+        if (pasajeros == null) {
+            throw new IllegalArgumentException("La lista de pasajeros no puede ser nula.");
+        }
+        this.lineasDisponibles = lineas;
+        this.colectivosEnSimulacion = new ArrayList<>();
+        this.colectivosPendientesDeAvanzar = new HashSet<>();
+        this.gestorEstadisticas = (gestorEstadisticas != null) ? gestorEstadisticas : new GestorEstadisticas();
+        this.planificadorRutas = (planificadorRutas != null) ? planificadorRutas : new PlanificadorRutas();
+    }
+
+    /**
+     * Constructor original para compatibilidad: instancia dependencias por defecto.
+     */
+    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros) {
+        this(lineas, paradas, pasajeros, null, null);
+    }
 
 	/**
-	 * Inicializa los colectivos en la simulación con una capacidad dada. * Cada
-	 * colectivo se asigna a una línea disponible y se le asigna un ID único.
-	 * 
+	 * Inicializa los colectivos en la simulación con las capacidades y recorridos dados.
+	 * Cada colectivo se asigna a una línea disponible y se le asigna un ID único.
+	 *
 	 * @param capacidadColectivo Capacidad máxima de pasajeros por colectivo.
+	 * @param capacidadSentados Capacidad máxima de pasajeros sentados.
+	 * @param capacidadParados Capacidad máxima de pasajeros parados.
+	 * @param recorridosRestantes Cantidad de recorridos que debe realizar el colectivo.
 	 */
-	public void inicializarColectivos(int capacidadColectivo) {
-		if (capacidadColectivo <= 0) {
-			throw new IllegalArgumentException("La capacidad de los colectivos debe ser positiva.");
-		}
-		this.colectivosEnSimulacion.clear();
-		int colectivoCounter = 1;
-		for (Linea linea : lineasDisponibles.values()) {
-			String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
-			Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo);
-			this.colectivosEnSimulacion.add(nuevoColectivo);
-			colectivoCounter++;
-		}
-		this.colectivosPendientesDeAvanzar.clear();
-	}
+	public void inicializarColectivos(int capacidadColectivo, int capacidadSentados, int capacidadParados, int recorridosRestantes) {
+        if (capacidadColectivo <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes <= 0) {
+            throw new IllegalArgumentException("Las capacidades y recorridos deben ser positivos.");
+        }
+        this.colectivosEnSimulacion.clear();
+        int colectivoCounter = 1;
+        for (Linea linea : lineasDisponibles.values()) {
+            String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
+            Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
+            this.colectivosEnSimulacion.add(nuevoColectivo);
+            colectivoCounter++;
+        }
+        this.colectivosPendientesDeAvanzar.clear();
+    }
 
 	/**
 	 * Ejecuta un paso de simulación. Este método avanza los colectivos pendientes
@@ -113,7 +127,10 @@ public List<String> ejecutarPasoDeSimulacion() {
 		for (Colectivo colectivo : colectivosEnSimulacion) {
 			if (colectivo.estaEnTerminal()) {
 				// Procesar colectivos que YA están en terminal desde el paso anterior
-				//procesarLogicaTerminal(colectivo, eventosDelPaso);
+				// Nota: La lógica de procesamiento de terminal se excluye aquí intencionalmente
+				// para evitar mensajes duplicados, ya que los colectivos que llegan a la terminal
+				// en este paso ya se procesan en el primer bucle.
+				// procesarLogicaTerminal(colectivo, eventosDelPaso);
 			} else {
 				// Procesar parada actual
 				procesarPasoParaColectivo(colectivo, eventosDelPaso);
