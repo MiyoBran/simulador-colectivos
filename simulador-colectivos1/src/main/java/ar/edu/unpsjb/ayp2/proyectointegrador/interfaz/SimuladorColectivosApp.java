@@ -26,6 +26,8 @@ public class SimuladorColectivosApp {
     }
 
     /**
+     * Este método ha quedado potencialmente inutilizado tras la integración de ReporteSimulacion.imprimirReportePasajeros.
+     * Verificar si sigue siendo utilizado en el proyecto antes de eliminarlo o refactorizarlo.
      * Agrupa y muestra los eventos de la simulación por colectivo, mejorando la
      * legibilidad. Cada bloque de eventos comienza con el nombre del colectivo,
      * seguido de los eventos de ese colectivo.

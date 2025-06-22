@@ -41,6 +41,16 @@ public class Pasajero {
 	/** Tiempo total de viaje en minutos. */
 	private int tiempoViaje;
 
+	// --- GETTERS Y SETTERS ---
+    // Satisfacción del pasajero (0-100)
+    private int satisfaccion = 100;
+    public void setSatisfaccion(int valor) {
+        this.satisfaccion = valor;
+    }
+    public int getSatisfaccion() {
+        return this.satisfaccion;
+    }
+
 	/**
 	 * Constructor para crear un pasajero con un ID aleatorio.
 	 * 
@@ -90,7 +100,6 @@ public class Pasajero {
 		this.tiempoViaje = 0;
 	}
 
-	// --- GETTERS Y SETTERS ---
 	public String getId() {
 		return id;
 	}

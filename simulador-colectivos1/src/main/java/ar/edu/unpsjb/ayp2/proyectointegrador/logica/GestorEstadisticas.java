@@ -81,11 +81,20 @@ public class GestorEstadisticas {
         } else {
             pasajerosInsatisfechos++;
         }
+        // --- NUEVO: Actualizar desglose de calificaciones y stats de satisfacción ---
+        int calificacion = mapSatisfaccionToCalificacion(satisfaccion);
+        conteoCalificaciones.put(calificacion, conteoCalificaciones.getOrDefault(calificacion, 0) + 1);
+        sumaCalificaciones += calificacion;
+        totalPasajerosCalificados++;
     }
 
-    /** Registrar ocupación de un colectivo en un momento dado. */
-    public void registrarOcupacion(String idColectivo, int ocupacion) {
-        ocupacionPorColectivo.put(idColectivo, ocupacion);
+    /** Mapea la satisfacción (0-100) a calificación 1-5. */
+    private int mapSatisfaccionToCalificacion(int satisfaccion) {
+        if (satisfaccion >= 80) return 5;
+        if (satisfaccion >= 60) return 4;
+        if (satisfaccion >= 40) return 3;
+        if (satisfaccion >= 20) return 2;
+        return 1;
     }
 
     /** Calcular el tiempo promedio de espera de los pasajeros transportados. */
@@ -100,7 +109,9 @@ public class GestorEstadisticas {
 
     /** Calcular la satisfacción promedio de los pasajeros transportados. */
     public double getSatisfaccionPromedio() {
-        return pasajerosTransportados == 0 ? 0 : (double) sumaSatisfaccion / pasajerosTransportados;
+        // Ahora se calcula como el promedio de calificaciones (1-5) * 20 para escalar a 0-100
+        if (pasajerosTransportados == 0 || totalPasajerosCalificados == 0) return 0;
+        return ((double) sumaCalificaciones / totalPasajerosCalificados) * 20;
     }
 
     /** Obtener el porcentaje de pasajeros satisfechos. */
@@ -134,11 +145,9 @@ public class GestorEstadisticas {
     }
 
     /** Registrar la calificación de satisfacción de un pasajero (Anexo I). */
+    @Deprecated
     public void registrarCalificacionSatisfaccion(int calificacion) {
-        if (calificacion < 1 || calificacion > 5) return;
-        conteoCalificaciones.put(calificacion, conteoCalificaciones.getOrDefault(calificacion, 0) + 1);
-        sumaCalificaciones += calificacion;
-        totalPasajerosCalificados++;
+        // Este método ya no debe usarse directamente. El desglose se actualiza en registrarTransporte.
     }
 
     /** Devuelve el índice de satisfacción según Anexo I. */
@@ -197,5 +206,31 @@ public class GestorEstadisticas {
         totalPasajerosCalificados = 0;
         ocupacionesPorColectivo.clear();
         capacidadPorColectivo.clear();
+    }
+
+    /**
+     * Devuelve un desglose de los pasajeros por categoría:
+     * - "transportados": llegaron a destino
+     * - "bajadosForzosamente": bajados en terminal sin llegar a destino
+     * - "nuncaSubieron": nunca subieron a un colectivo (siguen esperando)
+     */
+    public Map<String, Integer> getDesglosePasajeros() {
+        int transportados = 0;
+        int bajadosForzosamente = 0;
+        int nuncaSubieron = 0;
+        for (Pasajero p : pasajeros) {
+            if (p.isBajadaForzosa()) {
+                bajadosForzosamente++;
+            } else if (!p.isPudoSubir()) {
+                nuncaSubieron++;
+            } else if (p.isPudoSubir() && !p.isBajadaForzosa()) {
+                transportados++;
+            }
+        }
+        Map<String, Integer> desglose = new HashMap<>();
+        desglose.put("transportados", transportados);
+        desglose.put("bajadosForzosamente", bajadosForzosamente);
+        desglose.put("nuncaSubieron", nuncaSubieron);
+        return desglose;
     }
 }

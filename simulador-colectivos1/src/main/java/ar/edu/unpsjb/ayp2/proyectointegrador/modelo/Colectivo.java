@@ -285,4 +285,13 @@ public class Colectivo {
 	public void setPasoDeSalida(int pasoDeSalida) {
 		this.pasoDeSalida = pasoDeSalida;
 	}
+
+	/**
+     * Devuelve la cantidad de asientos disponibles en el colectivo.
+     * Se asume que los primeros 'capacidadSentados' pasajeros van sentados.
+     */
+    public int getCantidadSentadosDisponibles() {
+        int ocupados = Math.min(pasajerosABordo.size(), capacidadSentados);
+        return capacidadSentados - ocupados;
+    }
 }

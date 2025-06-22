@@ -192,6 +192,15 @@ public class Parada {
 		return colectivosPasados;
 	}
 
+	/**
+	 * Devuelve la cola de pasajeros esperando en la parada.
+	 * 
+	 * @return cola de pasajeros.
+	 */
+	public Queue<Pasajero> getPasajerosEsperando() {
+		return pasajerosEsperando;
+	}
+
 	@Override
 	public String toString() {
 		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", latitud=" + latitud

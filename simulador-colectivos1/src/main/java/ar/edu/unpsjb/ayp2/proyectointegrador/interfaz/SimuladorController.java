@@ -5,6 +5,7 @@ import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Linea;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Pasajero;
 import ar.edu.unpsjb.ayp2.proyectointegrador.datos.LectorArchivos;
+import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GestorEstadisticas;
 import java.util.*;
 
 public class SimuladorController {
@@ -13,6 +14,7 @@ public class SimuladorController {
     private Map<String, Linea> lineasCargadas;
     private Properties configProperties;
     private List<Pasajero> pasajerosGenerados;
+    private GestorEstadisticas gestorEstadisticas;
 
     public SimuladorController() {
         // La inicialización real se hará en un método separado
@@ -25,12 +27,14 @@ public class SimuladorController {
             paradasCargadas = lector.getParadasCargadas();
             lineasCargadas = lector.getLineasCargadas();
             configProperties = lector.getPropiedades();
+            // Crear gestor de estadísticas único
+            gestorEstadisticas = new GestorEstadisticas();
             // Generar pasajeros
             ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros generador =
-                new ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros(lineasCargadas, paradasCargadas, configProperties);
+                new ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros(lineasCargadas, paradasCargadas, configProperties, gestorEstadisticas);
             pasajerosGenerados = generador.generarPasajeros();
             // Crear simulador
-            simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados, configProperties);
+            simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados, gestorEstadisticas, null, configProperties);
             int capacidadColectivo = SimuladorConfig.obtenerCapacidadColectivo(configProperties);
             int capacidadSentadosColectivo = SimuladorConfig.obtenerCapacidadSentadosColectivo(configProperties);
             int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
@@ -50,4 +54,5 @@ public class SimuladorController {
     public Map<String, Linea> getLineasCargadas() { return lineasCargadas; }
     public Properties getConfigProperties() { return configProperties; }
     public List<Pasajero> getPasajerosGenerados() { return pasajerosGenerados; }
+    public GestorEstadisticas getGestorEstadisticas() { return gestorEstadisticas; }
 }

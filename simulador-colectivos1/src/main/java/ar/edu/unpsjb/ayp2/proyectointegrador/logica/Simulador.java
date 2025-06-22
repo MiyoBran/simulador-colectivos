@@ -281,35 +281,53 @@ public List<String> ejecutarPasoDeSimulacion() {
 	 * un destino válido.
 	 */
 	private void procesarSubidaPasajeros(Colectivo colectivo, Parada paradaActual, List<String> eventos) {
-		eventos.add("  Pasajeros esperando en parada: " + paradaActual.cantidadPasajerosEsperando());
-		int pasajerosSubidos = 0;
-		List<Pasajero> pasajerosQueSeQuedan = new ArrayList<>();
+        eventos.add("  Pasajeros esperando en parada: " + paradaActual.cantidadPasajerosEsperando());
+        int pasajerosSubidos = 0;
+        List<Pasajero> pasajerosQueSeQuedan = new ArrayList<>();
 
-		while (paradaActual.hayPasajerosEsperando()) {
-			Pasajero pasajero = paradaActual.removerSiguientePasajero();
-			if (colectivo.getLineaAsignada().tieneParadaEnRecorrido(pasajero.getParadaDestino())) {
-				if (colectivo.subirPasajero(pasajero)) {
-					pasajerosSubidos++;
-					pasajero.setPudoSubir(true);
-					eventos.add("  + Subió pasajero " + pasajero.getId() + " (destino: "
-							+ pasajero.getParadaDestino().getDireccion() + ")");
-				} else {
-					pasajero.incrementarColectivosEsperados();
-					eventos.add("  - Pasajero " + pasajero.getId()
-							+ " no pudo subir (colectivo lleno). Esperando al siguiente.");
-					pasajerosQueSeQuedan.add(pasajero);
-				}
-			} else {
-				pasajerosQueSeQuedan.add(pasajero);
-			}
-		}
+        int pasajerosEnParadaAlInicio = paradaActual.cantidadPasajerosEsperando();
+        int intentos = 0;
+        while (paradaActual.hayPasajerosEsperando()) {
+            Pasajero pasajero = paradaActual.removerSiguientePasajero();
+            intentos++;
+            // Solo permitir subir si el destino está más adelante en el recorrido
+            int idxActual = colectivo.getLineaAsignada().getRecorrido().indexOf(paradaActual);
+            int idxDestino = colectivo.getLineaAsignada().getRecorrido().indexOf(pasajero.getParadaDestino());
+            if (colectivo.getLineaAsignada().tieneParadaEnRecorrido(pasajero.getParadaDestino()) && idxDestino > idxActual) {
+                boolean pudoSubir = colectivo.subirPasajero(pasajero);
+                if (pudoSubir) {
+                    pasajerosSubidos++;
+                    pasajero.setPudoSubir(true);
+                    // Si es el primer intento de subida, subió al primer colectivo que pasó
+                    if (pasajero.getColectivosEsperados() == 0) {
+                        pasajero.setSubioAlPrimerColectivoQuePaso(true);
+                    }
+                    // Determinar si viajó sentado o parado
+                    if (colectivo.getCantidadSentadosDisponibles() > 0) {
+                        pasajero.setViajoSentado(true);
+                    } else {
+                        pasajero.setViajoSentado(false);
+                    }
+                    eventos.add("  + Subió pasajero " + pasajero.getId() + " (destino: "
+                            + pasajero.getParadaDestino().getDireccion() + ")");
+                } else {
+                    pasajero.incrementarColectivosEsperados();
+                    pasajero.setSubioAlPrimerColectivoQuePaso(false); // No subió al primer colectivo
+                    eventos.add("  - Pasajero " + pasajero.getId()
+                            + " no pudo subir (colectivo lleno). Esperando al siguiente.");
+                    pasajerosQueSeQuedan.add(pasajero);
+                }
+            } else {
+                pasajerosQueSeQuedan.add(pasajero);
+            }
+        }
 
-		for (Pasajero p : pasajerosQueSeQuedan) {
-			paradaActual.agregarPasajero(p);
-		}
-		eventos.add("  Cantidad de pasajeros que subieron en esta parada: " + pasajerosSubidos);
-		eventos.add("  Pasajeros restantes esperando en parada: " + paradaActual.cantidadPasajerosEsperando());
-	}
+        for (Pasajero p : pasajerosQueSeQuedan) {
+            paradaActual.agregarPasajero(p);
+        }
+        eventos.add("  Cantidad de pasajeros que subieron en esta parada: " + pasajerosSubidos);
+        eventos.add("  Pasajeros restantes esperando en parada: " + paradaActual.cantidadPasajerosEsperando());
+    }
 
 	/**
 	 * Procesa la lógica cuando un colectivo ha finalizado su recorrido. Este método
@@ -330,10 +348,14 @@ public List<String> ejecutarPasoDeSimulacion() {
 				// Distinguir entre pasajeros que llegaron a su destino vs bajada forzosa
 				if (p.getParadaDestino().equals(paradaFinal)) {
 					eventos.add("  - Bajó " + p + " en su destino (terminal).");
+					gestorEstadisticas.registrarTransporte(p); // Registrar como transportado
 				} else {
 					p.setBajadaForzosa(true);
+					// Satisfacción mínima para bajada forzosa
+					p.setSatisfaccion(0); // O el valor mínimo que corresponda
 					eventos.add("  - BAJADA FORZOSA: " + p + " no llegó a su destino ("
 							+ p.getParadaDestino().getDireccion() + ").");
+					gestorEstadisticas.registrarTransporte(p); // Registrar como transportado aunque bajó forzosamente
 				}
 			}
 		}
@@ -371,32 +393,54 @@ public List<String> ejecutarPasoDeSimulacion() {
      * los que quedaron esperando en paradas y los que bajaron forzosamente en la terminal.
      */
     public void imprimirReportePasajeros() {
-        int totalGenerados = pasajerosSimulados != null ? pasajerosSimulados.size() : 0;
-        int esperandoEnParada = 0;
-        int bajadosForzosamente = 0;
-        int nuncaSubieron = 0;
-        // Usar un Set para evitar contar la misma parada varias veces
+        // Usar el desglose de GestorEstadisticas para asegurar consistencia
+        if (gestorEstadisticas != null) {
+            var desglose = gestorEstadisticas.getDesglosePasajeros();
+            int totalGenerados = gestorEstadisticas.getPasajerosTotales();
+            int transportados = desglose.getOrDefault("transportados", 0);
+            int bajadosForzosamente = desglose.getOrDefault("bajadosForzosamente", 0);
+            int nuncaSubieron = desglose.getOrDefault("nuncaSubieron", 0);
+            int suma = transportados + bajadosForzosamente + nuncaSubieron;
+            System.out.println("\n--- Reporte de Pasajeros ---");
+            System.out.println("Total de pasajeros generados: " + totalGenerados);
+            System.out.println("Pasajeros transportados: " + transportados);
+            System.out.println("Pasajeros bajados forzosamente en terminal: " + bajadosForzosamente);
+            System.out.println("Pasajeros que nunca subieron a un colectivo: " + nuncaSubieron);
+            if (suma != totalGenerados) {
+                System.err.println("[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: " + suma + ", Total generados: " + totalGenerados);
+            }
+        } else {
+            System.out.println("[ERROR] No hay gestor de estadísticas disponible para el reporte de pasajeros.");
+        }
+    }
+
+    /**
+     * DEBUG: Imprime los IDs de los pasajeros esperando en cada parada y verifica duplicados.
+     * Quitar o comentar este método cuando no se necesite más debug.
+     */
+    public void imprimirDebugPasajerosEsperandoPorParada() {
+        System.out.println("\n--- DEBUG: Pasajeros esperando por parada ---");
+        Set<String> idsVistos = new HashSet<>();
+        boolean hayDuplicados = false;
         Set<Parada> paradasUnicas = new HashSet<>();
         for (Linea linea : lineasDisponibles.values()) {
             paradasUnicas.addAll(linea.getRecorrido());
         }
         for (Parada parada : paradasUnicas) {
-            esperandoEnParada += parada.cantidadPasajerosEsperando();
-        }
-        // Contar pasajeros que bajaron forzosamente o nunca subieron
-        if (pasajerosSimulados != null) {
-            for (Pasajero p : pasajerosSimulados) {
-                if (!p.isPudoSubir()) {
-                    nuncaSubieron++;
-                } else if (p.isBajadaForzosa()) {
-                    bajadosForzosamente++;
+            List<Pasajero> esperando = new ArrayList<>(parada.getPasajerosEsperando());
+            if (!esperando.isEmpty()) {
+                System.out.println("Parada " + parada.getId() + " (" + parada.getDireccion() + "):");
+                for (Pasajero p : esperando) {
+                    System.out.println("  - " + p.getId());
+                    if (!idsVistos.add(p.getId())) {
+                        System.out.println("    [DUPLICADO] El pasajero " + p.getId() + " ya fue listado en otra parada!");
+                        hayDuplicados = true;
+                    }
                 }
             }
         }
-        System.out.println("\n--- Reporte de Pasajeros ---");
-        System.out.println("Total de pasajeros generados: " + totalGenerados);
-        System.out.println("Pasajeros esperando en paradas: " + esperandoEnParada);
-        System.out.println("Pasajeros bajados forzosamente en terminal: " + bajadosForzosamente);
-        System.out.println("Pasajeros que nunca subieron a un colectivo: " + nuncaSubieron);
+        if (!hayDuplicados) {
+            System.out.println("No se detectaron pasajeros duplicados en las paradas.");
+        }
     }
 }

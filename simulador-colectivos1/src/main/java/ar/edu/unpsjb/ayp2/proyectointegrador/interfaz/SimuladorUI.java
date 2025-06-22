@@ -63,6 +63,7 @@ public class SimuladorUI {
                     System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
                     System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
                     ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
+                    ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
                     break;
                 case "3":
                     System.out.print("Ingrese ID de parada origen: ");
@@ -92,7 +93,10 @@ public class SimuladorUI {
                         System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
                     } else {
                         ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
-                        simulador.imprimirReportePasajeros();
+                        ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
+                        ReporteSimulacion.imprimirReportePasajeros(simulador);
+                        // DEBUG: Listar pasajeros esperando en cada parada y detectar duplicados
+                        simulador.imprimirDebugPasajerosEsperandoPorParada();
                     }
                     break;
                 case "0":
