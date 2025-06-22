@@ -44,6 +44,10 @@ public class SimuladorColectivosApp {
 
 			int capacidadColectivo = obtenerCapacidadColectivo(configProperties);
 			int capacidadSentadosColectivo = Integer.parseInt(configProperties.getProperty("capacidadSentadosColectivo", "0"));
+			if (capacidadSentadosColectivo > capacidadColectivo) {
+				System.err.println("Error: La capacidad de sentados no puede exceder la capacidad total del colectivo.");
+				return; // Termina la ejecución si la validación falla
+			}
 			int recorridosPorColectivo = Integer.parseInt(configProperties.getProperty("recorridos_por_colectivo", "1"));
 			int capacidadParados = capacidadColectivo - capacidadSentadosColectivo;
 
