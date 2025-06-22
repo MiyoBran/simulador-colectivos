@@ -1,0 +1,25 @@
+
+# This file is used to define attributes for paths in the repository.
+# It can be used to set text encoding, merge strategies, and other attributes.
+* text=auto
+# Set the default behavior to automatically detect text files
+# and convert line endings to the platform's native format.
+# For example, on Windows, it will convert LF to CRLF on checkout.
+# For more information, see: https://git-scm.com/docs/gitattributes
+# Set specific attributes for certain file types
+*.md text
+*.txt text
+*.json text
+*.xml text
+*.yml text
+*.yaml text
+*.html text
+*.css text
+*.js text
+*.ts text
+*.scss text
+*.sass text
+*.less text
+*.csv text
+*.log text
+*.conf text

@@ -3,10 +3,10 @@
 # .project, .classpath, y .settings/ PUEDEN ser versionados si todos usan m2e y la misma versión de IDE
 # ya que m2e los usa para la configuración específica del proyecto Maven.
 # Si decides ignorarlos, cada desarrollador debe reimportar los proyectos como "Existing Maven Projects".
-# Por ahora, los comentaré. Si ves que causan problemas de merge, puedes descomentarlos.
-# .project
-# .classpath
-# .settings/
+# Archivos de configuración de Eclipse
+.classpath
+.project
+.settings/
 
 .recommenders/
 RemoteSystemsTempFiles/
