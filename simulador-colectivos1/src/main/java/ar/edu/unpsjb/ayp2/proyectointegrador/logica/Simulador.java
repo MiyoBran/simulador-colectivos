@@ -109,6 +109,9 @@ public class Simulador {
             throw new IllegalArgumentException("Las capacidades, recorridos y cantidad de colectivos deben ser positivos.");
         }
         int frecuenciaMin = ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorConfig.obtenerFrecuenciaSalidaColectivosMinutos(this.configProperties);
+        if (frecuenciaMin <= 0) {
+            throw new IllegalArgumentException("La frecuencia mínima de salida de colectivos debe ser mayor a cero.");
+        }
         this.pasosPorFrecuencia = (int) Math.ceil(frecuenciaMin / 2.0);
         this.colectivosEnSimulacion.clear();
         int colectivoCounter = 1;
