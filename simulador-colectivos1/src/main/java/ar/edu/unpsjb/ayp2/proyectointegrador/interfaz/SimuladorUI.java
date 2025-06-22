@@ -95,37 +95,7 @@ public class SimuladorUI {
                         ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
                         ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
                         ReporteSimulacion.imprimirReportePasajeros(simulador);
-                        // --- OCUPACIÓN PROMEDIO DE COLECTIVOS (Anexo II) ---
-                        var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
-                        System.out.println("\n--- OCUPACIÓN PROMEDIO DE COLECTIVOS (Anexo II) ---");
-                        if (ocupaciones.isEmpty()) {
-                            System.out.println("No hay datos de ocupación registrados.");
-                        } else {
-                            // Ordenar por número de colectivo (C#-linea)
-                            var colectivosOrdenados = new ArrayList<>(simulador.getColectivosEnSimulacion());
-                            colectivosOrdenados.sort((a, b) -> {
-                                // Extraer número después de 'C' y antes de '-' para ordenar
-                                try {
-                                    int numA = Integer.parseInt(a.getIdColectivo().substring(1, a.getIdColectivo().indexOf('-')));
-                                    int numB = Integer.parseInt(b.getIdColectivo().substring(1, b.getIdColectivo().indexOf('-')));
-                                    return Integer.compare(numA, numB);
-                                } catch (Exception e) {
-                                    return a.getIdColectivo().compareTo(b.getIdColectivo());
-                                }
-                            });
-                            double suma = 0.0;
-                            int cantidad = 0;
-                            for (var colectivo : colectivosOrdenados) {
-                                Double ocup = ocupaciones.get(colectivo.getIdColectivo());
-                                if (ocup != null) {
-                                    System.out.printf("%s: %.2f%%\n", colectivo.getEtiqueta(), ocup * 100);
-                                    suma += ocup;
-                                    cantidad++;
-                                }
-                            }
-                            double promedioGeneral = cantidad > 0 ? (suma / cantidad) * 100 : 0.0;
-                            System.out.printf("\nOcupación promedio general de colectivos: %.2f%%\n", promedioGeneral);
-                        }
+                        ReporteSimulacion.imprimirOcupacionPromedioColectivos(simulador);
                         // DEBUG: Listar pasajeros esperando en cada parada y detectar duplicados
                         simulador.imprimirDebugPasajerosEsperandoPorParada();
                     }
