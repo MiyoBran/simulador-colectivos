@@ -22,15 +22,17 @@ public class Colectivo {
 	private int indiceParadaActualEnRecorrido; // Índice de la paradaActual en el recorrido de la línea
 
 	/** Capacidad máxima de pasajeros sentados en el colectivo. */
-    private int capacidadSentados;
-    /** Capacidad máxima de pasajeros de pie en el colectivo. */
-    private int capacidadParados;
-    /** Cantidad de recorridos que debe realizar este colectivo en la simulación. */
-    private int recorridosRestantes;
-    /** Estado del colectivo: EN_SERVICIO, FUERA_DE_SERVICIO, EN_ESPERA, etc. */
-    private String estado;
-    /** Tiempo (en minutos) hasta la próxima salida, útil para la simulación. */
-    private int tiempoHastaProximaSalida;
+	private final int capacidadSentados;
+	/** Capacidad máxima de pasajeros de pie en el colectivo. */
+	private final int capacidadParados;
+	/** Cantidad de recorridos que debe realizar este colectivo en la simulación. */
+	private int recorridosRestantes;
+	/** Estado del colectivo: EN_SERVICIO, FUERA_DE_SERVICIO, EN_ESPERA, etc. */
+	private String estado;
+	/** Tiempo (en minutos) hasta la próxima salida, útil para la simulación. */
+	private int tiempoHastaProximaSalida;
+	/** Paso de simulación en el que este colectivo puede salir de la terminal (según frecuencia de salida). */
+	private int pasoDeSalida = 0;
 
 	/**
 	 * Constructor para un Colectivo.
@@ -42,31 +44,42 @@ public class Colectivo {
 	 *                                  (e.g., id nulo, línea nula, capacidad
 	 *                                  negativa).
 	 */
-	public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima) {
+	public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima, int capacidadSentados,
+			int capacidadParados, int recorridosRestantes) {
 		if (idColectivo == null || idColectivo.trim().isEmpty()) {
 			throw new IllegalArgumentException("El ID del colectivo no puede ser nulo o vacío.");
 		}
 		if (lineaAsignada == null) {
 			throw new IllegalArgumentException("La línea asignada no puede ser nula.");
 		}
-		if (capacidadMaxima < 0) {
-			throw new IllegalArgumentException("La capacidad máxima no puede ser negativa.");
+		if (capacidadMaxima < 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes < 0) {
+			throw new IllegalArgumentException("Las capacidades y recorridos no pueden ser negativos.");
 		}
 
 		this.idColectivo = idColectivo;
 		this.lineaAsignada = lineaAsignada;
 		this.capacidadMaxima = capacidadMaxima;
+		this.capacidadSentados = capacidadSentados;
+		this.capacidadParados = capacidadParados;
+		this.recorridosRestantes = recorridosRestantes;
 		this.pasajerosABordo = new ArrayList<>();
 
-		// Inicializar paradaActual y su índice
+		// Initialize paradaActual and indiceParadaActualEnRecorrido as before
 		List<Parada> recorridoLinea = this.lineaAsignada.getRecorrido();
 		if (recorridoLinea != null && !recorridoLinea.isEmpty()) {
 			this.paradaActual = recorridoLinea.get(0);
 			this.indiceParadaActualEnRecorrido = 0;
 		} else {
-			this.paradaActual = null; // No hay recorrido, no hay parada actual
-			this.indiceParadaActualEnRecorrido = -1; // Indica que no está en un recorrido válido
+			this.paradaActual = null;
+			this.indiceParadaActualEnRecorrido = -1;
 		}
+	}
+
+	// Nuevo constructor para permitir setear pasoDeSalida
+	public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima, int capacidadSentados,
+			int capacidadParados, int recorridosRestantes, int pasoDeSalida) {
+		this(idColectivo, lineaAsignada, capacidadMaxima, capacidadSentados, capacidadParados, recorridosRestantes);
+		this.pasoDeSalida = pasoDeSalida;
 	}
 
 	// Getters
@@ -109,67 +122,75 @@ public class Colectivo {
 
 	/**
 	 * Devuelve la capacidad máxima de pasajeros sentados.
+	 * 
 	 * @return Capacidad de sentados.
 	 */
 	public int getCapacidadSentados() {
-        return capacidadSentados;
-    }
+		return capacidadSentados;
+	}
 
-    /**
-     * Devuelve la capacidad máxima de pasajeros de pie.
-     * @return Capacidad de parados.
-     */
-    public int getCapacidadParados() {
-        return capacidadParados;
-    }
+	/**
+	 * Devuelve la capacidad máxima de pasajeros de pie.
+	 * 
+	 * @return Capacidad de parados.
+	 */
+	public int getCapacidadParados() {
+		return capacidadParados;
+	}
 
-    /**
-     * Establece la cantidad de recorridos restantes para este colectivo.
-     * @param recorridosRestantes cantidad de recorridos.
-     */
-    public void setRecorridosRestantes(int recorridosRestantes) {
-        this.recorridosRestantes = recorridosRestantes;
-    }
+	/**
+	 * Establece la cantidad de recorridos restantes para este colectivo.
+	 * 
+	 * @param recorridosRestantes cantidad de recorridos.
+	 */
+	public void setRecorridosRestantes(int recorridosRestantes) {
+		this.recorridosRestantes = recorridosRestantes;
+	}
 
-    /**
-     * Devuelve la cantidad de recorridos restantes.
-     * @return recorridos restantes.
-     */
-    public int getRecorridosRestantes() {
-        return recorridosRestantes;
-    }
+	/**
+	 * Devuelve la cantidad de recorridos restantes.
+	 * 
+	 * @return recorridos restantes.
+	 */
+	public int getRecorridosRestantes() {
+		return recorridosRestantes;
+	}
 
-    /**
-     * Devuelve el estado actual del colectivo.
-     * @return estado.
-     */
-    public String getEstado() {
-        return estado;
-    }
+	/**
+	 * Devuelve el estado actual del colectivo.
+	 * 
+	 * @return estado.
+	 */
+	public String getEstado() {
+		return estado;
+	}
 
-    /**
-     * Establece el estado del colectivo.
-     * @param estado nuevo estado.
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+	/**
+	 * Establece el estado del colectivo.
+	 * 
+	 * @param estado nuevo estado.
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
-    /**
-     * Devuelve el tiempo hasta la próxima salida.
-     * @return tiempo en minutos.
-     */
-    public int getTiempoHastaProximaSalida() {
-        return tiempoHastaProximaSalida;
-    }
+	/**
+	 * Devuelve el tiempo hasta la próxima salida.
+	 * 
+	 * @return tiempo en minutos.
+	 */
+	public int getTiempoHastaProximaSalida() {
+		return tiempoHastaProximaSalida;
+	}
 
-    /**
-     * Establece el tiempo hasta la próxima salida.
-     * @param tiempo minutos hasta la próxima salida.
-     */
-    public void setTiempoHastaProximaSalida(int tiempo) {
-        this.tiempoHastaProximaSalida = tiempo;
-    }
+	/**
+	 * Establece el tiempo hasta la próxima salida.
+	 * 
+	 * @param tiempo minutos hasta la próxima salida.
+	 */
+	public void setTiempoHastaProximaSalida(int tiempo) {
+		this.tiempoHastaProximaSalida = tiempo;
+	}
 
 	/**
 	 * Intenta subir un pasajero al colectivo.
@@ -181,6 +202,13 @@ public class Colectivo {
 	public boolean subirPasajero(Pasajero pasajero) {
 		if (pasajero == null || getCapacidadDisponible() <= 0 || this.pasajerosABordo.contains(pasajero)) {
 			return false;
+		}
+	
+		// Determinar si viajó sentado o parado
+		if (getCantidadSentadosDisponibles() > 0) {
+        pasajero.setViajoSentado(true);
+		} else {
+        pasajero.setViajoSentado(false);
 		}
 		this.pasajerosABordo.add(pasajero);
 		return true;
@@ -256,4 +284,31 @@ public class Colectivo {
 	public int hashCode() {
 		return Objects.hash(idColectivo);
 	}
+
+	public int getPasoDeSalida() {
+		return pasoDeSalida;
+	}
+
+	public void setPasoDeSalida(int pasoDeSalida) {
+		this.pasoDeSalida = pasoDeSalida;
+	}
+
+	/**
+     * Devuelve la cantidad de asientos disponibles en el colectivo.
+     * Se asume que los primeros 'capacidadSentados' pasajeros van sentados.
+     */
+    public int getCantidadSentadosDisponibles() {
+        int ocupados = Math.min(pasajerosABordo.size(), capacidadSentados);
+        return capacidadSentados - ocupados;
+    }
+
+    /**
+     * Devuelve una etiqueta descriptiva del colectivo, incluyendo su ID y el nombre de la línea.
+     * Ejemplo: C3-1 (Línea 1 - Regreso)
+     *
+     * @return Etiqueta descriptiva del colectivo.
+     */
+    public String getEtiqueta() {
+        return idColectivo + " (" + lineaAsignada.getNombre() + ")";
+    }
 }

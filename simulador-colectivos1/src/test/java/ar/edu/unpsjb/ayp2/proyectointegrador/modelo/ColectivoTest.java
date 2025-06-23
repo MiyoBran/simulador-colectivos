@@ -42,8 +42,8 @@ class ColectivoTest {
         pax2 = new Pasajero("PAX2", p1, p3);
         pax3 = new Pasajero("PAX3", p2, p3);
 
-        // Colectivo SUT por defecto con capacidad para 2 pasajeros
-        colectivoSUT = new Colectivo("C01", lineaConRecorrido, 2);
+        // Colectivo SUT por defecto con capacidad para 2 pasajeros (1 sentado, 1 parado, 1 recorrido)
+        colectivoSUT = new Colectivo("C01", lineaConRecorrido, 2, 1, 1, 1);
     }
 
     // --- Pruebas de Constructor ---
@@ -53,6 +53,9 @@ class ColectivoTest {
         assertEquals("C01", colectivoSUT.getIdColectivo());
         assertSame(lineaConRecorrido, colectivoSUT.getLineaAsignada());
         assertEquals(2, colectivoSUT.getCapacidadMaxima());
+        assertEquals(1, colectivoSUT.getCapacidadSentados());
+        assertEquals(1, colectivoSUT.getCapacidadParados());
+        assertEquals(1, colectivoSUT.getRecorridosRestantes());
         assertTrue(colectivoSUT.getPasajerosABordo().isEmpty());
         assertEquals(p1, colectivoSUT.getParadaActual(), "Debería iniciar en la primera parada de la línea.");
         assertEquals(0, colectivoSUT.getIndiceParadaActualEnRecorrido());
@@ -61,7 +64,7 @@ class ColectivoTest {
     @Test
     @DisplayName("Constructor: debería inicializar correctamente con una línea sin recorrido")
     void testConstructorLineaSinRecorrido() {
-        Colectivo c = new Colectivo("C02", lineaSinRecorrido, 5);
+        Colectivo c = new Colectivo("C02", lineaSinRecorrido, 5, 3, 2, 1);
         assertNull(c.getParadaActual(), "Parada actual debería ser null si la línea no tiene recorrido.");
         assertEquals(-1, c.getIndiceParadaActualEnRecorrido(), "Índice debería ser -1 si no hay recorrido.");
     }
@@ -69,25 +72,38 @@ class ColectivoTest {
     @Test
     @DisplayName("Constructor: debería lanzar excepción si el ID es nulo")
     void testConstructorIdNuloLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Colectivo(null, lineaConRecorrido, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Colectivo(null, lineaConRecorrido, 5, 3, 2, 1));
     }
 
     @Test
     @DisplayName("Constructor: debería lanzar excepción si el ID está vacío")
     void testConstructorIdVacioLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Colectivo("   ", lineaConRecorrido, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Colectivo("   ", lineaConRecorrido, 5, 3, 2, 1));
     }
 
     @Test
     @DisplayName("Constructor: debería lanzar excepción si la línea es nula")
     void testConstructorLineaNulaLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Colectivo("C03", null, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Colectivo("C03", null, 5, 3, 2, 1));
     }
 
     @Test
     @DisplayName("Constructor: debería lanzar excepción si la capacidad es negativa")
     void testConstructorCapacidadNegativaLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Colectivo("C04", lineaConRecorrido, -1));
+        assertThrows(IllegalArgumentException.class, () -> new Colectivo("C04", lineaConRecorrido, -1, 0, 0, 1));
+    }
+
+    @Test
+    @DisplayName("Constructor: debería inicializar correctamente el pasoDeSalida por defecto (0)")
+    void testConstructorPasoDeSalidaPorDefecto() {
+        assertEquals(0, colectivoSUT.getPasoDeSalida(), "El pasoDeSalida por defecto debe ser 0");
+    }
+
+    @Test
+    @DisplayName("Constructor: debería inicializar correctamente el pasoDeSalida personalizado")
+    void testConstructorPasoDeSalidaPersonalizado() {
+        Colectivo c = new Colectivo("C10", lineaConRecorrido, 10, 5, 5, 2, 7);
+        assertEquals(7, c.getPasoDeSalida(), "El pasoDeSalida debe ser el valor pasado por parámetro");
     }
 
     // --- Pruebas de Gestión de Pasajeros ---
@@ -203,7 +219,7 @@ class ColectivoTest {
     @DisplayName("Movimiento: no debería avanzar si la línea no tiene recorrido")
     void testAvanzarSinRecorrido() {
         // CORRECCIÓN: Se adapta al método void.
-        Colectivo cSinRecorrido = new Colectivo("CSR", lineaSinRecorrido, 5);
+        Colectivo cSinRecorrido = new Colectivo("CSR", lineaSinRecorrido, 5, 3, 2, 1);
         assertTrue(cSinRecorrido.estaEnTerminal());
         
         cSinRecorrido.avanzarAProximaParada();
@@ -225,7 +241,7 @@ class ColectivoTest {
     @Test
     @DisplayName("Estado: debería considerarse en terminal si la línea no tiene recorrido")
     void testEstaEnTerminalLineaSinRecorrido() {
-        Colectivo c = new Colectivo("C05", lineaSinRecorrido, 5);
+        Colectivo c = new Colectivo("C05", lineaSinRecorrido, 5, 3, 2, 1);
         assertTrue(c.estaEnTerminal());
     }
 
@@ -233,9 +249,9 @@ class ColectivoTest {
     @Test
     @DisplayName("Equals/HashCode: deberían basarse únicamente en el ID del colectivo")
     void testEqualsYHashCode() {
-        Colectivo c1 = new Colectivo("ID-COLECTIVO", lineaConRecorrido, 5);
-        Colectivo c2 = new Colectivo("ID-COLECTIVO", lineaSinRecorrido, 10);
-        Colectivo c3 = new Colectivo("ID-OTRO", lineaConRecorrido, 5);
+        Colectivo c1 = new Colectivo("ID-COLECTIVO", lineaConRecorrido, 5, 3, 2, 1);
+        Colectivo c2 = new Colectivo("ID-COLECTIVO", lineaSinRecorrido, 10, 7, 3, 1);
+        Colectivo c3 = new Colectivo("ID-OTRO", lineaConRecorrido, 5, 3, 2, 1);
 
         assertEquals(c1, c2);
         assertEquals(c1.hashCode(), c2.hashCode());
@@ -251,5 +267,14 @@ class ColectivoTest {
         assertTrue(str.contains("capacidadMaxima=2"));
         assertTrue(str.contains(lineaConRecorrido.getId()));
         assertTrue(str.contains(p1.getId()));
+    }
+
+    @Test
+    @DisplayName("getEtiqueta: debería devolver la etiqueta descriptiva correcta")
+    void testGetEtiqueta() {
+        Colectivo c = new Colectivo("C10-LCR", lineaConRecorrido, 10, 5, 5, 2);
+        assertEquals("C10-LCR (Linea Con Recorrido)", c.getEtiqueta(), "La etiqueta debe incluir el id y el nombre de la línea");
+        Colectivo c2 = new Colectivo("C2-LSR", lineaSinRecorrido, 8, 4, 4, 1);
+        assertEquals("C2-LSR (Linea Sin Recorrido)", c2.getEtiqueta(), "La etiqueta debe funcionar también para líneas sin recorrido");
     }
 }

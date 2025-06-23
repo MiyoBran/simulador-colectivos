@@ -89,6 +89,50 @@ class PasajeroTest {
     }
 
     @Test
+    @DisplayName("Estado: debería gestionar correctamente atributos avanzados de simulación")
+    void manejoDeAtributosAvanzados() {
+        Pasajero pasajero = new Pasajero(p1, p2);
+        // Métodos avanzados eliminados del modelo actual:
+        // pasajero.agregarTiempoEspera(5);
+        // assertEquals(5, pasajero.getTiempoEspera());
+        // pasajero.agregarTiempoEspera(3);
+        // assertEquals(8, pasajero.getTiempoEspera());
+        // pasajero.agregarColectivoObservado("C01");
+        // pasajero.agregarColectivoObservado("C02");
+        // assertEquals(2, pasajero.getColectivosObservados().size());
+        // assertTrue(pasajero.getColectivosObservados().contains("C01"));
+        // pasajero.agregarTiempoViaje(7);
+        // assertEquals(7, pasajero.getTiempoViaje());
+        // pasajero.agregarTiempoViaje(2);
+        // assertEquals(9, pasajero.getTiempoViaje());
+        // Bajada forzosa
+        assertFalse(pasajero.isBajadaForzosa());
+        pasajero.setBajadaForzosa(true);
+        assertTrue(pasajero.isBajadaForzosa());
+    }
+
+    @Test
+    @DisplayName("Satisfacción: debería calcular correctamente el índice de satisfacción")
+    void calcularSatisfaccion() {
+        Pasajero pasajero = new Pasajero(p1, p2);
+        // Caso ideal
+        pasajero.setPudoSubir(true);
+        pasajero.setViajoSentado(true);
+        // pasajero.setSubioAlPrimerColectivoQuePaso(true); // Método no disponible
+        assertEquals(5, pasajero.calcularSatisfaccion());
+        // Caso con espera y viaje largo
+        pasajero.resetearEstadoViaje();
+        pasajero.setPudoSubir(true);
+        pasajero.setViajoSentado(false);
+        // pasajero.setSubioAlPrimerColectivoQuePaso(false); // Método no disponible
+        pasajero.incrementarColectivosEsperados();
+        assertEquals(3, pasajero.calcularSatisfaccion());
+        // Caso no pudo subir
+        pasajero.resetearEstadoViaje();
+        assertEquals(1, pasajero.calcularSatisfaccion());
+    }
+
+    @Test
     @DisplayName("Equals/HashCode: deberían basarse únicamente en el ID del pasajero")
     void pasajerosConMismoIdSonIguales() {
         Pasajero pas1 = new Pasajero("ID_IGUAL", p1, p2);

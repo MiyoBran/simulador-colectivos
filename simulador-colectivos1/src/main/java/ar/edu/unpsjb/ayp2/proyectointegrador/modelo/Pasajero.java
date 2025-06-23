@@ -1,7 +1,6 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -25,18 +24,45 @@ public class Pasajero {
 
 	// Atributos para Incremento 2 (Índice de Satisfacción)
 	private int colectivosEsperados; // Cuántos colectivos llenos pasaron antes de poder subir
-	private boolean subioAlPrimerColectivoQuePaso; // Si subió al primer colectivo que llegó (no necesariamente el
+	//private boolean subioAlPrimerColectivoQuePaso; // Si subió al primer colectivo que llegó (no necesariamente el
 													// primero que esperaba si hubo llenos)
 	private boolean viajoSentado; // Simplificación, se podría determinar de otra forma
-	private boolean pudoSubir; // Si finalmente logró subir a algún colectivo
+	private boolean pudoSubir ; // Si finalmente logró subir a algún colectivo
+
+	// Indica si el pasajero fue bajado forzosamente en la terminal (no llegó a su destino)
+	private boolean bajadaForzosa = false;
 
 	// Incremento 2: atributos para simulación avanzada
 	/** Tiempo total de espera en minutos antes de abordar un colectivo. */
-	private int tiempoEspera;
+	//private int tiempoEspera;
 	/** Lista de IDs de colectivos observados mientras esperaba. */
-	private List<String> colectivosObservados;
+	//private List<String> colectivosObservados;
 	/** Tiempo total de viaje en minutos. */
-	private int tiempoViaje;
+	//private int tiempoViaje;
+
+	// --- GETTERS Y SETTERS ---
+    // Satisfacción del pasajero (1-5)
+    private int satisfaccion;
+    public void setSatisfaccion(int valor) {
+        this.satisfaccion = valor;
+    }
+    public int getSatisfaccion() {
+        return this.satisfaccion;
+    }
+    /*
+	// --- Métodos para tiempo de espera y viaje (en minutos, cada paso de simulación equivale a 2 minutos) ---
+    public int getTiempoEspera() {
+        return this.tiempoEspera;
+    }
+    public void setTiempoEspera(int minutos) {
+        this.tiempoEspera = minutos;
+    }
+    public int getTiempoViaje() {
+        return this.tiempoViaje;
+    }
+    public void setTiempoViaje(int minutos) {
+        this.tiempoViaje = minutos;
+    }*/
 
 	/**
 	 * Constructor para crear un pasajero con un ID aleatorio.
@@ -77,17 +103,16 @@ public class Pasajero {
 
 		// Inicialización para Incremento 2
 		this.colectivosEsperados = 0;
-		this.subioAlPrimerColectivoQuePaso = false;
+		//this.subioAlPrimerColectivoQuePaso = false;
 		this.viajoSentado = false;
 		this.pudoSubir = false;
 
 		// Inicialización para simulación avanzada
-		this.tiempoEspera = 0;
-		this.colectivosObservados = new ArrayList<>();
-		this.tiempoViaje = 0;
+		//this.tiempoEspera = 0;
+		//this.colectivosObservados = new ArrayList<>();
+		//this.tiempoViaje = 0;
 	}
 
-	// --- GETTERS Y SETTERS ---
 	public String getId() {
 		return id;
 	}
@@ -108,13 +133,13 @@ public class Pasajero {
 		this.colectivosEsperados++;
 	}
 
-	public boolean isSubioAlPrimerColectivoQuePaso() {
+	/*public boolean isSubioAlPrimerColectivoQuePaso() {
 		return subioAlPrimerColectivoQuePaso;
 	}
 
 	public void setSubioAlPrimerColectivoQuePaso(boolean subioAlPrimerColectivoQuePaso) {
 		this.subioAlPrimerColectivoQuePaso = subioAlPrimerColectivoQuePaso;
-	}
+	}*/
 
 	public boolean isViajoSentado() {
 		return viajoSentado;
@@ -132,20 +157,18 @@ public class Pasajero {
 		this.pudoSubir = pudoSubir;
 	}
 
-	/**
-	 * Devuelve el tiempo total de espera del pasajero.
-	 * 
-	 * @return tiempo de espera en minutos.
-	 */
-	public int getTiempoEspera() {
-		return tiempoEspera;
+	public boolean isBajadaForzosa() {
+		return bajadaForzosa;
+	}
+	public void setBajadaForzosa(boolean valor) {
+		this.bajadaForzosa = valor;
 	}
 
 	/**
 	 * Suma minutos al tiempo de espera del pasajero.
 	 * 
 	 * @param minutos minutos a sumar.
-	 */
+	 
 	public void agregarTiempoEspera(int minutos) {
 		this.tiempoEspera += minutos;
 	}
@@ -155,7 +178,7 @@ public class Pasajero {
 	 * 
 	 * @return lista de IDs.
 	 */
-	public List<String> getColectivosObservados() {
+	/*public List<String> getColectivosObservados() {
 		return new ArrayList<>(colectivosObservados);
 	}
 
@@ -163,25 +186,16 @@ public class Pasajero {
 	 * Agrega un colectivo observado a la lista.
 	 * 
 	 * @param idColectivo ID del colectivo observado.
-	 */
+	 
 	public void agregarColectivoObservado(String idColectivo) {
 		this.colectivosObservados.add(idColectivo);
-	}
-
-	/**
-	 * Devuelve el tiempo total de viaje del pasajero.
-	 * 
-	 * @return tiempo de viaje en minutos.
-	 */
-	public int getTiempoViaje() {
-		return tiempoViaje;
 	}
 
 	/**
 	 * Suma minutos al tiempo de viaje del pasajero.
 	 * 
 	 * @param minutos minutos a sumar.
-	 */
+	 
 	public void agregarTiempoViaje(int minutos) {
 		this.tiempoViaje += minutos;
 	}
@@ -192,20 +206,28 @@ public class Pasajero {
 	 * @return valor de satisfacción (0-100).
 	 */
 	public int calcularSatisfaccion() {
-		int satisfaccion = 100;
+		int satisfaccion=this.satisfaccion;
 		if (!pudoSubir) {
-			satisfaccion = 0;
+			satisfaccion = 1;
 		} else {
-			satisfaccion -= colectivosEsperados * 10;
-			if (!viajoSentado)
-				satisfaccion -= 15;
-			if (!subioAlPrimerColectivoQuePaso)
-				satisfaccion -= 10;
-			satisfaccion -= tiempoEspera / 2;
-			satisfaccion -= tiempoViaje / 3;
-			if (satisfaccion < 0)
-				satisfaccion = 0;
-		}
+			switch (colectivosEsperados) {
+				case 0:
+					if (viajoSentado) {
+						satisfaccion = 5; // Subió al primer colectivo y viajó sentado
+					} else {
+						satisfaccion = 4; // Subió al primer colectivo pero no viajó sentado
+					}
+					break;
+				case 1:
+					satisfaccion = 3; // Esperó un colectivo
+					break;
+				default:
+					satisfaccion = 2; // Esperó dos o mas colectivos
+					break;
+			
+			}
+		
+	}
 		return satisfaccion;
 	}
 
@@ -215,13 +237,13 @@ public class Pasajero {
 	 */
 	public void resetearEstadoViaje() {
 		this.colectivosEsperados = 0;
-		this.subioAlPrimerColectivoQuePaso = false;
+		//this.subioAlPrimerColectivoQuePaso = false;
 		this.viajoSentado = false;
 		this.pudoSubir = false;
 
-		this.tiempoEspera = 0;
-		this.colectivosObservados.clear();
-		this.tiempoViaje = 0;
+		//this.tiempoEspera = 0;
+		//this.colectivosObservados.clear();
+		//this.tiempoViaje = 0;
 	}
 
 	// --- MÉTODOS DE OBJECT ---

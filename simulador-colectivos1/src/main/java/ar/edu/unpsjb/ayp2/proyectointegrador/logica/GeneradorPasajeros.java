@@ -29,6 +29,7 @@ public class GeneradorPasajeros {
 	// se usa
 	private final Random random;
 	private final int cantidadPasajerosAGenerar;
+	private final GestorEstadisticas gestorEstadisticas;
 
 	/**
 	 * Constructor principal para el generador de pasajeros.
@@ -37,12 +38,14 @@ public class GeneradorPasajeros {
 	 * @param paradas          Un mapa de paradas disponibles cargadas.
 	 * @param configProperties Las propiedades de configuración (debe incluir
 	 *                         "cantidadPasajeros").
+	 * @param gestorEstadisticas El gestor de estadísticas donde se registrarán los
+	 *                          pasajeros generados.
 	 * @throws IllegalArgumentException si los mapas o propiedades son nulos o están
 	 *                                  vacíos, o si la propiedad
 	 *                                  'cantidadPasajeros' falta, está vacía, o no
 	 *                                  es un número positivo.
 	 */
-	public GeneradorPasajeros(Map<String, Linea> lineas, Map<String, Parada> paradas, Properties configProperties) {
+	public GeneradorPasajeros(Map<String, Linea> lineas, Map<String, Parada> paradas, Properties configProperties, GestorEstadisticas gestorEstadisticas) {
 		if (lineas == null || lineas.isEmpty()) {
 			throw new IllegalArgumentException("Las líneas disponibles no pueden ser nulas o vacías.");
 		}
@@ -52,11 +55,13 @@ public class GeneradorPasajeros {
 		if (configProperties == null) {
 			throw new IllegalArgumentException("Las propiedades de configuración no pueden ser nulas.");
 		}
-
+		if (gestorEstadisticas == null) {
+			throw new IllegalArgumentException("El gestor de estadísticas no puede ser nulo.");
+		}
 		this.lineasDisponibles = lineas;
-		// this.paradasDisponibles = paradas; // Eliminada porque no se usa
 		this.random = new Random();
 		this.cantidadPasajerosAGenerar = leerCantidadPasajeros(configProperties);
+		this.gestorEstadisticas = gestorEstadisticas;
 	}
 
 	/**
@@ -97,6 +102,7 @@ public class GeneradorPasajeros {
 
 			// Asignar el pasajero a la cola de espera de su parada de origen.
 			paradaOrigen.agregarPasajero(nuevoPasajero);
+			gestorEstadisticas.registrarPasajero(nuevoPasajero);
 		}
 		return pasajerosGenerados;
 	}

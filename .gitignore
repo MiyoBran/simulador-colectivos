@@ -4,9 +4,9 @@
 # ya que m2e los usa para la configuración específica del proyecto Maven.
 # Si decides ignorarlos, cada desarrollador debe reimportar los proyectos como "Existing Maven Projects".
 # Por ahora, los comentaré. Si ves que causan problemas de merge, puedes descomentarlos.
-# .project
-# .classpath
-# .settings/
+.project
+.classpath
+.settings/
 
 .recommenders/
 RemoteSystemsTempFiles/

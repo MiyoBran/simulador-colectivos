@@ -1,9 +1,0 @@
-L01;Linea Test Valida 1;P01,P02,P03
-L02;Linea Test Valida 2;P03,P01
-L01;Linea Test Valida 1;P02,P03
-L03;Linea Formato Incorrecto
-L04;Linea Parada Inexistente;P01,P99,P02
-L05;Linea Recorrido Vacio;
-;Linea ID Vacio;P01
-L07;;P01,P02
-L08;Linea OK con Parada P09;P09

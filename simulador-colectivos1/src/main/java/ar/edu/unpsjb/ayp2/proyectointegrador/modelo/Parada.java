@@ -98,6 +98,10 @@ public class Parada {
 		}
 		this.pasajerosEsperando.offer(pasajero);
 	}
+	
+	public Pasajero peekSiguientePasajero() {
+		return this.pasajerosEsperando.peek();
+	}
 
 	/**
 	 * Remueve y devuelve el siguiente pasajero de la cola de espera.
@@ -190,6 +194,15 @@ public class Parada {
 	 */
 	public int getColectivosPasados() {
 		return colectivosPasados;
+	}
+
+	/**
+	 * Devuelve la cola de pasajeros esperando en la parada.
+	 * 
+	 * @return cola de pasajeros.
+	 */
+	public Queue<Pasajero> getPasajerosEsperando() {
+		return pasajerosEsperando;
 	}
 
 	@Override
