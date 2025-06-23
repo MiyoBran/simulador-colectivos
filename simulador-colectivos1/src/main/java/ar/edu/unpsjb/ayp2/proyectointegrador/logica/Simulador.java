@@ -276,8 +276,7 @@ public List<String> ejecutarPasoDeSimulacion() {
 
 		procesarBajadaPasajeros(colectivo, paradaActual, eventos);
 		procesarSubidaPasajeros(colectivo, paradaActual, eventos);
-		
-
+	    
 		// MARCAR para avanzar en el próximo paso (NO avanzar ahora)
 		if (!colectivo.estaEnTerminal()) {
 			colectivosPendientesDeAvanzar.add(colectivo.getIdColectivo());
@@ -299,8 +298,10 @@ public List<String> ejecutarPasoDeSimulacion() {
 			
 			}
 		}
-		
+	
+
 	}
+	
 
 	/**
 	 * Procesa la lógica de subida de pasajeros en la parada actual del colectivo.
@@ -356,8 +357,8 @@ public List<String> ejecutarPasoDeSimulacion() {
 		String paradaInfo = (paradaFinal != null) ? paradaFinal.getDireccion() + " (ID: " + paradaFinal.getId() + ")"
 				: "N/A (Recorrido Vacío)";
 		eventos.add("Colectivo " + colectivo.getIdColectivo() + " de la línea "
-				+ colectivo.getLineaAsignada().getNombre() + " ha finalizado su recorrido en: " + paradaInfo);
-
+				+ colectivo.getLineaAsignada().getNombre() + " ha finalizado su recorrido "+colectivo.getRecorridoActual()+" en: " + paradaInfo);
+		colectivo.resRecorridosRestantes();
 		if (colectivo.getCantidadPasajerosABordo() > 0) {
 			eventos.add("  Procesando pasajeros en la parada terminal...");
 			List<Pasajero> pasajerosCopia = new ArrayList<>(colectivo.getPasajerosABordo());
@@ -377,7 +378,18 @@ public List<String> ejecutarPasoDeSimulacion() {
 				}
 			}
 		}
-	}
+		
+		if(colectivo.getRecorridosRestantes() > 0) {
+			// Si el colectivo tiene más recorridos, reiniciar su estado para el próximo recorrido
+			colectivo.reiniciarParaNuevoRecorrido();
+			eventos.add("  Colectivo " + colectivo.getIdColectivo() + " reiniciado para un nuevo recorrido.");
+			colectivosPendientesDeAvanzar.add(colectivo.getIdColectivo()); // Marcar para avanzar en el próximo paso
+		} else {
+			eventos.add("  Colectivo " + colectivo.getIdColectivo() + " ha finalizado todos sus recorridos.");
+		}
+		
+		}
+
 
 	public List<Colectivo> getColectivosEnSimulacion() {
 		return new ArrayList<>(this.colectivosEnSimulacion);
