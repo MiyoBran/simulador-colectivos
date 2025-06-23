@@ -39,8 +39,13 @@ public class SimuladorController {
             int capacidadSentadosColectivo = SimuladorConfig.obtenerCapacidadSentadosColectivo(configProperties);
             int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
             int capacidadParados = capacidadColectivo - capacidadSentadosColectivo;
-            //int cantidadColectivosPorLinea = SimuladorConfig.obtenerCantidadColectivosSimultaneosPorLinea(configProperties);
+            int cantidadColectivosPorLinea = SimuladorConfig.obtenerCantidadColectivosSimultaneosPorLinea(configProperties);
+            // Inicializar colectivos con la nueva lógica
             simulador.inicializarColectivos(capacidadColectivo, capacidadSentadosColectivo, capacidadParados, recorridosPorColectivo);
+            // La lógica de inicialización de colectivos ahora incluye la cantidad de colectivos por línea
+            //simulador.inicializarColectivos(capacidadColectivo, capacidadSentadosColectivo, capacidadParados, capacidadParados, cantidadColectivosPorLinea);
+            // Constructor que tiene cantidad de colectivos por línea y recorridos por colectivo
+            
         } catch (java.io.IOException e) {
             System.err.println("Error al cargar archivos de datos: " + e.getMessage());
             throw new RuntimeException(e);
