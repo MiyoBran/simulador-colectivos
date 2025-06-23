@@ -22,9 +22,9 @@ public class Colectivo {
 	private int indiceParadaActualEnRecorrido; // Índice de la paradaActual en el recorrido de la línea
 
 	/** Capacidad máxima de pasajeros sentados en el colectivo. */
-	private int capacidadSentados;
+	private final int capacidadSentados;
 	/** Capacidad máxima de pasajeros de pie en el colectivo. */
-	private int capacidadParados;
+	private final int capacidadParados;
 	/** Cantidad de recorridos que debe realizar este colectivo en la simulación. */
 	private int recorridosRestantes;
 	/** Estado del colectivo: EN_SERVICIO, FUERA_DE_SERVICIO, EN_ESPERA, etc. */
@@ -202,6 +202,13 @@ public class Colectivo {
 	public boolean subirPasajero(Pasajero pasajero) {
 		if (pasajero == null || getCapacidadDisponible() <= 0 || this.pasajerosABordo.contains(pasajero)) {
 			return false;
+		}
+	
+		// Determinar si viajó sentado o parado
+		if (getCantidadSentadosDisponibles() > 0) {
+        pasajero.setViajoSentado(true);
+		} else {
+        pasajero.setViajoSentado(false);
 		}
 		this.pasajerosABordo.add(pasajero);
 		return true;

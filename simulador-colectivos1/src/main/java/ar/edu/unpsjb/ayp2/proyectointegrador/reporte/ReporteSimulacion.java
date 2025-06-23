@@ -3,6 +3,7 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.reporte;
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.Simulador;
 
 public class ReporteSimulacion {
+	
 	public static void imprimirEstadisticasCompletas(Simulador simulador) {
 		System.out.println("\n--- Estadísticas de Satisfacción (Anexo I) ---");
 		System.out.println(String.format("Índice de satisfacción: %.2f", simulador.getGestorEstadisticas().getIndiceSatisfaccion()));
@@ -64,7 +65,7 @@ public class ReporteSimulacion {
 			totalCalificaciones += count;
 		}
 		if (totalCalificaciones > 0) {
-			double promedioEscala100 = calculoPromedio / totalCalificaciones * 20; // 1-5 mapped to 20-100
+			double promedioEscala100 = calculoPromedio / totalCalificaciones * 20; // 1-5 scaled to 20-100
 			if (Math.abs(promedioEscala100 - satisfaccionPromedio) > 1.0) {
 				System.err.println("[ADVERTENCIA] La satisfacción promedio calculada no coincide con la reportada.");
 			}

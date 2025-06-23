@@ -98,6 +98,10 @@ public class Parada {
 		}
 		this.pasajerosEsperando.offer(pasajero);
 	}
+	
+	public Pasajero peekSiguientePasajero() {
+		return this.pasajerosEsperando.peek();
+	}
 
 	/**
 	 * Remueve y devuelve el siguiente pasajero de la cola de espera.

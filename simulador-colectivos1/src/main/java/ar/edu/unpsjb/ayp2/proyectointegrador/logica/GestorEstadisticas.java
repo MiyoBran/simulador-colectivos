@@ -29,7 +29,9 @@ public class GestorEstadisticas {
     private Map<String, Integer> ocupacionPorColectivo;
 
     // Para índice de satisfacción (Anexo I)
-    private final Map<Integer, Integer> conteoCalificaciones; // calificación (1-5) -> cantidad
+   
+    private Map<Integer, Integer> conteoCalificaciones; // calificación (1-5) -> cantidad
+  
     private int sumaCalificaciones;
     private int totalPasajerosCalificados;
 
@@ -71,20 +73,21 @@ public class GestorEstadisticas {
 
     /** Registrar que un pasajero fue transportado. */
     public void registrarTransporte(Pasajero p) {
+    	
         pasajerosTransportados++;
-        sumaTiemposEspera += p.getTiempoEspera();
-        sumaTiemposViaje += p.getTiempoViaje();
+       // sumaTiemposEspera += p.getTiempoEspera();
+       //sumaTiemposViaje += p.getTiempoViaje();
         int satisfaccion = p.calcularSatisfaccion();
         sumaSatisfaccion += satisfaccion;
-        if (satisfaccion >= 60) {
+        if (satisfaccion >= 3) {
             pasajerosSatisfechos++;
         } else {
             pasajerosInsatisfechos++;
         }
         // --- NUEVO: Actualizar desglose de calificaciones y stats de satisfacción ---
-        int calificacion = mapSatisfaccionToCalificacion(satisfaccion);
-        conteoCalificaciones.put(calificacion, conteoCalificaciones.getOrDefault(calificacion, 0) + 1);
-        sumaCalificaciones += calificacion;
+        //int calificacion = mapSatisfaccionToCalificacion(satisfaccion);
+        conteoCalificaciones.put(satisfaccion, conteoCalificaciones.getOrDefault(satisfaccion, 0)+ 1);
+        sumaCalificaciones += satisfaccion * 20; // Mapeo directo de 1-5 a 20-100
         totalPasajerosCalificados++;
     }
 
@@ -109,9 +112,9 @@ public class GestorEstadisticas {
 
     /** Calcular la satisfacción promedio de los pasajeros transportados. */
     public double getSatisfaccionPromedio() {
-        // Ahora se calcula como el promedio de calificaciones (1-5) * 20 para escalar a 0-100
+        // Ahora se calcula como el promedio de calificaciones (1-5) 
         if (pasajerosTransportados == 0 || totalPasajerosCalificados == 0) return 0;
-        return ((double) sumaCalificaciones / totalPasajerosCalificados) * 20;
+        return ((double) sumaCalificaciones / totalPasajerosCalificados);
     }
 
     /** Obtener el porcentaje de pasajeros satisfechos. */
