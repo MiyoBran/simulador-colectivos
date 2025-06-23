@@ -15,10 +15,12 @@ import java.util.*;
  * encarga de la carga de datos, configuración de la simulación y la interacción
  * con el usuario a través de un menú por consola.
  * 
- * @author MiyoBran
+ * @author Miyo
+ * @author Enzo
  * @version 1.0
  */
 public class SimuladorColectivosApp {
+
     public static void main(String[] args) {
         SimuladorController controller = new SimuladorController();
         SimuladorUI ui = new SimuladorUI(controller);
@@ -76,4 +78,5 @@ public class SimuladorColectivosApp {
         return null;
     }
     
+
 }

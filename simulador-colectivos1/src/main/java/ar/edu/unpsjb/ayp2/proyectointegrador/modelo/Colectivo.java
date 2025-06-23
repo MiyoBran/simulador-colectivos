@@ -10,19 +10,22 @@ import java.util.Objects;
  * capacidad y su posición actual dentro del recorrido de la línea asignada.
  *
  * @author Miyo
- * @version 2.1
+ * @author Enzo
+ * @version 2.5
  * 
  */
 public class Colectivo {
+	// Todo: Documentar el uso de los atributos y métodos
+	// --- CONSTANTES ---
 	private String idColectivo;
 	private Linea lineaAsignada;
 	private int capacidadMaxima;
 	private List<Pasajero> pasajerosABordo;
 	private Parada paradaActual;
 	private int indiceParadaActualEnRecorrido;// Índice de la paradaActual en el recorrido de la línea
-	private int recorridoActual = 1;
-	
-	private int cantidadPasajerosSentados = 0;
+	private int recorridoActual = 1; // Contador de recorridos realizados por el colectivo
+
+	private int cantidadPasajerosSentados = 0; // Cantidad de pasajeros sentados actualmente a bordo
 
 	/** Capacidad máxima de pasajeros sentados en el colectivo. */
 	private final int capacidadSentados;
@@ -34,7 +37,10 @@ public class Colectivo {
 	private String estado;
 	/** Tiempo (en minutos) hasta la próxima salida, útil para la simulación. */
 	private int tiempoHastaProximaSalida;
-	/** Paso de simulación en el que este colectivo puede salir de la terminal (según frecuencia de salida). */
+	/**
+	 * Paso de simulación en el que este colectivo puede salir de la terminal (según
+	 * frecuencia de salida).
+	 */
 	private int pasoDeSalida = 0;
 
 	/**
@@ -65,7 +71,7 @@ public class Colectivo {
 		this.capacidadSentados = capacidadSentados;
 		this.capacidadParados = capacidadParados;
 		this.recorridosRestantes = recorridosRestantes;
-	
+
 		this.pasajerosABordo = new ArrayList<>();
 
 		// Initialize paradaActual and indiceParadaActualEnRecorrido as before
@@ -91,10 +97,20 @@ public class Colectivo {
 		return idColectivo;
 	}
 
+	/**
+	 * Devuelve la línea asignada a este colectivo.
+	 * 
+	 * @return Línea asignada.
+	 */
 	public Linea getLineaAsignada() {
 		return lineaAsignada;
 	}
 
+	/**
+	 * Devuelve la capacidad máxima del colectivo.
+	 * 
+	 * @return Capacidad máxima de pasajeros.
+	 */
 	public int getCapacidadMaxima() {
 		return capacidadMaxima;
 	}
@@ -120,6 +136,12 @@ public class Colectivo {
 		return this.pasajerosABordo.size();
 	}
 
+	/**
+	 * Devuelve la cantidad total de pasajeros a bordo, incluyendo sentados y de
+	 * pie.
+	 * 
+	 * @return Cantidad total de pasajeros a bordo.
+	 */
 	public int getCapacidadDisponible() {
 		return this.capacidadMaxima - getCantidadPasajerosABordo();
 	}
@@ -151,15 +173,17 @@ public class Colectivo {
 		this.recorridoActual++;
 		this.recorridosRestantes--;
 	}
-    
+
 	public int getRecorridoActual() {
 		return recorridoActual;
-		
+
 	}
+
 	public void reiniciarParaNuevoRecorrido() {
 		this.indiceParadaActualEnRecorrido = 0;
 		this.paradaActual = this.lineaAsignada.getRecorrido().get(this.indiceParadaActualEnRecorrido);
 	}
+
 	/**
 	 * Devuelve la cantidad de recorridos restantes.
 	 * 
@@ -216,15 +240,14 @@ public class Colectivo {
 		if (pasajero == null || getCapacidadDisponible() <= 0 || this.pasajerosABordo.contains(pasajero)) {
 			return false;
 		}
-	
-		
+		// Verifica si el pasajero puede viajar sentado o de pie.
 		if (cantidadPasajerosSentados < capacidadSentados) {
-        pasajero.setViajoSentado(true);
-        cantidadPasajerosSentados++;
-		} 
+			pasajero.setViajoSentado(true);
+			cantidadPasajerosSentados++;
+		}
 		this.pasajerosABordo.add(pasajero);
 		return true;
-		
+
 	}
 
 	/**
@@ -238,9 +261,10 @@ public class Colectivo {
 		if (pasajero == null) {
 			return false;
 		}
+		// Verifica si el pasajero viajo sentado y ajusta la cantidad de sentados.
 		if (pasajero.isViajoSentado()) {
-	        cantidadPasajerosSentados--;
-		} 
+			cantidadPasajerosSentados--;
+		}
 		return this.pasajerosABordo.remove(pasajero);
 	}
 
@@ -310,21 +334,21 @@ public class Colectivo {
 	}
 
 	/**
-     * Devuelve la cantidad de asientos disponibles en el colectivo.
-     * Se asume que los primeros 'capacidadSentados' pasajeros van sentados.
-     */
-    public int getCantidadSentadosDisponibles() {
-        int ocupados = Math.min(pasajerosABordo.size(), capacidadSentados);
-        return capacidadSentados - ocupados;
-    }
+	 * Devuelve la cantidad de asientos disponibles en el colectivo. Se asume que
+	 * los primeros 'capacidadSentados' pasajeros van sentados.
+	 */
+	public int getCantidadSentadosDisponibles() {
+		int ocupados = Math.min(pasajerosABordo.size(), capacidadSentados);
+		return capacidadSentados - ocupados;
+	}
 
-    /**
-     * Devuelve una etiqueta descriptiva del colectivo, incluyendo su ID y el nombre de la línea.
-     * Ejemplo: C3-1 (Línea 1 - Regreso)
-     *
-     * @return Etiqueta descriptiva del colectivo.
-     */
-    public String getEtiqueta() {
-        return idColectivo + " (" + lineaAsignada.getNombre() + ")";
-    }
+	/**
+	 * Devuelve una etiqueta descriptiva del colectivo, incluyendo su ID y el nombre
+	 * de la línea. Ejemplo: C3-1 (Línea 1 - Regreso)
+	 *
+	 * @return Etiqueta descriptiva del colectivo.
+	 */
+	public String getEtiqueta() {
+		return idColectivo + " (" + lineaAsignada.getNombre() + ")";
+	}
 }

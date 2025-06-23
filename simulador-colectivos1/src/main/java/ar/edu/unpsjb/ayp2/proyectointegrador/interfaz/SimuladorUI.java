@@ -2,15 +2,17 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.interfaz;
 
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
 import ar.edu.unpsjb.ayp2.proyectointegrador.reporte.ReporteSimulacion;
+import ar.edu.unpsjb.ayp2.proyectointegrador.util.EventoUtils;
 import java.util.*;
 
 public class SimuladorUI {
-    private final SimuladorController controller;
-    private final Scanner scanner = new Scanner(System.in);
+	private final SimuladorController controller;
+	private final Scanner scanner = new Scanner(System.in);
 
-    public SimuladorUI(SimuladorController controller) {
-        this.controller = controller;
-    }
+	public SimuladorUI(SimuladorController controller) {
+		this.controller = controller;
+	}
+
 
     public void start() {
         imprimirBienvenida();
@@ -117,9 +119,10 @@ public class SimuladorUI {
         }
     }
 
-    private void imprimirBienvenida() {
-        System.out.println("===================================");
-        System.out.println("  Simulador de Colectivos Urbanos  ");
-        System.out.println("===================================\n");
-    }
+
+	private void imprimirBienvenida() {
+		System.out.println("===================================");
+		System.out.println("  Simulador de Colectivos Urbanos  ");
+		System.out.println("===================================\n");
+	}
 }
