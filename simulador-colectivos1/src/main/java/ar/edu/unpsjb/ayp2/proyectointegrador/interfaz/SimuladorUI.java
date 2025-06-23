@@ -33,8 +33,13 @@ public class SimuladorUI {
                 case "1":
                     if (!simulador.isSimulacionTerminada()) {
                         List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
+                        
                         Map<String, List<String>> eventosPorColectivo = SimuladorColectivosApp.mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
                         for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
+                            simulacionColectivo.putIfAbsent(entry.getKey(), new ArrayList<String>());
+                            simulacionColectivo.get(entry.getKey()).addAll(entry.getValue());
+                        }
+                    for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
                             System.out.println("Colectivo " + entry.getKey() + ":");
                             for (String evento : entry.getValue()) {
                                 System.out.println("  " + evento);
