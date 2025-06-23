@@ -39,8 +39,8 @@ public class SimuladorController {
             int capacidadSentadosColectivo = SimuladorConfig.obtenerCapacidadSentadosColectivo(configProperties);
             int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
             int capacidadParados = capacidadColectivo - capacidadSentadosColectivo;
-            int cantidadColectivosPorLinea = SimuladorConfig.obtenerCantidadColectivosSimultaneosPorLinea(configProperties);
-            simulador.inicializarColectivos(capacidadColectivo, capacidadSentadosColectivo, capacidadParados, recorridosPorColectivo, cantidadColectivosPorLinea);
+            //int cantidadColectivosPorLinea = SimuladorConfig.obtenerCantidadColectivosSimultaneosPorLinea(configProperties);
+            simulador.inicializarColectivos(capacidadColectivo, capacidadSentadosColectivo, capacidadParados, recorridosPorColectivo);
         } catch (java.io.IOException e) {
             System.err.println("Error al cargar archivos de datos: " + e.getMessage());
             throw new RuntimeException(e);
@@ -50,6 +50,7 @@ public class SimuladorController {
     public Simulador getSimulador() {
         return simulador;
     }
+    
     public Map<String, Parada> getParadasCargadas() { return paradasCargadas; }
     public Map<String, Linea> getLineasCargadas() { return lineasCargadas; }
     public Properties getConfigProperties() { return configProperties; }

@@ -19,7 +19,8 @@ public class Colectivo {
 	private int capacidadMaxima;
 	private List<Pasajero> pasajerosABordo;
 	private Parada paradaActual;
-	private int indiceParadaActualEnRecorrido; // Índice de la paradaActual en el recorrido de la línea
+	private int indiceParadaActualEnRecorrido;// Índice de la paradaActual en el recorrido de la línea
+	private int recorridosActual = 1;
 
 	/** Capacidad máxima de pasajeros sentados en el colectivo. */
 	private final int capacidadSentados;
@@ -62,6 +63,7 @@ public class Colectivo {
 		this.capacidadSentados = capacidadSentados;
 		this.capacidadParados = capacidadParados;
 		this.recorridosRestantes = recorridosRestantes;
+	
 		this.pasajerosABordo = new ArrayList<>();
 
 		// Initialize paradaActual and indiceParadaActualEnRecorrido as before
@@ -143,10 +145,15 @@ public class Colectivo {
 	 * 
 	 * @param recorridosRestantes cantidad de recorridos.
 	 */
-	public void setRecorridosRestantes(int recorridosRestantes) {
-		this.recorridosRestantes = recorridosRestantes;
+	public void resRecorridosRestantes() {
+		this.recorridosActual++;
+		this.recorridosRestantes--;
 	}
 
+	public void reiniciarParaNuevoRecorrido() {
+		this.indiceParadaActualEnRecorrido = 0;
+		this.paradaActual = this.lineaAsignada.getRecorrido().get(this.indiceParadaActualEnRecorrido);
+	}
 	/**
 	 * Devuelve la cantidad de recorridos restantes.
 	 * 

@@ -33,6 +33,7 @@ public class GestorEstadisticas {
     private Map<Integer, Integer> conteoCalificaciones; // calificación (1-5) -> cantidad
   
     private int sumaCalificaciones;
+    private double indiceSatisfaccion;
     private int totalPasajerosCalificados;
 
     // Para ocupación promedio (Anexo II)
@@ -156,7 +157,16 @@ public class GestorEstadisticas {
     /** Devuelve el índice de satisfacción según Anexo I. */
     public double getIndiceSatisfaccion() {
         if (totalPasajerosCalificados == 0) return 0.0;
-        return (double) sumaCalificaciones / (totalPasajerosCalificados * 5);
+        for(Map.Entry<Integer, Integer> entry : conteoCalificaciones.entrySet()) {
+			int calificacion = entry.getKey();
+			int cantidad = entry.getValue();
+			// Calcular la suma ponderada de calificaciones
+			indiceSatisfaccion += calificacion * cantidad;
+        	
+        	
+        	
+        }
+        return (double) indiceSatisfaccion / (totalPasajerosCalificados * 5);//
     }
 
     /** Devuelve el desglose de calificaciones. */
