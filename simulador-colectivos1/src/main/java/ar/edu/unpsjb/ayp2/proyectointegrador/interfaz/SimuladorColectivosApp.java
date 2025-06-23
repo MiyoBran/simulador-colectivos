@@ -75,32 +75,5 @@ public class SimuladorColectivosApp {
         }
         return null;
     }
-
-    /**
-     * Extrae la capacidad de colectivos de las propiedades de configuración, o
-     * retorna un valor por defecto.
-     */
-    private static int obtenerCapacidadColectivo(Properties configProperties) {
-        String valor = configProperties.getProperty("capacidad.colectivo");
-        if (valor != null) {
-            try {
-                int capacidad = Integer.parseInt(valor);
-                if (capacidad > 0) {
-                    return capacidad;
-                }
-            } catch (NumberFormatException e) {
-                System.err.println("Valor de capacidad.colectivo inválido en configuración, se usará 30 por defecto.");
-            }
-        }
-        return 30; // Valor por defecto
-    }
-
-    /**
-     * Imprime la bienvenida al usuario.
-     */
-    private static void imprimirBienvenida() {
-        System.out.println("===================================");
-        System.out.println("  Simulador de Colectivos Urbanos  ");
-        System.out.println("===================================\n");
-    }
+    
 }
