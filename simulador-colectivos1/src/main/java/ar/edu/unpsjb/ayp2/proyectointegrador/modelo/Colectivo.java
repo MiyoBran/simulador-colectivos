@@ -20,7 +20,9 @@ public class Colectivo {
 	private List<Pasajero> pasajerosABordo;
 	private Parada paradaActual;
 	private int indiceParadaActualEnRecorrido;// Índice de la paradaActual en el recorrido de la línea
-	private int recorridosActual = 1;
+	private int recorridoActual = 1;
+	
+	private int cantidadPasajerosSentados = 0;
 
 	/** Capacidad máxima de pasajeros sentados en el colectivo. */
 	private final int capacidadSentados;
@@ -146,10 +148,14 @@ public class Colectivo {
 	 * @param recorridosRestantes cantidad de recorridos.
 	 */
 	public void resRecorridosRestantes() {
-		this.recorridosActual++;
+		this.recorridoActual++;
 		this.recorridosRestantes--;
 	}
-
+    
+	public int getRecorridoActual() {
+		return recorridoActual;
+		
+	}
 	public void reiniciarParaNuevoRecorrido() {
 		this.indiceParadaActualEnRecorrido = 0;
 		this.paradaActual = this.lineaAsignada.getRecorrido().get(this.indiceParadaActualEnRecorrido);
@@ -211,14 +217,14 @@ public class Colectivo {
 			return false;
 		}
 	
-		// Determinar si viajó sentado o parado
-		if (getCantidadSentadosDisponibles() > 0) {
+		
+		if (cantidadPasajerosSentados < capacidadSentados) {
         pasajero.setViajoSentado(true);
-		} else {
-        pasajero.setViajoSentado(false);
-		}
+        cantidadPasajerosSentados++;
+		} 
 		this.pasajerosABordo.add(pasajero);
 		return true;
+		
 	}
 
 	/**
@@ -232,6 +238,9 @@ public class Colectivo {
 		if (pasajero == null) {
 			return false;
 		}
+		if (pasajero.isViajoSentado()) {
+	        cantidadPasajerosSentados--;
+		} 
 		return this.pasajerosABordo.remove(pasajero);
 	}
 
