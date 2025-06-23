@@ -157,16 +157,14 @@ public class GestorEstadisticas {
     /** Devuelve el índice de satisfacción según Anexo I. */
     public double getIndiceSatisfaccion() {
         if (totalPasajerosCalificados == 0) return 0.0;
+        double sumaPonderada = 0.0; // Local variable for calculation
         for(Map.Entry<Integer, Integer> entry : conteoCalificaciones.entrySet()) {
-			int calificacion = entry.getKey();
-			int cantidad = entry.getValue();
-			// Calcular la suma ponderada de calificaciones
-			indiceSatisfaccion += calificacion * cantidad;
-        	
-        	
-        	
+            int calificacion = entry.getKey();
+            int cantidad = entry.getValue();
+            // Calcular la suma ponderada de calificaciones
+            sumaPonderada += calificacion * cantidad;
         }
-        return (double) indiceSatisfaccion / (totalPasajerosCalificados * 5);//
+        return sumaPonderada / (totalPasajerosCalificados * 5); // Normalized value
     }
 
     /** Devuelve el desglose de calificaciones. */
