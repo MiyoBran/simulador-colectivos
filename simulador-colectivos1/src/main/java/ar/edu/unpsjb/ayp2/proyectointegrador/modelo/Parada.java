@@ -1,68 +1,64 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 /**
- * Representa una parada de colectivo en el sistema de transporte público. Cada
- * parada tiene un identificador único, una dirección descriptiva, coordenadas
- * geográficas (latitud y longitud) y una cola de pasajeros esperando para
- * abordar.
- * 
+ * Representa una parada de colectivo en el sistema de transporte público.
+ * <p>
+ * Cada parada tiene un identificador, dirección, coordenadas y gestiona
+ * una cola de pasajeros en espera.
+ *
  * @author Miyo
- * @version 1.1
- * 
+ * @version 1.2
  */
 public class Parada {
-	private String id; // Manteniendo como String para consistencia con tu LectorArchivos actual
-	private String direccion; // Renombrado de 'nombre' a 'direccion' para claridad
-	private Queue<Pasajero> pasajerosEsperando;
-	private double latitud;
-	private double longitud;
 
-	/**
-	 * Tiempo promedio de espera de los pasajeros en esta parada (para estadísticas).
-	 */
-	private double tiempoEsperaPromedio;
-	/**
-	 * Cantidad de pasajeros que han abordado en esta parada (para estadísticas).
-	 */
-	private int pasajerosAbordados;
-	/**
-	 * Cantidad de colectivos que han pasado por esta parada (para estadísticas).
-	 */
-	private int colectivosPasados;
+	// =================================================================================
+	// ATRIBUTOS
+	// =================================================================================
+
+	/** Identificador único de la parada (ej: "42"). */
+	private final String id;
+	/** Dirección descriptiva de la parada. */
+	private final String direccion;
+	/** Coordenada geográfica de latitud. */
+	private final double latitud;
+	/** Coordenada geográfica de longitud. */
+	private final double longitud;
+	/** Cola de pasajeros que se encuentran esperando en esta parada. */
+	private final Queue<Pasajero> pasajerosEsperando;
+
+	// =================================================================================
+	// CONSTRUCTORES
+	// =================================================================================
 
 	/**
 	 * Constructor principal.
-	 * 
+	 *
 	 * @param id        El identificador único de la parada.
 	 * @param direccion La dirección descriptiva de la parada.
 	 * @param latitud   La latitud geográfica de la parada.
 	 * @param longitud  La longitud geográfica de la parada.
-	 * @throws IllegalArgumentException si id o direccion son nulos o vacíos.
 	 */
 	public Parada(String id, String direccion, double latitud, double longitud) {
-		if (id == null || id.trim().isEmpty()) {
+		if (id == null || id.trim().isEmpty())
 			throw new IllegalArgumentException("El ID de la parada no puede ser nulo o vacío.");
-		}
-		if (direccion == null || direccion.trim().isEmpty()) {
+		if (direccion == null || direccion.trim().isEmpty())
 			throw new IllegalArgumentException("La dirección de la parada no puede ser nula o vacía.");
-		}
+
 		this.id = id;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.pasajerosEsperando = new LinkedList<>();
-		this.tiempoEsperaPromedio = 0.0;
-		this.pasajerosAbordados = 0;
-		this.colectivosPasados = 0;
 	}
 
 	/**
-	 * Constructor alternativo sin latitud/longitud (asume 0.0). Útil para tests o
-	 * casos donde no se disponga de coordenadas.
-	 * 
+	 * Constructor alternativo sin coordenadas (asume 0.0).
+	 *
 	 * @param id        El identificador único de la parada.
 	 * @param direccion La dirección descriptiva de la parada.
 	 */
@@ -70,27 +66,13 @@ public class Parada {
 		this(id, direccion, 0.0, 0.0);
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public double getLatitud() {
-		return latitud;
-	}
-
-	public double getLongitud() {
-		return longitud;
-	}
+	// =================================================================================
+	// MÉTODOS DE GESTIÓN DE LA COLA DE PASAJEROS
+	// =================================================================================
 
 	/**
 	 * Añade un pasajero a la cola de espera de esta parada.
-	 * 
-	 * @param pasajero El pasajero a añadir.
-	 * @throws IllegalArgumentException si el pasajero es nulo.
+	 * @param pasajero El pasajero a añadir (no puede ser nulo).
 	 */
 	public void agregarPasajero(Pasajero pasajero) {
 		if (pasajero == null) {
@@ -98,32 +80,21 @@ public class Parada {
 		}
 		this.pasajerosEsperando.offer(pasajero);
 	}
-	
-	public Pasajero peekSiguientePasajero() {
-		return this.pasajerosEsperando.peek();
-	}
 
 	/**
 	 * Remueve y devuelve el siguiente pasajero de la cola de espera.
-	 * 
 	 * @return El siguiente pasajero, o null si la cola está vacía.
 	 */
 	public Pasajero removerSiguientePasajero() {
 		return this.pasajerosEsperando.poll();
 	}
-
-	/**
-	 * Verifica si hay pasajeros esperando en la parada.
-	 * 
-	 * @return true si hay pasajeros esperando, false en caso contrario.
-	 */
-	public boolean hayPasajerosEsperando() {
-		return !this.pasajerosEsperando.isEmpty();
-	}
+	
+	// =================================================================================
+	// MÉTODOS DE CONSULTA
+	// =================================================================================
 
 	/**
 	 * Devuelve la cantidad de pasajeros esperando en la parada.
-	 * 
 	 * @return El número de pasajeros en la cola.
 	 */
 	public int cantidadPasajerosEsperando() {
@@ -131,100 +102,63 @@ public class Parada {
 	}
 
 	/**
-	 * Verifica si un pasajero específico se encuentra en la cola de espera de esta
-	 * parada.
-	 * 
-	 * @param pasajero El pasajero a buscar.
-	 * @return true si el pasajero está en la cola, false en caso contrario.
+	 * [Sugerencia de Legibilidad]
+	 * Genera un reporte multilínea del estado actual de la parada.
+	 * @return Un String formateado con los detalles de la parada y los pasajeros esperando.
 	 */
-	public boolean tienePasajeroEnCola(Pasajero pasajero) {
-		return this.pasajerosEsperando.contains(pasajero);
-	}
+	public String getReporteDeEstado() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("--- Estado de Parada: ").append(this.id).append(" (").append(this.direccion).append(") ---\n");
+		sb.append("  Pasajeros esperando: ").append(this.cantidadPasajerosEsperando()).append("\n");
 
-	/**
-	 * Incrementa la cantidad de pasajeros que han abordado en esta parada.
-	 */
-	public void incrementarPasajerosAbordados() {
-		this.pasajerosAbordados++;
-	}
-
-	/**
-	 * Incrementa la cantidad de colectivos que han pasado por esta parada.
-	 */
-	public void incrementarColectivosPasados() {
-		this.colectivosPasados++;
-	}
-
-	/**
-	 * Actualiza el tiempo promedio de espera de los pasajeros en esta parada.
-	 * 
-	 * @param nuevoTiempoEspera tiempo de espera del pasajero que abordó.
-	 */
-	public void actualizarTiempoEsperaPromedio(double nuevoTiempoEspera) {
-		if (pasajerosAbordados == 0) {
-			this.tiempoEsperaPromedio = nuevoTiempoEspera;
-		} else {
-			this.tiempoEsperaPromedio = ((this.tiempoEsperaPromedio * (pasajerosAbordados - 1)) + nuevoTiempoEspera)
-					/ pasajerosAbordados;
+		if (!pasajerosEsperando.isEmpty()) {
+			String pasajerosStr = pasajerosEsperando.stream()
+					.map(p -> p.getId() + " (Destino: " + p.getParadaDestino().getId() + ")")
+					.collect(Collectors.joining(", "));
+			sb.append("  En cola: [").append(pasajerosStr).append("]\n");
 		}
+		sb.append("-----------------------------------------------------");
+		return sb.toString();
 	}
 
-	/**
-	 * Devuelve el tiempo promedio de espera en la parada.
-	 * 
-	 * @return tiempo promedio de espera.
-	 */
-	public double getTiempoEsperaPromedio() {
-		return tiempoEsperaPromedio;
-	}
+	// =================================================================================
+	// GETTERS
+	// =================================================================================
+
+	public String getId() { return this.id; }
+	public String getDireccion() { return this.direccion; }
+	public double getLatitud() { return this.latitud; }
+	public double getLongitud() { return this.longitud; }
 
 	/**
-	 * Devuelve la cantidad de pasajeros que han abordado en esta parada.
-	 * 
-	 * @return cantidad de pasajeros abordados.
-	 */
-	public int getPasajerosAbordados() {
-		return pasajerosAbordados;
-	}
-
-	/**
-	 * Devuelve la cantidad de colectivos que han pasado por esta parada.
-	 * 
-	 * @return cantidad de colectivos pasados.
-	 */
-	public int getColectivosPasados() {
-		return colectivosPasados;
-	}
-
-	/**
-	 * Devuelve la cola de pasajeros esperando en la parada.
-	 * 
-	 * @return cola de pasajeros.
+	 * Devuelve una copia defensiva de la cola de pasajeros.
+	 * Esto evita que el código externo modifique la cola interna de la parada.
+	 *
+	 * @return Una nueva cola (LinkedList) con los pasajeros que están esperando.
 	 */
 	public Queue<Pasajero> getPasajerosEsperando() {
-		return pasajerosEsperando;
+		return new LinkedList<>(this.pasajerosEsperando);
 	}
+	
+	// =================================================================================
+	// MÉTODOS SOBREESCRITOS (Object)
+	// =================================================================================
 
 	@Override
 	public String toString() {
-		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", latitud=" + latitud
-				+ ", longitud=" + longitud + ", pasajerosEsperando=" + pasajerosEsperando.size() + '}';
+		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", esperando=" + cantidadPasajerosEsperando() + '}';
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 		Parada parada = (Parada) o;
-		// La igualdad se basa únicamente en el ID, que es único.
-		return id.equals(parada.id);
+		return id.equals(parada.id); // La igualdad se basa únicamente en el ID.
 	}
 
 	@Override
 	public int hashCode() {
-		// El hashCode también debe basarse en el ID.
-		return id.hashCode();
+		return Objects.hash(id); // El hashCode también debe basarse en el ID.
 	}
 }
