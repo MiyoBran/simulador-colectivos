@@ -140,8 +140,7 @@ public class LectorArchivos {
 	/**
 	 * Procesa una única línea del archivo de paradas y la añade al mapa si es
 	 * válida.
-	 * 
-	 * @param linea La línea de texto a procesar.
+	 * * @param linea La línea de texto a procesar.
 	 */
 	private void procesarLineaDeParada(String linea) {
 		if (linea.trim().isEmpty())
@@ -155,10 +154,21 @@ public class LectorArchivos {
 
 		try {
 			String id = partes[0].trim();
-			if (id.isEmpty() || paradasCargadas.containsKey(id))
-				return;
-
 			String direccion = partes[1].trim();
+			
+
+			// Verificamos que los campos obligatorios no estén vacíos ANTES de crear el objeto.
+			if (id.isEmpty() || direccion.isEmpty()) {
+				System.err.println("Advertencia: ID o Dirección de parada vacíos en línea omitida -> " + linea);
+				return;
+			}
+
+			
+			if (paradasCargadas.containsKey(id)) {
+				// Ya existe una parada con este ID, la ignoramos.
+				return;
+			}
+
 			double latitud = Double.parseDouble(partes[2].trim());
 			double longitud = Double.parseDouble(partes[3].trim());
 

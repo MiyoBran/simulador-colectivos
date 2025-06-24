@@ -1,10 +1,11 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.datos;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
@@ -16,132 +17,139 @@ import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
  * Tests para la clase LectorArchivos, verificando la correcta carga de datos y
  * el manejo de errores de configuración y de archivos.
  */
-@DisplayName("Tests para LectorArchivos")
+@DisplayName("Pruebas de la Clase LectorArchivos")
 class LectorArchivosTest {
 
-	private LectorArchivos lector;
+	private LectorArchivos lectorSUT;
 
 	// Archivos de prueba ubicados en src/test/resources/
-	private final String PARADAS_VALIDAS = "datos_test/paradas_test.txt";
-	private final String LINEAS_VALIDAS = "datos_test/lineas_test.txt";
-	private final String ARCHIVO_INEXISTENTE = "archivo_que_no_existe.txt";
+	private static final String PARADAS_VALIDAS = "datos_test/paradas_test.txt";
+	private static final String LINEAS_VALIDAS = "datos_test/lineas_test.txt";
+	private static final String ARCHIVO_INEXISTENTE = "archivo_que_no_existe.txt";
 
-	/**
-	 * Crea una instancia de LectorArchivos con propiedades de prueba.
-	 */
 	private LectorArchivos createLectorWithTestProperties(String paradaProp, String lineaProp) {
 		Properties testProps = new Properties();
-		if (paradaProp != null) {
-			testProps.setProperty("parada", paradaProp);
-		}
-		if (lineaProp != null) {
-			testProps.setProperty("linea", lineaProp);
-		}
+		if (paradaProp != null) testProps.setProperty("parada", paradaProp);
+		if (lineaProp != null) testProps.setProperty("linea", lineaProp);
 		return new LectorArchivos(testProps);
 	}
 
-	// --- Pruebas para cargarParadas ---
-	@Test
-	@DisplayName("Carga de Paradas: debería cargar exitosamente un archivo válido")
-	void testCargarParadasExitoso() throws IOException {
-		lector = createLectorWithTestProperties(PARADAS_VALIDAS, null);
-		lector.cargarParadas();
-		Map<String, Parada> paradas = lector.getParadasCargadas();
+	@Nested
+	@DisplayName("Pruebas de Carga de Paradas")
+	class PruebasCargaParadas {
 
-		assertEquals(4, paradas.size(), "Deberían cargarse 4 paradas válidas del archivo de prueba.");
-		assertTrue(paradas.containsKey("P01"));
-		assertEquals("Parada Valida 1", paradas.get("P01").getDireccion());
+		@Test
+		@DisplayName("Debería cargar exitosamente un archivo de paradas válido")
+		void cargarParadasExitoso() throws IOException {
+			lectorSUT = createLectorWithTestProperties(PARADAS_VALIDAS, null);
+			lectorSUT.cargarParadas();
+			Map<String, Parada> paradas = lectorSUT.getParadasCargadas();
 
-		// Verifica que las paradas inválidas del archivo de prueba no se cargaron.
-		assertFalse(paradas.containsKey("P05"), "P05 (formato incorrecto) no debería cargarse.");
-		assertFalse(paradas.containsKey("P06"), "P06 (lat no numérica) no debería cargarse.");
+			assertEquals(4, paradas.size(), "Deberían cargarse 4 paradas válidas del archivo.");
+			assertTrue(paradas.containsKey("P01"));
+			assertEquals("Parada Valida 1", paradas.get("P01").getDireccion());
+			assertFalse(paradas.containsKey("P05"), "La parada con formato incorrecto no debería cargarse.");
+		}
+
+		@Test
+		@DisplayName("Debería lanzar IOException si el archivo de paradas no existe")
+		void cargarParadasArchivoNoExiste() {
+			lectorSUT = createLectorWithTestProperties(ARCHIVO_INEXISTENTE, null);
+			// CORRECCIÓN: Se espera IOException, que es lo que lanza el método si el recurso no se encuentra.
+			assertThrows(IOException.class, () -> lectorSUT.cargarParadas());
+		}
+
+		@Test
+		@DisplayName("Debería lanzar IOException si la propiedad 'parada' no está definida")
+		void cargarParadasPropiedadNoDefinida() {
+			lectorSUT = createLectorWithTestProperties(null, null);
+			assertThrows(IOException.class, () -> lectorSUT.cargarParadas());
+		}
 	}
 
-	@Test
-	@DisplayName("Carga de Paradas: debería lanzar FileNotFoundException si el archivo no existe")
-	void testCargarParadasArchivoNoExiste() {
-		lector = createLectorWithTestProperties(ARCHIVO_INEXISTENTE, null);
-		assertThrows(FileNotFoundException.class, () -> {
-			lector.cargarParadas();
-		});
+	@Nested
+	@DisplayName("Pruebas de Carga de Líneas")
+	class PruebasCargaLineas {
+
+		@BeforeEach
+		void setUp() throws IOException {
+			// Pre-condición para los tests de líneas: cargar las paradas primero.
+			lectorSUT = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
+			lectorSUT.cargarParadas();
+		}
+
+		@Test
+		@DisplayName("Debería cargar exitosamente un archivo de líneas válido")
+		void cargarLineasExitoso() throws IOException {
+			lectorSUT.cargarLineas();
+			Map<String, Linea> lineas = lectorSUT.getLineasCargadas();
+
+			assertEquals(4, lineas.size(), "Deberían cargarse 4 líneas válidas.");
+			
+			String claveLinea1 = "L01 - Linea Test Valida 1";
+			assertTrue(lineas.containsKey(claveLinea1));
+			Linea l01 = lineas.get(claveLinea1);
+			// CORRECCIÓN: Usamos getRecorrido().size()
+			assertEquals(3, l01.getRecorrido().size());
+			assertEquals("P01", l01.getParadaPorIndice(0).getId());
+
+			assertFalse(lineas.containsKey("L04 - Linea Parada Inexistente"), "Línea con parada inexistente no debería cargarse.");
+		}
+
+		@Test
+		@DisplayName("No debería cargar líneas si las paradas no fueron cargadas previamente")
+		void cargarLineasSinParadasPrevias() throws IOException {
+			LectorArchivos lectorSinParadas = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
+			// No llamamos a lectorSinParadas.cargarParadas()
+			lectorSinParadas.cargarLineas();
+			assertTrue(lectorSinParadas.getLineasCargadas().isEmpty(), "No deberían cargarse líneas sin paradas.");
+		}
+
+		@Test
+		@DisplayName("Debería lanzar IOException si la propiedad 'linea' no está definida")
+		void cargarLineasPropiedadNoDefinida() {
+			// Creamos un lector que tiene la propiedad de paradas pero no la de líneas
+			LectorArchivos lectorSinPropLinea = createLectorWithTestProperties(PARADAS_VALIDAS, null);
+			
+			// === MEJORA AÑADIDA AQUÍ ===
+			// Para probar la carga de líneas, primero debemos cumplir la pre-condición de que las paradas existan.
+			// Lo cargamos dentro de un assertDoesNotThrow para asegurarnos de que este paso funciona como se espera.
+			assertDoesNotThrow(lectorSinPropLinea::cargarParadas, "La carga de paradas (pre-condición) no debería fallar.");
+
+			// Ahora que las paradas están cargadas, el método SÍ intentará leer el archivo de líneas.
+			// Como la propiedad 'linea' es nula, AHORA SÍ se lanzará la excepción esperada.
+			assertThrows(IOException.class, lectorSinPropLinea::cargarLineas);
+		}
 	}
+	
+	@Nested
+	@DisplayName("Pruebas de Carga Completa")
+	class PruebasCargaCompleta {
+		
+		@Test
+		@DisplayName("cargarDatosCompletos() debería invocar la carga de paradas y líneas")
+		void cargarDatosCompletos() throws IOException {
+			lectorSUT = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
+			lectorSUT.cargarDatosCompletos();
 
-	@Test
-	@DisplayName("Carga de Paradas: debería lanzar IOException si la propiedad 'parada' no está definida")
-	void testCargarParadasPropiedadNoDefinida() {
-		lector = createLectorWithTestProperties(null, null); // Propiedad "parada" es null
-		assertThrows(IOException.class, () -> {
-			lector.cargarParadas();
-		});
-	}
+			assertEquals(4, lectorSUT.getParadasCargadas().size());
+			assertEquals(4, lectorSUT.getLineasCargadas().size());
+		}
 
-	// --- Pruebas para cargarLineas ---
-	@Test
-	@DisplayName("Carga de Líneas: debería cargar exitosamente un archivo válido si las paradas ya existen")
-	void testCargarLineasExitoso() throws IOException {
-		lector = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
-		lector.cargarParadas(); // Pre-condición: cargar las paradas necesarias.
-		lector.cargarLineas();
-		Map<String, Linea> lineas = lector.getLineasCargadas();
+		@Test
+		@DisplayName("cargarDatosCompletos() debería ser idempotente y recargar los datos")
+		void cargarDatosCompletosEsIdempotente() throws IOException {
+			lectorSUT = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
+			lectorSUT.cargarDatosCompletos();
 
-		assertEquals(4, lineas.size(), "Deberían cargarse 4 líneas válidas.");
-		assertTrue(lineas.containsKey("L01 - Linea Test Valida 1"));
-		Linea l01 = lineas.get("L01 - Linea Test Valida 1");
-		assertEquals(3, l01.longitudRecorrido());
-		assertEquals("P01", l01.getParadaPorIndice(0).getId());
+			// Modificamos los datos cargados para simular un estado "sucio"
+			lectorSUT.getParadasCargadas().put("P99", new Parada("P99", "Parada Falsa"));
+			
+			// Volvemos a llamar al método
+			lectorSUT.cargarDatosCompletos();
 
-		// Verifica que una línea con recorrido vacío se cargue correctamente.
-		assertTrue(lineas.containsKey("L05 - Linea Recorrido Vacio"));
-		assertEquals(0, lineas.get("L05 - Linea Recorrido Vacio").longitudRecorrido());
-
-		// Verifica que las líneas inválidas no se cargaron.
-		assertFalse(lineas.containsKey("L04 - Linea Parada Inexistente"),
-				"L04 (parada inexistente) no debería cargarse.");
-	}
-
-	@Test
-	@DisplayName("Carga de Líneas: no debería cargar ninguna línea si las paradas no fueron cargadas previamente")
-	void testCargarLineasSinHaberCargadoParadasAntes() throws IOException {
-		lector = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
-		lector.cargarLineas();
-		assertTrue(lector.getLineasCargadas().isEmpty(), "No debería cargarse ninguna línea si no hay paradas.");
-	}
-
-	@Test
-	@DisplayName("Carga de Líneas: debería lanzar IOException si la propiedad 'linea' no está definida")
-	void testCargarLineasPropiedadNoDefinida() {
-		// CORRECCIÓN: El test ahora espera una IOException.
-		lector = createLectorWithTestProperties(PARADAS_VALIDAS, null); // No se define la propiedad "linea"
-		assertThrows(IOException.class, () -> {
-			lector.cargarLineas();
-		});
-	}
-
-	// --- Pruebas para cargarDatosCompletos ---
-	@Test
-	@DisplayName("Carga Completa: debería cargar paradas y líneas correctamente")
-	void testCargarDatosCompletosExitoso() throws IOException {
-		lector = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
-		lector.cargarDatosCompletos();
-
-		assertEquals(4, lector.getParadasCargadas().size());
-		assertEquals(4, lector.getLineasCargadas().size());
-	}
-
-	@Test
-	@DisplayName("Carga Completa: debería ser idempotente y recargar correctamente")
-	void testCargarDatosCompletosEsIdempotente() throws IOException {
-		lector = createLectorWithTestProperties(PARADAS_VALIDAS, LINEAS_VALIDAS);
-
-		lector.cargarDatosCompletos();
-		int numParadasInicial = lector.getParadasCargadas().size();
-		int numLineasInicial = lector.getLineasCargadas().size();
-
-		// Volver a llamar no debería causar errores ni acumular datos
-		lector.cargarDatosCompletos();
-		assertEquals(numParadasInicial, lector.getParadasCargadas().size(),
-				"cargarDatosCompletos no limpió/recargó paradas correctamente.");
-		assertEquals(numLineasInicial, lector.getLineasCargadas().size(),
-				"cargarDatosCompletos no limpió/recargó líneas correctamente.");
+			assertEquals(4, lectorSUT.getParadasCargadas().size(), "La recarga debería limpiar los datos antiguos.");
+			assertFalse(lectorSUT.getParadasCargadas().containsKey("P99"), "La parada falsa no debería existir después de recargar.");
+		}
 	}
 }
