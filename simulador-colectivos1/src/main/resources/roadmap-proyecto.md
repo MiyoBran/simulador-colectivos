@@ -32,72 +32,87 @@ Esta etapa detalla los pasos para crear y configurar el proyecto Java con Maven 
 
 Abre el archivo pom.xml que se encuentra en la raíz de tu proyecto recién creado. Asegúrate de que tenga la siguiente configuración (o modifícalo para que coincida con el pom.xml que ya tienes y hemos revisado, el cual incluye Java 21, JUnit 5 y net.datastructures):
 
-\<?xml version="1.0" encoding="UTF-8"?\>  
-\<project xmlns="http://maven.apache.org/POM/4.0.0"  
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"\>  
-    \<modelVersion\>4.0.0\</modelVersion\>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    \<groupId\>ar.edu.unpsjb.ayp2.proyectointegrador\</groupId\>  
-    \<artifactId\>simulador-colectivos\</artifactId\>  
-    \<version\>0.0.1-SNAPSHOT\</version\>  
-    \<name\>Proyecto Integrador \- Simulador de Colectivos Urbanos\</name\>  
-    \<description\>Sistema para simular el funcionamiento de líneas de colectivos urbanos para la materia Algoritmica y Programacion II.\</description\>
+  <groupId>ar.edu.unpsjb.ayp2.proyectointegrador</groupId>
+  <artifactId>simulador-colectivos1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Proyecto Integrador - Simulador de Colectivos Urbanos</name>
+  <description>Sistema para simular el funcionamiento de líneas de colectivos urbanos para la materia Algoritmica y Programacion II.</description>
+  
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<java.version>21</java.version>
+	</properties>
 
-    \<properties\>  
-        \<project.build.sourceEncoding\>UTF-8\</project.build.sourceEncoding\>  
-        \<maven.compiler.source\>21\</maven.compiler.source\>  
-        \<maven.compiler.target\>21\</maven.compiler.target\>  
-        \<java.version\>21\</java.version\>  
-    \</properties\>
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
 
-    \<dependencies\>  
-        \<dependency\>  
-            \<groupId\>org.junit.jupiter\</groupId\>  
-            \<artifactId\>junit-jupiter-api\</artifactId\>  
-            \<version\>5.10.2\</version\> \<scope\>test\</scope\>  
-        \</dependency\>  
-        \<dependency\>  
-            \<groupId\>org.junit.jupiter\</groupId\>  
-            \<artifactId\>junit-jupiter-engine\</artifactId\>  
-            \<version\>5.10.2\</version\> \<scope\>test\</scope\>  
-        \</dependency\>
+		<dependency>
+			<groupId>net.datastructures</groupId>
+			<artifactId>datastructures-library</artifactId>
+			<version>6.0.0-custom</version>
+		</dependency>
 
-        \<dependency\>  
-            \<groupId\>net.datastructures\</groupId\>  
-            \<artifactId\>datastructures-library\</artifactId\>  
-            \<version\>6.0.0-custom\</version\>  
-            \</dependency\>  
-    \</dependencies\>
+		<dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
 
-    \<build\>  
-        \<plugins\>  
-            \<plugin\>  
-                \<groupId\>org.apache.maven.plugins\</groupId\>  
-                \<artifactId\>maven-compiler-plugin\</artifactId\>  
-                \<version\>3.13.0\</version\> \<configuration\>  
-                    \<release\>${java.version}\</release\>  
-                \</configuration\>  
-            \</plugin\>  
-            \<plugin\>  
-                \<groupId\>org.apache.maven.plugins\</groupId\>  
-                \<artifactId\>maven-jar-plugin\</artifactId\>  
-                \<version\>3.3.0\</version\> \<configuration\>  
-                    \<archive\>  
-                        \<manifest\>  
-                            \<mainClass\>ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp\</mainClass\>  
-                        \</manifest\>  
-                    \</archive\>  
-                \</configuration\>  
-            \</plugin\>  
-            \<plugin\>  
-                \<groupId\>org.apache.maven.plugins\</groupId\>  
-                \<artifactId\>maven-surefire-plugin\</artifactId\>  
-                \<version\>3.2.5\</version\> \</plugin\>  
-        \</plugins\>  
-    \</build\>  
-\</project\>
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version> 
+            </plugin>
+		</plugins>
+	</build>
+</project>
 **Nota sobre** net.datastructures\*\*: Asegúrate de que la librería datastructures-library-6.0.0-custom.jar esté accesible para Maven, ya sea instalándola localmente o mediante la configuración que provea la cátedra.
 
 Después de guardar el pom.xml, haz clic derecho en el proyecto en Eclipse y selecciona Maven \> Update Project... (marcando "Force Update of Snapshots/Releases").
@@ -318,7 +333,6 @@ Implementar una primera versión funcional del sistema de simulación de colecti
 ### 6.1. Objetivos Principales Alcanzados
 
 * **Gestión de Estado y Capacidad:** Los colectivos manejan múltiples recorridos, un estado (ej: EN_RUTA) y capacidad diferenciada (sentados/parados).
-* **Simulación con Noción de Tiempo:** El sistema incorpora la gestión de tiempos de espera y viaje, calculados en cada paso de la simulación.
 * **Módulo de Estadísticas (`GestorEstadisticas`):** Se implementó y probó exitosamente el cálculo y reporte del Índice de Satisfacción (Anexo I) y la Ocupación Promedio de Colectivos (Anexo II).
 * **Red de Transporte como Grafo (`PlanificadorRutas`):** Se utiliza un grafo dirigido para modelar la red, permitiendo el cálculo de rutas óptimas con el algoritmo de Dijkstra.
 * **Refactorización de Arquitectura:** La capa de interfaz fue completamente reestructurada en `SimuladorController`, `SimuladorUI` y `SimuladorConfig`, mejorando la separación de responsabilidades y la mantenibilidad.
@@ -367,7 +381,7 @@ El desarrollo del incremento no fue lineal, sino un proceso iterativo de impleme
     * Se corrigió un error de modelado al cambiar el grafo del `PlanificadorRutas` a **dirigido**.
     * Las pruebas de estrés finales permitieron encontrar y corregir los bugs en los cálculos de **tiempos de simulación** y el reporte de **ocupación promedio**.
 
-5.  **Consolidación y Documentación Final:** El proceso culminó con una limpieza general del código, la estandarización de los mensajes de salida y la actualización completa de toda la documentación del proyecto para reflejar el estado final.
+5.  **Fase Final de Calidad y Consolidación:** El proceso culminó con una limpieza general del código, la estandarización de los mensajes de salida y una refactorización completa de toda la suite de pruebas unitarias para asegurar su robustez, legibilidad y correcta funcionalidad. Finalmente, se actualizó toda la documentación del proyecto para reflejar el estado final de la entrega.
 
 ---
 
