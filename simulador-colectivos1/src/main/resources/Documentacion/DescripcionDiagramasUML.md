@@ -1,74 +1,83 @@
-# Descripción de Diagramas UML del Paquete `proyectointegrador.modelo`
+# Descripción del Diagrama UML del Paquete `proyectointegrador.modelo`
 
-Este documento detalla la estructura y las relaciones de las clases principales del modelo: `Colectivo`, `Linea`, `Parada` y `Pasajero`.
+Este documento detalla la estructura y las relaciones de las clases principales del modelo: `Colectivo`, `Linea`, `Parada` y `Pasajero`, según su implementación real en el código fuente.
 
-#### 1. Clases y sus Relaciones
+## 1. Clases y sus Relaciones
 
-Se describe el rol de cada clase y cómo interactúan entre sí, utilizando la terminología estándar de UML (Agregación, Asociación).
+**Colectivo**
+- Modela un vehículo de transporte colectivo.
+- Tiene una **Agregación** con `Linea` (cada colectivo pertenece a una línea concreta, pero la línea existe independientemente).
+- Tiene una **Agregación** con `Pasajero` (a través de su lista `pasajerosABordo`).
+- Tiene una **Asociación** con `Parada` (referencia a `paradaActual`).
 
-* **`Colectivo`**
-    * Modela un vehículo de transporte.
-    * Tiene una relación de **Agregación** con `Linea` (un Colectivo pertenece a una Linea, pero la Linea existe independientemente del Colectivo).
-    * Tiene una relación de **Agregación** con `Pasajero` a través de su lista `pasajerosABordo`.
-    * Mantiene una **Asociación** simple con `Parada` para rastrear su `paradaActual`.
+**Linea**
+- Representa una ruta de transporte determinada.
+- Tiene una **Agregación** con `Parada` (lista ordenada `recorrido` que define el trayecto).
 
-* **`Linea`**
-    * Representa una ruta de transporte.
-    * Tiene una relación de **Agregación** con `Parada`, conteniendo una lista ordenada de ellas que conforman su `recorrido`.
+**Parada**
+- Representa una ubicación física donde los pasajeros esperan.
+- Tiene una **Agregación** con `Pasajero` (cola `pasajerosEsperando` de los que esperan en la parada).
 
-* **`Parada`**
-    * Representa una ubicación física donde los pasajeros esperan.
-    * Tiene una relación de **Agregación** con `Pasajero`, gestionando una cola (`pasajerosEsperando`) de los que aguardan.
+**Pasajero**
+- Modela a una persona usuaria del sistema de transporte.
+- Tiene **Asociaciones** con dos instancias de `Parada`: `paradaOrigen` y `paradaDestino`.
 
-* **`Pasajero`**
-    * Modela a un usuario del sistema.
-    * Mantiene dos **Asociaciones** con `Parada` para definir su `paradaOrigen` y `paradaDestino`.
+## 2. Atributos principales y visibilidad
 
-#### 2. Atributos Principales y Visibilidad
+Todos los atributos son `private` y la mayoría son `final` (inmutables tras la construcción), salvo los de estado (que pueden cambiar durante la simulación). El acceso es por métodos públicos (getters/setters) según buenas prácticas de Java.
 
-A continuación se listan los atributos fundamentales de cada clase. Es importante destacar que, siguiendo las buenas prácticas de encapsulamiento, **todos los atributos son `private` (`-`)** y se accede a ellos a través de métodos públicos (getters/setters).
+### Colectivo
 
-* **Colectivo**
-    * `- idColectivo: String`
-    * `- lineaAsignada: Linea`
-    * `- capacidadMaxima: int`
-    * `- pasajerosABordo: List<Pasajero>`
-    * `- paradaActual: Parada`
+- `- final idColectivo: String`
+- `- final lineaAsignada: Linea`
+- `- final capacidadMaxima: int`
+- `- final capacidadSentados: int`
+- `- final capacidadParados: int`
+- `- final pasajerosABordo: List<Pasajero>`
+- `- paradaActual: Parada`
+- `- indiceParadaActualEnRecorrido: int`
+- `- cantidadPasajerosSentados: int`
+- `- estado: String`
+- `- recorridoActual: int`
+- `- recorridosRestantes: int`
+- `- pasoDeSalida: int`
 
-* **Linea**
-    * `- id: String`
-    * `- nombre: String`
-    * `- recorrido: List<Parada>`
+### Linea
 
-* **Parada**
-    * `- id: String`
-    * `- direccion: String`
-    * `- pasajerosEsperando: Queue<Pasajero>`
+- `- final id: String`
+- `- final nombre: String`
+- `- final recorrido: List<Parada>`
 
-* **Pasajero**
-    * `- id: String`
-    * `- paradaOrigen: Parada`
-    * `- paradaDestino: Parada`
+### Parada
 
-#### 3. Detalle de Relaciones y Cardinalidad
+- `- final id: String`
+- `- final direccion: String`
+- `- final latitud: double`
+- `- final longitud: double`
+- `- final pasajerosEsperando: Queue<Pasajero>`
+- `- tiempoEsperaPromedio: double`
+- `- pasajerosAbordados: int`
+- `- colectivosPasados: int`
 
-Esta sección describe las relaciones en un formato similar a PlantUML, especificando la multiplicidad (cardinalidad) de cada una.
+### Pasajero
 
-* `Colectivo "1" o-- "1" Linea`
-    * Un `Colectivo` siempre pertenece a `1` y solo `1` `Linea`. La `Linea` es una parte agregada del `Colectivo`.
+- `- final id: String`
+- `- final paradaOrigen: Parada`
+- `- final paradaDestino: Parada`
+- `- colectivosEsperados: int`
+- `- viajoSentado: boolean`
+- `- pudoSubir: boolean`
+- `- bajadaForzosa: boolean`
+- `- satisfaccion: int`
 
-* `Colectivo "1" o-- "0..*" Pasajero`
-    * Un `Colectivo` puede tener `0` o muchos (`*`) `Pasajero`s a bordo.
+## 3. Detalle de relaciones y cardinalidad
 
-* `Colectivo "1" -- "1" Parada`
-    * Un `Colectivo` siempre está en `1` `Parada` actual (o en tránsito hacia ella).
+- `Colectivo "1" o-- "1" Linea`
+- `Colectivo "1" o-- "0..*" Pasajero`
+- `Colectivo "1" -- "1" Parada`
+- `Linea "1" o-- "2..*" Parada`
+- `Parada "1" o-- "0..*" Pasajero`
+- `Pasajero "1" --> "1" Parada` (origen)
+- `Pasajero "1" --> "1" Parada` (destino)
 
-* `Linea "1" o-- "2..*" Parada`
-    * Una `Linea` se compone de un recorrido de al menos `2` (origen y destino) o muchas (`*`) `Parada`s.
-
-* `Parada "1" o-- "0..*" Pasajero`
-    * Una `Parada` puede tener `0` o muchos (`*`) `Pasajero`s esperando.
-
-* `Pasajero "1" --> "1" Parada` (origen)
-* `Pasajero "1" --> "1" Parada` (destino)
-    * Un `Pasajero` siempre tiene exactamente `1` `Parada` de origen y `1` `Parada` de destino.
+---

@@ -27,8 +27,7 @@ Para lograrlo, la solución debe abordar los siguientes requerimientos específi
 
 - **Modelado de la Red:** Representar la topología del sistema, incluyendo las líneas con sus recorridos fijos de paradas y los colectivos asociados a cada una.
 - **Gestión de Capacidad y Recorridos:** Simular que cada colectivo tiene una capacidad limitada de pasajeros y que debe realizar múltiples vueltas a su recorrido.
-- **Comportamiento de Pasajeros:** Modelar el ciclo de vida de un pasajero, desde su llegada a una parada de origen hasta que se baja en su destino, incluyendo los tiempos de espera.
-- **Cálculo de Rutas para Pasajeros:** Modelar la red de transporte como un grafo para determinar la ruta óptima que un pasajero debe seguir para viajar desde su origen a su destino, considerando las conexiones entre líneas.
+- **Comportamiento de Pasajeros:** Modelar el ciclo de vida de un pasajero, desde su llegada a una parada de origen hasta que se baja en su destino.
 - **Generación de Indicadores (KPIs):** Calcular y reportar métricas de rendimiento, como un Índice de Satisfacción del Pasajero y la Ocupación Promedio de los vehículos, basados en los datos generados durante la simulación.
 
 ## 3. Análisis de las Estructuras de Datos Seleccionadas
@@ -61,18 +60,17 @@ El recorrido de una línea se construye una vez y luego se consulta frecuentemen
 
 **Justificación:**  
 Aunque `HashMap` ofrece un rendimiento promedio de $O(1)$, se eligió `TreeMap` ($O(\log n)$) deliberadamente por una ventaja clave para este proyecto: mantiene las claves ordenadas. Esta característica garantiza que al iterar sobre los datos cargados, el orden sea siempre predecible, lo que facilita enormemente la depuración y la reproducibilidad de los resultados de la simulación.
+3.4. Almacenamiento de Datos en Memoria para Impresión Ordenada
 
-### 3.4. Red de Transporte para Cálculo de Rutas
+• Componente: interfaz.SimuladorUI
+• TAD requerido: Mapa (Map), para asociar un ID único (String) con la lista de eventos (List<String>) de cada colectivo.
+• Implementación seleccionada: java.util.LinkedHashMap
 
-- **Componente:** `logica.PlanificadorRutas`
-- **TADs requeridos:** Grafo Dirigido Ponderado y Cola de Prioridad (`Priority Queue`)
-- **Implementaciones seleccionadas:** `net.datastructures.AdjacencyMapGraph` y `java.util.PriorityQueue`
-
-**Justificación:**  
-Para modelar la red se utilizó `AdjacencyMapGraph` (de la librería de la cátedra), una implementación basada en listas de adyacencia ideal para grafos dispersos como una red de transporte. Para el algoritmo de Dijkstra, se utilizó `java.util.PriorityQueue`, que es la estructura canónica para esta tarea. Implementada como un montículo binario, sus operaciones `add` y `poll` ($O(\log n)$) resultan en una implementación muy eficiente del algoritmo.
+Justificación:
+Aunque HashMap ofrece un rendimiento promedio de $O(1)$, se eligió LinkedHashMap por una ventaja clave: preserva el orden de inserción de las claves. Esto asegura que, al mostrar los resultados o eventos de la simulación al usuario, la salida respete el mismo orden en que se generaron los datos. Esta característica hace que la presentación sea más intuitiva y fácil de seguir, además de mantener la consistencia entre ejecuciones
 
 
-## 4. Diagrama de Clases
+# 4. Diagrama de Clases
 
 A continuación, se presenta el diagrama de clases UML que representa la arquitectura del paquete modelo del proyecto. Este diagrama ilustra las clases principales (`Colectivo`, `Linea`, `Parada`, `Pasajero`), sus atributos fundamentales y las relaciones de asociación y agregación que existen entre ellas.
 
@@ -82,89 +80,94 @@ Como se puede observar, el diseño sigue el principio de encapsulamiento al decl
 
 ---
 
-# Descripción de Diagramas UML del Paquete `proyectointegrador.modelo`
+# Descripción del Diagrama UML del Paquete `proyectointegrador.modelo`
 
-Este documento detalla la estructura y las relaciones de las clases principales del modelo: `Colectivo`, `Linea`, `Parada` y `Pasajero`.
+Este documento detalla la estructura y las relaciones de las clases principales del modelo: `Colectivo`, `Linea`, `Parada` y `Pasajero`, según su implementación real en el código fuente.
 
-#### 1. Clases y sus Relaciones
+## 1. Clases y sus Relaciones
 
-Se describe el rol de cada clase y cómo interactúan entre sí, utilizando la terminología estándar de UML (Agregación, Asociación).
+**Colectivo**
+- Modela un vehículo de transporte colectivo.
+- Tiene una **Agregación** con `Linea` (cada colectivo pertenece a una línea concreta, pero la línea existe independientemente).
+- Tiene una **Agregación** con `Pasajero` (a través de su lista `pasajerosABordo`).
+- Tiene una **Asociación** con `Parada` (referencia a `paradaActual`).
 
-* **`Colectivo`**
-    * Modela un vehículo de transporte.
-    * Tiene una relación de **Agregación** con `Linea` (un Colectivo pertenece a una Linea, pero la Linea existe independientemente del Colectivo).
-    * Tiene una relación de **Agregación** con `Pasajero` a través de su lista `pasajerosABordo`.
-    * Mantiene una **Asociación** simple con `Parada` para rastrear su `paradaActual`.
+**Linea**
+- Representa una ruta de transporte determinada.
+- Tiene una **Agregación** con `Parada` (lista ordenada `recorrido` que define el trayecto).
 
-* **`Linea`**
-    * Representa una ruta de transporte.
-    * Tiene una relación de **Agregación** con `Parada`, conteniendo una lista ordenada de ellas que conforman su `recorrido`.
+**Parada**
+- Representa una ubicación física donde los pasajeros esperan.
+- Tiene una **Agregación** con `Pasajero` (cola `pasajerosEsperando` de los que esperan en la parada).
 
-* **`Parada`**
-    * Representa una ubicación física donde los pasajeros esperan.
-    * Tiene una relación de **Agregación** con `Pasajero`, gestionando una cola (`pasajerosEsperando`) de los que aguardan.
+**Pasajero**
+- Modela a una persona usuaria del sistema de transporte.
+- Tiene **Asociaciones** con dos instancias de `Parada`: `paradaOrigen` y `paradaDestino`.
 
-* **`Pasajero`**
-    * Modela a un usuario del sistema.
-    * Mantiene dos **Asociaciones** con `Parada` para definir su `paradaOrigen` y `paradaDestino`.
+## 2. Atributos principales y visibilidad
 
----
+Todos los atributos son `private` y la mayoría son `final` (inmutables tras la construcción), salvo los de estado (que pueden cambiar durante la simulación). El acceso es por métodos públicos (getters/setters) según buenas prácticas de Java.
 
-#### 2. Atributos Principales y Visibilidad
+### Colectivo
 
-A continuación se listan los atributos fundamentales de cada clase. Es importante destacar que, siguiendo las buenas prácticas de encapsulamiento, **todos los atributos son `private` (`-`)** y se accede a ellos a través de métodos públicos (getters/setters).
+- `- final idColectivo: String`
+- `- final lineaAsignada: Linea`
+- `- final capacidadMaxima: int`
+- `- final capacidadSentados: int`
+- `- final capacidadParados: int`
+- `- final pasajerosABordo: List<Pasajero>`
+- `- paradaActual: Parada`
+- `- indiceParadaActualEnRecorrido: int`
+- `- cantidadPasajerosSentados: int`
+- `- estado: String`
+- `- recorridoActual: int`
+- `- recorridosRestantes: int`
+- `- pasoDeSalida: int`
 
-* **Colectivo**
-    * `- idColectivo: String`
-    * `- lineaAsignada: Linea`
-    * `- capacidadMaxima: int`
-    * `- pasajerosABordo: List<Pasajero>`
-    * `- paradaActual: Parada`
+### Linea
 
-* **Linea**
-    * `- id: String`
-    * `- nombre: String`
-    * `- recorrido: List<Parada>`
+- `- final id: String`
+- `- final nombre: String`
+- `- final recorrido: List<Parada>`
 
-* **Parada**
-    * `- id: String`
-    * `- direccion: String`
-    * `- pasajerosEsperando: Queue<Pasajero>`
+### Parada
 
-* **Pasajero**
-    * `- id: String`
-    * `- paradaOrigen: Parada`
-    * `- paradaDestino: Parada`
----
+- `- final id: String`
+- `- final direccion: String`
+- `- final latitud: double`
+- `- final longitud: double`
+- `- final pasajerosEsperando: Queue<Pasajero>`
+- `- tiempoEsperaPromedio: double`
+- `- pasajerosAbordados: int`
+- `- colectivosPasados: int`
 
-#### 3. Detalle de Relaciones y Cardinalidad
+### Pasajero
 
-Esta sección describe las relaciones en un formato similar a PlantUML, especificando la multiplicidad (cardinalidad) de cada una.
+- `- final id: String`
+- `- final paradaOrigen: Parada`
+- `- final paradaDestino: Parada`
+- `- colectivosEsperados: int`
+- `- viajoSentado: boolean`
+- `- pudoSubir: boolean`
+- `- bajadaForzosa: boolean`
+- `- satisfaccion: int`
 
-* `Colectivo "1" o-- "1" Linea`
-    * Un `Colectivo` siempre pertenece a `1` y solo `1` `Linea`. La `Linea` es una parte agregada del `Colectivo`.
+## 3. Detalle de relaciones y cardinalidad
 
-* `Colectivo "1" o-- "0..*" Pasajero`
-    * Un `Colectivo` puede tener `0` o muchos (`*`) `Pasajero`s a bordo.
-
-* `Colectivo "1" -- "1" Parada`
-    * Un `Colectivo` siempre está en `1` `Parada` actual (o en tránsito hacia ella).
-
-* `Linea "1" o-- "2..*" Parada`
-    * Una `Linea` se compone de un recorrido de al menos `2` (origen y destino) o muchas (`*`) `Parada`s.
-
-* `Parada "1" o-- "0..*" Pasajero`
-    * Una `Parada` puede tener `0` o muchos (`*`) `Pasajero`s esperando.
-
-* `Pasajero "1" --> "1" Parada` (origen)
-* `Pasajero "1" --> "1" Parada` (destino)
-    * Un `Pasajero` siempre tiene exactamente `1` `Parada` de origen y `1` `Parada` de destino.
+- `Colectivo "1" o-- "1" Linea`
+- `Colectivo "1" o-- "0..*" Pasajero`
+- `Colectivo "1" -- "1" Parada`
+- `Linea "1" o-- "2..*" Parada`
+- `Parada "1" o-- "0..*" Pasajero`
+- `Pasajero "1" --> "1" Parada` (origen)
+- `Pasajero "1" --> "1" Parada` (destino)
 
 ---
 
 ![Diagrama de Clases UML](./src/main/resources/Documentacion/UMLSimplificado.png)
 
 ---
+
 ## 5. Implementación de la Solución
 
 La solución propuesta sigue una arquitectura modular por capas, facilitando la mantenibilidad, la extensibilidad y la claridad del sistema. A continuación, se describen las funciones y responsabilidades principales de cada parte del simulador.
@@ -184,7 +187,6 @@ El sistema está organizado en los siguientes paquetes, cada uno con responsabil
 
 - **`logica`**
   - `Simulador`: Núcleo de la simulación. Gestiona el bucle principal, el avance de los colectivos, la gestión de pasajeros y la interacción con los demás módulos lógicos.
-  - `PlanificadorRutas`: Calcula rutas óptimas para los pasajeros utilizando grafos.
   - `GestorEstadisticas`: Recolecta eventos relevantes durante la simulación y calcula indicadores de rendimiento (KPIs).
   - `GeneradorPasajeros`: Responsable de la creación y asignación inicial de pasajeros al sistema.
   - `SimuladorHelper`: Provee funciones auxiliares para la operación y flujo de la simulación.
@@ -224,7 +226,6 @@ Este diseño permite observar la evolución dinámica del sistema y analizar el 
 
 Durante la simulación, el `Simulador` delega tareas especializadas a otros componentes de la capa lógica:
 
-- **PlanificadorRutas:** Calcula la mejor ruta posible para cada pasajero, considerando la red de líneas y paradas como un grafo. Implementa algoritmos de búsqueda de caminos óptimos, como Dijkstra.
 - **GestorEstadisticas:** Registra y procesa eventos clave (como tiempos de espera, ocupación de colectivos, cantidad de pasajeros transportados), permitiendo la generación de indicadores de rendimiento (KPIs) al finalizar la simulación.
 
 Al concluir la simulación, la clase `ReporteSimulacion` del paquete `reporte` toma los datos recolectados y los presenta de manera clara y formateada. La capa `interfaz` se encarga de mostrar estos resultados al usuario, ya sea en consola o a través de otros medios de presentación.
@@ -292,28 +293,23 @@ Al iniciar la aplicación, se presenta el siguiente menú de opciones en consola
 
 ```
 --- MENÚ PRINCIPAL ---
-1. Ejecutar paso de simulación
-2. Ejecutar simulación completa
-3. Calcular ruta óptima entre paradas
-4. Ver estadísticas de la simulación
+1. Ejecutar simulación completa
+2. Ver estadísticas de la simulación
 0. Salir
 Seleccione una opción:
 ```
 
 **Opciones y funcionalidades:**
-- **Opción 1:** Ejecuta un único paso/ciclo de la simulación, mostrando los eventos que ocurren en ese ciclo (movimientos de colectivos, ascenso/descenso de pasajeros, etc.).
-- **Opción 2:** Ejecuta la simulación completa hasta que todos los pasajeros hayan llegado a destino o no queden nuevos eventos por procesar, mostrando los eventos agrupados por colectivo.
-- **Opción 3:** Permite ingresar los IDs de dos paradas y calcula la ruta más corta entre ellas usando el algoritmo de Dijkstra, mostrando el recorrido óptimo.
-- **Opción 4:** Muestra un reporte completo con los principales indicadores de desempeño (KPIs), incluyendo:
+- **Opción 1:** Ejecuta la simulación completa hasta que todos los pasajeros hayan llegado a destino o no queden nuevos eventos por procesar, mostrando los eventos agrupados por colectivo.
+- **Opción 2:** Muestra un reporte completo con los principales indicadores de desempeño (KPIs), incluyendo:
     - **Índice de Satisfacción del Cliente** (Anexo I)
     - **Ocupación Promedio de Colectivos** (Anexo II)
-    - Estadísticas adicionales: tiempos de viaje y espera, total de pasajeros transportados, cantidad de pasajeros que no pudieron subir, etc.
+    - Estadísticas adicionales: total de pasajeros transportados, cantidad de pasajeros que no pudieron subir, etc.
 
 ### 6.4. Interpretación de Resultados
 
-- **Eventos en tiempo real:** Las opciones 1 y 2 muestran, paso a paso o en bloque, los eventos de la simulación para facilitar el seguimiento del sistema.
-- **Cálculo de rutas:** Opción 3 permite analizar la red y comparar la eficiencia de las rutas propuestas.
-- **Reporte de estadísticas:** Opción 4 ofrece los KPIs más relevantes para evaluar la calidad del servicio simulado y la eficiencia operativa del sistema.
+- **Eventos en tiempo real:** Las opción 1 muestra, en bloque, los eventos de la simulación para facilitar el seguimiento del sistema.
+- **Reporte de estadísticas:** Opción 2 ofrece los KPIs más relevantes para evaluar la calidad del servicio simulado y la eficiencia operativa del sistema.
 
 ### 6.5. Documentación y Recursos Adicionales
 
@@ -347,13 +343,14 @@ Durante el desarrollo iterativo del simulador se identificaron y resolvieron num
 
 ### 7.2. Bugs Funcionales y de Simulación
 
-- **Problema:** Se detectaron errores en la gestión de rutas y recorridos, incluyendo:
+- **Problema:** Se detectaron errores en la gestión de recorridos, incluyendo:
   - `ConcurrentModificationException` al procesar la bajada de pasajeros.
-  - `IllegalArgumentException` al insertar aristas duplicadas en el planificador de rutas, cuando varias líneas compartían tramos.
+  - Simular paso a paso.
+  - Errores en el manejo de los asientos.	
   - Errores en la inicialización de colectivos y en la asignación de capacidades sentados/parados.
 - **Soluciones implementadas:**
   - Mejoras en la gestión de colecciones para evitar modificaciones concurrentes.
-  - Verificación previa a la inserción de aristas para evitar duplicados.
+  -Cambiar la lógica con la cual eran asignados los asientos a los pasajeros.
   - Refactorización de la inicialización de colectivos y parámetros, alineando la configuración (`config.properties`) con la lógica del sistema.
 
 ### 7.3. Validación y Manejo de Errores
@@ -408,7 +405,7 @@ Las pruebas abarcan los siguientes aspectos:
   - *ColectivoTest, LineaTest, ParadaTest, PasajeroTest*  
     Prueban constructores, invariantes, gestión de pasajeros, movimiento, recorridos, contratos (`equals`, `hashCode`, `toString`), reportes y reglas de negocio (capacidad, asientos, estados).
 - **Lógica de simulación:**  
-  - *SimuladorTest, GestorEstadisticasTest, PlanificadorRutasTest, GeneradorPasajerosTest*  
+  - *SimuladorTest, GestorEstadisticasTest, GeneradorPasajerosTest*  
     Validan escenarios completos, cálculos de KPIs, rutas óptimas, generación de pasajeros y manejo de excepciones.
 - **Interfaz y configuración:**  
   - *SimuladorControllerTest, SimuladorConfigTest, SimuladorUITest*  
@@ -438,7 +435,6 @@ El sistema no solo prueba los caminos felices, sino también múltiples casos de
 
 ```
 Advertencia: Línea de parada con formato incorrecto omitida -> P05;Formato Incorrecto Menos Campos
-Advertencia: Coordenadas inválidas en línea de parada omitida -> P06;Latitud No Numerica;ERROR;20.6
 Advertencia: ID o Dirección de parada vacíos en línea omitida -> ;Nombre Parada ID Vacio;10.7;20.7
 Error: La línea 'L04 - Linea Parada Inexistente' referencia una parada desconocida ('P99'). La línea no será cargada.
 ```
@@ -511,6 +507,8 @@ A pesar de que el sistema cumple con los objetivos y requisitos de los increment
 - **Mejoras en la calificación y satisfacción del pasajero:**
   - Implementar un sistema de calificación más complejo, teniendo en cuenta tiempos de espera, trasbordos, y experiencias individuales de viaje.
 
+- **Mejoras al inicializar los datos:**
+  -Implementar estructuras condicionales para verificar que sean coherentes los parámetros iniciales
 ---
 
 Estas mejoras, junto a la continua refactorización y extensión de la cobertura de pruebas, permitirán evolucionar el simulador hacia un entorno aún más realista y útil tanto para propósitos académicos como para potenciales aplicaciones reales.
@@ -529,5 +527,3 @@ El equipo dedicó especial atención a la **ingeniería de prompts** para optimi
 En definitiva, el sistema entrega no solo una solución satisfactoria al problema planteado, sino también una base sólida para futuras mejoras, extensiones y aplicaciones reales. El proyecto ha sido un ejercicio integral en ingeniería de software, colaboración y aplicación de tecnologías emergentes, sentando un precedente valioso para trabajos futuros en la materia y en el desarrollo profesional en general.
 
 ---
-
-

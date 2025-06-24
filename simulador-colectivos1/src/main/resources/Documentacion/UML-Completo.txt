@@ -2,12 +2,12 @@
 skinparam classAttributeIconSize 0
 
 class Colectivo {
-  - idColectivo: String
-  - lineaAsignada: Linea
-  - capacidadMaxima: int
-  - capacidadSentados: int
-  - capacidadParados: int
-  - pasajerosABordo: List<Pasajero>
+  - final idColectivo: String
+  - final lineaAsignada: Linea
+  - final capacidadMaxima: int
+  - final capacidadSentados: int
+  - final capacidadParados: int
+  - final pasajerosABordo: List<Pasajero>
   - paradaActual: Parada
   - indiceParadaActualEnRecorrido: int
   - cantidadPasajerosSentados: int
@@ -15,7 +15,9 @@ class Colectivo {
   - recorridoActual: int
   - recorridosRestantes: int
   - pasoDeSalida: int
+  -- 
   + Colectivo(idColectivo: String, lineaAsignada: Linea, capacidadMaxima: int, capacidadSentados: int, capacidadParados: int, recorridosRestantes: int, pasoDeSalida: int)
+  # Colectivo(idColectivo: String, lineaAsignada: Linea, capacidadMaxima: int, capacidadSentados: int, capacidadParados: int, recorridosRestantes: int)
   + subirPasajero(pasajero: Pasajero): boolean
   + bajarPasajero(pasajero: Pasajero): boolean
   + avanzarAProximaParada(): void
@@ -42,12 +44,16 @@ class Colectivo {
   + setEstado(estado: String): void
   + getPasoDeSalida(): int
   + setPasoDeSalida(pasoDeSalida: int): void
+  + toString(): String
+  + equals(o: Object): boolean
+  + hashCode(): int
 }
 
 class Linea {
-  - id: String
-  - nombre: String
-  - recorrido: List<Parada>
+  - final id: String
+  - final nombre: String
+  - final recorrido: List<Parada>
+  --
   + Linea(id: String, nombre: String)
   + agregarParadaAlRecorrido(parada: Parada): void
   + tieneParadaEnRecorrido(parada: Parada): boolean
@@ -60,17 +66,21 @@ class Linea {
   + getParadaPorIndice(indice: int): Parada
   + getPrimeraParada(): Parada
   + getUltimaParada(): Parada
+  + toString(): String
+  + equals(o: Object): boolean
+  + hashCode(): int
 }
 
 class Parada {
-  - id: String
-  - direccion: String
-  - latitud: double
-  - longitud: double
-  - pasajerosEsperando: Queue<Pasajero>
+  - final id: String
+  - final direccion: String
+  - final latitud: double
+  - final longitud: double
+  - final pasajerosEsperando: Queue<Pasajero>
   - tiempoEsperaPromedio: double
   - pasajerosAbordados: int
   - colectivosPasados: int
+  --
   + Parada(id: String, direccion: String, latitud: double, longitud: double)
   + Parada(id: String, direccion: String)
   + agregarPasajero(pasajero: Pasajero): void
@@ -88,17 +98,21 @@ class Parada {
   + getColectivosPasados(): int
   + getTiempoEsperaPromedio(): double
   + getPasajerosEsperando(): Queue<Pasajero>
+  + toString(): String
+  + equals(o: Object): boolean
+  + hashCode(): int
 }
 
 class Pasajero {
-  - id: String
-  - paradaOrigen: Parada
-  - paradaDestino: Parada
+  - final id: String
+  - final paradaOrigen: Parada
+  - final paradaDestino: Parada
   - colectivosEsperados: int
   - viajoSentado: boolean
   - pudoSubir: boolean
   - bajadaForzosa: boolean
   - satisfaccion: int
+  --
   + Pasajero(id: String, paradaOrigen: Parada, paradaDestino: Parada)
   + Pasajero(paradaOrigen: Parada, paradaDestino: Parada)
   + incrementarColectivosEsperados(): void
@@ -116,6 +130,9 @@ class Pasajero {
   + setBajadaForzosa(valor: boolean): void
   + getSatisfaccion(): int
   + setSatisfaccion(valor: int): void
+  + toString(): String
+  + equals(o: Object): boolean
+  + hashCode(): int
 }
 
 Colectivo "1" o-- "1" Linea : lineaAsignada
