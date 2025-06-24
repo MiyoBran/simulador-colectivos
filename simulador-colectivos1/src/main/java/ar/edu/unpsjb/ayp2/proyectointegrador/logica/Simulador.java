@@ -230,7 +230,7 @@ public List<String> ejecutarPasoDeSimulacion() {
         if (pasajerosSimulados != null) {
             for (Pasajero pasajero : pasajerosSimulados) {
                 int calificacion = calcularCalificacionSatisfaccion(pasajero);
-                gestorEstadisticas.registrarCalificacionSatisfaccion(calificacion);
+
             }
         }
         return reporte;

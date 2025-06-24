@@ -3,16 +3,14 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
-import java.util.stream.Collectors;
 
 /**
- * Representa una parada de colectivo en el sistema de transporte público.
- * <p>
- * Cada parada tiene un identificador, dirección, coordenadas y gestiona
- * una cola de pasajeros en espera.
+ * Representa una parada de colectivo. Cada parada tiene un identificador único,
+ * una dirección, coordenadas geográficas y gestiona una cola de pasajeros en
+ * espera y sus propias estadísticas básicas.
  *
  * @author Miyo
- * @version 1.2
+ * @version 1.1
  */
 public class Parada {
 
@@ -31,6 +29,14 @@ public class Parada {
 	/** Cola de pasajeros que se encuentran esperando en esta parada. */
 	private final Queue<Pasajero> pasajerosEsperando;
 
+	// --- Atributos de Estadísticas ---
+	/** Tiempo promedio de espera de los pasajeros que abordaron en esta parada. */
+	private double tiempoEsperaPromedio;
+	/** Cantidad total de pasajeros que han abordado en esta parada. */
+	private int pasajerosAbordados;
+	/** Cantidad total de colectivos que han pasado por esta parada. */
+	private int colectivosPasados;
+
 	// =================================================================================
 	// CONSTRUCTORES
 	// =================================================================================
@@ -44,16 +50,20 @@ public class Parada {
 	 * @param longitud  La longitud geográfica de la parada.
 	 */
 	public Parada(String id, String direccion, double latitud, double longitud) {
-		if (id == null || id.trim().isEmpty())
+		if (id == null || id.trim().isEmpty()) {
 			throw new IllegalArgumentException("El ID de la parada no puede ser nulo o vacío.");
-		if (direccion == null || direccion.trim().isEmpty())
+		}
+		if (direccion == null || direccion.trim().isEmpty()) {
 			throw new IllegalArgumentException("La dirección de la parada no puede ser nula o vacía.");
-
+		}
 		this.id = id;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.pasajerosEsperando = new LinkedList<>();
+		this.tiempoEsperaPromedio = 0.0;
+		this.pasajerosAbordados = 0;
+		this.colectivosPasados = 0;
 	}
 
 	/**
@@ -67,7 +77,7 @@ public class Parada {
 	}
 
 	// =================================================================================
-	// MÉTODOS DE GESTIÓN DE LA COLA DE PASAJEROS
+	// MÉTODOS DE GESTIÓN DE LA COLA
 	// =================================================================================
 
 	/**
@@ -88,10 +98,22 @@ public class Parada {
 	public Pasajero removerSiguientePasajero() {
 		return this.pasajerosEsperando.poll();
 	}
+
+	/**
+	 * Devuelve el siguiente pasajero de la cola sin removerlo.
+	 * @return El siguiente pasajero, o null si la cola está vacía.
+	 */
+	public Pasajero peekSiguientePasajero() {
+		return this.pasajerosEsperando.peek();
+	}
 	
-	// =================================================================================
-	// MÉTODOS DE CONSULTA
-	// =================================================================================
+	/**
+	 * Verifica si hay pasajeros esperando en la parada.
+	 * @return true si hay pasajeros esperando, false en caso contrario.
+	 */
+	public boolean hayPasajerosEsperando() {
+		return !this.pasajerosEsperando.isEmpty();
+	}
 
 	/**
 	 * Devuelve la cantidad de pasajeros esperando en la parada.
@@ -101,25 +123,24 @@ public class Parada {
 		return this.pasajerosEsperando.size();
 	}
 
-	/**
-	 * [Sugerencia de Legibilidad]
-	 * Genera un reporte multilínea del estado actual de la parada.
-	 * @return Un String formateado con los detalles de la parada y los pasajeros esperando.
-	 */
-	public String getReporteDeEstado() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("--- Estado de Parada: ").append(this.id).append(" (").append(this.direccion).append(") ---\n");
-		sb.append("  Pasajeros esperando: ").append(this.cantidadPasajerosEsperando()).append("\n");
+	// =================================================================================
+	// MÉTODOS DE GESTIÓN DE ESTADÍSTICAS
+	// =================================================================================
 
-		if (!pasajerosEsperando.isEmpty()) {
-			String pasajerosStr = pasajerosEsperando.stream()
-					.map(p -> p.getId() + " (Destino: " + p.getParadaDestino().getId() + ")")
-					.collect(Collectors.joining(", "));
-			sb.append("  En cola: [").append(pasajerosStr).append("]\n");
-		}
-		sb.append("-----------------------------------------------------");
-		return sb.toString();
+	/**
+	 * Incrementa en uno la cantidad de pasajeros que han abordado en esta parada.
+	 */
+	public void incrementarPasajerosAbordados() {
+		this.pasajerosAbordados++;
 	}
+
+	/**
+	 * Incrementa en uno la cantidad de colectivos que han pasado por esta parada.
+	 */
+	public void incrementarColectivosPasados() {
+		this.colectivosPasados++;
+	}
+
 
 	// =================================================================================
 	// GETTERS
@@ -129,24 +150,27 @@ public class Parada {
 	public String getDireccion() { return this.direccion; }
 	public double getLatitud() { return this.latitud; }
 	public double getLongitud() { return this.longitud; }
-
+	public int getPasajerosAbordados() { return this.pasajerosAbordados; }
+	public int getColectivosPasados() { return this.colectivosPasados; }
+	public double getTiempoEsperaPromedio() { return this.tiempoEsperaPromedio; }
+	
 	/**
-	 * Devuelve una copia defensiva de la cola de pasajeros.
-	 * Esto evita que el código externo modifique la cola interna de la parada.
-	 *
-	 * @return Una nueva cola (LinkedList) con los pasajeros que están esperando.
+	 * Devuelve la cola de pasajeros esperando en la parada.
+	 * ADVERTENCIA: Devuelve la referencia original. Modificarla externamente afectará
+	 * el estado de la parada. Para una versión segura, ver getCopiaPasajerosEsperando().
+	 * @return la cola de pasajeros.
 	 */
 	public Queue<Pasajero> getPasajerosEsperando() {
-		return new LinkedList<>(this.pasajerosEsperando);
+		return this.pasajerosEsperando;
 	}
-	
+
 	// =================================================================================
 	// MÉTODOS SOBREESCRITOS (Object)
 	// =================================================================================
 
 	@Override
 	public String toString() {
-		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", esperando=" + cantidadPasajerosEsperando() + '}';
+		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", esperando=" + pasajerosEsperando.size() + '}';
 	}
 
 	@Override

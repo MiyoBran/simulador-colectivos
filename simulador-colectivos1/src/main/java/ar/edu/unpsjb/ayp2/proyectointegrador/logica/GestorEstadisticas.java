@@ -1,9 +1,10 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.logica;
 
-import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Pasajero;
-import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Colectivo;
+import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Pasajero;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,232 +17,154 @@ import java.util.Map;
  * @version 2.0
  */
 public class GestorEstadisticas {
-    private int pasajerosTransportados;
-    private int pasajerosTotales;
-    private int colectivosTotales;
-    private int colectivosEnServicio;
-    private int pasajerosSatisfechos;
-    private int pasajerosInsatisfechos;
-    private int sumaTiemposEspera;
-    private int sumaTiemposViaje;
-    private int sumaSatisfaccion;
-    private List<Pasajero> pasajeros;
-    private Map<String, Integer> ocupacionPorColectivo;
 
-    // Para índice de satisfacción (Anexo I)
-   
-    private Map<Integer, Integer> conteoCalificaciones; // calificación (1-5) -> cantidad
-  
-    private int sumaCalificaciones;
-    private double indiceSatisfaccion;
-    private int totalPasajerosCalificados;
+	// =================================================================================
+	// ATRIBUTOS
+	// =================================================================================
 
-    // Para ocupación promedio (Anexo II)
-    private final Map<String, List<Double>> ocupacionesPorColectivo; // idColectivo -> lista de ocupaciones por tramo
-    private final Map<String, Integer> capacidadPorColectivo;
+	// --- Estadísticas Generales ---
+	private final List<Pasajero> pasajerosRegistrados;
+	private int pasajerosTransportados;
+	private int pasajerosSatisfechos;
+	private int pasajerosInsatisfechos;
+	private final Map<String, Integer> ocupacionPorColectivo;
 
-    public GestorEstadisticas() {
-        this.pasajerosTransportados = 0;
-        this.pasajerosTotales = 0;
-        this.colectivosTotales = 0;
-        this.colectivosEnServicio = 0;
-        this.pasajerosSatisfechos = 0;
-        this.pasajerosInsatisfechos = 0;
-        this.sumaTiemposEspera = 0;
-        this.sumaTiemposViaje = 0;
-        this.sumaSatisfaccion = 0;
-        this.pasajeros = new ArrayList<>();
-        this.ocupacionPorColectivo = new HashMap<>();
+	// --- Estadísticas de Satisfacción (Anexo I) ---
+	private final Map<Integer, Integer> conteoCalificaciones; // Calificación (1-5) -> Cantidad
+	private int sumaCalificaciones;
+	private int totalPasajerosCalificados;
 
-        this.conteoCalificaciones = new HashMap<>();
-        this.sumaCalificaciones = 0;
-        this.totalPasajerosCalificados = 0;
-        this.ocupacionesPorColectivo = new HashMap<>();
-        this.capacidadPorColectivo = new HashMap<>();
-    }
+	// --- Estadísticas de Ocupación de Colectivos (Anexo II) ---
+	private final Map<String, List<Double>> ocupacionesPorColectivo; // idColectivo -> lista de % ocupación
+	private final Map<String, Integer> capacidadPorColectivo;
 
-    /** Registrar un pasajero en la simulación. */
-    public void registrarPasajero(Pasajero p) {
-        pasajeros.add(p);
-        pasajerosTotales++;
-    }
+	// =================================================================================
+	// CONSTRUCTOR Y RESET
+	// =================================================================================
 
-    /** Registrar un colectivo en la simulación. */
-    public void registrarColectivo(Colectivo c) {
-        colectivosTotales++;
-        ocupacionPorColectivo.put(c.getIdColectivo(), 0);
-    }
+	public GestorEstadisticas() {
+		this.pasajerosRegistrados = new ArrayList<>();
+		this.ocupacionPorColectivo = new HashMap<>();
+		this.conteoCalificaciones = new HashMap<>();
+		this.ocupacionesPorColectivo = new HashMap<>();
+		this.capacidadPorColectivo = new HashMap<>();
+		this.reset();
+	}
 
-    /** Registrar que un pasajero fue transportado. */
-    public void registrarTransporte(Pasajero p) {
-    	
-        pasajerosTransportados++;
-       // sumaTiemposEspera += p.getTiempoEspera();
-       //sumaTiemposViaje += p.getTiempoViaje();
-        int satisfaccion = p.calcularSatisfaccion();
-        sumaSatisfaccion += satisfaccion;
-        if (satisfaccion >= 3) {
-            pasajerosSatisfechos++;
-        } else {
-            pasajerosInsatisfechos++;
-        }
-        // --- NUEVO: Actualizar desglose de calificaciones y stats de satisfacción ---
-        //int calificacion = mapSatisfaccionToCalificacion(satisfaccion);
-        conteoCalificaciones.put(satisfaccion, conteoCalificaciones.getOrDefault(satisfaccion, 0)+ 1);
-        sumaCalificaciones += satisfaccion * 20; // Mapeo directo de 1-5 a 20-100
-        totalPasajerosCalificados++;
-    }
+	/** Resetear todas las estadísticas a su estado inicial. */
+	public void reset() {
+		this.pasajerosRegistrados.clear();
+		this.ocupacionPorColectivo.clear();
+		this.conteoCalificaciones.clear();
+		this.ocupacionesPorColectivo.clear();
+		this.capacidadPorColectivo.clear();
+		this.pasajerosTransportados = 0;
+		this.pasajerosSatisfechos = 0;
+		this.pasajerosInsatisfechos = 0;
+		this.sumaCalificaciones = 0;
+		this.totalPasajerosCalificados = 0;
+	}
 
-    /** Mapea la satisfacción (0-100) a calificación 1-5. */
-    private int mapSatisfaccionToCalificacion(int satisfaccion) {
-        if (satisfaccion >= 80) return 5;
-        if (satisfaccion >= 60) return 4;
-        if (satisfaccion >= 40) return 3;
-        if (satisfaccion >= 20) return 2;
-        return 1;
-    }
+	// =================================================================================
+	// MÉTODOS DE REGISTRO
+	// =================================================================================
 
-    /** Calcular el tiempo promedio de espera de los pasajeros transportados. */
-    public double getTiempoEsperaPromedio() {
-        return pasajerosTransportados == 0 ? 0 : (double) sumaTiemposEspera / pasajerosTransportados;
-    }
+	/** Registra un nuevo pasajero al inicio de la simulación. */
+	public void registrarPasajero(Pasajero p) {
+		this.pasajerosRegistrados.add(p);
+	}
 
-    /** Calcular el tiempo promedio de viaje de los pasajeros transportados. */
-    public double getTiempoViajePromedio() {
-        return pasajerosTransportados == 0 ? 0 : (double) sumaTiemposViaje / pasajerosTransportados;
-    }
+	/** Registra que un pasajero fue transportado y procesa su satisfacción. */
+	public void registrarTransporte(Pasajero p) {
+		this.pasajerosTransportados++;
+		
+		int satisfaccion = p.calcularSatisfaccion(); // Asumimos que devuelve 1-5
+		
+		if (satisfaccion >= 3) {
+			this.pasajerosSatisfechos++;
+		} else {
+			this.pasajerosInsatisfechos++;
+		}
+		
+		this.conteoCalificaciones.put(satisfaccion, this.conteoCalificaciones.getOrDefault(satisfaccion, 0) + 1);
+		this.sumaCalificaciones += satisfaccion;
+		this.totalPasajerosCalificados++;
+	}
 
-    /** Calcular la satisfacción promedio de los pasajeros transportados. */
-    public double getSatisfaccionPromedio() {
-        // Ahora se calcula como el promedio de calificaciones (1-5) 
-        if (pasajerosTransportados == 0 || totalPasajerosCalificados == 0) return 0;
-        return ((double) sumaCalificaciones / totalPasajerosCalificados);
-    }
+	/** Registrar la capacidad máxima de un colectivo para el cálculo de ocupación. */
+	public void registrarCapacidadColectivo(String idColectivo, int capacidadMaxima) {
+		this.capacidadPorColectivo.put(idColectivo, capacidadMaxima);
+	}
 
-    /** Obtener el porcentaje de pasajeros satisfechos. */
-    public double getPorcentajeSatisfechos() {
-        return pasajerosTransportados == 0 ? 0 : 100.0 * pasajerosSatisfechos / pasajerosTransportados;
-    }
+	/** Registrar la ocupación de un colectivo en un tramo del recorrido. */
+	public void registrarOcupacionTramo(String idColectivo, int pasajerosEnTramo) {
+		Integer capacidad = capacidadPorColectivo.get(idColectivo);
+		if (capacidad == null || capacidad == 0) return;
+		
+		double ocupacion = (double) pasajerosEnTramo / capacidad;
+		this.ocupacionesPorColectivo.computeIfAbsent(idColectivo, k -> new ArrayList<>()).add(ocupacion);
+	}
 
-    /** Obtener el porcentaje de pasajeros insatisfechos. */
-    public double getPorcentajeInsatisfechos() {
-        return pasajerosTransportados == 0 ? 0 : 100.0 * pasajerosInsatisfechos / pasajerosTransportados;
-    }
+	// =================================================================================
+	// MÉTODOS DE CÁLCULO Y CONSULTA
+	// =================================================================================
 
-    /** Obtener la ocupación máxima registrada por colectivo. */
-    public Map<String, Integer> getOcupacionPorColectivo() {
-        return new HashMap<>(ocupacionPorColectivo);
-    }
+	/** Obtener el porcentaje de pasajeros satisfechos. */
+	public double getPorcentajeSatisfechos() {
+		return pasajerosTransportados == 0 ? 0 : 100.0 * pasajerosSatisfechos / pasajerosTransportados;
+	}
 
-    /** Obtener la cantidad total de pasajeros transportados. */
-    public int getPasajerosTransportados() {
-        return pasajerosTransportados;
-    }
+	/** Obtener el porcentaje de pasajeros insatisfechos. */
+	public double getPorcentajeInsatisfechos() {
+		return pasajerosTransportados == 0 ? 0 : 100.0 * pasajerosInsatisfechos / pasajerosTransportados;
+	}
 
-    /** Obtener la cantidad total de pasajeros simulados. */
-    public int getPasajerosTotales() {
-        return pasajerosTotales;
-    }
+	/** Devuelve el índice de satisfacción general (normalizado a 1). */
+	public double getIndiceSatisfaccion() {
+		if (totalPasajerosCalificados == 0) return 0.0;
+		// La suma de calificaciones (1-5) dividido por el máximo posible (pasajeros * 5)
+		return (double) sumaCalificaciones / (totalPasajerosCalificados * 5.0);
+	}
 
-    /** Obtener la cantidad total de colectivos simulados. */
-    public int getColectivosTotales() {
-        return colectivosTotales;
-    }
+	/** Devuelve el promedio de ocupación por colectivo como un mapa. */
+	public Map<String, Double> getOcupacionPromedioPorColectivo() {
+		Map<String, Double> promedios = new HashMap<>();
+		for (Map.Entry<String, List<Double>> entry : ocupacionesPorColectivo.entrySet()) {
+			List<Double> lista = entry.getValue();
+			if (lista != null && !lista.isEmpty()) {
+				double suma = lista.stream().mapToDouble(Double::doubleValue).sum();
+				promedios.put(entry.getKey(), suma / lista.size());
+			}
+		}
+		return promedios;
+	}
 
-    /** Registrar la calificación de satisfacción de un pasajero (Anexo I). */
-    @Deprecated
-    public void registrarCalificacionSatisfaccion(int calificacion) {
-        // Este método ya no debe usarse directamente. El desglose se actualiza en registrarTransporte.
-    }
+	/** Devuelve un desglose de los pasajeros por su estado final. */
+	public Map<String, Integer> getDesglosePasajeros() {
+		int transportados = 0;
+		int bajadosForzosamente = 0;
+		int nuncaSubieron = 0;
+		for (Pasajero p : pasajerosRegistrados) {
+			if (p.isBajadaForzosa()) {
+				bajadosForzosamente++;
+			} else if (!p.isPudoSubir()) {
+				nuncaSubieron++;
+			} else {
+				transportados++;
+			}
+		}
+		Map<String, Integer> desglose = new HashMap<>();
+		desglose.put("transportadosConExito", transportados);
+		desglose.put("bajadosForzosamente", bajadosForzosamente);
+		desglose.put("nuncaSubieron", nuncaSubieron);
+		return desglose;
+	}
 
-    /** Devuelve el índice de satisfacción según Anexo I. */
-    public double getIndiceSatisfaccion() {
-        if (totalPasajerosCalificados == 0) return 0.0;
-        double sumaPonderada = 0.0; // Local variable for calculation
-        for(Map.Entry<Integer, Integer> entry : conteoCalificaciones.entrySet()) {
-            int calificacion = entry.getKey();
-            int cantidad = entry.getValue();
-            // Calcular la suma ponderada de calificaciones
-            sumaPonderada += calificacion * cantidad;
-        }
-        return sumaPonderada / (totalPasajerosCalificados * 5); // Normalized value
-    }
+	// =================================================================================
+	// GETTERS (Defensivos)
+	// =================================================================================
 
-    /** Devuelve el desglose de calificaciones. */
-    public Map<Integer, Integer> getDesgloseCalificaciones() {
-        return new HashMap<>(conteoCalificaciones);
-    }
-
-    /** Registrar la capacidad máxima de un colectivo (para ocupación promedio). */
-    public void registrarCapacidadColectivo(String idColectivo, int capacidadMaxima) {
-        capacidadPorColectivo.put(idColectivo, capacidadMaxima);
-    }
-
-    /** Registrar ocupación de un colectivo en un tramo (Anexo II). */
-    public void registrarOcupacionTramo(String idColectivo, int pasajerosEnTramo) {
-        Integer capacidad = capacidadPorColectivo.get(idColectivo);
-        if (capacidad == null || capacidad == 0) return;
-        double ocupacion = (double) pasajerosEnTramo / capacidad;
-        ocupacionesPorColectivo.computeIfAbsent(idColectivo, k -> new ArrayList<>()).add(ocupacion);
-    }
-
-    /** Devuelve el promedio de ocupación por colectivo (Anexo II). */
-    public Map<String, Double> getOcupacionPromedioPorColectivo() {
-        Map<String, Double> promedios = new HashMap<>();
-        for (Map.Entry<String, List<Double>> entry : ocupacionesPorColectivo.entrySet()) {
-            List<Double> lista = entry.getValue();
-            if (!lista.isEmpty()) {
-                double suma = 0.0;
-                for (double o : lista) suma += o;
-                promedios.put(entry.getKey(), suma / lista.size());
-            }
-        }
-        return promedios;
-    }
-
-    /** Resetear todas las estadísticas (útil para nuevas simulaciones). */
-    public void reset() {
-        pasajerosTransportados = 0;
-        pasajerosTotales = 0;
-        colectivosTotales = 0;
-        colectivosEnServicio = 0;
-        pasajerosSatisfechos = 0;
-        pasajerosInsatisfechos = 0;
-        sumaTiemposEspera = 0;
-        sumaTiemposViaje = 0;
-        sumaSatisfaccion = 0;
-        pasajeros.clear();
-        ocupacionPorColectivo.clear();
-        conteoCalificaciones.clear();
-        sumaCalificaciones = 0;
-        totalPasajerosCalificados = 0;
-        ocupacionesPorColectivo.clear();
-        capacidadPorColectivo.clear();
-    }
-
-    /**
-     * Devuelve un desglose de los pasajeros por categoría:
-     * - "transportados": llegaron a destino
-     * - "bajadosForzosamente": bajados en terminal sin llegar a destino
-     * - "nuncaSubieron": nunca subieron a un colectivo (siguen esperando)
-     */
-    public Map<String, Integer> getDesglosePasajeros() {
-        int transportados = 0;
-        int bajadosForzosamente = 0;
-        int nuncaSubieron = 0;
-        for (Pasajero p : pasajeros) {
-            if (p.isBajadaForzosa()) {
-                bajadosForzosamente++;
-            } else if (!p.isPudoSubir()) {
-                nuncaSubieron++;
-            } else if (p.isPudoSubir() && !p.isBajadaForzosa()) {
-                transportados++;
-            }
-        }
-        Map<String, Integer> desglose = new HashMap<>();
-        desglose.put("transportados", transportados);
-        desglose.put("bajadosForzosamente", bajadosForzosamente);
-        desglose.put("nuncaSubieron", nuncaSubieron);
-        return desglose;
-    }
+	public int getPasajerosTransportados() { return this.pasajerosTransportados; }
+	public int getPasajerosTotales() { return this.pasajerosRegistrados.size(); }
+	public Map<Integer, Integer> getDesgloseCalificaciones() { return Collections.unmodifiableMap(this.conteoCalificaciones); }
 }
