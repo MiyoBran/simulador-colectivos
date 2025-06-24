@@ -53,8 +53,8 @@ public class Linea {
 	// =================================================================================
 
 	/**
-	 * Añade una parada al final del recorrido.
-	 * Evita la adición de paradas nulas o duplicados consecutivos.
+	 * Añade una parada al final del recorrido. Evita la adición de paradas nulas o
+	 * duplicados consecutivos.
 	 *
 	 * @param parada La parada a añadir.
 	 */
@@ -72,12 +72,13 @@ public class Linea {
 	// =================================================================================
 	// MÉTODOS DE CONSULTA
 	// =================================================================================
-	
+
 	/**
 	 * Verifica si una parada específica forma parte del recorrido de esta línea.
 	 *
 	 * @param parada La parada a buscar en el recorrido.
-	 * @return {@code true} si la parada está en el recorrido, {@code false} en caso contrario.
+	 * @return {@code true} si la parada está en el recorrido, {@code false} en caso
+	 *         contrario.
 	 */
 	public boolean tieneParadaEnRecorrido(Parada parada) {
 		return parada != null && this.recorrido.contains(parada);
@@ -94,8 +95,8 @@ public class Linea {
 	}
 
 	/**
-	 * [Sugerencia de Legibilidad]
-	 * Genera un reporte multilínea y formateado del recorrido de la línea.
+	 * [Sugerencia de Legibilidad] Genera un reporte multilínea y formateado del
+	 * recorrido de la línea.
 	 *
 	 * @return Un String con el detalle de la línea y todas sus paradas.
 	 */
@@ -119,12 +120,45 @@ public class Linea {
 	// GETTERS
 	// =================================================================================
 
-	public String getId() { return this.id; }
-	public String getNombre() { return this.nombre; }
-	public List<Parada> getRecorrido() { return new ArrayList<>(this.recorrido); }
-	public int getIndiceParada(Parada parada) { return parada == null ? -1 : this.recorrido.indexOf(parada); }
-	public Parada getPrimeraParada() { return this.recorrido.isEmpty() ? null : this.recorrido.get(0); }
-	public Parada getUltimaParada() { return this.recorrido.isEmpty() ? null : this.recorrido.get(this.recorrido.size() - 1); }
+	public String getId() {
+		return this.id;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public List<Parada> getRecorrido() {
+		return new ArrayList<>(this.recorrido);
+	}
+
+	public int getIndiceParada(Parada parada) {
+		return parada == null ? -1 : this.recorrido.indexOf(parada);
+	}
+
+	/**
+	 * Obtiene una parada del recorrido por su índice.
+	 * 
+	 * @param indice El índice de la parada (0-based).
+	 * 
+	 * @return La parada en el índice especificado.
+	 * @throws IndexOutOfBoundsException si el índice está fuera de rango.
+	 */
+	public Parada getParadaPorIndice(int indice) {
+		if (indice < 0 || indice >= this.recorrido.size()) {
+			throw new IndexOutOfBoundsException(
+					"Índice fuera de rango: " + indice + ". Tamaño del recorrido: " + this.recorrido.size());
+		}
+		return this.recorrido.get(indice);
+	}
+
+	public Parada getPrimeraParada() {
+		return this.recorrido.isEmpty() ? null : this.recorrido.get(0);
+	}
+
+	public Parada getUltimaParada() {
+		return this.recorrido.isEmpty() ? null : this.recorrido.get(this.recorrido.size() - 1);
+	}
 
 	// =================================================================================
 	// MÉTODOS SOBREESCRITOS (Object)
@@ -133,17 +167,17 @@ public class Linea {
 	@Override
 	public String toString() {
 		// Versión mejorada usando Streams y String.join para mayor claridad.
-		String recorridoStr = this.recorrido.stream()
-				.map(Parada::getId)
-				.collect(Collectors.joining(" -> "));
-		
+		String recorridoStr = this.recorrido.stream().map(Parada::getId).collect(Collectors.joining(" -> "));
+
 		return String.format("Linea{id='%s', nombre='%s', recorrido=[%s]}", id, nombre, recorridoStr);
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		Linea linea = (Linea) o;
 		return Objects.equals(id, linea.id);
 	}
