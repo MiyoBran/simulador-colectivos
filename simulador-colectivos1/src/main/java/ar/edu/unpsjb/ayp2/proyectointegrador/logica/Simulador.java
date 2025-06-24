@@ -1,5 +1,6 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.logica;
 
+import ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorConfig;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Colectivo;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Linea;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
@@ -13,129 +14,102 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * Simulador de recorrido de colectivos. * Esta clase gestiona la simulación de
- * colectivos recorriendo paradas, * subiendo y bajando pasajeros. * Requiere
- * líneas y paradas previamente cargadas.
- * 
+ * Motor principal de la simulación. Gestiona el ciclo de vida de los
+ * colectivos, el movimiento de pasajeros y la progresión del tiempo.
+ *
  * @author Miyo
- * @version 1.0
- * 
+ * @version 1.1
  */
 public class Simulador {
 
-	private List<Colectivo> colectivosEnSimulacion;
-	private Set<String> colectivosPendientesDeAvanzar; // IDs de colectivos que deben avanzar en el próximo paso
-	private Map<String, Linea> lineasDisponibles;
-    private GestorEstadisticas gestorEstadisticas;
-    private PlanificadorRutas planificadorRutas;
-    private List<Pasajero> pasajerosSimulados;
-    private int pasoActual = 0;
-    private int pasosPorFrecuencia = 1;
-    private Properties configProperties;
-    private boolean simulacionTerminada = false; // Indica si la simulación ha finalizado
+	// =================================================================================
+	// ATRIBUTOS
+	// =================================================================================
 
-    /**
-     * Constructor del simulador. Permite inyectar dependencias para facilitar el testeo.
-     * Si gestorEstadisticas o planificadorRutas son nulos, se crean instancias por defecto.
-     *
-     * @param lineas    Mapa de líneas disponibles para la simulación.
-     * @param paradas   Mapa de paradas disponibles para la simulación.
-     * @param pasajeros Lista de pasajeros que participarán en la simulación.
-     * @param gestorEstadisticas (opcional) Gestor de estadísticas a utilizar.
-     * @param planificadorRutas (opcional) Planificador de rutas a utilizar.
-     * @param configProperties Propiedades de configuración para la simulación.
-     */
-    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros,
-                     GestorEstadisticas gestorEstadisticas, PlanificadorRutas planificadorRutas, Properties configProperties) {
-        if (lineas == null || lineas.isEmpty()) {
-            throw new IllegalArgumentException("El simulador requiere líneas cargadas.");
-        }
-        if (paradas == null || paradas.isEmpty()) {
-            throw new IllegalArgumentException("El simulador requiere paradas cargadas.");
-        }
-        if (pasajeros == null) {
-            throw new IllegalArgumentException("La lista de pasajeros no puede ser nula.");
-        }
-        this.lineasDisponibles = lineas;
-        this.colectivosEnSimulacion = new ArrayList<>();
-        this.colectivosPendientesDeAvanzar = new HashSet<>();
-        this.gestorEstadisticas = (gestorEstadisticas != null) ? gestorEstadisticas : new GestorEstadisticas();
-        this.planificadorRutas = (planificadorRutas != null) ? planificadorRutas : new PlanificadorRutas();
-        this.pasajerosSimulados = pasajeros; // Guardar referencia a todos los pasajeros simulados
-        this.configProperties = configProperties;
-    }
+	private final List<Colectivo> colectivosEnSimulacion;
+	private final Set<String> colectivosPendientesDeAvanzar;
+	private final Map<String, Linea> lineasDisponibles;
+	private final List<Pasajero> pasajerosSimulados;
+	private final GestorEstadisticas gestorEstadisticas;
+	private final PlanificadorRutas planificadorRutas;
+	private final Properties configProperties;
 
-    /**
-     * Constructor original para compatibilidad: instancia dependencias por defecto.
-     */
-    public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros, Properties configProperties) {
-        this(lineas, paradas, pasajeros, null, null, configProperties);
-    }
+	private int pasoActual = 0;
+	private boolean simulacionTerminada = false;
+
+	// =================================================================================
+	// CONSTRUCTORES
+	// =================================================================================
 
 	/**
-	 * Inicializa los colectivos en la simulación con las capacidades y recorridos dados.
-	 * Cada colectivo se asigna a una línea disponible y se le asigna un ID único.
+	 * Constructor principal del simulador.
 	 *
-	 * @param capacidadColectivo Capacidad máxima de pasajeros por colectivo.
-	 * @param capacidadSentados Capacidad máxima de pasajeros sentados.
-	 * @param capacidadParados Capacidad máxima de pasajeros parados.
-	 * @param recorridosRestantes Cantidad de recorridos que debe realizar el colectivo.
+	 * @param lineas           Mapa de líneas disponibles para la simulación.
+	 * @param paradas          Mapa de paradas disponibles (usado para validación).
+	 * @param pasajeros        Lista de todos los pasajeros que participarán.
+	 * @param gestorEstadisticas Gestor de estadísticas a utilizar.
+	 * @param planificadorRutas Planificador de rutas a utilizar.
+	 * @param configProperties Propiedades de configuración.
 	 */
-	public void inicializarColectivos(int capacidadColectivo, int capacidadSentados, int capacidadParados, int recorridosRestantes) {
-        if (capacidadColectivo <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes <= 0) {
-            throw new IllegalArgumentException("Las capacidades y recorridos deben ser positivos.");
-        }
-        this.colectivosEnSimulacion.clear();
-        int colectivoCounter = 1;
-        for (Linea linea : lineasDisponibles.values()) {
-            String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
-            Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes);
-            this.colectivosEnSimulacion.add(nuevoColectivo);
-            // Registrar capacidad máxima para estadísticas de ocupación promedio (Anexo II)
-            if (gestorEstadisticas != null) {
-                gestorEstadisticas.registrarCapacidadColectivo(idColectivo, capacidadColectivo);
-            }
-            colectivoCounter++;
-        }
-        this.colectivosPendientesDeAvanzar.clear();
-    }
+	public Simulador(Map<String, Linea> lineas, Map<String, Parada> paradas, List<Pasajero> pasajeros,
+			GestorEstadisticas gestorEstadisticas, PlanificadorRutas planificadorRutas, Properties configProperties) {
+		if (lineas == null || lineas.isEmpty() || paradas == null || paradas.isEmpty() || pasajeros == null) {
+			throw new IllegalArgumentException("Líneas, paradas y pasajeros no pueden ser nulos o vacíos.");
+		}
+		this.lineasDisponibles = lineas;
+		this.pasajerosSimulados = pasajeros;
+		this.configProperties = configProperties;
+		this.colectivosEnSimulacion = new ArrayList<>();
+		this.colectivosPendientesDeAvanzar = new HashSet<>();
+		this.gestorEstadisticas = (gestorEstadisticas != null) ? gestorEstadisticas : new GestorEstadisticas();
+		this.planificadorRutas = (planificadorRutas != null) ? planificadorRutas : new PlanificadorRutas();
+	}
 
-    /**
-     * Inicializa los colectivos en la simulación según la cantidad de colectivos simultáneos por línea.
-     *
-     * @param capacidadColectivo Capacidad máxima de pasajeros por colectivo.
-     * @param capacidadSentados Capacidad máxima de pasajeros sentados.
-     * @param capacidadParados Capacidad máxima de pasajeros parados.
-     * @param recorridosRestantes Cantidad de recorridos que debe realizar el colectivo.
-     * @param cantidadColectivosPorLinea Cantidad de colectivos simultáneos por línea.
-     */
-    public void inicializarColectivos(int capacidadColectivo, int capacidadSentados, int capacidadParados, int recorridosRestantes, int cantidadColectivosPorLinea) {
-        if (capacidadColectivo <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosRestantes <= 0 || cantidadColectivosPorLinea <= 0) {
-            throw new IllegalArgumentException("Las capacidades, recorridos y cantidad de colectivos deben ser positivos.");
-        }
-        int frecuenciaMin = ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorConfig.obtenerFrecuenciaSalidaColectivosMinutos(this.configProperties);
-        if (frecuenciaMin <= 0) {
-            throw new IllegalArgumentException("La frecuencia mínima de salida de colectivos debe ser mayor a cero.");
-        }
-        this.pasosPorFrecuencia = (int) Math.ceil(frecuenciaMin / 2.0);
-        this.colectivosEnSimulacion.clear();
-        int colectivoCounter = 1;
-        for (Linea linea : lineasDisponibles.values()) {
-            for (int i = 0; i < cantidadColectivosPorLinea; i++) {
-                int pasoDeSalida = i * pasosPorFrecuencia;
-                String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
-                Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadColectivo, capacidadSentados, capacidadParados, recorridosRestantes, pasoDeSalida);
-                this.colectivosEnSimulacion.add(nuevoColectivo);
-                // Registrar capacidad máxima para estadísticas de ocupación promedio (Anexo II)
-                if (gestorEstadisticas != null) {
-                    gestorEstadisticas.registrarCapacidadColectivo(idColectivo, capacidadColectivo);
-                }
-                colectivoCounter++;
-            }
-        }
-        this.colectivosPendientesDeAvanzar.clear();
-        this.pasoActual = 0;
-    }
+	// =================================================================================
+	// MÉTODOS DE INICIALIZACIÓN
+	// =================================================================================
+
+	/**
+	 * Inicializa todos los colectivos de la simulación basándose en los parámetros
+	 * del archivo de configuración. Este es el único método para crear los colectivos.
+	 *
+	 * @param capacidadTotal    Capacidad máxima total de un colectivo.
+	 * @param capacidadSentados Capacidad de asientos de un colectivo.
+	 */
+	public void inicializarColectivos(int capacidadTotal, int capacidadSentados) {
+		// 1. Leer parámetros desde la configuración
+		int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(this.configProperties);
+		int cantidadPorLinea = SimuladorConfig.obtenerCantidadColectivosSimultaneosPorLinea(this.configProperties);
+		int frecuenciaMin = SimuladorConfig.obtenerFrecuenciaSalidaColectivosMinutos(this.configProperties);
+		int capacidadParados = capacidadTotal - capacidadSentados;
+		
+		// 2. Validar parámetros leídos
+		if (capacidadTotal <= 0 || capacidadSentados < 0 || capacidadParados < 0 || recorridosPorColectivo <= 0 || cantidadPorLinea <= 0 || frecuenciaMin <= 0) {
+			throw new IllegalArgumentException("Las capacidades, recorridos y cantidad de colectivos deben ser positivos.");
+		}
+
+		// 3. Limpiar estado anterior y calcular pasos de frecuencia
+		this.colectivosEnSimulacion.clear();
+		this.colectivosPendientesDeAvanzar.clear();
+		this.pasoActual = 0;
+		int pasosPorFrecuencia = (int) Math.ceil(frecuenciaMin / 2.0); // Asumiendo 2 min por paso
+		int colectivoCounter = 1;
+
+		// 4. Crear los colectivos para cada línea
+		for (Linea linea : lineasDisponibles.values()) {
+			for (int i = 0; i < cantidadPorLinea; i++) {
+				String idColectivo = "C" + colectivoCounter + "-" + linea.getId();
+				int pasoDeSalida = i * pasosPorFrecuencia; // Salidas escalonadas
+
+				Colectivo nuevoColectivo = new Colectivo(idColectivo, linea, capacidadTotal, capacidadSentados,
+						capacidadParados, recorridosPorColectivo, pasoDeSalida);
+				
+				this.colectivosEnSimulacion.add(nuevoColectivo);
+				this.gestorEstadisticas.registrarCapacidadColectivo(idColectivo, capacidadTotal);
+				colectivoCounter++;
+			}
+		}
+	}
 
 	/**
 	 * Ejecuta un paso de simulación. Este método avanza los colectivos pendientes
@@ -356,51 +330,47 @@ public List<String> ejecutarPasoDeSimulacion() {
     }
 
 	/**
-	 * Procesa la lógica cuando un colectivo ha finalizado su recorrido. Este método
-	 * se llama para colectivos que YA están en terminal.
+	 * Procesa la lógica cuando un colectivo ha finalizado su recorrido.
 	 */
 	private void procesarLogicaTerminal(Colectivo colectivo, List<String> eventos) {
 		Parada paradaFinal = colectivo.getParadaActual();
-		String paradaInfo = (paradaFinal != null) ? paradaFinal.getDireccion() + " (ID: " + paradaFinal.getId() + ")"
-				: "N/A (Recorrido Vacío)";
+		String paradaInfo = (paradaFinal != null) ? paradaFinal.getDireccion() + " (ID: " + paradaFinal.getId() + ")" : "N/A";
 		eventos.add("Colectivo " + colectivo.getIdColectivo() + " de la línea "
-				+ colectivo.getLineaAsignada().getNombre() + " ha finalizado su recorrido "+colectivo.getRecorridoActual()+" en: " + paradaInfo);
+				+ colectivo.getLineaAsignada().getNombre() + " ha finalizado su recorrido " + colectivo.getRecorridoActual() + " en: " + paradaInfo);
+		
 		colectivo.actualizarRecorridosRestantes();
+
+		// Bajar a todos los pasajeros restantes
 		if (colectivo.getCantidadPasajerosABordo() > 0) {
 			eventos.add("  Procesando pasajeros en la parada terminal...");
 			List<Pasajero> pasajerosCopia = new ArrayList<>(colectivo.getPasajerosABordo());
 			for (Pasajero p : pasajerosCopia) {
 				colectivo.bajarPasajero(p);
-				// Distinguir entre pasajeros que llegaron a su destino vs bajada forzosa
 				if (p.getParadaDestino().equals(paradaFinal)) {
 					eventos.add("  - Bajó " + p + " en su destino (terminal).");
-					gestorEstadisticas.registrarTransporte(p); // Registrar como transportado
 				} else {
 					p.setBajadaForzosa(true);
-					// Satisfacción mínima para bajada forzosa
-					p.setSatisfaccion(1); // 1 el valor mínimo que corresponda
-					eventos.add("  - BAJADA FORZOSA: " + p + " no llegó a su destino ("
-							+ p.getParadaDestino().getDireccion() + ").");
-					gestorEstadisticas.registrarTransporte(p); // Registrar como transportado aunque bajó forzosamente
+					eventos.add("  - BAJADA FORZOSA: " + p + " no llegó a su destino (" + p.getParadaDestino().getDireccion() + ").");
 				}
+				gestorEstadisticas.registrarTransporte(p);
 			}
 		}
-		
-		if(colectivo.getRecorridosRestantes() > 0) {
-			// Si el colectivo tiene más recorridos, reiniciar su estado para el próximo recorrido
-			colectivo.reiniciarParaNuevoRecorrido();
-			// Reiniciar el paso de salida si es necesario
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-			eventos.add("  Colectivo " + colectivo.getIdColectivo() + " reiniciado para un nuevo recorrido.");
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			colectivosPendientesDeAvanzar.add(colectivo.getIdColectivo()); // Marcar para avanzar en el próximo paso
+		// Preparar para el siguiente recorrido o finalizar
+		if (colectivo.getRecorridosRestantes() > 0) {
+			colectivo.reiniciarParaNuevoRecorrido();
+			
+			// MEJORA DE LEGIBILIDAD PARA LA CONSOLA
+			String separador = "----->";
+			String eventoReinicio = String.format("\n%s EVENTO: Colectivo %s reiniciado para un nuevo recorrido %s\n",
+					separador, colectivo.getIdColectivo(), separador);
+			eventos.add(eventoReinicio);
+			
+			colectivosPendientesDeAvanzar.add(colectivo.getIdColectivo()); // Marcar para avanzar
 		} else {
 			eventos.add("  Colectivo " + colectivo.getIdColectivo() + " ha finalizado todos sus recorridos.");
 		}
-		
-		}
-
+	}
 
 	public List<Colectivo> getColectivosEnSimulacion() {
 		return new ArrayList<>(this.colectivosEnSimulacion);

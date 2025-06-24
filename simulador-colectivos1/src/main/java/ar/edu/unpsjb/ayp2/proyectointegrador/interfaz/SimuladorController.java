@@ -78,8 +78,8 @@ public class SimuladorController {
 			int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
 			int capacidadParados = capacidadColectivo - capacidadSentados;
 
-			simulador.inicializarColectivos(capacidadColectivo, capacidadSentados, capacidadParados,
-					recorridosPorColectivo);
+			simulador.inicializarColectivos(capacidadColectivo, capacidadSentados);
+
 
 		} catch (IOException e) {
 			System.err.println("Error fatal al cargar archivos de datos: " + e.getMessage());
