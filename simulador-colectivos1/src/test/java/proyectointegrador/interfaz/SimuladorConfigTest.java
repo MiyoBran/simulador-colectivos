@@ -2,8 +2,6 @@ package proyectointegrador.interfaz;
 
 import org.junit.jupiter.api.*;
 
-import proyectointegrador.interfaz.SimuladorConfig;
-
 import java.util.Properties;
 import static org.junit.jupiter.api.Assertions.*;
 

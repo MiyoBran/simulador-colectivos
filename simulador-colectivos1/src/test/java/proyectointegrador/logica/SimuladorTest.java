@@ -6,9 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import proyectointegrador.logica.GestorEstadisticas;
-import proyectointegrador.logica.PlanificadorRutas;
-import proyectointegrador.logica.Simulador;
 import proyectointegrador.modelo.Colectivo;
 import proyectointegrador.modelo.Linea;
 import proyectointegrador.modelo.Parada;

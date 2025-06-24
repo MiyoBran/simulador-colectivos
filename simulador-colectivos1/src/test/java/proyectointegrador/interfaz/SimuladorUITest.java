@@ -1,7 +1,5 @@
 package proyectointegrador.interfaz;
 
-import proyectointegrador.interfaz.SimuladorController;
-import proyectointegrador.interfaz.SimuladorUI;
 import proyectointegrador.logica.Simulador;
 import proyectointegrador.modelo.Colectivo;
 import proyectointegrador.modelo.Linea;

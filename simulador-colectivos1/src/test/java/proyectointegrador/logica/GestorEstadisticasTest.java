@@ -1,6 +1,5 @@
 package proyectointegrador.logica;
 
-import proyectointegrador.logica.GestorEstadisticas;
 import proyectointegrador.modelo.Parada;
 import proyectointegrador.modelo.Pasajero;
 

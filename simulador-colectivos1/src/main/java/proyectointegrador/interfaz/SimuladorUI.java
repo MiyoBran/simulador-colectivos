@@ -1,6 +1,5 @@
 package proyectointegrador.interfaz;
 
-import proyectointegrador.modelo.Parada;
 import proyectointegrador.reporte.ReporteSimulacion;
 import proyectointegrador.util.EventoUtils;
 

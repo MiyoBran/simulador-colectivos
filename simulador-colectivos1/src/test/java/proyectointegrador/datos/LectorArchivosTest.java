@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
-import proyectointegrador.datos.LectorArchivos;
 import proyectointegrador.modelo.Linea;
 import proyectointegrador.modelo.Parada;
 

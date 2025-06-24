@@ -24,8 +24,6 @@ package net.datastructures;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * An implementation of a sorted map using a binary search tree.

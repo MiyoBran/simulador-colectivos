@@ -1,6 +1,5 @@
 package proyectointegrador.interfaz;
 
-import proyectointegrador.interfaz.SimuladorController;
 import proyectointegrador.logica.Simulador;
 
 import org.junit.jupiter.api.*;

@@ -5,9 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import proyectointegrador.modelo.Parada;
-import proyectointegrador.modelo.Pasajero;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**

@@ -1,6 +1,5 @@
 package proyectointegrador.logica;
 
-import proyectointegrador.logica.PlanificadorRutas;
 import proyectointegrador.modelo.Linea;
 import proyectointegrador.modelo.Parada;
 
