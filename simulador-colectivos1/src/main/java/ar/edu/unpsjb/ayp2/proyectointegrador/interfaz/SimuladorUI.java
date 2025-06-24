@@ -121,8 +121,7 @@ public class SimuladorUI {
 	private void ejecutarSimulacionCompleta() {
 		var simulador = controller.getSimulador();
 		if (simulador.isSimulacionTerminada()) {
-			System.out.println("La simulación ya ha finalizado. Mostrando estadísticas.");
-			mostrarEstadisticas();
+			System.out.println("La simulación ya ha finalizado.");
 			return;
 		}
 
