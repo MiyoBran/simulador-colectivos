@@ -1,3 +1,0 @@
-A;Línea A;
-B;Línea B;
-C;Línea C;

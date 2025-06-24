@@ -154,35 +154,84 @@ Maven crea una estructura estándar. Deberás crear los subpaquetes y carpetas d
 **Estructura Visual Final (resumida):**
 
 * simulador-colectivos/  
-  * ├── pom.xml  
-  * └── src/  
-    * ├── main/  
-      * ├── java/  
-        * └── ar/edu/unpsjb/ayp2/proyectointegrador/ \<-- PAQUETE RAÍZ  
-          * ├── modelo/ (Linea.java, Parada.java, etc.)  
-          * ├── datos/ (LectorArchivos.java, etc.)  
-          * ├── logica/ (Simulador.java, etc.)  
-          * └── interfaz/ (SimuladorColectivosApp.java)  
-      * └── resources/  
-        * ├── datos\_pm/  
-          * ├── parada.txt  \<-- Y otras versiones anteriores  
-          * └── horarios_pm.txt  
-        * ├── config.properties  
-        * ├── prompt-proyecto.md  
-        * ├── roadmap-proyecto.md
-        * ├── Laboratorio2025.txt
-        * ├── paradas_pm_mapeadas.txt  
-        * └── lineas_pm_mapeadas.txt    
-    * └── test/  
-      * ├── java/  
-        * └── ar/edu/unpsjb/ayp2/proyectointegrador/ \<-- PAQUETE RAÍZ PARA TESTS  
-          * ├── modelo/ (LineaTest.java, etc.)  
-          * ├── datos/ (LectorArchivosTest.java, etc.)  
-          * └── logica/ (SimuladorTest.java, etc.)  
-      * └── resources/  
-        * └── datos\_test/  
-          * ├── paradas\_test.txt  
-          * └── lineas\_test.test
+├── README.md
+└── simulador-colectivos-incremento2
+    ├── onboarding-copilot.txt
+    ├── pom.xml
+    ├── src
+    │   ├── main
+    │   │   ├── java
+    │   │   │   └── proyectointegrador
+    │   │   │       ├── datos
+    │   │   │       │   └── LectorArchivos.java
+    │   │   │       ├── interfaz
+    │   │   │       │   ├── SimuladorColectivosApp.java
+    │   │   │       │   ├── SimuladorConfig.java
+    │   │   │       │   ├── SimuladorController.java
+    │   │   │       │   └── SimuladorUI.java
+    │   │   │       ├── logica
+    │   │   │       │   ├── GeneradorPasajeros.java
+    │   │   │       │   ├── GestorEstadisticas.java
+    │   │   │       │   ├── PlanificadorRutas.java
+    │   │   │       │   ├── SimuladorHelper.java
+    │   │   │       │   └── Simulador.java
+    │   │   │       ├── modelo
+    │   │   │       │   ├── Colectivo.java
+    │   │   │       │   ├── Linea.java
+    │   │   │       │   ├── Parada.java
+    │   │   │       │   └── Pasajero.java
+    │   │   │       ├── reporte
+    │   │   │       │   └── ReporteSimulacion.java
+    │   │   │       └── util
+    │   │   │           └── EventoUtils.java
+    │   │   └── resources
+    │   │       ├── config.properties
+    │   │       ├── conventions-proyecto.md
+    │   │       ├── datos_pm_no_utilizados
+    │   │       │   ├── horarios_pm.txt
+    │   │       │   ├── linea.txt
+    │   │       │   └── parada.txt
+    │   │       ├── Documentacion
+    │   │       │   ├── DescripcionDiagramasUML.md
+    │   │       │   ├── UML-Completo.txt
+    │   │       │   └── UML-simplificado.txt
+    │   │       ├── instructions-proyecto.md
+    │   │       ├── Laboratorio2025.txt
+    │   │       ├── Laboratorio-requisitos-y-logica-simulacion2025.txt
+    │   │       ├── lineas_pm_mapeadas.txt
+    │   │       ├── lineas_pm.txt
+    │   │       ├── paradas_pm_mapeadas.txt
+    │   │       ├── paradas_pm.txt
+    │   │       ├── prompt-proyecto.md
+    │   │       ├── roadmap-proyecto.md
+    │   │       ├── TAD-decisiones.md
+    │   │       └── workflow-colaboracion.md
+    │   └── test
+    │       ├── java
+    │       │   └── proyectointegrador
+    │       │       ├── datos
+    │       │       │   └── LectorArchivosTest.java
+    │       │       ├── interfaz
+    │       │       │   ├── SimuladorConfigTest.java
+    │       │       │   ├── SimuladorControllerTest.java
+    │       │       │   └── SimuladorUITest.java
+    │       │       ├── logica
+    │       │       │   ├── GeneradorPasajerosTest.java
+    │       │       │   ├── GestorEstadisticasTest.java
+    │       │       │   ├── PlanificadorRutasTest.java
+    │       │       │   └── SimuladorTest.java
+    │       │       └── modelo
+    │       │           ├── ColectivoTest.java
+    │       │           ├── LineaTest.java
+    │       │           ├── ParadaTest.java
+    │       │           └── PasajeroTest.java
+    │       └── resources
+    │           └── datos_test
+    │               ├── explicacion-lineas-test.txt
+    │               ├── explicacion-paradas-test.txt
+    │               ├── lineas_test.txt
+    │               └── paradas_test.txt
+
 
 Con esto, el proyecto está correctamente configurado y listo para empezar a desarrollar las clases según el plan.
 
@@ -317,14 +366,30 @@ Implementar una primera versión funcional del sistema de simulación de colecti
 * \[x\] Tarea: Crear GeneradorPasajerosTest.java.  
 * \[x\] Tarea: Crear SimuladorTest.java (pruebas para inicialización y un ciclo básico de simulación).
 
-## **5. Reglas y Buenas Prácticas (Generales)**
+## 5. Reglas y Buenas Prácticas (Actualizadas)
 
-* **E/S y Consola:** `System.out.println` solo en `SimuladorColectivosApp.java` o clases de prueba controladas.
-* **Encapsulamiento:** Atributos `private`.
-* **Invariantes:** Validar parámetros.
-* **Estructura de Carpetas:** Respetar arquitectura por capas.
-* **Manejo de Errores:** Usar excepciones.
-* **JavaDoc:** Para clases y métodos públicos (especialmente en Incremento 2).
+- **E/S y Consola:**  
+  - Uso de `System.out.println` limitado exclusivamente a las clases de interfaz de usuario (`SimuladorColectivosApp`, `SimuladorUI`, `ReporteSimulacion`) y pruebas controladas.
+- **Encapsulamiento:**  
+  - Todos los atributos deben ser `private` y, cuando corresponda, `final` para promover inmutabilidad.
+- **Validación de Invariantes:**  
+  - Validar parámetros de entrada en constructores y métodos públicos; usar `IllegalArgumentException` para datos inválidos.
+- **Estructura de Carpetas:**  
+  - Respetar la arquitectura por capas: `modelo`, `datos`, `logica`, `interfaz`, `reporte`, `util` y `test`.
+- **Manejo de Errores:**  
+  - Usar excepciones para reportar errores y validaciones, nunca abortar silenciosamente.
+- **Documentación:**  
+  - JavaDoc obligatorio para todas las clases y métodos públicos, actualizado en cada incremento y refactorización.
+- **Código Limpio:**  
+  - Prohibido el código comentado, obsoleto o duplicado en la base principal.
+- **Clases Utilitarias:**  
+  - Usar el patrón de "utility class" (`final` y constructor privado) para clases estáticas auxiliares.
+- **Tests:**  
+  - Toda funcionalidad nueva o refactorizada debe ir acompañada de tests unitarios y de integración, empleando Mockito y JUnit 5.
+- **Formato de Salida:**  
+  - Unificar la salida por consola con `String.format` para reportes y estadísticas.
+
+---
 
 ## 6. Log de Desarrollo – Incremento 2 (COMPLETADO)
 
@@ -332,72 +397,66 @@ Implementar una primera versión funcional del sistema de simulación de colecti
 
 ### 6.1. Objetivos Principales Alcanzados
 
-* **Gestión de Estado y Capacidad:** Los colectivos manejan múltiples recorridos, un estado (ej: EN_RUTA) y capacidad diferenciada (sentados/parados).
-* **Módulo de Estadísticas (`GestorEstadisticas`):** Se implementó y probó exitosamente el cálculo y reporte del Índice de Satisfacción (Anexo I) y la Ocupación Promedio de Colectivos (Anexo II).
-* **Red de Transporte como Grafo (`PlanificadorRutas`):** Se utiliza un grafo dirigido para modelar la red, permitiendo el cálculo de rutas óptimas con el algoritmo de Dijkstra.
-* **Refactorización de Arquitectura:** La capa de interfaz fue completamente reestructurada en `SimuladorController`, `SimuladorUI` y `SimuladorConfig`, mejorando la separación de responsabilidades y la mantenibilidad.
-* **Suite de Pruebas Robusta:** Se actualizaron todos los tests, se introdujo Mockito para un testing más aislado y se aseguró la compatibilidad con Java 21.
+- **Gestión avanzada de colectivos:**  
+  - Los colectivos gestionan múltiples recorridos, estado (`EN_RUTA`, etc.) y capacidad diferenciada (sentados/parados).
+- **Módulo de Estadísticas:**  
+  - Implementación robusta de `GestorEstadisticas` (Índice de Satisfacción, Ocupación Promedio, desglose de viajes).
+- **Red de Transporte como Grafo:**  
+  - `PlanificadorRutas` modela la red como grafo dirigido; rutas óptimas por Dijkstra.
+- **Refactorización de la Interfaz:**  
+  - Interfaz desacoplada y modular: `SimuladorController`, `SimuladorUI`, `SimuladorConfig`.
+- **Suite de Pruebas Robusta:**  
+  - Tests actualizados, introducción de Mockito y compatibilidad total con Java 21+.
 
 ### 6.2. Estructura Final y Clases Implementadas
 
-La arquitectura final del proyecto consolidó la separación por capas, con la siguiente estructura destacada para el Incremento 2:
-
-* **Modelo (`modelo`):**
-    * Se extendieron las clases `Colectivo`, `Pasajero` y `Parada` con nuevos atributos y métodos para soportar las funcionalidades de estado, tiempo y estadísticas.
-* **Lógica (`logica`):**
-    * **`GestorEstadisticas`**: Implementado y testeado para centralizar la recolección de métricas.
-    * **`PlanificadorRutas`**: Implementado y testeado para encapsular la construcción del grafo dirigido y el cálculo de rutas.
-    * **`Simulador`**: Modificado para integrar y orquestar los nuevos componentes de lógica.
-* **Interfaz (`interfaz`):**
-    * **`SimuladorController`**, **`SimuladorUI`**, **`SimuladorConfig`**: Nuevas clases resultado de la refactorización, que manejan el control, la vista y la configuración de forma separada.
-    * **`SimuladorColectivosApp`**: Simplificada a un mero punto de entrada que inicializa y lanza la aplicación.
-* **Test (`test`):**
-    * Se crearon las clases `GestorEstadisticasTest` y `PlanificadorRutasTest`.
-    * Se actualizaron todos los tests existentes, añadiendo el uso de Mockito para manejar las nuevas dependencias.
+- **Modelo (`modelo`):**  
+  - Nuevos atributos y métodos en `Colectivo`, `Pasajero`, `Parada` para soportar estados y estadísticas.
+- **Lógica (`logica`):**  
+  - `GestorEstadisticas` y `PlanificadorRutas` aislados, testeados y centralizados.
+  - `Simulador` orquesta e integra los componentes.
+- **Interfaz (`interfaz`):**  
+  - `SimuladorController`, `SimuladorUI`, `SimuladorConfig` gestionan control, vista y configuración.
+  - `SimuladorColectivosApp` como punto de entrada limpio.
+- **Test (`test`):**  
+  - Nuevas clases de test exhaustivas; uso de Mockito para dependencias.
 
 ### 6.3. Resumen del Proceso de Desarrollo y Depuración
 
-1.  **Desarrollo por Componentes:** Se implementaron `GestorEstadisticas` y `PlanificadorRutas` de forma aislada, cada uno con su suite de tests.
-2.  **Depuración Basada en Tests:** Se resolvieron bugs críticos gracias a las pruebas unitarias, como la necesidad de un grafo dirigido en `PlanificadorRutas` y la correcta inicialización de dependencias en los tests.
-3.  **Resolución de Problemas de Entorno:** Se solucionó una incompatibilidad entre la versión de Mockito y Java 21 actualizando las dependencias en el `pom.xml`.
-4.  **Pruebas de Estrés:** Se realizaron pruebas con alta carga de pasajeros (hasta 2000) para validar la robustez del sistema y depurar los cálculos finales de tiempo y ocupación.
-5.  **Refactorización Final:** Se reestructuró la capa de interfaz para mejorar la calidad del diseño antes de la entrega.
+1. **Implementación Modular:**  
+   - Componentes lógicos desarrollados y testeados en aislamiento.
+2. **Depuración Basada en Tests:**  
+   - Bugs críticos resueltos por cobertura exhaustiva de tests (ej., grafo dirigido, inicialización de dependencias).
+3. **Solución de Problemas de Entorno:**  
+   - Compatibilidad asegurada entre Mockito y Java 21.
+4. **Pruebas de Estrés:**  
+   - Cargas de hasta 2000 pasajeros para validar robustez y KPIs.
+5. **Refactorización Final:**  
+   - Limpieza, documentación y reestructuración de la interfaz y reportes.
 
-### 6.4. Resumen del Proceso de Desarrollo y Refactorización
+### 6.4. Resumen del Proceso de Refactorización
 
-El desarrollo del incremento no fue lineal, sino un proceso iterativo de implementación, prueba y refactorización continua, enfocado en mejorar la calidad y la arquitectura del código.
-
-1.  **Implementación de la Lógica Central:** El primer paso fue desarrollar los nuevos componentes de lógica de forma aislada (`GestorEstadisticas` y `PlanificadorRutas`), cada uno con su propia suite de tests unitarios para validar su comportamiento individual.
-
-2.  **Refactorización del Manejo de Eventos:** Durante la integración inicial, se detectó la necesidad de desacoplar la generación de eventos de su presentación. Se refactorizó la clase `Simulador` para que, en lugar de imprimir en consola, devolviera una estructura de datos (`Map<String, List<String>>`) con los eventos del paso, delegando la responsabilidad de la visualización a la capa superior.
-
-3.  **Refactorización Arquitectónica de la Interfaz:** Para mejorar drásticamente la mantenibilidad y la separación de responsabilidades, se reestructuró por completo la capa de `interfaz`. La clase monolítica `SimuladorColectivosApp` se dividió en tres componentes especializados:
-    * **`SimuladorConfig`**: Para manejar la carga de la configuración.
-    * **`SimuladorController`**: Para orquestar la inicialización y el flujo de la aplicación.
-    * **`SimuladorUI`**: Para gestionar toda la interacción con el usuario (menú, entrada y salida).
-
-4.  **Ciclo de Depuración y Pruebas de Estrés:** A lo largo del proceso, la suite de tests fue crucial para detectar y solucionar problemas:
-    * Se resolvió una incompatibilidad entre **Mockito y Java 21** actualizando las dependencias del proyecto.
-    * Se corrigió un error de modelado al cambiar el grafo del `PlanificadorRutas` a **dirigido**.
-    * Las pruebas de estrés finales permitieron encontrar y corregir los bugs en los cálculos de **tiempos de simulación** y el reporte de **ocupación promedio**.
-
-5.  **Fase Final de Calidad y Consolidación:** El proceso culminó con una limpieza general del código, la estandarización de los mensajes de salida y una refactorización completa de toda la suite de pruebas unitarias para asegurar su robustez, legibilidad y correcta funcionalidad. Finalmente, se actualizó toda la documentación del proyecto para reflejar el estado final de la entrega.
+- Refactorización iterativa tras cada integración importante.
+- Desacoplamiento de generación y presentación de eventos (ahora estructuras de datos en vez de prints directos).
+- Modularización y separación estricta de interfaz, lógica y modelo.
+- Tests como herramienta central del ciclo de calidad.
 
 ---
 
 ## 7. Checklist Previo a Entrega (Finalizado)
 
 * [x] Modelo de clases implementado correctamente.
-* [x] Carga de archivos y configuración robusta.
-* [x] Simulación y lógica funcional según objetivos del incremento.
-* [x] Interfaz (consola) funcional, modular y desacoplada de la lógica.
-* [x] Resultados/exportación desacoplados y flexibles.
-* [x] Sin `System.out.println` indebidos (solo en clases de UI/Reporte).
-* [x] Tests unitarios exhaustivos para componentes nuevos y refactorizados (113 tests pasan).
-* [x] Estructura de carpetas y paquetes respeta arquitectura.
-* [x] Código bien comentado, con JavaDoc para métodos públicos.
-* [x] `README.md` y toda la documentación interna actualizada.
+* [x] Carga de archivos y configuración robusta y validada.
+* [x] Simulación funcional y alineada con objetivos del incremento.
+* [x] Interfaz (consola) modular, desacoplada y clara.
+* [x] Resultados y reportes flexibles, formato unificado.
+* [x] Sin `System.out.println` indebidos fuera de UI/Reporte.
+* [x] Tests unitarios exhaustivos y actualizados (>100 tests pasan).
+* [x] Estructura de carpetas y paquetes conforme a arquitectura.
+* [x] Código limpio, comentado y documentado (JavaDoc).
+* [x] Documentación (`README.md`, roadmap, TAD) completa y actualizada.
 ---
+
 
 ## 8. Actualización Continua del Proyecto y Documentación
 

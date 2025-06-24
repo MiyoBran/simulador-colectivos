@@ -1,0 +1,44 @@
+@startuml
+' --- Apariencia más limpia ---
+skinparam classAttributeIconSize 0
+hide empty members
+
+' --- Definición de Clases con Atributos Clave ---
+class Colectivo {
+  - idColectivo: String
+  - lineaAsignada: Linea
+  - capacidadMaxima: int
+  - pasajerosABordo: List<Pasajero>
+  - paradaActual: Parada
+}
+
+class Linea {
+  - id: String
+  - nombre: String
+  - recorrido: List<Parada>
+}
+
+class Parada {
+  - id: String
+  - direccion: String
+  - pasajerosEsperando: Queue<Pasajero>
+}
+
+class Pasajero {
+  - id: String
+  - paradaOrigen: Parada
+  - paradaDestino: Parada
+}
+
+' --- Relaciones entre Clases ---
+Colectivo "1" o-- "1" Linea : lineaAsignada
+Colectivo "1" o-- "0..*" Pasajero : pasajerosABordo
+Colectivo "1" -- "1" Parada : paradaActual
+
+Linea "1" o-- "2..*" Parada : recorrido
+
+Parada "1" o-- "0..*" Pasajero : pasajerosEsperando
+
+Pasajero "1" --> "1" Parada : paradaOrigen
+Pasajero "1" --> "1" Parada : paradaDestino
+@enduml
