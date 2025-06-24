@@ -169,7 +169,7 @@ public class Colectivo {
 	 * 
 	 * @param recorridosRestantes cantidad de recorridos.
 	 */
-	public void resRecorridosRestantes() {
+	public void actualizarRecorridosRestantes() {
 		this.recorridoActual++;
 		this.recorridosRestantes--;
 	}

@@ -3,6 +3,7 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.interfaz;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
 import ar.edu.unpsjb.ayp2.proyectointegrador.reporte.ReporteSimulacion;
 import ar.edu.unpsjb.ayp2.proyectointegrador.util.EventoUtils;
+import ar.edu.unpsjb.ayp2.proyectointegrador.util.EventoUtils;
 import java.util.*;
 
 public class SimuladorUI {
@@ -24,19 +25,20 @@ public class SimuladorUI {
         Map<String, List<String>> simulacionColectivo = new LinkedHashMap<>();
         while (!salir) {
             System.out.println("\n--- MENÚ PRINCIPAL ---");
-            System.out.println("1. Ejecutar paso de simulación");
-            System.out.println("2. Ejecutar simulación completa");
-            System.out.println("3. Calcular ruta óptima entre paradas");
-            System.out.println("4. Ver estadísticas de la simulación");
+            System.out.println("1. Ejecutar simulación completa");
+            System.out.println("2. Ver estadísticas de la simulación");
+            //System.out.println("3. Ejecutar paso de simulación");
+            //System.out.println("4. Calcular ruta óptima entre paradas");
+
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             String opcion = scanner.nextLine();
             switch (opcion) {
-                case "1":
+                case "3":
                     if (!simulador.isSimulacionTerminada()) {
                         List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
                         
-                        Map<String, List<String>> eventosPorColectivo = SimuladorColectivosApp.mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+                        Map<String, List<String>> eventosPorColectivo = EventoUtils.mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
                         for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
                             simulacionColectivo.putIfAbsent(entry.getKey(), new ArrayList<String>());
                             simulacionColectivo.get(entry.getKey()).addAll(entry.getValue());
@@ -51,10 +53,10 @@ public class SimuladorUI {
                         System.out.println("La simulación ya ha finalizado.");
                     }
                     break;
-                case "2":
+                case "1":
                     while (!simulador.isSimulacionTerminada()) {
                         List<String> eventosDelPaso = simulador.ejecutarPasoDeSimulacion();
-                        Map<String, List<String>> eventosPorColectivo = SimuladorColectivosApp.mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
+                        Map<String, List<String>> eventosPorColectivo = EventoUtils.mostrarEventosAgrupadosPorColectivo(eventosDelPaso);
                         for (Map.Entry<String, List<String>> entry : eventosPorColectivo.entrySet()) {
                             simulacionColectivo.putIfAbsent(entry.getKey(), new ArrayList<String>());
                             simulacionColectivo.get(entry.getKey()).addAll(entry.getValue());
@@ -72,7 +74,7 @@ public class SimuladorUI {
                     ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
                     ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
                     break;
-                case "3":
+                case "4":
                     System.out.print("Ingrese ID de parada origen: ");
                     String idOrigen = scanner.nextLine();
                     System.out.print("Ingrese ID de parada destino: ");
@@ -95,7 +97,7 @@ public class SimuladorUI {
                         }
                     }
                     break;
-                case "4":
+                case "2":
                     if (simulador.getGestorEstadisticas() == null) {
                         System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
                     } else {
@@ -104,7 +106,7 @@ public class SimuladorUI {
                         ReporteSimulacion.imprimirReportePasajeros(simulador);
                         ReporteSimulacion.imprimirOcupacionPromedioColectivos(simulador);
                         // DEBUG: Listar pasajeros esperando en cada parada y detectar duplicados
-                        simulador.imprimirDebugPasajerosEsperandoPorParada();
+                        //simulador.imprimirDebugPasajerosEsperandoPorParada();
                     }
                     break;
                 case "0":

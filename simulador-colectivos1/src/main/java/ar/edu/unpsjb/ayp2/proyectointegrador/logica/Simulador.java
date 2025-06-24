@@ -32,6 +32,7 @@ public class Simulador {
     private int pasoActual = 0;
     private int pasosPorFrecuencia = 1;
     private Properties configProperties;
+    private boolean simulacionTerminada = false; // Indica si la simulación ha finalizado
 
     /**
      * Constructor del simulador. Permite inyectar dependencias para facilitar el testeo.
@@ -151,6 +152,8 @@ public class Simulador {
 
 public List<String> ejecutarPasoDeSimulacion() {
         List<String> eventosDelPaso = new ArrayList<>();
+        // --- DEBUG: Separador de pasos ---
+        System.out.println("\n==================== PASO DE SIMULACIÓN ====================\n");
         // --- NUEVO: Actualizar tiempos de espera y viaje ---
        // final int MINUTOS_POR_PASO = MINUTOS_POR_PASO_POR_CICLO;
         /*/ 1. Incrementar tiempo de espera de pasajeros en paradas
@@ -217,11 +220,15 @@ public List<String> ejecutarPasoDeSimulacion() {
 				return false;
 			}
 		}
-		for(Pasajero p : pasajerosSimulados) {
-			if (!p.isPudoSubir()) {
-				gestorEstadisticas.registrarTransporte(p); 
+		if(!this.simulacionTerminada) {
+			for(Pasajero p : pasajerosSimulados) {
+				if (!p.isPudoSubir()) {
+					gestorEstadisticas.registrarTransporte(p); 
+				}
 			}
+			this.simulacionTerminada = true; // Marcar como terminada una vez que se procesan todos los pasajeros
 		}
+
 		return colectivosPendientesDeAvanzar.isEmpty();
 	}
 
@@ -358,7 +365,7 @@ public List<String> ejecutarPasoDeSimulacion() {
 				: "N/A (Recorrido Vacío)";
 		eventos.add("Colectivo " + colectivo.getIdColectivo() + " de la línea "
 				+ colectivo.getLineaAsignada().getNombre() + " ha finalizado su recorrido "+colectivo.getRecorridoActual()+" en: " + paradaInfo);
-		colectivo.resRecorridosRestantes();
+		colectivo.actualizarRecorridosRestantes();
 		if (colectivo.getCantidadPasajerosABordo() > 0) {
 			eventos.add("  Procesando pasajeros en la parada terminal...");
 			List<Pasajero> pasajerosCopia = new ArrayList<>(colectivo.getPasajerosABordo());
@@ -382,7 +389,11 @@ public List<String> ejecutarPasoDeSimulacion() {
 		if(colectivo.getRecorridosRestantes() > 0) {
 			// Si el colectivo tiene más recorridos, reiniciar su estado para el próximo recorrido
 			colectivo.reiniciarParaNuevoRecorrido();
+			// Reiniciar el paso de salida si es necesario
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
 			eventos.add("  Colectivo " + colectivo.getIdColectivo() + " reiniciado para un nuevo recorrido.");
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			colectivosPendientesDeAvanzar.add(colectivo.getIdColectivo()); // Marcar para avanzar en el próximo paso
 		} else {
 			eventos.add("  Colectivo " + colectivo.getIdColectivo() + " ha finalizado todos sus recorridos.");

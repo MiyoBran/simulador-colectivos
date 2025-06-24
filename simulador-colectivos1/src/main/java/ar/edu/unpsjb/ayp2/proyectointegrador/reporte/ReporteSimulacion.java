@@ -2,23 +2,44 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.reporte;
 
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.Simulador;
 
+/**
+ * Clase para generar reportes de simulación. Proporciona métodos para imprimir
+ * estadísticas de satisfacción, verificar consistencia de estadísticas y
+ * reportar ocupación de colectivos.
+ * 
+ * @author Miyo
+ * @author Enzo
+ * @version 1.0
+ * 
+ */
 public class ReporteSimulacion {
-	
+	/**
+	 * Imprime un resumen de la simulación, incluyendo estadísticas de
+	 * satisfacción, ocupación de colectivos y reporte de pasajeros.
+	 * @param simulador El simulador del cual se obtienen las estadísticas.
+	 */
 	public static void imprimirEstadisticasCompletas(Simulador simulador) {
 		System.out.println("\n--- Estadísticas de Satisfacción (Anexo I) ---");
-		System.out.println(String.format("Índice de satisfacción: %.2f", simulador.getGestorEstadisticas().getIndiceSatisfaccion()));
+		System.out.println(String.format("Índice de satisfacción: %.2f",
+				simulador.getGestorEstadisticas().getIndiceSatisfaccion()));
 		System.out.println("Desglose de calificaciones:");
 		for (int cal = 5; cal >= 1; cal--) {
 			int count = simulador.getGestorEstadisticas().getDesgloseCalificaciones().getOrDefault(cal, 0);
 			System.out.println(String.format("  Calificación %d: %d pasajeros", cal, count));
 		}
 		System.out.println("\n--- Estadísticas de la Simulación ---");
-		System.out.println(String.format("Pasajeros transportados: %d", simulador.getGestorEstadisticas().getPasajerosTransportados()));
-		System.out.println(String.format("Tiempo promedio de espera: %.2f minutos", simulador.getGestorEstadisticas().getTiempoEsperaPromedio()));
-		System.out.println(String.format("Tiempo promedio de viaje: %.2f minutos", simulador.getGestorEstadisticas().getTiempoViajePromedio()));
-		System.out.println(String.format("Satisfacción promedio: %.1f", simulador.getGestorEstadisticas().getSatisfaccionPromedio()));
-		System.out.println(String.format("%% Satisfechos: %.1f%%", simulador.getGestorEstadisticas().getPorcentajeSatisfechos()));
-		System.out.println(String.format("%% Insatisfechos: %.1f%%", simulador.getGestorEstadisticas().getPorcentajeInsatisfechos()));
+		System.out.println(String.format("Pasajeros transportados: %d",
+				simulador.getGestorEstadisticas().getPasajerosTransportados()));
+		System.out.println(String.format("Tiempo promedio de espera: %.2f minutos",
+				simulador.getGestorEstadisticas().getTiempoEsperaPromedio()));
+		System.out.println(String.format("Tiempo promedio de viaje: %.2f minutos",
+				simulador.getGestorEstadisticas().getTiempoViajePromedio()));
+		System.out.println(String.format("Satisfacción promedio: %.1f",
+				simulador.getGestorEstadisticas().getSatisfaccionPromedio()));
+		System.out.println(
+				String.format("%% Satisfechos: %.1f%%", simulador.getGestorEstadisticas().getPorcentajeSatisfechos()));
+		System.out.println(String.format("%% Insatisfechos: %.1f%%",
+				simulador.getGestorEstadisticas().getPorcentajeInsatisfechos()));
 		// Agregar ocupación promedio general de colectivos
 		var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
 		if (!ocupaciones.isEmpty()) {
@@ -73,46 +94,50 @@ public class ReporteSimulacion {
 	}
 
 	public static void imprimirReportePasajeros(Simulador simulador) {
-        var gestor = simulador.getGestorEstadisticas();
-        var desglose = gestor.getDesglosePasajeros();
-        int totalGenerados = gestor.getPasajerosTotales();
-        int suma = desglose.getOrDefault("transportados", 0) + desglose.getOrDefault("bajadosForzosamente", 0)
-                + desglose.getOrDefault("nuncaSubieron", 0);
-        System.out.println("\n--- Reporte de Pasajeros ---");
-        System.out.println(String.format("Total de pasajeros generados: %d", totalGenerados));
-        System.out.println(String.format("Pasajeros transportados: %d", desglose.getOrDefault("transportados", 0)));
-        System.out.println(String.format("Pasajeros bajados forzosamente en terminal: %d", desglose.getOrDefault("bajadosForzosamente", 0)));
-        System.out.println(String.format("Pasajeros que nunca subieron a un colectivo: %d", desglose.getOrDefault("nuncaSubieron", 0)));
-        if (suma != totalGenerados) {
-            System.out.println(String.format("[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: %d, Total generados: %d", suma, totalGenerados));
-        }
-    }
+		var gestor = simulador.getGestorEstadisticas();
+		var desglose = gestor.getDesglosePasajeros();
+		int totalGenerados = gestor.getPasajerosTotales();
+		int suma = desglose.getOrDefault("transportados", 0) + desglose.getOrDefault("bajadosForzosamente", 0)
+				+ desglose.getOrDefault("nuncaSubieron", 0);
+		System.out.println("\n--- Reporte de Pasajeros ---");
+		System.out.println(String.format("Total de pasajeros generados: %d", totalGenerados));
+		System.out.println(String.format("Pasajeros transportados: %d", desglose.getOrDefault("transportados", 0)));
+		System.out.println(String.format("Pasajeros bajados forzosamente en terminal: %d",
+				desglose.getOrDefault("bajadosForzosamente", 0)));
+		System.out.println(String.format("Pasajeros que nunca subieron a un colectivo: %d",
+				desglose.getOrDefault("nuncaSubieron", 0)));
+		if (suma != totalGenerados) {
+			System.out.println(String.format(
+					"[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: %d, Total generados: %d",
+					suma, totalGenerados));
+		}
+	}
 
 	/**
 	 * Imprime la ocupación promedio de cada colectivo y el promedio general.
 	 */
 	public static void imprimirOcupacionPromedioColectivos(Simulador simulador) {
-        var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
-        System.out.println("\n--- OCUPACIÓN PROMEDIO DE COLECTIVOS (Anexo II) ---");
-        if (ocupaciones.isEmpty()) {
-            System.out.println("No hay datos de ocupación registrados.");
-        } else {
-            var colectivosOrdenados = new java.util.ArrayList<>(simulador.getColectivosEnSimulacion());
-            colectivosOrdenados.sort(COMPARATOR_POR_NUMERO_ID_COLECTIVO);
-            double suma = 0.0;
-            int cantidad = 0;
-            for (var colectivo : colectivosOrdenados) {
-                Double ocup = ocupaciones.get(colectivo.getIdColectivo());
-                if (ocup != null) {
-                    System.out.println(String.format("%s: %.2f%%", colectivo.getEtiqueta(), ocup * 100));
-                    suma += ocup;
-                    cantidad++;
-                }
-            }
-            double promedioGeneral = cantidad > 0 ? (suma / cantidad) * 100 : 0.0;
-            System.out.println(String.format("\nOcupación promedio general de colectivos: %.2f%%", promedioGeneral));
-        }
-    }
+		var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
+		System.out.println("\n--- OCUPACIÓN PROMEDIO DE COLECTIVOS (Anexo II) ---");
+		if (ocupaciones.isEmpty()) {
+			System.out.println("No hay datos de ocupación registrados.");
+		} else {
+			var colectivosOrdenados = new java.util.ArrayList<>(simulador.getColectivosEnSimulacion());
+			colectivosOrdenados.sort(COMPARATOR_POR_NUMERO_ID_COLECTIVO);
+			double suma = 0.0;
+			int cantidad = 0;
+			for (var colectivo : colectivosOrdenados) {
+				Double ocup = ocupaciones.get(colectivo.getIdColectivo());
+				if (ocup != null) {
+					System.out.println(String.format("%s: %.2f%%", colectivo.getEtiqueta(), ocup * 100));
+					suma += ocup;
+					cantidad++;
+				}
+			}
+			double promedioGeneral = cantidad > 0 ? (suma / cantidad) * 100 : 0.0;
+			System.out.println(String.format("\nOcupación promedio general de colectivos: %.2f%%", promedioGeneral));
+		}
+	}
 
 	/**
 	 * Comparator para ordenar colectivos por el número extraído de su id
