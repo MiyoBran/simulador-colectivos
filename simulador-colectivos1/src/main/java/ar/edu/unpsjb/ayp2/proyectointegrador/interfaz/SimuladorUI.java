@@ -151,20 +151,40 @@ public class SimuladorUI {
 	}
 
 	/**
-	 * Lógica para la opción 2: Muestra los reportes y estadísticas de la
-	 * simulación.
+	 * Lógica para la opción 2: Muestra los reportes y estadísticas de la simulación.
+	 * Llama a los métodos de la clase ReporteSimulacion para imprimir un informe
+	 * consolidado y ordenado en la consola.
 	 */
 	private void mostrarEstadisticas() {
-		var simulador = controller.getSimulador();
-		if (simulador.getGestorEstadisticas() == null) {
-			System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
-		} else {
-			System.out.println("\n" + String.join("\n", simulador.getReporteFinal()));
-			ReporteSimulacion.imprimirEstadisticasCompletas(simulador);
-			ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
-			ReporteSimulacion.imprimirReportePasajeros(simulador);
-			ReporteSimulacion.imprimirOcupacionPromedioColectivos(simulador);
-		}
+	    var simulador = controller.getSimulador();
+	    
+	    if (simulador.getGestorEstadisticas() == null) {
+	        System.out.println("Funcionalidad de estadísticas no disponible en este simulador.");
+	    } else {
+	        // Imprime un gran título para el informe completo
+	        System.out.println("\n=====================================================");
+	        System.out.println("      INFORME COMPLETO DE LA SIMULACIÓN");
+	        System.out.println("=====================================================");
+
+	        // Llama a cada método de reporte específico en un orden lógico
+	        ReporteSimulacion.imprimirReportePasajeros(simulador);
+	        ReporteSimulacion.imprimirEstadisticasDeSatisfaccion(simulador);
+	        ReporteSimulacion.imprimirOcupacionPromedioColectivos(simulador);
+	        
+	        // Imprime las advertencias finales del simulador, si las hubiera
+	        System.out.println("\n--- Mensajes Finales del Simulador ---");
+	        List<String> reporteFinal = simulador.getReporteFinal();
+	        if (reporteFinal.isEmpty()) {
+	            System.out.println("  No hay mensajes o advertencias finales.");
+	        } else {
+	            for (String mensaje : reporteFinal) {
+	                System.out.println("  " + mensaje);
+	            }
+	        }
+	        
+	        // Finalmente, ejecuta la verificación de consistencia
+	        ReporteSimulacion.verificarConsistenciaEstadisticas(simulador);
+	    }
 	}
 
 	/*
