@@ -1,0 +1,129 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Colectivo {
+  - idColectivo: String
+  - lineaAsignada: Linea
+  - capacidadMaxima: int
+  - capacidadSentados: int
+  - capacidadParados: int
+  - pasajerosABordo: List<Pasajero>
+  - paradaActual: Parada
+  - indiceParadaActualEnRecorrido: int
+  - cantidadPasajerosSentados: int
+  - estado: String
+  - recorridoActual: int
+  - recorridosRestantes: int
+  - pasoDeSalida: int
+  + Colectivo(idColectivo: String, lineaAsignada: Linea, capacidadMaxima: int, capacidadSentados: int, capacidadParados: int, recorridosRestantes: int, pasoDeSalida: int)
+  + subirPasajero(pasajero: Pasajero): boolean
+  + bajarPasajero(pasajero: Pasajero): boolean
+  + avanzarAProximaParada(): void
+  + reiniciarParaNuevoRecorrido(): void
+  + actualizarRecorridosRestantes(): void
+  + estaEnTerminal(): boolean
+  + getAsientosDisponibles(): int
+  + getLugaresDePieDisponibles(): int
+  + getEtiqueta(): String
+  + getReporteDeEstado(): String
+  + getIdColectivo(): String
+  + getLineaAsignada(): Linea
+  + getCapacidadMaxima(): int
+  + getCapacidadSentados(): int
+  + getCapacidadParados(): int
+  + getParadaActual(): Parada
+  + getIndiceParadaActualEnRecorrido(): int
+  + getCantidadPasajerosABordo(): int
+  + getCapacidadDisponible(): int
+  + getPasajerosABordo(): List<Pasajero>
+  + getRecorridoActual(): int
+  + getRecorridosRestantes(): int
+  + getEstado(): String
+  + setEstado(estado: String): void
+  + getPasoDeSalida(): int
+  + setPasoDeSalida(pasoDeSalida: int): void
+}
+
+class Linea {
+  - id: String
+  - nombre: String
+  - recorrido: List<Parada>
+  + Linea(id: String, nombre: String)
+  + agregarParadaAlRecorrido(parada: Parada): void
+  + tieneParadaEnRecorrido(parada: Parada): boolean
+  + esTerminal(parada: Parada): boolean
+  + getReporteRecorrido(): String
+  + getId(): String
+  + getNombre(): String
+  + getRecorrido(): List<Parada>
+  + getIndiceParada(parada: Parada): int
+  + getParadaPorIndice(indice: int): Parada
+  + getPrimeraParada(): Parada
+  + getUltimaParada(): Parada
+}
+
+class Parada {
+  - id: String
+  - direccion: String
+  - latitud: double
+  - longitud: double
+  - pasajerosEsperando: Queue<Pasajero>
+  - tiempoEsperaPromedio: double
+  - pasajerosAbordados: int
+  - colectivosPasados: int
+  + Parada(id: String, direccion: String, latitud: double, longitud: double)
+  + Parada(id: String, direccion: String)
+  + agregarPasajero(pasajero: Pasajero): void
+  + removerSiguientePasajero(): Pasajero
+  + peekSiguientePasajero(): Pasajero
+  + hayPasajerosEsperando(): boolean
+  + cantidadPasajerosEsperando(): int
+  + incrementarPasajerosAbordados(): void
+  + incrementarColectivosPasados(): void
+  + getId(): String
+  + getDireccion(): String
+  + getLatitud(): double
+  + getLongitud(): double
+  + getPasajerosAbordados(): int
+  + getColectivosPasados(): int
+  + getTiempoEsperaPromedio(): double
+  + getPasajerosEsperando(): Queue<Pasajero>
+}
+
+class Pasajero {
+  - id: String
+  - paradaOrigen: Parada
+  - paradaDestino: Parada
+  - colectivosEsperados: int
+  - viajoSentado: boolean
+  - pudoSubir: boolean
+  - bajadaForzosa: boolean
+  - satisfaccion: int
+  + Pasajero(id: String, paradaOrigen: Parada, paradaDestino: Parada)
+  + Pasajero(paradaOrigen: Parada, paradaDestino: Parada)
+  + incrementarColectivosEsperados(): void
+  + calcularSatisfaccion(): int
+  + resetearEstadoViaje(): void
+  + getId(): String
+  + getParadaOrigen(): Parada
+  + getParadaDestino(): Parada
+  + getColectivosEsperados(): int
+  + isViajoSentado(): boolean
+  + setViajoSentado(viajoSentado: boolean): void
+  + isPudoSubir(): boolean
+  + setPudoSubir(pudoSubir: boolean): void
+  + isBajadaForzosa(): boolean
+  + setBajadaForzosa(valor: boolean): void
+  + getSatisfaccion(): int
+  + setSatisfaccion(valor: int): void
+}
+
+Colectivo "1" o-- "1" Linea : lineaAsignada
+Colectivo "1" o-- "0..*" Pasajero : pasajerosABordo
+Colectivo "1" -- "1" Parada : paradaActual
+Linea "1" o-- "2..*" Parada : recorrido
+Parada "1" o-- "0..*" Pasajero : pasajerosEsperando
+Pasajero "1" --> "1" Parada : paradaOrigen
+Pasajero "1" --> "1" Parada : paradaDestino
+
+@enduml

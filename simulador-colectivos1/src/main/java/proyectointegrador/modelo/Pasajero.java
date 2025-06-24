@@ -39,8 +39,6 @@ public class Pasajero {
 	/** Almacena la calificación de satisfacción final del pasajero (1-5). */
 	private int satisfaccion;
 	
-	// Atributo comentado mantenido según solicitud (no es de manejo de tiempo)
-	// private boolean subioAlPrimerColectivoQuePaso;
 
 	// =================================================================================
 	// CONSTRUCTORES
@@ -68,7 +66,6 @@ public class Pasajero {
 		this.paradaDestino = paradaDestino;
 		
 		this.colectivosEsperados = 0;
-		// this.subioAlPrimerColectivoQuePaso = false;
 		this.viajoSentado = false;
 		this.pudoSubir = false;
 		this.bajadaForzosa = false;
