@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
  * un nombre descriptivo y un recorrido como secuencia ordenada de paradas.
  *
  * @author Miyo
+ * @author Enzo
+ * 
  * @version 1.2
  */
 public class Linea {

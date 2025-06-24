@@ -14,6 +14,8 @@ import java.util.Map;
  * Permite registrar eventos relevantes y consultar estadísticas agregadas.
  *
  * @author Miyen
+ * @author Enzo
+ * 
  * @version 2.0
  */
 public class GestorEstadisticas {

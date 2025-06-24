@@ -10,6 +10,8 @@ import java.util.Queue;
  * espera y sus propias estadísticas básicas.
  *
  * @author Miyo
+ * @author Enzo
+ * 
  * @version 1.1
  */
 public class Parada {

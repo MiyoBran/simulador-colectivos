@@ -18,6 +18,8 @@ import java.util.Properties;
  * una línea, origen y destino, y los añade a la cola de espera de su parada.
  *
  * @author Miyen
+ * @author Enzo
+ * 
  * @version 1.1
  */
 public class GeneradorPasajeros {

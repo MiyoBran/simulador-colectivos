@@ -8,7 +8,9 @@ import java.util.UUID;
  * parada de origen a una de destino. Contiene atributos para gestionar su
  * estado durante la simulación y calcular su satisfacción.
  *
- * @author Miyo
+ * @author Miyen
+ * @author Enzo
+ * 
  * @version 1.1
  */
 public class Pasajero {
