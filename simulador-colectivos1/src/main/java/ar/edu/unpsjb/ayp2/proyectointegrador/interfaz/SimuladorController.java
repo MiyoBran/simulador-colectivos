@@ -64,8 +64,8 @@ public class SimuladorController {
 
 			// 2. Creación del gestor de estadísticas y generación de pasajeros
 			this.gestorEstadisticas = new GestorEstadisticas();
-			GeneradorPasajeros generador = new GeneradorPasajeros(lineasCargadas, paradasCargadas, configProperties,
-					gestorEstadisticas);
+			// CORRECCIÓN: Se elimina el argumento 'paradasCargadas' que ya no es necesario.
+			GeneradorPasajeros generador = new GeneradorPasajeros(lineasCargadas, configProperties, gestorEstadisticas);
 			this.pasajerosGenerados = generador.generarPasajeros();
 
 			// 3. Creación del simulador principal
@@ -75,11 +75,13 @@ public class SimuladorController {
 			// 4. Lectura de configuración y inicialización de los colectivos
 			int capacidadColectivo = SimuladorConfig.obtenerCapacidadColectivo(configProperties);
 			int capacidadSentados = SimuladorConfig.obtenerCapacidadSentadosColectivo(configProperties);
-			int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
-			int capacidadParados = capacidadColectivo - capacidadSentados;
+
+			// LIMPIEZA: Las variables 'recorridosPorColectivo' y 'capacidadParados' se
+			// eliminan
+			// ya que ahora son gestionadas internamente por el método
+			// 'inicializarColectivos'.
 
 			simulador.inicializarColectivos(capacidadColectivo, capacidadSentados);
-
 
 		} catch (IOException e) {
 			System.err.println("Error fatal al cargar archivos de datos: " + e.getMessage());
@@ -88,7 +90,6 @@ public class SimuladorController {
 			throw new RuntimeException(e);
 		}
 	}
-
 	// =================================================================================
 	// GETTERS
 	// (Permiten a la UI acceder a los componentes y datos del controlador)
