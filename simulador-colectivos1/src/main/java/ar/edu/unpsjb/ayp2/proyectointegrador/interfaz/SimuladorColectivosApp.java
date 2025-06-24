@@ -1,11 +1,12 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.interfaz;
 
-
 /**
- * Clase principal y punto de entrada para la aplicación "Simulador de Colectivos Urbanos".
+ * Clase principal y punto de entrada para la aplicación "Simulador de
+ * Colectivos Urbanos".
  * <p>
- * Su única responsabilidad es inicializar y conectar los componentes clave de la
- * arquitectura (el Controlador y la Interfaz de Usuario) y luego iniciar la aplicación.
+ * Su única responsabilidad es inicializar y conectar los componentes clave de
+ * la arquitectura (el Controlador y la Interfaz de Usuario) y luego iniciar la
+ * aplicación.
  *
  * @author Miyo
  * @author Enzo
@@ -27,7 +28,7 @@ public final class SimuladorColectivosApp {
 	public static void main(String[] args) {
 		// DECLARACIÓN DE COMPONENTES
 		SimuladorController controller = new SimuladorController(); // Crea el controlador que gestiona la lógica
-		SimuladorUI ui = new SimuladorUI(controller);             // Crea la UI y le inyecta el controlador
+		SimuladorUI ui = new SimuladorUI(controller); // Crea la UI y le inyecta el controlador
 
 		// INICIO DE LA APLICACIÓN
 		ui.start(); // Inicia la interfaz de usuario

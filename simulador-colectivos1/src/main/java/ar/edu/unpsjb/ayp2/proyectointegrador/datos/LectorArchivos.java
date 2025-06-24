@@ -17,7 +17,8 @@ import java.util.TreeMap;
  * Proporciona una interfaz unificada para leer los datos necesarios para la
  * simulación, manejando errores de archivo y de formato de datos.
  *
- * @author MiyoBran
+ * @author Miyen
+ * @author Enzo
  * @version 1.2
  */
 public class LectorArchivos {
@@ -54,6 +55,7 @@ public class LectorArchivos {
 
 	/**
 	 * Constructor para inyección de dependencias, ideal para pruebas.
+	 * 
 	 * @param props las propiedades a utilizar.
 	 */
 	public LectorArchivos(Properties props) {
@@ -71,6 +73,7 @@ public class LectorArchivos {
 
 	/**
 	 * Carga todos los datos necesarios en orden: paradas y luego líneas.
+	 * 
 	 * @throws IOException si ocurre un error al leer los archivos de datos.
 	 */
 	public void cargarDatosCompletos() throws IOException {
@@ -82,7 +85,9 @@ public class LectorArchivos {
 
 	/**
 	 * Carga las paradas desde el archivo especificado en la configuración.
-	 * @throws IOException si la propiedad no está definida o el archivo no se encuentra.
+	 * 
+	 * @throws IOException si la propiedad no está definida o el archivo no se
+	 *                     encuentra.
 	 */
 	public void cargarParadas() throws IOException {
 		try (Scanner scanner = obtenerScannerParaArchivo("parada")) {
@@ -94,7 +99,9 @@ public class LectorArchivos {
 
 	/**
 	 * Carga las líneas desde el archivo especificado en la configuración.
-	 * @throws IOException si la propiedad no está definida o el archivo no se encuentra.
+	 * 
+	 * @throws IOException si la propiedad no está definida o el archivo no se
+	 *                     encuentra.
 	 */
 	public void cargarLineas() throws IOException {
 		if (this.paradasCargadas.isEmpty()) {
@@ -112,8 +119,14 @@ public class LectorArchivos {
 	// GETTERS (Defensivos, devuelven copias)
 	// =================================================================================
 
-	public Map<String, Parada> getParadasCargadas() { return new TreeMap<>(this.paradasCargadas); }
-	public Map<String, Linea> getLineasCargadas() { return new TreeMap<>(this.lineasCargadas); }
+	public Map<String, Parada> getParadasCargadas() {
+		return new TreeMap<>(this.paradasCargadas);
+	}
+
+	public Map<String, Linea> getLineasCargadas() {
+		return new TreeMap<>(this.lineasCargadas);
+	}
+
 	public Properties getPropiedades() {
 		Properties copia = new Properties();
 		copia.putAll(propiedades);
@@ -125,11 +138,14 @@ public class LectorArchivos {
 	// =================================================================================
 
 	/**
-	 * Procesa una única línea del archivo de paradas y la añade al mapa si es válida.
+	 * Procesa una única línea del archivo de paradas y la añade al mapa si es
+	 * válida.
+	 * 
 	 * @param linea La línea de texto a procesar.
 	 */
 	private void procesarLineaDeParada(String linea) {
-		if (linea.trim().isEmpty()) return;
+		if (linea.trim().isEmpty())
+			return;
 
 		String[] partes = linea.split(DELIMITADOR_CAMPOS, -1);
 		if (partes.length != 4) {
@@ -139,7 +155,8 @@ public class LectorArchivos {
 
 		try {
 			String id = partes[0].trim();
-			if (id.isEmpty() || paradasCargadas.containsKey(id)) return;
+			if (id.isEmpty() || paradasCargadas.containsKey(id))
+				return;
 
 			String direccion = partes[1].trim();
 			double latitud = Double.parseDouble(partes[2].trim());
@@ -152,11 +169,14 @@ public class LectorArchivos {
 	}
 
 	/**
-	 * Procesa una única línea del archivo de líneas y la añade al mapa si es válida.
+	 * Procesa una única línea del archivo de líneas y la añade al mapa si es
+	 * válida.
+	 * 
 	 * @param lineaStr La línea de texto a procesar.
 	 */
 	private void procesarLineaDeLinea(String lineaStr) {
-		if (lineaStr.trim().isEmpty()) return;
+		if (lineaStr.trim().isEmpty())
+			return;
 
 		String[] partes = lineaStr.split(DELIMITADOR_CAMPOS, -1);
 		if (partes.length != 3) {
@@ -167,10 +187,12 @@ public class LectorArchivos {
 		try {
 			String id = partes[0].trim();
 			String nombre = partes[1].trim();
-			if (id.isEmpty()) return;
+			if (id.isEmpty())
+				return;
 
 			String claveMapa = id + " - " + nombre;
-			if (lineasCargadas.containsKey(claveMapa)) return;
+			if (lineasCargadas.containsKey(claveMapa))
+				return;
 
 			Linea lineaObj = new Linea(id, nombre);
 			String[] idsParadas = partes[2].trim().split(DELIMITADOR_RECORRIDO);
@@ -181,7 +203,8 @@ public class LectorArchivos {
 				for (String idParada : idsParadas) {
 					Parada parada = this.paradasCargadas.get(idParada.trim());
 					if (parada == null) {
-						System.err.println("Error: La línea '" + claveMapa + "' referencia una parada desconocida ('" + idParada.trim() + "'). La línea no será cargada.");
+						System.err.println("Error: La línea '" + claveMapa + "' referencia una parada desconocida ('"
+								+ idParada.trim() + "'). La línea no será cargada.");
 						return; // Omite toda la línea si una parada no existe
 					}
 					lineaObj.agregarParadaAlRecorrido(parada);
@@ -192,10 +215,12 @@ public class LectorArchivos {
 			System.err.println("Advertencia: Argumentos inválidos en línea de línea omitida -> " + lineaStr);
 		}
 	}
-	
+
 	/**
 	 * Obtiene un Scanner para un archivo especificado en la configuración.
-	 * @param propiedadKey La clave en config.properties que contiene el nombre del archivo.
+	 * 
+	 * @param propiedadKey La clave en config.properties que contiene el nombre del
+	 *                     archivo.
 	 * @return Un Scanner listo para leer el archivo.
 	 * @throws IOException si la propiedad no existe o el archivo no se encuentra.
 	 */
@@ -213,6 +238,7 @@ public class LectorArchivos {
 
 	/**
 	 * Carga las propiedades desde un archivo en el classpath.
+	 * 
 	 * @param nombreArchivo el nombre del archivo de propiedades a cargar.
 	 * @throws RuntimeException si el archivo de configuración no se puede cargar.
 	 */

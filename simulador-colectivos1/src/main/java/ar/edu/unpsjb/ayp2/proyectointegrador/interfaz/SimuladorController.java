@@ -39,8 +39,8 @@ public class SimuladorController {
 	private GestorEstadisticas gestorEstadisticas;
 
 	/**
-	 * Constructor de la clase. La inicialización de los componentes se delega
-	 * al método inicializar() para un mayor control del flujo.
+	 * Constructor de la clase. La inicialización de los componentes se delega al
+	 * método inicializar() para un mayor control del flujo.
 	 */
 	public SimuladorController() {
 		// Constructor vacío, la inicialización se realiza en el método inicializar().
@@ -50,7 +50,8 @@ public class SimuladorController {
 	 * Realiza la carga y configuración completa de todos los componentes necesarios
 	 * para ejecutar la simulación.
 	 *
-	 * @throws RuntimeException si ocurre un error fatal durante la carga de archivos.
+	 * @throws RuntimeException si ocurre un error fatal durante la carga de
+	 *                          archivos.
 	 */
 	public void inicializar() {
 		try {
@@ -63,11 +64,13 @@ public class SimuladorController {
 
 			// 2. Creación del gestor de estadísticas y generación de pasajeros
 			this.gestorEstadisticas = new GestorEstadisticas();
-			GeneradorPasajeros generador = new GeneradorPasajeros(lineasCargadas, paradasCargadas, configProperties, gestorEstadisticas);
+			GeneradorPasajeros generador = new GeneradorPasajeros(lineasCargadas, paradasCargadas, configProperties,
+					gestorEstadisticas);
 			this.pasajerosGenerados = generador.generarPasajeros();
 
 			// 3. Creación del simulador principal
-			this.simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados, gestorEstadisticas, null, configProperties);
+			this.simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados, gestorEstadisticas,
+					null, configProperties);
 
 			// 4. Lectura de configuración y inicialización de los colectivos
 			int capacidadColectivo = SimuladorConfig.obtenerCapacidadColectivo(configProperties);
@@ -75,11 +78,13 @@ public class SimuladorController {
 			int recorridosPorColectivo = SimuladorConfig.obtenerRecorridosPorColectivo(configProperties);
 			int capacidadParados = capacidadColectivo - capacidadSentados;
 
-			simulador.inicializarColectivos(capacidadColectivo, capacidadSentados, capacidadParados, recorridosPorColectivo);
+			simulador.inicializarColectivos(capacidadColectivo, capacidadSentados, capacidadParados,
+					recorridosPorColectivo);
 
 		} catch (IOException e) {
 			System.err.println("Error fatal al cargar archivos de datos: " + e.getMessage());
-			// Relanzamos como RuntimeException para detener la aplicación si los datos no se pueden cargar.
+			// Relanzamos como RuntimeException para detener la aplicación si los datos no
+			// se pueden cargar.
 			throw new RuntimeException(e);
 		}
 	}
@@ -89,10 +94,27 @@ public class SimuladorController {
 	// (Permiten a la UI acceder a los componentes y datos del controlador)
 	// =================================================================================
 
-	public Simulador getSimulador() { return this.simulador; }
-	public Map<String, Parada> getParadasCargadas() { return this.paradasCargadas; }
-	public Map<String, Linea> getLineasCargadas() { return this.lineasCargadas; }
-	public Properties getConfigProperties() { return this.configProperties; }
-	public List<Pasajero> getPasajerosGenerados() { return this.pasajerosGenerados; }
-	public GestorEstadisticas getGestorEstadisticas() { return this.gestorEstadisticas; }
+	public Simulador getSimulador() {
+		return this.simulador;
+	}
+
+	public Map<String, Parada> getParadasCargadas() {
+		return this.paradasCargadas;
+	}
+
+	public Map<String, Linea> getLineasCargadas() {
+		return this.lineasCargadas;
+	}
+
+	public Properties getConfigProperties() {
+		return this.configProperties;
+	}
+
+	public List<Pasajero> getPasajerosGenerados() {
+		return this.pasajerosGenerados;
+	}
+
+	public GestorEstadisticas getGestorEstadisticas() {
+		return this.gestorEstadisticas;
+	}
 }
