@@ -1,168 +1,183 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.reporte;
 
+import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GestorEstadisticas;
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.Simulador;
+import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Colectivo;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Map;
 
 /**
- * Clase para generar reportes de simulación. Proporciona métodos para imprimir
- * estadísticas de satisfacción, verificar consistencia de estadísticas y
- * reportar ocupación de colectivos.
- * 
+ * Clase de utilidad para generar y mostrar reportes de la simulación.
+ * Proporciona métodos estáticos para imprimir diversas estadísticas en la consola.
+ *
  * @author Miyo
  * @author Enzo
- * @version 1.0
- * 
+ * @version 1.1
  */
-public class ReporteSimulacion {
+public final class ReporteSimulacion {
+
 	/**
-	 * Imprime un resumen de la simulación, incluyendo estadísticas de
-	 * satisfacción, ocupación de colectivos y reporte de pasajeros.
-	 * @param simulador El simulador del cual se obtienen las estadísticas.
+	 * Constructor privado para prevenir la instanciación de esta clase de utilidad.
 	 */
-	public static void imprimirEstadisticasCompletas(Simulador simulador) {
-		System.out.println("\n--- Estadísticas de Satisfacción (Anexo I) ---");
-		System.out.println(String.format("Índice de satisfacción: %.2f",
-				simulador.getGestorEstadisticas().getIndiceSatisfaccion()));
-		System.out.println("Desglose de calificaciones:");
-		for (int cal = 5; cal >= 1; cal--) {
-			int count = simulador.getGestorEstadisticas().getDesgloseCalificaciones().getOrDefault(cal, 0);
-			System.out.println(String.format("  Calificación %d: %d pasajeros", cal, count));
-		}
-		System.out.println("\n--- Estadísticas de la Simulación ---");
-		System.out.println(String.format("Pasajeros transportados: %d",
-				simulador.getGestorEstadisticas().getPasajerosTransportados()));
-		System.out.println(String.format("Tiempo promedio de espera: %.2f minutos",
-				simulador.getGestorEstadisticas().getTiempoEsperaPromedio()));
-		System.out.println(String.format("Tiempo promedio de viaje: %.2f minutos",
-				simulador.getGestorEstadisticas().getTiempoViajePromedio()));
-		System.out.println(String.format("Satisfacción promedio: %.1f",
-				simulador.getGestorEstadisticas().getSatisfaccionPromedio()));
-		System.out.println(
-				String.format("%% Satisfechos: %.1f%%", simulador.getGestorEstadisticas().getPorcentajeSatisfechos()));
-		System.out.println(String.format("%% Insatisfechos: %.1f%%",
-				simulador.getGestorEstadisticas().getPorcentajeInsatisfechos()));
-		// Agregar ocupación promedio general de colectivos
-		var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
-		if (!ocupaciones.isEmpty()) {
-			double suma = 0.0;
-			int cantidad = 0;
-			for (var entry : ocupaciones.entrySet()) {
-				suma += entry.getValue();
-				cantidad++;
-			}
-			double promedioGeneral = cantidad > 0 ? (suma / cantidad) * 100 : 0.0;
-			System.out.println(String.format("\nOcupación promedio general de colectivos: %.2f%%", promedioGeneral));
-		}
+	private ReporteSimulacion() {
 	}
 
-	public static void verificarConsistenciaEstadisticas(Simulador simulador) {
-		var gestor = simulador.getGestorEstadisticas();
-		int totalPasajerosGenerados = gestor.getPasajerosTotales();
-		int pasajerosTransportados = gestor.getPasajerosTransportados();
-		var desglose = gestor.getDesgloseCalificaciones();
-		int sumaCalificaciones = desglose.values().stream().mapToInt(Integer::intValue).sum();
-		double indiceSatisfaccion = gestor.getIndiceSatisfaccion();
-		double satisfaccionPromedio = gestor.getSatisfaccionPromedio();
-		double porcentajeSatisfechos = gestor.getPorcentajeSatisfechos();
-		double porcentajeInsatisfechos = gestor.getPorcentajeInsatisfechos();
+	// =================================================================================
+	// MÉTODOS PÚBLICOS DE REPORTE
+	// =================================================================================
 
-		// Check 1: Breakdown matches total generated or transported
-		if (sumaCalificaciones != totalPasajerosGenerados && sumaCalificaciones != pasajerosTransportados) {
-			System.err.println(
-					"[ADVERTENCIA] El desglose de calificaciones no coincide con la cantidad de pasajeros generados ni transportados.");
-		}
-
-		// Check 2: Percentages add up to 100%
-		double totalPorcentaje = porcentajeSatisfechos + porcentajeInsatisfechos;
-		if (Math.abs(totalPorcentaje - 100.0) > 0.1) {
-			System.err.println("[ADVERTENCIA] Los porcentajes de satisfechos e insatisfechos no suman 100%.");
-		}
-
-		// Check 3: Satisfaction index and average are compatible
-		double calculoPromedio = 0.0;
-		int totalCalificaciones = 0;
-		for (int i = 1; i <= 5; i++) {
-			int count = desglose.getOrDefault(i, 0);
-			calculoPromedio += i * count;
-			totalCalificaciones += count;
-		}
-		if (totalCalificaciones > 0) {
-			double promedioEscala100 = calculoPromedio / totalCalificaciones * 20; // 1-5 scaled to 20-100
-			if (Math.abs(promedioEscala100 - satisfaccionPromedio) > 1.0) {
-				System.err.println("[ADVERTENCIA] La satisfacción promedio calculada no coincide con la reportada.");
-			}
-		}
+	/**
+	 * Imprime las estadísticas de satisfacción de los pasajeros (Anexo I).
+	 * @param simulador El simulador del cual se obtienen los datos.
+	 */
+	public static void imprimirEstadisticasDeSatisfaccion(Simulador simulador) {
+		GestorEstadisticas gestor = simulador.getGestorEstadisticas();
+		
+		imprimirTitulo("Estadísticas de Satisfacción (Anexo I)");
+		imprimirLineaDato("Índice de satisfacción general", String.format("%.2f%%", gestor.getIndiceSatisfaccion() * 100), "");
+		
+		System.out.println("  - Desglose de calificaciones:");
+		gestor.getDesgloseCalificaciones().entrySet().stream()
+			.sorted(Map.Entry.<Integer, Integer>comparingByKey().reversed()) // Ordenar de 5 a 1
+			.forEach(entry -> 
+				imprimirLineaDato(String.format("    Calificación %d estrellas", entry.getKey()), entry.getValue(), "pasajeros")
+			);
 	}
-
+	
+	/**
+	 * Imprime un reporte detallado sobre el estado final de todos los pasajeros.
+	 * @param simulador El simulador del cual se obtienen los datos.
+	 */
 	public static void imprimirReportePasajeros(Simulador simulador) {
-		var gestor = simulador.getGestorEstadisticas();
-		var desglose = gestor.getDesglosePasajeros();
-		int totalGenerados = gestor.getPasajerosTotales();
-		int suma = desglose.getOrDefault("transportados", 0) + desglose.getOrDefault("bajadosForzosamente", 0)
-				+ desglose.getOrDefault("nuncaSubieron", 0);
-		System.out.println("\n--- Reporte de Pasajeros ---");
-		System.out.println(String.format("Total de pasajeros generados: %d", totalGenerados));
-		System.out.println(String.format("Pasajeros transportados: %d", desglose.getOrDefault("transportados", 0)));
-		System.out.println(String.format("Pasajeros bajados forzosamente en terminal: %d",
-				desglose.getOrDefault("bajadosForzosamente", 0)));
-		System.out.println(String.format("Pasajeros que nunca subieron a un colectivo: %d",
-				desglose.getOrDefault("nuncaSubieron", 0)));
-		if (suma != totalGenerados) {
-			System.out.println(String.format(
-					"[ADVERTENCIA] La suma de pasajeros reportados no coincide con el total generado. Suma: %d, Total generados: %d",
-					suma, totalGenerados));
-		}
+		GestorEstadisticas gestor = simulador.getGestorEstadisticas();
+		Map<String, Integer> desglose = gestor.getDesglosePasajeros();
+		
+		imprimirTitulo("Reporte de Pasajeros");
+		imprimirLineaDato("Total generados", gestor.getPasajerosTotales(), "pasajeros");
+		imprimirLineaDato("Transportados con éxito", desglose.getOrDefault("transportadosConExito", 0), "pasajeros");
+		imprimirLineaDato("Bajados forzosamente", desglose.getOrDefault("bajadosForzosamente", 0), "pasajeros");
+		imprimirLineaDato("Nunca subieron", desglose.getOrDefault("nuncaSubieron", 0), "pasajeros");
+		
+		verificarConsistenciaPasajeros(gestor, desglose);
 	}
 
 	/**
-	 * Imprime la ocupación promedio de cada colectivo y el promedio general.
+	 * Imprime la ocupación promedio de cada colectivo y el promedio general (Anexo II).
+	 * @param simulador El simulador del cual se obtienen los datos.
 	 */
 	public static void imprimirOcupacionPromedioColectivos(Simulador simulador) {
-		var ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
-		System.out.println("\n--- OCUPACIÓN PROMEDIO DE COLECTIVOS (Anexo II) ---");
+		Map<String, Double> ocupaciones = simulador.getGestorEstadisticas().getOcupacionPromedioPorColectivo();
+		
+		imprimirTitulo("Ocupación Promedio de Colectivos (Anexo II)");
 		if (ocupaciones.isEmpty()) {
-			System.out.println("No hay datos de ocupación registrados.");
-		} else {
-			var colectivosOrdenados = new java.util.ArrayList<>(simulador.getColectivosEnSimulacion());
-			colectivosOrdenados.sort(COMPARATOR_POR_NUMERO_ID_COLECTIVO);
-			double suma = 0.0;
-			int cantidad = 0;
-			for (var colectivo : colectivosOrdenados) {
-				Double ocup = ocupaciones.get(colectivo.getIdColectivo());
-				if (ocup != null) {
-					System.out.println(String.format("%s: %.2f%%", colectivo.getEtiqueta(), ocup * 100));
-					suma += ocup;
-					cantidad++;
-				}
+			System.out.println("  No hay datos de ocupación registrados.");
+			return;
+		}
+
+		// Ordena los colectivos por ID para una presentación consistente
+		ArrayList<Colectivo> colectivosOrdenados = new ArrayList<>(simulador.getColectivosEnSimulacion());
+		colectivosOrdenados.sort(COMPARATOR_POR_NUMERO_ID_COLECTIVO);
+
+		for (Colectivo colectivo : colectivosOrdenados) {
+			Double ocupacion = ocupaciones.get(colectivo.getIdColectivo());
+			if (ocupacion != null) {
+				imprimirLineaDato(colectivo.getEtiqueta(), String.format("%.2f%%", ocupacion * 100), "");
 			}
-			double promedioGeneral = cantidad > 0 ? (suma / cantidad) * 100 : 0.0;
-			System.out.println(String.format("\nOcupación promedio general de colectivos: %.2f%%", promedioGeneral));
+		}
+		
+		double promedioGeneral = calcularOcupacionPromedioGeneral(ocupaciones);
+		System.out.println(); // Salto de línea
+		imprimirLineaDato("Ocupación promedio general", String.format("%.2f%%", promedioGeneral * 100), "");
+	}
+	
+	// =================================================================================
+	// MÉTODOS PÚBLICOS DE VERIFICACIÓN
+	// =================================================================================
+
+	/**
+	 * Realiza una serie de verificaciones para asegurar la consistencia de las estadísticas.
+	 * Imprime advertencias en la consola de error si encuentra inconsistencias.
+	 * @param simulador El simulador cuyos datos se verificarán.
+	 */
+	public static void verificarConsistenciaEstadisticas(Simulador simulador) {
+		GestorEstadisticas gestor = simulador.getGestorEstadisticas();
+		
+		imprimirTitulo("Verificación de Consistencia de Estadísticas");
+		
+		// Verificación 1: Que el desglose de pasajeros coincida con el total generado.
+		verificarConsistenciaPasajeros(gestor, gestor.getDesglosePasajeros());
+		
+		// Verificación 2: Que el total de pasajeros calificados coincida con los transportados (o generados).
+		int totalCalificaciones = gestor.getDesgloseCalificaciones().values().stream().mapToInt(Integer::intValue).sum();
+		if (totalCalificaciones != gestor.getPasajerosTotales()) {
+			System.err.printf("[ADVERTENCIA] El total de pasajeros calificados (%d) no coincide con el total de pasajeros generados (%d).\n",
+				totalCalificaciones, gestor.getPasajerosTotales());
+		} else {
+			System.out.println("  Consistencia de conteo de pasajeros: OK");
+		}
+	}
+	
+	// =================================================================================
+	// MÉTODOS PRIVADOS DE AYUDA (HELPERS)
+	// =================================================================================
+
+	/** Imprime un título de sección formateado. */
+	private static void imprimirTitulo(String titulo) {
+		System.out.printf("\n--- %S ---\n", titulo); // %S para mayúsculas
+	}
+
+	/** Imprime una línea de dato con etiqueta, valor y sufijo, con formato e indentación. */
+	private static void imprimirLineaDato(String etiqueta, Object valor, String sufijo) {
+		System.out.printf("  - %-40s %s %s\n", etiqueta + ":", valor, sufijo).flush();
+	}
+
+	/** Calcula el promedio general de ocupación a partir de un mapa de promedios individuales. */
+	private static double calcularOcupacionPromedioGeneral(Map<String, Double> ocupaciones) {
+		if (ocupaciones == null || ocupaciones.isEmpty()) {
+			return 0.0;
+		}
+		double sumaPromedios = ocupaciones.values().stream().mapToDouble(Double::doubleValue).sum();
+		return sumaPromedios / ocupaciones.size();
+	}
+
+	/** Verifica si el desglose de pasajeros suma el total de generados. */
+	private static void verificarConsistenciaPasajeros(GestorEstadisticas gestor, Map<String, Integer> desglose) {
+		int totalGenerados = gestor.getPasajerosTotales();
+		int sumaDesglose = desglose.values().stream().mapToInt(Integer::intValue).sum();
+
+		if (sumaDesglose != totalGenerados) {
+			System.err.printf("[ADVERTENCIA] La suma del desglose de pasajeros (%d) no coincide con el total generado (%d).\n",
+				sumaDesglose, totalGenerados);
 		}
 	}
 
+	// =================================================================================
+	// COMPARATOR
+	// =================================================================================
+
 	/**
-	 * Comparator para ordenar colectivos por el número extraído de su id
-	 * (C#-linea).
+	 * Compara dos colectivos basándose en el número numérico de su ID (ej: C<num>-linea).
 	 */
-	private static final java.util.Comparator<ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Colectivo> COMPARATOR_POR_NUMERO_ID_COLECTIVO = (
-			a, b) -> {
+	private static final Comparator<Colectivo> COMPARATOR_POR_NUMERO_ID_COLECTIVO = (a, b) -> {
 		try {
 			int numA = extraerNumeroIdColectivo(a.getIdColectivo());
 			int numB = extraerNumeroIdColectivo(b.getIdColectivo());
 			return Integer.compare(numA, numB);
 		} catch (Exception e) {
+			// Fallback a comparación de String si el formato falla
 			return a.getIdColectivo().compareTo(b.getIdColectivo());
 		}
 	};
 
-	/**
-	 * Extrae el número del id del colectivo (formato C#-linea).
-	 */
+	/** Extrae la parte numérica del ID de un colectivo. */
 	private static int extraerNumeroIdColectivo(String id) {
 		int start = id.indexOf('C') + 1;
 		int end = id.indexOf('-');
 		if (start > 0 && end > start) {
 			return Integer.parseInt(id.substring(start, end));
 		}
-		throw new IllegalArgumentException("Formato de id de colectivo inválido: " + id);
+		throw new NumberFormatException("Formato de id de colectivo inválido: " + id);
 	}
 }
