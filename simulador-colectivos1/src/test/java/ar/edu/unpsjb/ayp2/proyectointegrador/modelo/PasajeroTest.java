@@ -2,168 +2,208 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Pruebas unitarias para la clase Pasajero.
- * Verifica la correcta creación, el manejo de estado y los métodos de la clase.
+ * Verifica la correcta creación, el manejo de estado, la lógica de negocio
+ * y los métodos de la clase.
  */
-@DisplayName("Tests para la Clase Pasajero")
+@DisplayName("Pruebas de la Clase Pasajero")
 class PasajeroTest {
 
-    private Parada p1, p2, p3;
+    private Parada p1, p2;
+    private Pasajero pasajero;
 
+    // Se ejecuta antes de CADA test.
     @BeforeEach
     void setUp() {
         p1 = new Parada("P01", "Parada Origen");
         p2 = new Parada("P02", "Parada Destino");
-        p3 = new Parada("P03", "Otra Parada");
+        pasajero = new Pasajero(p1, p2); // Usamos un pasajero común para varios tests
     }
 
-    @Test
-    @DisplayName("Constructor: debería crear un pasajero con ID autogenerado y estado inicial correcto")
-    void crearPasajeroConIdAutogeneradoYDatosValidos() {
-        Pasajero pasajero = new Pasajero(p1, p2);
-        assertNotNull(pasajero.getId(), "El ID autogenerado no debería ser nulo.");
-        assertFalse(pasajero.getId().trim().isEmpty(), "El ID autogenerado no debería estar vacío.");
-        assertEquals(p1, pasajero.getParadaOrigen());
-        assertEquals(p2, pasajero.getParadaDestino());
-        // Verificar valores iniciales por defecto
-        assertEquals(0, pasajero.getColectivosEsperados());
-        assertFalse(pasajero.isPudoSubir());
+    @Nested
+    @DisplayName("Pruebas de Constructores y Creación")
+    class PruebasDeConstructor {
+
+        @Test
+        @DisplayName("Debería crear pasajero con ID autogenerado y estado inicial correcto")
+        void crearPasajeroConIdAutogenerado() {
+            assertNotNull(pasajero.getId(), "El ID autogenerado no debería ser nulo.");
+            assertFalse(pasajero.getId().trim().isEmpty(), "El ID autogenerado no debería estar vacío.");
+            assertEquals(p1, pasajero.getParadaOrigen(), "La parada de origen debe ser la correcta.");
+            assertEquals(p2, pasajero.getParadaDestino(), "La parada de destino debe ser la correcta.");
+            
+            // Verificar estado inicial por defecto
+            assertEquals(0, pasajero.getColectivosEsperados());
+            assertFalse(pasajero.isPudoSubir());
+            assertFalse(pasajero.isViajoSentado());
+            assertFalse(pasajero.isBajadaForzosa());
+            assertEquals(0, pasajero.getSatisfaccion());
+        }
+
+        @Test
+        @DisplayName("Debería crear pasajero con un ID específico")
+        void crearPasajeroConIdEspecifico() {
+            Pasajero pasajeroConId = new Pasajero("PASS001", p1, p2);
+            assertEquals("PASS001", pasajeroConId.getId());
+            assertEquals(p1, pasajeroConId.getParadaOrigen());
+            assertEquals(p2, pasajeroConId.getParadaDestino());
+        }
+
+        @Test
+        @DisplayName("Debería lanzar excepción si ID es nulo")
+        void crearPasajeroConIdNuloLanzaExcepcion() {
+            assertThrows(IllegalArgumentException.class, () -> new Pasajero(null, p1, p2), "ID nulo debe lanzar excepción.");
+        }
+
+        @Test
+        @DisplayName("Debería lanzar excepción si origen es nulo")
+        void crearPasajeroConOrigenNuloLanzaExcepcion() {
+            assertThrows(IllegalArgumentException.class, () -> new Pasajero("ID", null, p2), "Origen nulo debe lanzar excepción.");
+        }
+
+        @Test
+        @DisplayName("Debería lanzar excepción si destino es nulo")
+        void crearPasajeroConDestinoNuloLanzaExcepcion() {
+            assertThrows(IllegalArgumentException.class, () -> new Pasajero("ID", p1, null), "Destino nulo debe lanzar excepción.");
+        }
+
+        @Test
+        @DisplayName("Debería lanzar excepción si origen y destino son iguales")
+        void crearPasajeroConOrigenIgualDestinoLanzaExcepcion() {
+            assertThrows(IllegalArgumentException.class, () -> new Pasajero("ID", p1, p1), "Origen igual a destino debe lanzar excepción.");
+        }
     }
 
-    @Test
-    @DisplayName("Constructor: debería crear un pasajero con un ID específico")
-    void crearPasajeroConIdEspecificoYDatosValidos() {
-        Pasajero pasajero = new Pasajero("PASS001", p1, p2);
-        assertEquals("PASS001", pasajero.getId());
-        assertEquals(p1, pasajero.getParadaOrigen());
-        assertEquals(p2, pasajero.getParadaDestino());
-    }
+    @Nested
+    @DisplayName("Pruebas de Lógica de Satisfacción")
+    class PruebasDeSatisfaccion {
 
-    @Test
-    @DisplayName("Constructor: debería lanzar excepción si el ID es nulo")
-    void crearPasajeroConIdNuloLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Pasajero(null, p1, p2));
-    }
+        @Test
+        @DisplayName("Debería ser 1 si el pasajero nunca pudo subir")
+        void calcularSatisfaccionCuandoNoPudoSubir() {
+            pasajero.setPudoSubir(false);
+            assertEquals(1, pasajero.calcularSatisfaccion(), "Satisfacción debe ser 1 si no subió.");
+        }
 
-    @Test
-    @DisplayName("Constructor: debería lanzar excepción si la parada de origen es nula")
-    void crearPasajeroConOrigenNuloLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Pasajero("PASS002", null, p2));
-    }
-
-    @Test
-    @DisplayName("Constructor: debería lanzar excepción si la parada de destino es nula")
-    void crearPasajeroConDestinoNuloLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Pasajero("PASS003", p1, null));
-    }
-
-    @Test
-    @DisplayName("Constructor: debería lanzar excepción si origen y destino son iguales")
-    void crearPasajeroConOrigenIgualDestinoLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> new Pasajero("PASS004", p1, p1));
-    }
-
-    @Test
-    @DisplayName("Estado: debería gestionar correctamente los atributos de estado del viaje")
-    void manejoDeEstadoParaIncremento2() {
-        Pasajero pasajero = new Pasajero(p1, p2);
+        @Test
+        @DisplayName("Debería ser 5 si no esperó colectivos (subió al primero) y viajó sentado")
+        void calcularSatisfaccionCasoIdeal() {
+            pasajero.setPudoSubir(true);
+            pasajero.setViajoSentado(true);
+            // NO se incrementa colectivosEsperados, porque subió al primero que pasó (contador = 0).
+            assertEquals(5, pasajero.calcularSatisfaccion(), "Satisfacción debe ser 5 en el caso ideal.");
+        }
         
-        pasajero.incrementarColectivosEsperados();
-        assertEquals(1, pasajero.getColectivosEsperados());
+        @Test
+        @DisplayName("Debería ser 4 si no esperó colectivos (subió al primero) y viajó de pie")
+        void calcularSatisfaccionCasoIdealDePie() {
+            pasajero.setPudoSubir(true);
+            pasajero.setViajoSentado(false);
+            // NO se incrementa colectivosEsperados, porque subió al primero (contador = 0).
+            assertEquals(4, pasajero.calcularSatisfaccion(), "Satisfacción debe ser 4 si subió al primero pero fue de pie.");
+        }
+
+        @Test
+        @DisplayName("Debería ser 3 si esperó 1 colectivo")
+        void calcularSatisfaccionCuandoEsperaUnColectivo() {
+            pasajero.setPudoSubir(true);
+            pasajero.incrementarColectivosEsperados(); // Pasa 1 colectivo de largo.
+            // Sube al siguiente. El contador es 1.
+            assertEquals(3, pasajero.calcularSatisfaccion(), "Satisfacción debe ser 3 si esperó 1 colectivo.");
+        }
+
+        @Test
+        @DisplayName("Debería ser 2 si esperó 2 o más colectivos")
+        void calcularSatisfaccionCuandoEsperaVariosColectivos() {
+            pasajero.setPudoSubir(true);
+            pasajero.incrementarColectivosEsperados(); // Pasa el 1ro.
+            pasajero.incrementarColectivosEsperados(); // Pasa el 2do.
+            // Sube al siguiente. El contador es 2.
+            assertEquals(2, pasajero.calcularSatisfaccion(), "Satisfacción debe ser 2 si esperó 2 colectivos.");
+        }
         
-        pasajero.setPudoSubir(true);
-        assertTrue(pasajero.isPudoSubir());
-
-        pasajero.setViajoSentado(true);
-        assertTrue(pasajero.isViajoSentado());
-
-        // Probamos el reinicio del estado
-        pasajero.resetearEstadoViaje();
-        assertEquals(0, pasajero.getColectivosEsperados());
-        assertFalse(pasajero.isPudoSubir());
-        assertFalse(pasajero.isViajoSentado());
+        @Test
+        @DisplayName("Debería devolver valor forzado si se usa setSatisfaccion")
+        void calcularSatisfaccionConValorForzado() {
+            // Este caso simula una bajada forzosa en una terminal, por ejemplo.
+            pasajero.setSatisfaccion(1); 
+            assertEquals(1, pasajero.calcularSatisfaccion(), "Debe devolver el valor seteado, ignorando otros cálculos.");
+        }
     }
 
-    @Test
-    @DisplayName("Estado: debería gestionar correctamente atributos avanzados de simulación")
-    void manejoDeAtributosAvanzados() {
-        Pasajero pasajero = new Pasajero(p1, p2);
-        // Métodos avanzados eliminados del modelo actual:
-        // pasajero.agregarTiempoEspera(5);
-        // assertEquals(5, pasajero.getTiempoEspera());
-        // pasajero.agregarTiempoEspera(3);
-        // assertEquals(8, pasajero.getTiempoEspera());
-        // pasajero.agregarColectivoObservado("C01");
-        // pasajero.agregarColectivoObservado("C02");
-        // assertEquals(2, pasajero.getColectivosObservados().size());
-        // assertTrue(pasajero.getColectivosObservados().contains("C01"));
-        // pasajero.agregarTiempoViaje(7);
-        // assertEquals(7, pasajero.getTiempoViaje());
-        // pasajero.agregarTiempoViaje(2);
-        // assertEquals(9, pasajero.getTiempoViaje());
-        // Bajada forzosa
-        assertFalse(pasajero.isBajadaForzosa());
-        pasajero.setBajadaForzosa(true);
-        assertTrue(pasajero.isBajadaForzosa());
+    @Nested
+    @DisplayName("Pruebas de Estado y Comportamiento")
+    class PruebasDeEstado {
+
+        @Test
+        @DisplayName("incrementarColectivosEsperados debería aumentar el contador en uno")
+        void incrementarColectivosEsperados() {
+            assertEquals(0, pasajero.getColectivosEsperados());
+            pasajero.incrementarColectivosEsperados();
+            assertEquals(1, pasajero.getColectivosEsperados());
+            pasajero.incrementarColectivosEsperados();
+            assertEquals(2, pasajero.getColectivosEsperados());
+        }
+
+        @Test
+        @DisplayName("resetearEstadoViaje debería restaurar todos los valores por defecto")
+        void resetearEstadoViaje() {
+            // Modificamos el estado
+            pasajero.incrementarColectivosEsperados();
+            pasajero.setPudoSubir(true);
+            pasajero.setViajoSentado(true);
+            pasajero.setSatisfaccion(5);
+            pasajero.setBajadaForzosa(true);
+
+            // Reseteamos
+            pasajero.resetearEstadoViaje();
+
+            // Verificamos
+            assertEquals(0, pasajero.getColectivosEsperados());
+            assertFalse(pasajero.isPudoSubir());
+            assertFalse(pasajero.isViajoSentado());
+            assertFalse(pasajero.isBajadaForzosa());
+            assertEquals(0, pasajero.getSatisfaccion());
+        }
     }
 
-    @Test
-    @DisplayName("Satisfacción: debería calcular correctamente el índice de satisfacción")
-    void calcularSatisfaccion() {
-        Pasajero pasajero = new Pasajero(p1, p2);
-        // Caso ideal
-        pasajero.setPudoSubir(true);
-        pasajero.setViajoSentado(true);
-        // pasajero.setSubioAlPrimerColectivoQuePaso(true); // Método no disponible
-        assertEquals(5, pasajero.calcularSatisfaccion());
-        // Caso con espera y viaje largo
-        pasajero.resetearEstadoViaje();
-        pasajero.setPudoSubir(true);
-        pasajero.setViajoSentado(false);
-        // pasajero.setSubioAlPrimerColectivoQuePaso(false); // Método no disponible
-        pasajero.incrementarColectivosEsperados();
-        assertEquals(3, pasajero.calcularSatisfaccion());
-        // Caso no pudo subir
-        pasajero.resetearEstadoViaje();
-        assertEquals(1, pasajero.calcularSatisfaccion());
-    }
-
-    @Test
-    @DisplayName("Equals/HashCode: deberían basarse únicamente en el ID del pasajero")
-    void pasajerosConMismoIdSonIguales() {
-        Pasajero pas1 = new Pasajero("ID_IGUAL", p1, p2);
-        Pasajero pas2 = new Pasajero("ID_IGUAL", p1, p3); // Mismo ID, diferente destino
+    @Nested
+    @DisplayName("Pruebas de Contrato (equals, hashCode, toString)")
+    class PruebasDeContrato {
         
-        assertEquals(pas1, pas2, "Pasajeros con el mismo ID deben ser iguales.");
-        assertEquals(pas1.hashCode(), pas2.hashCode(), "El hashCode debe ser consistente con equals.");
-    }
-
-    @Test
-    @DisplayName("Equals/HashCode: no deberían ser iguales si los IDs son diferentes")
-    void pasajerosConDiferenteIdNoSonIguales() {
-        Pasajero pas1 = new Pasajero("ID_UNO", p1, p2);
-        Pasajero pas2 = new Pasajero("ID_DOS", p1, p2);
-        assertNotEquals(pas1, pas2);
-    }
-
-
-    @Test
-    @DisplayName("toString: debería contener la información relevante del pasajero")
-    void toStringContieneInfoRelevante() {
-        // Arrange
-        Pasajero pasajero = new Pasajero("PASS_TEST", p1, p2);
-        
-        // Act
-        String str = pasajero.toString();
-        
-        // Assert
-        
-        assertTrue(str.contains("'PASS_TEST'"), "El toString() debe contener el ID del pasajero entre comillas simples.");
-        assertTrue(str.contains("Origen: " + p1.getId()), "El toString() debe contener la información del origen.");
-        assertTrue(str.contains("Destino: " + p2.getId()), "El toString() debe contener la información del destino.");
+        @Test
+        @DisplayName("equals y hashCode: deberían basarse únicamente en el ID")
+        void pasajerosConMismoIdSonIguales() {
+            Parada otraParada = new Parada("P03", "Otra");
+            Pasajero pas1 = new Pasajero("ID_IGUAL", p1, p2);
+            Pasajero pas2 = new Pasajero("ID_IGUAL", p1, otraParada); // Mismo ID, diferente destino
+            
+            assertEquals(pas1, pas2, "Pasajeros con el mismo ID deben ser iguales.");
+            assertEquals(pas1.hashCode(), pas2.hashCode(), "El hashCode debe ser consistente con equals.");
+        }
+    
+        @Test
+        @DisplayName("equals: no deberían ser iguales si los IDs son diferentes")
+        void pasajerosConDiferenteIdNoSonIguales() {
+            Pasajero pas1 = new Pasajero("ID_UNO", p1, p2);
+            Pasajero pas2 = new Pasajero("ID_DOS", p1, p2);
+            assertNotEquals(pas1, pas2);
+        }
+    
+        @Test
+        @DisplayName("toString: debería contener la información relevante")
+        void toStringContieneInfoRelevante() {
+            Pasajero pasajeroConId = new Pasajero("PASS_TEST", p1, p2);
+            String str = pasajeroConId.toString();
+            
+            assertTrue(str.contains("'PASS_TEST'"), "toString() debe contener el ID del pasajero.");
+            assertTrue(str.contains("Origen: " + p1.getId()), "toString() debe contener el ID de origen.");
+            assertTrue(str.contains("Destino: " + p2.getId()), "toString() debe contener el ID de destino.");
+        }
     }
 }
