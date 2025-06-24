@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- Coordenadas del Proyecto Integrador -->
-  <groupId>ar.edu.unpsjb.ayp2.proyectointegrador</groupId>
-  <artifactId>simulador-colectivos1</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <groupId>proyectointegrador</groupId>
+  <artifactId>simulador-colectivos-incremento2</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
   <name>Proyecto Integrador - Simulador de Colectivos Urbanos</name>
   <description>Sistema para simular el funcionamiento de líneas de colectivos urbanos para la materia Algoritmica y Programacion II.</description>
   
