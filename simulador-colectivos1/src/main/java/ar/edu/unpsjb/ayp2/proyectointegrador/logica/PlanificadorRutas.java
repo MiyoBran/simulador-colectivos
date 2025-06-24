@@ -1,95 +1,167 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.logica;
 
+import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Linea;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
+
 import net.datastructures.AdjacencyMapGraph;
-import net.datastructures.Vertex;
 import net.datastructures.Edge;
-import java.util.*;
+import net.datastructures.Vertex;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
- * PlanificadorRutas modela la red de transporte como un grafo y permite calcular rutas óptimas entre paradas.
- * Utiliza AdjacencyMapGraph para representar la red y Dijkstra para rutas más cortas.
+ * Modela la red de transporte como un grafo y calcula rutas óptimas entre paradas.
+ * Utiliza un grafo dirigido y el algoritmo de Dijkstra para encontrar el camino más corto.
  *
  * @author Miyen
- * @version 2.0
+ * @version 2.1
  */
 public class PlanificadorRutas {
-    private AdjacencyMapGraph<Parada, Integer> grafo;
-    private Map<String, Vertex<Parada>> verticesPorId;
 
-    public PlanificadorRutas() {
-        this.grafo = new AdjacencyMapGraph<>(true); // Cambiado a dirigido
-        this.verticesPorId = new HashMap<>();
-    }
+	// =================================================================================
+	// ATRIBUTOS
+	// =================================================================================
 
-    /**
-     * Agrega una parada al grafo si no existe.
-     */
-    public void agregarParada(Parada parada) {
-        if (!verticesPorId.containsKey(parada.getId())) {
-            Vertex<Parada> v = grafo.insertVertex(parada);
-            verticesPorId.put(parada.getId(), v);
-        }
-    }
+	/** Grafo que representa la red de transporte. Las Paradas son vértices y los tramos, aristas. */
+	private final AdjacencyMapGraph<Parada, Integer> grafo;
+	/** Mapa para acceder rápidamente a un vértice del grafo a través del ID de la Parada. */
+	private final Map<String, Vertex<Parada>> verticesPorId;
 
-    /**
-     * Conecta dos paradas con un peso (por ejemplo, tiempo o distancia).
-     */
-    public void conectarParadas(Parada origen, Parada destino, int peso) {
-        agregarParada(origen);
-        agregarParada(destino);
-        grafo.insertEdge(verticesPorId.get(origen.getId()), verticesPorId.get(destino.getId()), peso);
-    }
+	// =================================================================================
+	// CONSTRUCTOR
+	// =================================================================================
 
-    /**
-     * Calcula la ruta óptima (menor peso) entre dos paradas usando Dijkstra.
-     * Devuelve la lista de paradas en el orden del recorrido óptimo.
-     */
-    public List<Parada> calcularRutaOptima(Parada origen, Parada destino) {
-        if (!verticesPorId.containsKey(origen.getId()) || !verticesPorId.containsKey(destino.getId())) {
-            return Collections.emptyList();
-        }
-        Map<Vertex<Parada>, Integer> dist = new HashMap<>();
-        Map<Vertex<Parada>, Vertex<Parada>> prev = new HashMap<>();
-        Set<Vertex<Parada>> visitados = new HashSet<>();
-        PriorityQueue<Vertex<Parada>> pq = new PriorityQueue<>(Comparator.comparingInt(dist::get));
-        for (Vertex<Parada> v : grafo.vertices()) {
-            dist.put(v, v.equals(verticesPorId.get(origen.getId())) ? 0 : Integer.MAX_VALUE);
-            prev.put(v, null);
-        }
-        pq.add(verticesPorId.get(origen.getId()));
-        while (!pq.isEmpty()) {
-            Vertex<Parada> u = pq.poll();
-            if (!visitados.add(u)) continue;
-            for (Edge<Integer> e : grafo.outgoingEdges(u)) {
-                Vertex<Parada> v = grafo.opposite(u, e);
-                int peso = e.getElement();
-                int alt = dist.get(u) + peso;
-                if (alt < dist.get(v)) {
-                    dist.put(v, alt);
-                    prev.put(v, u);
-                    pq.add(v);
-                }
-            }
-        }
-        // Reconstruir el camino
-        List<Parada> ruta = new LinkedList<>();
-        Vertex<Parada> actual = verticesPorId.get(destino.getId());
-        while (actual != null) {
-            ruta.add(0, actual.getElement());
-            actual = prev.get(actual);
-        }
-        if (!ruta.isEmpty() && ruta.get(0).equals(origen)) {
-            return ruta;
-        } else {
-            return Collections.emptyList();
-        }
-    }
+	public PlanificadorRutas() {
+		// Se usa un grafo dirigido (true) porque los recorridos de colectivo tienen un sentido.
+		this.grafo = new AdjacencyMapGraph<>(true);
+		this.verticesPorId = new HashMap<>();
+	}
 
-    /**
-     * Devuelve el grafo interno (solo para fines de test o visualización).
-     */
-    public AdjacencyMapGraph<Parada, Integer> getGrafo() {
-        return grafo;
-    }
+	// =================================================================================
+	// MÉTODOS PÚBLICOS DE CONSTRUCCIÓN DEL GRAFO
+	// =================================================================================
+
+	/**
+	 * [MÉTODO CLAVE AÑADIDO]
+	 * Construye la topología completa del grafo a partir de todas las líneas de colectivo.
+	 * Este método debe ser llamado una vez después de cargar los datos de las líneas.
+	 *
+	 * @param lineasDisponibles Un mapa con todas las líneas cargadas en la simulación.
+	 */
+	public void construirGrafoDesdeLineas(final Map<String, Linea> lineasDisponibles) {
+		if (lineasDisponibles == null) return;
+		
+		for (final Linea linea : lineasDisponibles.values()) {
+			final List<Parada> recorrido = linea.getRecorrido();
+			// Itera sobre el recorrido para conectar paradas consecutivas.
+			for (int i = 0; i < recorrido.size() - 1; i++) {
+				final Parada origen = recorrido.get(i);
+				final Parada destino = recorrido.get(i + 1);
+				// El peso "1" significa que cuesta "1 paso" ir de una parada a la siguiente.
+				conectarParadas(origen, destino, 1);
+			}
+		}
+	}
+
+	// =================================================================================
+	// MÉTODOS PÚBLICOS DE CÁLCULO
+	// =================================================================================
+
+	/**
+	 * Calcula la ruta óptima (menor peso) entre dos paradas usando el algoritmo de Dijkstra.
+	 *
+	 * @param origen Parada de inicio del viaje.
+	 * @param destino Parada final del viaje.
+	 * @return Una lista ordenada de Paradas que representa la ruta óptima, o una lista vacía si no se encuentra ruta.
+	 */
+	public List<Parada> calcularRutaOptima(final Parada origen, final Parada destino) {
+		final Vertex<Parada> vOrigen = verticesPorId.get(origen.getId());
+		final Vertex<Parada> vDestino = verticesPorId.get(destino.getId());
+
+		if (vOrigen == null || vDestino == null) {
+			return Collections.emptyList(); // Origen o destino no están en el grafo.
+		}
+
+		// Implementación del algoritmo de Dijkstra
+		final Map<Vertex<Parada>, Integer> dist = new HashMap<>();
+		final Map<Vertex<Parada>, Vertex<Parada>> prev = new HashMap<>();
+		final PriorityQueue<Vertex<Parada>> pq = new PriorityQueue<>(Comparator.comparingInt(dist::get));
+
+		// Inicialización
+		for (Vertex<Parada> v : grafo.vertices()) {
+			dist.put(v, Integer.MAX_VALUE);
+			prev.put(v, null);
+		}
+		dist.put(vOrigen, 0);
+		pq.add(vOrigen);
+
+		// Bucle principal
+		while (!pq.isEmpty()) {
+			Vertex<Parada> u = pq.poll();
+
+			if (u.equals(vDestino)) break; // Optimización: parar si ya llegamos al destino.
+
+			for (Edge<Integer> e : grafo.outgoingEdges(u)) {
+				Vertex<Parada> v = grafo.opposite(u, e);
+				int nuevoPeso = dist.get(u) + e.getElement();
+				
+				if (nuevoPeso < dist.get(v)) {
+					dist.put(v, nuevoPeso);
+					prev.put(v, u);
+					// Se vuelve a añadir a la cola con la nueva prioridad (menor distancia)
+					pq.add(v);
+				}
+			}
+		}
+
+		// Reconstrucción del camino
+		return reconstruirRuta(vOrigen, vDestino, prev);
+	}
+	
+	// =================================================================================
+	// MÉTODOS PRIVADOS DE AYUDA (HELPERS)
+	// =================================================================================
+
+	/** Agrega una parada como vértice al grafo si no existe previamente. */
+	private void agregarParada(final Parada parada) {
+		if (parada != null && !verticesPorId.containsKey(parada.getId())) {
+			Vertex<Parada> v = grafo.insertVertex(parada);
+			verticesPorId.put(parada.getId(), v);
+		}
+	}
+
+	/** Conecta dos paradas con una arista dirigida y un peso. */
+	private void conectarParadas(final Parada origen, final Parada destino, final int peso) {
+		agregarParada(origen);
+		agregarParada(destino);
+		grafo.insertEdge(verticesPorId.get(origen.getId()), verticesPorId.get(destino.getId()), peso);
+	}
+	
+	/** Reconstruye la lista de paradas de la ruta óptima a partir del mapa de predecesores. */
+	private List<Parada> reconstruirRuta(final Vertex<Parada> origen, final Vertex<Parada> destino, final Map<Vertex<Parada>, Vertex<Parada>> prev) {
+		final List<Parada> ruta = new LinkedList<>();
+		Vertex<Parada> actual = destino;
+
+		// Si el destino no es alcanzable desde el origen, su predecesor será null (excepto si es el origen mismo)
+		if (prev.get(actual) == null && !actual.equals(origen)) {
+			return Collections.emptyList();
+		}
+
+		while (actual != null) {
+			ruta.add(0, actual.getElement());
+			actual = prev.get(actual);
+		}
+		
+		// Verificación final: la ruta debe empezar en el origen.
+		return (ruta.get(0).equals(origen.getElement())) ? ruta : Collections.emptyList();
+	}
+
 }

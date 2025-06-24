@@ -3,6 +3,7 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.interfaz;
 import ar.edu.unpsjb.ayp2.proyectointegrador.datos.LectorArchivos;
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GeneradorPasajeros;
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.GestorEstadisticas;
+import ar.edu.unpsjb.ayp2.proyectointegrador.logica.PlanificadorRutas;
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.Simulador;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Linea;
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
@@ -17,18 +18,17 @@ import java.util.Properties;
  * Controlador principal de la simulación.
  * <p>
  * Orquesta el flujo de inicialización de la aplicación, incluyendo la carga de
- * datos desde archivos, la generación de pasajeros y la configuración inicial
- * del simulador y sus componentes.
+ * datos, la construcción de la red de rutas, la generación de pasajeros y la
+ * configuración inicial del simulador y sus componentes.
  *
  * @author Miyo
  * @author Enzo
- * @version 1.2
+ * @version 1.3
  */
 public class SimuladorController {
 
 	// =================================================================================
 	// ATRIBUTOS
-	// (Gestionan el estado y los componentes principales de la simulación)
 	// =================================================================================
 
 	private Simulador simulador;
@@ -37,21 +37,28 @@ public class SimuladorController {
 	private Properties configProperties;
 	private List<Pasajero> pasajerosGenerados;
 	private GestorEstadisticas gestorEstadisticas;
+	private PlanificadorRutas planificadorRutas;
+
+	// =================================================================================
+	// CONSTRUCTOR
+	// =================================================================================
 
 	/**
-	 * Constructor de la clase. La inicialización de los componentes se delega al
-	 * método inicializar() para un mayor control del flujo.
+	 * Constructor de la clase. La inicialización se delega al método inicializar().
 	 */
 	public SimuladorController() {
-		// Constructor vacío, la inicialización se realiza en el método inicializar().
+		// Constructor vacío.
 	}
+	
+	// =================================================================================
+	// MÉTODOS DE INICIALIZACIÓN
+	// =================================================================================
 
 	/**
 	 * Realiza la carga y configuración completa de todos los componentes necesarios
 	 * para ejecutar la simulación.
 	 *
-	 * @throws RuntimeException si ocurre un error fatal durante la carga de
-	 *                          archivos.
+	 * @throws RuntimeException si ocurre un error fatal durante la carga de archivos.
 	 */
 	public void inicializar() {
 		try {
@@ -62,60 +69,45 @@ public class SimuladorController {
 			this.lineasCargadas = lector.getLineasCargadas();
 			this.configProperties = lector.getPropiedades();
 
-			// 2. Creación del gestor de estadísticas y generación de pasajeros
+			// 2. Creación de componentes de lógica
 			this.gestorEstadisticas = new GestorEstadisticas();
-			// CORRECCIÓN: Se elimina el argumento 'paradasCargadas' que ya no es necesario.
+			this.planificadorRutas = new PlanificadorRutas();
+			this.planificadorRutas.construirGrafoDesdeLineas(lineasCargadas);
+			
+			// 3. Generación de pasajeros
 			GeneradorPasajeros generador = new GeneradorPasajeros(lineasCargadas, configProperties, gestorEstadisticas);
 			this.pasajerosGenerados = generador.generarPasajeros();
 
-			// 3. Creación del simulador principal
+			// 4. Creación del simulador principal, inyectando todos los componentes
 			this.simulador = new Simulador(lineasCargadas, paradasCargadas, pasajerosGenerados, gestorEstadisticas,
-					null, configProperties);
+					this.planificadorRutas, configProperties);
 
-			// 4. Lectura de configuración y inicialización de los colectivos
+			// 5. Lectura de configuración e inicialización de los colectivos
 			int capacidadColectivo = SimuladorConfig.obtenerCapacidadColectivo(configProperties);
 			int capacidadSentados = SimuladorConfig.obtenerCapacidadSentadosColectivo(configProperties);
-
-			// LIMPIEZA: Las variables 'recorridosPorColectivo' y 'capacidadParados' se
-			// eliminan
-			// ya que ahora son gestionadas internamente por el método
-			// 'inicializarColectivos'.
 
 			simulador.inicializarColectivos(capacidadColectivo, capacidadSentados);
 
 		} catch (IOException e) {
 			System.err.println("Error fatal al cargar archivos de datos: " + e.getMessage());
-			// Relanzamos como RuntimeException para detener la aplicación si los datos no
-			// se pueden cargar.
-			throw new RuntimeException(e);
+			throw new RuntimeException("No se pudieron cargar los datos iniciales de la simulación.", e);
 		}
 	}
+
 	// =================================================================================
-	// GETTERS
-	// (Permiten a la UI acceder a los componentes y datos del controlador)
+	// GETTERS (API para la UI)
 	// =================================================================================
 
-	public Simulador getSimulador() {
-		return this.simulador;
-	}
-
-	public Map<String, Parada> getParadasCargadas() {
-		return this.paradasCargadas;
-	}
-
-	public Map<String, Linea> getLineasCargadas() {
-		return this.lineasCargadas;
-	}
-
-	public Properties getConfigProperties() {
-		return this.configProperties;
-	}
-
-	public List<Pasajero> getPasajerosGenerados() {
-		return this.pasajerosGenerados;
-	}
-
-	public GestorEstadisticas getGestorEstadisticas() {
-		return this.gestorEstadisticas;
-	}
+	public Simulador getSimulador() { return this.simulador; }
+	public Map<String, Parada> getParadasCargadas() { return this.paradasCargadas; }
+	public Map<String, Linea> getLineasCargadas() { return this.lineasCargadas; }
+	public Properties getConfigProperties() { return this.configProperties; }
+	public List<Pasajero> getPasajerosGenerados() { return this.pasajerosGenerados; }
+	public GestorEstadisticas getGestorEstadisticas() { return this.gestorEstadisticas; }
+	
+	/**
+	 * Devuelve el planificador de rutas para que la UI pueda usarlo.
+	 * @return La instancia del PlanificadorRutas.
+	 */
+	public PlanificadorRutas getPlanificadorRutas() { return this.planificadorRutas; }
 }
