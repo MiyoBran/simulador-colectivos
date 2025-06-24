@@ -165,9 +165,10 @@ Todos los atributos son `private` y la mayoría son `final` (inmutables tras la 
 ---
 
 ![Diagramas de Modelo UML](./src/main/resources/Documentacion/UMLSimplificado.png)
-![Diagramas de Logica UML](./src/main/resources/Documentacion/UML-Logica-simplificado.png)
+---
+![Diagramas de Logica UML](./src/main/resources/Documentacion/UML-Logica-Simplificado.png)
+---
 ![Diagramas de Interfaz UML](./src/main/resources/Documentacion/UML-Interfaz-Simplificado.png)
-
 ---
 
 ## 5. Implementación de la Solución
