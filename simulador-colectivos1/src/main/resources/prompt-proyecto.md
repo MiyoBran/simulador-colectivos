@@ -10,7 +10,7 @@ Fecha de última actualización: 2025-06-22
 ## **Estado actualizado (junio 2025)**
 
 * **Proyecto Finalizado:** Se implementaron y probaron todas las funcionalidades planificadas para los Incrementos 1 y 2, incluyendo gestión de estadísticas, cálculo de rutas óptimas mediante grafos y una interfaz de usuario interactiva.
-* **Código Estable y Probado:** La suite completa de tests unitarios (113 pruebas) se ejecuta con éxito.
+* **Calidad de Código Asegurada:** Se completó una refactorización integral de la suite de pruebas (107 tests), garantizando la robustez, el correcto funcionamiento y la mantenibilidad a largo plazo del código base.
 * **Documentación Completa:** Se ha revisado y actualizado toda la documentación del proyecto para reflejar el estado final de la entrega.
 * **Próximos pasos:** Preparación del paquete de entrega final.
 
@@ -62,7 +62,6 @@ Los objetivos principales:
 ### **5.1. Objetivos Alcanzados**
 
 * **Gestión de Estado y Capacidad:** Los colectivos ahora manejan múltiples recorridos, un estado (ej: EN_RUTA) y capacidad diferenciada (sentados/parados).
-* **Simulación con Noción de Tiempo:** El sistema incorpora la gestión de tiempos de espera y viaje.
 * **Módulo de Estadísticas:** Se implementó `GestorEstadisticas` para reportar sobre pasajeros transportados, tiempos, ocupación (Anexo II) y satisfacción (Anexo I).
 * **Red de Transporte como Grafo:** Se utiliza `PlanificadorRutas` para modelar la red como un grafo dirigido y calcular la ruta más corta para los pasajeros.
 * **Integración Completa:** Las nuevas funcionalidades son accesibles a través de un menú de texto en la aplicación principal.
