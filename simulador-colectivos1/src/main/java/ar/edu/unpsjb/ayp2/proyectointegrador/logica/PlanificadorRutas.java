@@ -68,6 +68,10 @@ public class PlanificadorRutas {
 	 * @return Una lista ordenada de Paradas que representa la ruta óptima, o una lista vacía si no se encuentra ruta.
 	 */
 	public List<Parada> calcularRutaOptima(final Parada origen, final Parada destino) {
+		// Cláusula de guarda para manejar entradas nulas de forma segura.
+		if (origen == null || destino == null) {
+			return Collections.emptyList();
+		}
 		final Vertex<Parada> vOrigen = verticesPorId.get(origen.getId());
 		final Vertex<Parada> vDestino = verticesPorId.get(destino.getId());
 

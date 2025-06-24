@@ -73,7 +73,6 @@ public final class ReporteSimulacion {
 		imprimirTitulo("Ocupación Promedio de Colectivos (Anexo II)");
 		if (ocupaciones.isEmpty()) {
 			System.out.println("  No hay datos de ocupación registrados.");
-			return;
 		}
 
 		// Ordena los colectivos por ID para una presentación consistente

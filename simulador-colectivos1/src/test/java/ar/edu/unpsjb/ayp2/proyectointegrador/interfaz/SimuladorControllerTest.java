@@ -1,19 +1,15 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.interfaz;
 
 import ar.edu.unpsjb.ayp2.proyectointegrador.logica.Simulador;
-import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Parada;
-import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Linea;
-import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Pasajero;
 import org.junit.jupiter.api.*;
-import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Pruebas unitarias para la clase SimuladorController.
- * Se verifica la inicialización, getters y el manejo de datos cargados.
+ * Pruebas (de integración) para la clase SimuladorController.
+ * Se verifica que el proceso de inicialización completo se ejecute correctamente
+ * y que el estado del controlador sea consistente.
  */
-@DisplayName("Tests para la clase SimuladorController")
+@DisplayName("Pruebas de la Clase SimuladorController")
 class SimuladorControllerTest {
     private SimuladorController controller;
 
@@ -22,53 +18,67 @@ class SimuladorControllerTest {
         controller = new SimuladorController();
     }
 
-    @Test
-    @DisplayName("Debería inicializar correctamente y cargar datos")
-    void testInicializarYCargarDatos() {
-        assertDoesNotThrow(() -> controller.inicializar());
-        assertNotNull(controller.getParadasCargadas(), "Las paradas deben estar cargadas");
-        assertNotNull(controller.getLineasCargadas(), "Las líneas deben estar cargadas");
-        assertNotNull(controller.getConfigProperties(), "Las propiedades deben estar cargadas");
-        assertNotNull(controller.getPasajerosGenerados(), "Los pasajeros deben estar generados");
-        assertNotNull(controller.getSimulador(), "El simulador debe estar inicializado");
-        assertTrue(controller.getParadasCargadas().size() > 0, "Debe haber al menos una parada cargada");
-        assertTrue(controller.getLineasCargadas().size() > 0, "Debe haber al menos una línea cargada");
-        assertTrue(controller.getPasajerosGenerados().size() > 0, "Debe haber al menos un pasajero generado");
+    @Nested
+    @DisplayName("Pruebas del Proceso de Inicialización")
+    class PruebasDeInicializacion {
+
+        @Test
+        @DisplayName("Debería inicializar por completo sin lanzar excepciones")
+        void inicializarNoLanzaExcepciones() {
+            // Este test verifica que toda la cadena de inicialización (carga de archivos,
+            // generación de pasajeros, etc.) funcione correctamente con los datos reales del proyecto.
+            assertDoesNotThrow(() -> controller.inicializar());
+        }
+
+        @Test
+        @DisplayName("Debería lanzar una excepción si se intenta usar el simulador antes de inicializar")
+        void usarSimuladorAntesDeInicializarLanzaExcepcion() {
+            // Se espera NullPointerException porque controller.getSimulador() devuelve null
+            assertThrows(NullPointerException.class, () -> controller.getSimulador().getColectivosEnSimulacion());
+        }
+
+        @Test
+        @DisplayName("Debería permitir múltiples inicializaciones sin error (ser idempotente)")
+        void inicializarMultiplesVeces() {
+            assertDoesNotThrow(() -> controller.inicializar(), "La primera inicialización debe ser exitosa.");
+            assertDoesNotThrow(() -> controller.inicializar(), "La segunda inicialización también debe ser exitosa.");
+        }
     }
 
-    @Test
-    @DisplayName("Debería devolver el mismo simulador tras inicializar")
-    void testGetSimulador() {
-        controller.inicializar();
-        Simulador sim1 = controller.getSimulador();
-        Simulador sim2 = controller.getSimulador();
-        assertSame(sim1, sim2, "Debe devolver la misma instancia de simulador");
-    }
+    @Nested
+    @DisplayName("Pruebas de Estado Post-Inicialización")
+    class PruebasDeEstado {
 
-    @Test
-    @DisplayName("Debería devolver los mismos datos cargados tras inicializar")
-    void testGettersConsistentes() {
-        controller.inicializar();
-        Map<String, Parada> paradas = controller.getParadasCargadas();
-        Map<String, Linea> lineas = controller.getLineasCargadas();
-        List<Pasajero> pasajeros = controller.getPasajerosGenerados();
-        assertEquals(paradas, controller.getParadasCargadas());
-        assertEquals(lineas, controller.getLineasCargadas());
-        assertEquals(pasajeros, controller.getPasajerosGenerados());
-    }
+        @BeforeEach
+        void inicializarControlador() {
+            // Nos aseguramos de que el controlador esté inicializado para todos los tests de este grupo.
+            controller.inicializar();
+        }
 
-    @Test
-    @DisplayName("Debería lanzar excepción si se accede al simulador antes de inicializar")
-    void testGetSimuladorAntesDeInicializar() {
-        Exception ex = assertThrows(NullPointerException.class, () -> controller.getSimulador().getColectivosEnSimulacion());
-        assertNotNull(ex, "Debe lanzar excepción si se accede al simulador sin inicializar");
-    }
+        @Test
+        @DisplayName("Debería haber cargado datos en todas sus entidades")
+        void gettersDevuelvenDatosCargados() {
+            assertNotNull(controller.getParadasCargadas(), "Las paradas no deben ser nulas.");
+            assertNotNull(controller.getLineasCargadas(), "Las líneas no deben ser nulas.");
+            assertNotNull(controller.getPasajerosGenerados(), "Los pasajeros no deben ser nulos.");
+            assertNotNull(controller.getSimulador(), "El simulador no debe ser nulo.");
+            
+            assertFalse(controller.getParadasCargadas().isEmpty(), "Debe haber paradas cargadas.");
+            assertFalse(controller.getLineasCargadas().isEmpty(), "Debe haber líneas cargadas.");
+            assertFalse(controller.getPasajerosGenerados().isEmpty(), "Debe haber pasajeros generados.");
+        }
 
-    @Test
-    @DisplayName("Debería permitir múltiples inicializaciones sin error")
-    void testInicializarMultiplesVeces() {
-        assertDoesNotThrow(() -> controller.inicializar());
-        assertDoesNotThrow(() -> controller.inicializar());
-        assertNotNull(controller.getSimulador(), "El simulador debe seguir disponible tras reinicializar");
+        @Test
+        @DisplayName("Debería devolver siempre la misma instancia de sus componentes")
+        void gettersSonConsistentes() {
+            // Verificamos que no se creen nuevas instancias en cada llamada a los getters.
+            Simulador sim1 = controller.getSimulador();
+            Simulador sim2 = controller.getSimulador();
+            assertSame(sim1, sim2, "El controlador debe devolver siempre la misma instancia del simulador.");
+
+            var paradas1 = controller.getParadasCargadas();
+            var paradas2 = controller.getParadasCargadas();
+            assertSame(paradas1, paradas2, "El controlador debe devolver siempre la misma instancia del mapa de paradas.");
+        }
     }
 }

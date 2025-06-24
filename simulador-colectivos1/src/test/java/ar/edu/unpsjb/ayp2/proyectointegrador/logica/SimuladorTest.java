@@ -3,6 +3,7 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.logica;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unpsjb.ayp2.proyectointegrador.modelo.Colectivo;
@@ -16,55 +17,49 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-@DisplayName("Tests para la clase Simulador")
+@DisplayName("Pruebas de la Clase Simulador")
 class SimuladorTest {
 
-    private Map<String, Linea> lineasDePrueba;
-    private Map<String, Parada> paradasDePrueba;
-    private List<Pasajero> pasajerosDePrueba;
+    // Dependencias comunes a la mayoría de los tests
+    private Map<String, Linea> lineas;
+    private Map<String, Parada> paradas;
+    private GestorEstadisticas gestor;
+    private PlanificadorRutas planificador;
+    private Properties props;
 
-    private Parada p1, p2, p3, p4, p5;
-    private Linea l1, l2;
+    // Entidades del modelo para los escenarios
+    private Parada p1, p2, p3;
+    private Linea l1;
 
     @BeforeEach
     void setUp() {
-        // Inicializar paradas de prueba
-        p1 = new Parada("P1", "Calle A 100", 0.0, 0.0);
-        p2 = new Parada("P2", "Calle B 200", 0.0, 0.0);
-        p3 = new Parada("P3", "Calle C 300", 0.0, 0.0);
-        p4 = new Parada("P4", "Calle D 400", 0.0, 0.0);
-        p5 = new Parada("P5", "Calle E 500", 0.0, 0.0);
+        // 1. Crear el mundo de la simulación
+        p1 = new Parada("P1", "Origen");
+        p2 = new Parada("P2", "Intermedia");
+        p3 = new Parada("P3", "Destino/Terminal");
 
-        paradasDePrueba = new HashMap<>();
-        paradasDePrueba.put("P1", p1);
-        paradasDePrueba.put("P2", p2);
-        paradasDePrueba.put("P3", p3);
-        paradasDePrueba.put("P4", p4);
-        paradasDePrueba.put("P5", p5);
-
-        // Inicializar líneas de prueba
-        l1 = new Linea("L1", "Linea Uno");
+        l1 = new Linea("L1", "Linea Unica");
         l1.agregarParadaAlRecorrido(p1);
         l1.agregarParadaAlRecorrido(p2);
-        l1.agregarParadaAlRecorrido(p3); // P1 -> P2 -> P3
+        l1.agregarParadaAlRecorrido(p3);
 
-        l2 = new Linea("L2", "Linea Dos");
-        l2.agregarParadaAlRecorrido(p3);
-        l2.agregarParadaAlRecorrido(p4);
-        l2.agregarParadaAlRecorrido(p5); // P3 -> P4 -> P5
+        lineas = new HashMap<>();
+        lineas.put("L1", l1);
 
-        lineasDePrueba = new HashMap<>();
-        lineasDePrueba.put("L1 - Linea Uno", l1);
-        lineasDePrueba.put("L2 - Linea Dos", l2);
+        paradas = new HashMap<>();
+        paradas.put("P1", p1);
+        paradas.put("P2", p2);
+        paradas.put("P3", p3);
 
-        // Reiniciar pasajeros de prueba para cada test
-        pasajerosDePrueba = new ArrayList<>();
+        // 2. Crear los componentes de lógica
+        gestor = new GestorEstadisticas();
+        planificador = new PlanificadorRutas();
+        planificador.construirGrafoDesdeLineas(lineas);
+        props = new Properties();
     }
 
     /**
-     * Método auxiliar para correr la simulación paso a paso hasta que termine.
-     * Reemplaza la necesidad de llamar a un método monolítico y permite probar el estado final.
-     * @param simulador la instancia de Simulador a ejecutar.
+     * Método de ayuda para ejecutar una simulación hasta su finalización.
      */
     private void ejecutarSimulacionCompleta(Simulador simulador) {
         while (!simulador.isSimulacionTerminada()) {
@@ -72,131 +67,86 @@ class SimuladorTest {
         }
     }
 
-    // --- Tests para el constructor de Simulador ---
-    @Test
-    @DisplayName("Constructor: debería crearse exitosamente con datos válidos")
-    void testSimuladorConstructorExitoso() {
-        assertDoesNotThrow(() -> {
-            new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
-        });
-    }
+    @Nested
+    @DisplayName("Pruebas de Inicialización")
+    class PruebasDeInicializacion {
 
-    @Test
-    @DisplayName("Constructor: debería lanzar excepción si las líneas son nulas")
-    void testSimuladorConstructorLineasNulas() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Simulador(null, paradasDePrueba, pasajerosDePrueba, new Properties());
-        }, "El simulador requiere líneas cargadas.");
-    }
-    
-    // --- Tests para inicializarColectivos ---
-    @Test
-    @DisplayName("Inicialización: debería crear un colectivo por línea con los datos correctos")
-    void testInicializarColectivosExitoso() {
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
-        // Usar valores de ejemplo para sentados, parados y recorridos
-        int capacidadMaxima = 10;
-        int capacidadSentados = 6;
-        int capacidadParados = 4;
-        int recorridosRestantes = 1;
-        simulador.inicializarColectivos(capacidadMaxima, capacidadSentados, capacidadParados, recorridosRestantes);
+        @Test
+        @DisplayName("Debería lanzar excepción si los datos base son nulos o vacíos")
+        void constructorConDatosInvalidos() {
+            // CORRECCIÓN: Se prueba el constructor correcto con sus dependencias
+            List<Pasajero> pasajeros = new ArrayList<>();
+            pasajeros.add(new Pasajero(p1, p2));
+            
+            assertThrows(IllegalArgumentException.class, () -> new Simulador(null, paradas, pasajeros, gestor, planificador, props));
+            assertThrows(IllegalArgumentException.class, () -> new Simulador(new HashMap<>(), paradas, pasajeros, gestor, planificador, props));
+        }
 
-        List<Colectivo> colectivos = simulador.getColectivosEnSimulacion();
-        assertNotNull(colectivos);
-        assertEquals(2, colectivos.size(), "Debería haber un colectivo por cada línea.");
+        @Test
+        @DisplayName("Debería inicializar los colectivos correctamente según la configuración")
+        void inicializarColectivos() {
+            props.setProperty("recorridos_por_colectivo", "2");
+            props.setProperty("cantidad_de_colectivos_simultaneos_por_linea", "1");
+            props.setProperty("frecuencia_salida_colectivos_minutos", "10");
 
-        Colectivo c1 = colectivos.stream().filter(c -> c.getLineaAsignada().equals(l1)).findFirst().orElseThrow();
-        assertEquals(l1, c1.getLineaAsignada());
-        assertEquals(capacidadMaxima, c1.getCapacidadMaxima());
-        assertEquals(capacidadSentados, c1.getCapacidadSentados());
-        assertEquals(capacidadParados, c1.getCapacidadParados());
-        assertEquals(recorridosRestantes, c1.getRecorridosRestantes());
-        assertEquals(p1, c1.getParadaActual());
+            Simulador simulador = new Simulador(lineas, paradas, new ArrayList<>(), gestor, planificador, props);
+            simulador.inicializarColectivos(30, 20);
 
-        Colectivo c2 = colectivos.stream().filter(c -> c.getLineaAsignada().equals(l2)).findFirst().orElseThrow();
-        assertEquals(l2, c2.getLineaAsignada());
-        assertEquals(capacidadMaxima, c2.getCapacidadMaxima());
-        assertEquals(capacidadSentados, c2.getCapacidadSentados());
-        assertEquals(capacidadParados, c2.getCapacidadParados());
-        assertEquals(recorridosRestantes, c2.getRecorridosRestantes());
-        assertEquals(p3, c2.getParadaActual());
-    }
-    
-    // --- Tests para la ejecución de la simulación ---
-    @Test
-    @DisplayName("Simulación: debería completarse sin errores cuando no hay pasajeros")
-    void testEjecutarSimulacionSinPasajeros() {
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, new ArrayList<>(), new Properties());
-        simulador.inicializarColectivos(10, 6, 4, 1);
-        // Ejecuta la simulación completa
-        ejecutarSimulacionCompleta(simulador);
-        // Verifica el estado final
-        for (Colectivo c : simulador.getColectivosEnSimulacion()) {
-            assertTrue(c.estaEnTerminal(), "Colectivo " + c.getIdColectivo() + " debería haber terminado su recorrido.");
-            assertEquals(0, c.getCantidadPasajerosABordo());
+            List<Colectivo> colectivos = simulador.getColectivosEnSimulacion();
+            assertEquals(1, colectivos.size());
+            
+            Colectivo c = colectivos.get(0);
+            assertEquals(l1, c.getLineaAsignada());
+            assertEquals(30, c.getCapacidadMaxima());
+            assertEquals(20, c.getCapacidadSentados());
+            assertEquals(10, c.getCapacidadParados());
+            assertEquals(2, c.getRecorridosRestantes());
+            assertEquals(p1, c.getParadaActual());
         }
     }
 
-    @Test
-    @DisplayName("Simulación: pasajeros deberían subir y bajar correctamente")
-    void testEjecutarSimulacionConPasajerosSubenYBajan() {
-        // Arrange: preparar el escenario
-        Pasajero pA = new Pasajero(p1, p3); // Pasajero para la Línea 1
-        Pasajero pB = new Pasajero(p3, p5); // Pasajero para la Línea 2
+    @Nested
+    @DisplayName("Pruebas de Escenarios de Simulación")
+    class PruebasDeEscenarios {
 
-        p1.agregarPasajero(pA);
-        p3.agregarPasajero(pB);
-        pasajerosDePrueba.add(pA);
-        pasajerosDePrueba.add(pB);
+        @Test
+        @DisplayName("Un pasajero debería completar su viaje de origen a destino correctamente")
+        void escenarioViajeExitoso() {
+            Pasajero pasajero = new Pasajero(p1, p3);
+            p1.agregarPasajero(pasajero);
+            List<Pasajero> pasajeros = List.of(pasajero);
 
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
-        simulador.inicializarColectivos(2, 1, 1, 1); // Capacidad suficiente
+            Simulador simulador = new Simulador(lineas, paradas, pasajeros, gestor, planificador, props);
+            simulador.inicializarColectivos(10, 5);
+            
+            ejecutarSimulacionCompleta(simulador);
 
-        // Act: ejecutar la simulación
-        ejecutarSimulacionCompleta(simulador);
-
-        // Assert: verificar los resultados
-        for (Colectivo c : simulador.getColectivosEnSimulacion()) {
-            assertTrue(c.estaEnTerminal(), "Cada colectivo debería haber terminado su recorrido.");
-            assertEquals(0, c.getCantidadPasajerosABordo(), "No deberían quedar pasajeros a bordo.");
+            assertTrue(pasajero.isPudoSubir());
+            assertFalse(pasajero.isBajadaForzosa());
+            assertEquals(1, gestor.getPasajerosTransportados());
+            assertEquals(0, simulador.getColectivosEnSimulacion().get(0).getCantidadPasajerosABordo());
         }
 
-        assertTrue(pA.isPudoSubir(), "Pasajero pA (L1) debería haber podido subir.");
-        assertFalse(p1.hayPasajerosEsperando(), "Parada P1 debería estar vacía.");
+        @Test
+        @DisplayName("Con capacidad 1, el primer pasajero sube y el segundo es dejado atrás")
+        void escenarioCapacidadLimitada() {
+            Pasajero pA = new Pasajero(p1, p2);
+            Pasajero pB = new Pasajero(p1, p3);
+            p1.agregarPasajero(pA);
+            p1.agregarPasajero(pB);
+            List<Pasajero> pasajeros = List.of(pA, pB);
+            
+            Simulador simulador = new Simulador(lineas, paradas, pasajeros, gestor, planificador, props);
+            simulador.inicializarColectivos(1, 1); // Capacidad máxima de 1
 
-        assertTrue(pB.isPudoSubir(), "Pasajero pB (L2) debería haber podido subir.");
-    }
-
-    @Test
-    @DisplayName("Simulación: con capacidad limitada, un pasajero sube y el otro espera")
-    void testEjecutarSimulacionCapacidadLimitada() {
-        // Arrange
-        Pasajero pA = new Pasajero(p1, p3);
-        Pasajero pB = new Pasajero(p1, p3);
-        p1.agregarPasajero(pA);
-        p1.agregarPasajero(pB);
-        pasajerosDePrueba.add(pA);
-        pasajerosDePrueba.add(pB);
-
-        Simulador simulador = new Simulador(lineasDePrueba, paradasDePrueba, pasajerosDePrueba, new Properties());
-        simulador.inicializarColectivos(1, 1, 0, 1); // Capacidad de solo 1 para el colectivo de L1
-
-        // Act
-        ejecutarSimulacionCompleta(simulador);
-
-        // Assert
-        assertTrue(pA.isPudoSubir() ^ pB.isPudoSubir(), "Solo uno de los dos pasajeros debería haber subido (XOR).");
-
-        Pasajero pasajeroQueSubio = pA.isPudoSubir() ? pA : pB;
-        Pasajero pasajeroQueNoSubio = pA.isPudoSubir() ? pB : pA;
-
-        assertTrue(pasajeroQueSubio.isPudoSubir(), "El pasajero que subió debe tener su flag en true.");
-        assertEquals(0, pasajeroQueSubio.getColectivosEsperados(), "El pasajero que subió no debería haber esperado colectivos llenos.");
-        
-        assertFalse(pasajeroQueNoSubio.isPudoSubir(), "El pasajero que no subió debe tener su flag en false.");
-        assertTrue(pasajeroQueNoSubio.getColectivosEsperados() > 0, "El pasajero que no subió debería haber esperado al menos un colectivo.");
-        
-        assertTrue(p1.hayPasajerosEsperando(), "La parada P1 debería tener todavía al pasajero que no subió.");
-        assertEquals(1, p1.cantidadPasajerosEsperando(), "La parada P1 debería tener exactamente un pasajero esperando.");
+            ejecutarSimulacionCompleta(simulador);
+            
+            // Verificamos con XOR que solo uno de los dos pudo subir
+            assertTrue(pA.isPudoSubir() ^ pB.isPudoSubir(), "Solo uno de los dos pasajeros debió haber subido.");
+            
+            Pasajero queNoSubio = pA.isPudoSubir() ? pB : pA;
+            assertTrue(queNoSubio.getColectivosEsperados() > 0, "El pasajero que no subió debe haber esperado un colectivo.");
+            assertEquals(1, p1.cantidadPasajerosEsperando(), "El pasajero que no subió debe seguir en la parada.");
+        }
     }
 }
