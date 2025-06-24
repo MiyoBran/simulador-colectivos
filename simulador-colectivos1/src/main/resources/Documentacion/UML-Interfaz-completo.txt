@@ -1,0 +1,58 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class SimuladorColectivosApp {
+  --
+  + main(args: String[]): void <<static>>
+}
+
+class SimuladorConfig {
+  -- // Claves y valores por defecto centralizados
+  -- // Métodos de acceso a configuración
+  + obtenerNombreArchivoLineas(props: Properties): String <<static>>
+  + obtenerNombreArchivoParadas(props: Properties): String <<static>>
+  + obtenerCantidadPasajeros(props: Properties): int <<static>>
+  + obtenerCapacidadColectivo(props: Properties): int <<static>>
+  + obtenerCapacidadSentadosColectivo(props: Properties): int <<static>>
+  + obtenerCantidadColectivosSimultaneosPorLinea(props: Properties): int <<static>>
+  + obtenerRecorridosPorColectivo(props: Properties): int <<static>>
+  + obtenerFrecuenciaSalidaColectivosMinutos(props: Properties): int <<static>>
+}
+
+class SimuladorController {
+  - simulador: Simulador
+  - paradasCargadas: Map<String, Parada>
+  - lineasCargadas: Map<String, Linea>
+  - configProperties: Properties
+  - pasajerosGenerados: List<Pasajero>
+  - gestorEstadisticas: GestorEstadisticas
+  - planificadorRutas: PlanificadorRutas
+  --
+  + inicializar(): void
+  + getSimulador(): Simulador
+  + getParadasCargadas(): Map<String, Parada>
+  + getLineasCargadas(): Map<String, Linea>
+  + getConfigProperties(): Properties
+  + getPasajerosGenerados(): List<Pasajero>
+  + getGestorEstadisticas(): GestorEstadisticas
+  + getPlanificadorRutas(): PlanificadorRutas
+}
+
+class SimuladorUI {
+  - controller: SimuladorController
+  - scanner: Scanner
+  --
+  + start(): void
+}
+
+SimuladorColectivosApp ..> SimuladorController : crea
+SimuladorColectivosApp ..> SimuladorUI : crea
+SimuladorUI --> SimuladorController : usa
+SimuladorController --> Simulador : crea y usa
+SimuladorController --> GestorEstadisticas : crea y usa
+SimuladorController --> PlanificadorRutas : crea y usa
+SimuladorController --> Linea
+SimuladorController --> Parada
+SimuladorController --> Pasajero
+
+@enduml

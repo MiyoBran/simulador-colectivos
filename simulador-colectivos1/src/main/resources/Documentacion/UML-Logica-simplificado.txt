@@ -1,0 +1,57 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class GeneradorPasajeros {
+  + GeneradorPasajeros(lineas: List<Linea>)
+  + generarPasajero(): Pasajero
+}
+
+class GestorEstadisticas {
+  + GestorEstadisticas()
+  + registrarPasajero(pasajero: Pasajero): void
+  + calcularEstadisticas(): void
+}
+
+class PlanificadorRutas {
+  + PlanificadorRutas()
+  + planificarRuta(colectivo: Colectivo): List<Parada>
+}
+
+class Simulador {
+  - generador: GeneradorPasajeros
+  - gestor: GestorEstadisticas
+  - planificador: PlanificadorRutas
+  - colectivos: List<Colectivo>
+  - lineas: List<Linea>
+  - paradas: List<Parada>
+  --
+  + Simulador()
+  + simularPaso(): void
+  + iniciar(): void
+  + finalizar(): void
+}
+
+class SimuladorHelper {
+  + {static} calcularTiempoEspera(pasajero: Pasajero): int
+  + {static} validarConfiguracion(lineas: List<Linea>): boolean
+}
+
+Simulador o-- GeneradorPasajeros : generador
+Simulador o-- GestorEstadisticas : gestor
+Simulador o-- PlanificadorRutas : planificador
+Simulador o-- "0..*" Colectivo : colectivos
+Simulador o-- "0..*" Linea : lineas
+Simulador o-- "0..*" Parada : paradas
+
+GeneradorPasajeros ..> Linea
+GeneradorPasajeros ..> Pasajero
+GestorEstadisticas ..> Pasajero
+GestorEstadisticas ..> Colectivo
+GestorEstadisticas ..> Parada
+PlanificadorRutas ..> Linea
+PlanificadorRutas ..> Colectivo
+PlanificadorRutas ..> Parada
+SimuladorHelper ..> Pasajero
+SimuladorHelper ..> Linea
+
+@enduml
