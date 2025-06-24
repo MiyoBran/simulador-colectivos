@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author Miyo
  * @author Enzo
- * @version 2.6
+ * @version 2.7
  */
 public class Colectivo {
 
@@ -21,53 +21,33 @@ public class Colectivo {
 	// =================================================================================
 
 	// --- Atributos de Identidad y Configuración (Inmutables tras la creación) ---
-	/** Identificador único del colectivo (ej: "C1-1"). */
 	private final String idColectivo;
-	/** Línea de colectivo a la que está asignado y cuyo recorrido sigue. */
 	private final Linea lineaAsignada;
-	/** Capacidad máxima total de pasajeros (sentados + de pie). */
 	private final int capacidadMaxima;
-	/** Capacidad máxima de pasajeros sentados. */
 	private final int capacidadSentados;
-	/** Capacidad máxima de pasajeros de pie. */
 	private final int capacidadParados;
 
 	// --- Atributos de Estado (Cambian durante la simulación) ---
-	/** Lista de los pasajeros que se encuentran actualmente a bordo. */
 	private final List<Pasajero> pasajerosABordo;
-	/** Parada actual en la que se encuentra el colectivo. */
 	private Parada paradaActual;
-	/** Índice de la parada actual dentro del recorrido de la línea. */
 	private int indiceParadaActualEnRecorrido;
-	/** Cantidad de pasajeros que actualmente viajan sentados. */
 	private int cantidadPasajerosSentados;
-	/** Estado descriptivo del colectivo (ej: "EN_SERVICIO", "FUERA_DE_SERVICIO"). */
 	private String estado;
 
 	// --- Atributos de Control de Simulación ---
-	/** Contador de recorridos completados por el colectivo. Empieza en 1. */
 	private int recorridoActual;
-	/** Cantidad de recorridos que aún le quedan por realizar en la simulación. */
 	private int recorridosRestantes;
-	/** Paso de simulación en el que este colectivo tiene permitido salir de la terminal. */
 	private int pasoDeSalida;
-
 
 	// =================================================================================
 	// CONSTRUCTORES
 	// =================================================================================
 
 	/**
-	 * Constructor principal para un Colectivo.
-	 *
-	 * @param idColectivo        Identificador único.
-	 * @param lineaAsignada      Línea a la que está asignado.
-	 * @param capacidadMaxima    Capacidad máxima total.
-	 * @param capacidadSentados  Capacidad de pasajeros sentados.
-	 * @param capacidadParados   Capacidad de pasajeros de pie.
-	 * @param recorridosRestantes Cantidad de recorridos a realizar.
+	 * Constructor base PRIVADO. Contiene toda la lógica de validación y asignación.
+	 * Solo puede ser llamado por el otro constructor público de la clase.
 	 */
-	public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima, int capacidadSentados,
+	private Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima, int capacidadSentados,
 			int capacidadParados, int recorridosRestantes) {
 		// Validación de parámetros
 		if (idColectivo == null || idColectivo.trim().isEmpty())
@@ -89,21 +69,20 @@ public class Colectivo {
 		this.pasajerosABordo = new ArrayList<>();
 		this.cantidadPasajerosSentados = 0;
 		this.recorridoActual = 1;
-		
-		// Posiciona el colectivo en la primera parada de la línea.
+
 		List<Parada> recorridoLinea = this.lineaAsignada.getRecorrido();
 		if (recorridoLinea != null && !recorridoLinea.isEmpty()) {
 			this.paradaActual = recorridoLinea.get(0);
 			this.indiceParadaActualEnRecorrido = 0;
 		} else {
 			this.paradaActual = null;
-			this.indiceParadaActualEnRecorrido = -1; // Indica que no hay recorrido
+			this.indiceParadaActualEnRecorrido = -1;
 		}
 	}
 
 	/**
-	 * Constructor secundario que permite especificar un paso de salida inicial.
-	 * Utiliza el constructor principal para la lógica de inicialización.
+	 * ÚNICO constructor público para crear un Colectivo.
+	 * Requiere todos los parámetros, incluyendo el paso de salida inicial.
 	 */
 	public Colectivo(String idColectivo, Linea lineaAsignada, int capacidadMaxima, int capacidadSentados,
 			int capacidadParados, int recorridosRestantes, int pasoDeSalida) {
@@ -117,9 +96,6 @@ public class Colectivo {
 
 	/**
 	 * Intenta agregar un pasajero al colectivo.
-	 * El pasajero sube si hay capacidad disponible y no está ya a bordo.
-	 * Se le asigna un asiento si hay disponibles.
-	 *
 	 * @param pasajero El pasajero a subir.
 	 * @return true si el pasajero subió con éxito, false en caso contrario.
 	 */
@@ -141,8 +117,6 @@ public class Colectivo {
 
 	/**
 	 * Intenta quitar un pasajero del colectivo.
-	 * Si el pasajero viajaba sentado, se libera un asiento.
-	 *
 	 * @param pasajero El pasajero a bajar.
 	 * @return true si el pasajero estaba a bordo y fue quitado, false en caso contrario.
 	 */
@@ -158,10 +132,9 @@ public class Colectivo {
 
 	/**
 	 * Mueve el colectivo a la siguiente parada de su recorrido.
-	 * No hace nada si ya se encuentra en la última parada (la terminal).
 	 */
 	public void avanzarAProximaParada() {
-		if (estaEnTerminal()) return; // Si ya está en la terminal, no avanza.
+		if (estaEnTerminal()) return;
 		
 		this.indiceParadaActualEnRecorrido++;
 		this.paradaActual = this.lineaAsignada.getRecorrido().get(this.indiceParadaActualEnRecorrido);
@@ -169,7 +142,6 @@ public class Colectivo {
 
 	/**
 	 * Reinicia la posición del colectivo al inicio del recorrido de su línea.
-	 * Usado cuando el colectivo finaliza un recorrido y se prepara para el siguiente.
 	 */
 	public void reiniciarParaNuevoRecorrido() {
 		this.indiceParadaActualEnRecorrido = 0;
@@ -180,22 +152,18 @@ public class Colectivo {
 	
 	/**
 	 * Actualiza los contadores de recorrido al finalizar una vuelta completa.
-	 * Incrementa el contador de recorridos actuales y decrementa los restantes.
 	 */
 	public void actualizarRecorridosRestantes() {
 		this.recorridoActual++;
 		this.recorridosRestantes--;
 	}
 
+	// ... (El resto de la clase, getters, setters, etc., permanece igual que en la versión anterior) ...
+
 	// =================================================================================
 	// MÉTODOS DE CONSULTA DE ESTADO
 	// =================================================================================
 
-	/**
-	 * Verifica si el colectivo se encuentra en la última parada de su recorrido.
-	 *
-	 * @return true si está en la parada terminal, false en caso contrario.
-	 */
 	public boolean estaEnTerminal() {
 		if (this.paradaActual == null || this.lineaAsignada.getRecorrido().isEmpty()) {
 			return true;
@@ -203,38 +171,19 @@ public class Colectivo {
 		return this.indiceParadaActualEnRecorrido >= this.lineaAsignada.getRecorrido().size() - 1;
 	}
 
-	/**
-	 * Devuelve la cantidad de asientos disponibles en el colectivo.
-	 * @return el número de asientos libres.
-	 */
 	public int getAsientosDisponibles() {
 		return this.capacidadSentados - this.cantidadPasajerosSentados;
 	}
 
-	/**
-	 * Devuelve la capacidad disponible para pasajeros de pie.
-	 * @return el número de lugares de pie libres.
-	 */
 	public int getLugaresDePieDisponibles() {
 		int pasajerosDePie = getCantidadPasajerosABordo() - this.cantidadPasajerosSentados;
 		return this.capacidadParados - pasajerosDePie;
 	}
 	
-	/**
-	 * Genera una etiqueta descriptiva del colectivo.
-	 * @return Una cadena con el formato "ID (Nombre de Línea)".
-	 */
 	public String getEtiqueta() {
 		return idColectivo + " (" + lineaAsignada.getNombre() + ")";
 	}
 
-	/**
-	 * [Sugerencia de Legibilidad]
-	 * Genera un reporte de estado multilínea y formateado del colectivo.
-	 * Ideal para imprimir un bloque de información clara en la consola.
-	 *
-	 * @return Un String con el estado detallado del colectivo.
-	 */
 	public String getReporteDeEstado() {
 		String separador = "---------------------------------------------";
 		StringBuilder sb = new StringBuilder();
