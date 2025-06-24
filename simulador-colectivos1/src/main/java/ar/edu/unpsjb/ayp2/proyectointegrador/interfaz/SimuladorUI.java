@@ -122,6 +122,7 @@ public class SimuladorUI {
 		var simulador = controller.getSimulador();
 		if (simulador.isSimulacionTerminada()) {
 			System.out.println("La simulación ya ha finalizado.");
+
 			return;
 		}
 
@@ -146,7 +147,7 @@ public class SimuladorUI {
 		}
 
 		System.out.println("\n--- SIMULACIÓN FINALIZADA ---");
-		mostrarEstadisticas();
+
 	}
 
 	/**
