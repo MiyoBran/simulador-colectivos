@@ -1,46 +1,55 @@
 package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
- * Representa una parada de colectivo en el sistema de transporte público. Cada
- * parada tiene un identificador único, una dirección descriptiva, coordenadas
- * geográficas (latitud y longitud) y una cola de pasajeros esperando para
- * abordar.
- * 
+ * Representa una parada de colectivo. Cada parada tiene un identificador único,
+ * una dirección, coordenadas geográficas y gestiona una cola de pasajeros en
+ * espera y sus propias estadísticas básicas.
+ *
  * @author Miyo
- * @version 1.1
+ * @author Enzo
  * 
+ * @version 1.1
  */
 public class Parada {
-	private String id; // Manteniendo como String para consistencia con tu LectorArchivos actual
-	private String direccion; // Renombrado de 'nombre' a 'direccion' para claridad
-	private Queue<Pasajero> pasajerosEsperando;
-	private double latitud;
-	private double longitud;
 
-	/**
-	 * Tiempo promedio de espera de los pasajeros en esta parada (para estadísticas).
-	 */
+	// =================================================================================
+	// ATRIBUTOS
+	// =================================================================================
+
+	/** Identificador único de la parada (ej: "42"). */
+	private final String id;
+	/** Dirección descriptiva de la parada. */
+	private final String direccion;
+	/** Coordenada geográfica de latitud. */
+	private final double latitud;
+	/** Coordenada geográfica de longitud. */
+	private final double longitud;
+	/** Cola de pasajeros que se encuentran esperando en esta parada. */
+	private final Queue<Pasajero> pasajerosEsperando;
+
+	// --- Atributos de Estadísticas ---
+	/** Tiempo promedio de espera de los pasajeros que abordaron en esta parada. */
 	private double tiempoEsperaPromedio;
-	/**
-	 * Cantidad de pasajeros que han abordado en esta parada (para estadísticas).
-	 */
+	/** Cantidad total de pasajeros que han abordado en esta parada. */
 	private int pasajerosAbordados;
-	/**
-	 * Cantidad de colectivos que han pasado por esta parada (para estadísticas).
-	 */
+	/** Cantidad total de colectivos que han pasado por esta parada. */
 	private int colectivosPasados;
+
+	// =================================================================================
+	// CONSTRUCTORES
+	// =================================================================================
 
 	/**
 	 * Constructor principal.
-	 * 
+	 *
 	 * @param id        El identificador único de la parada.
 	 * @param direccion La dirección descriptiva de la parada.
 	 * @param latitud   La latitud geográfica de la parada.
 	 * @param longitud  La longitud geográfica de la parada.
-	 * @throws IllegalArgumentException si id o direccion son nulos o vacíos.
 	 */
 	public Parada(String id, String direccion, double latitud, double longitud) {
 		if (id == null || id.trim().isEmpty()) {
@@ -60,9 +69,8 @@ public class Parada {
 	}
 
 	/**
-	 * Constructor alternativo sin latitud/longitud (asume 0.0). Útil para tests o
-	 * casos donde no se disponga de coordenadas.
-	 * 
+	 * Constructor alternativo sin coordenadas (asume 0.0).
+	 *
 	 * @param id        El identificador único de la parada.
 	 * @param direccion La dirección descriptiva de la parada.
 	 */
@@ -70,27 +78,13 @@ public class Parada {
 		this(id, direccion, 0.0, 0.0);
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public double getLatitud() {
-		return latitud;
-	}
-
-	public double getLongitud() {
-		return longitud;
-	}
+	// =================================================================================
+	// MÉTODOS DE GESTIÓN DE LA COLA
+	// =================================================================================
 
 	/**
 	 * Añade un pasajero a la cola de espera de esta parada.
-	 * 
-	 * @param pasajero El pasajero a añadir.
-	 * @throws IllegalArgumentException si el pasajero es nulo.
+	 * @param pasajero El pasajero a añadir (no puede ser nulo).
 	 */
 	public void agregarPasajero(Pasajero pasajero) {
 		if (pasajero == null) {
@@ -98,14 +92,9 @@ public class Parada {
 		}
 		this.pasajerosEsperando.offer(pasajero);
 	}
-	
-	public Pasajero peekSiguientePasajero() {
-		return this.pasajerosEsperando.peek();
-	}
 
 	/**
 	 * Remueve y devuelve el siguiente pasajero de la cola de espera.
-	 * 
 	 * @return El siguiente pasajero, o null si la cola está vacía.
 	 */
 	public Pasajero removerSiguientePasajero() {
@@ -113,8 +102,15 @@ public class Parada {
 	}
 
 	/**
+	 * Devuelve el siguiente pasajero de la cola sin removerlo.
+	 * @return El siguiente pasajero, o null si la cola está vacía.
+	 */
+	public Pasajero peekSiguientePasajero() {
+		return this.pasajerosEsperando.peek();
+	}
+	
+	/**
 	 * Verifica si hay pasajeros esperando en la parada.
-	 * 
 	 * @return true si hay pasajeros esperando, false en caso contrario.
 	 */
 	public boolean hayPasajerosEsperando() {
@@ -123,108 +119,72 @@ public class Parada {
 
 	/**
 	 * Devuelve la cantidad de pasajeros esperando en la parada.
-	 * 
 	 * @return El número de pasajeros en la cola.
 	 */
 	public int cantidadPasajerosEsperando() {
 		return this.pasajerosEsperando.size();
 	}
 
-	/**
-	 * Verifica si un pasajero específico se encuentra en la cola de espera de esta
-	 * parada.
-	 * 
-	 * @param pasajero El pasajero a buscar.
-	 * @return true si el pasajero está en la cola, false en caso contrario.
-	 */
-	public boolean tienePasajeroEnCola(Pasajero pasajero) {
-		return this.pasajerosEsperando.contains(pasajero);
-	}
+	// =================================================================================
+	// MÉTODOS DE GESTIÓN DE ESTADÍSTICAS
+	// =================================================================================
 
 	/**
-	 * Incrementa la cantidad de pasajeros que han abordado en esta parada.
+	 * Incrementa en uno la cantidad de pasajeros que han abordado en esta parada.
 	 */
 	public void incrementarPasajerosAbordados() {
 		this.pasajerosAbordados++;
 	}
 
 	/**
-	 * Incrementa la cantidad de colectivos que han pasado por esta parada.
+	 * Incrementa en uno la cantidad de colectivos que han pasado por esta parada.
 	 */
 	public void incrementarColectivosPasados() {
 		this.colectivosPasados++;
 	}
 
-	/**
-	 * Actualiza el tiempo promedio de espera de los pasajeros en esta parada.
-	 * 
-	 * @param nuevoTiempoEspera tiempo de espera del pasajero que abordó.
-	 */
-	public void actualizarTiempoEsperaPromedio(double nuevoTiempoEspera) {
-		if (pasajerosAbordados == 0) {
-			this.tiempoEsperaPromedio = nuevoTiempoEspera;
-		} else {
-			this.tiempoEsperaPromedio = ((this.tiempoEsperaPromedio * (pasajerosAbordados - 1)) + nuevoTiempoEspera)
-					/ pasajerosAbordados;
-		}
-	}
 
-	/**
-	 * Devuelve el tiempo promedio de espera en la parada.
-	 * 
-	 * @return tiempo promedio de espera.
-	 */
-	public double getTiempoEsperaPromedio() {
-		return tiempoEsperaPromedio;
-	}
+	// =================================================================================
+	// GETTERS
+	// =================================================================================
 
-	/**
-	 * Devuelve la cantidad de pasajeros que han abordado en esta parada.
-	 * 
-	 * @return cantidad de pasajeros abordados.
-	 */
-	public int getPasajerosAbordados() {
-		return pasajerosAbordados;
-	}
-
-	/**
-	 * Devuelve la cantidad de colectivos que han pasado por esta parada.
-	 * 
-	 * @return cantidad de colectivos pasados.
-	 */
-	public int getColectivosPasados() {
-		return colectivosPasados;
-	}
-
+	public String getId() { return this.id; }
+	public String getDireccion() { return this.direccion; }
+	public double getLatitud() { return this.latitud; }
+	public double getLongitud() { return this.longitud; }
+	public int getPasajerosAbordados() { return this.pasajerosAbordados; }
+	public int getColectivosPasados() { return this.colectivosPasados; }
+	public double getTiempoEsperaPromedio() { return this.tiempoEsperaPromedio; }
+	
 	/**
 	 * Devuelve la cola de pasajeros esperando en la parada.
-	 * 
-	 * @return cola de pasajeros.
+	 * ADVERTENCIA: Devuelve la referencia original. Modificarla externamente afectará
+	 * el estado de la parada. Para una versión segura, ver getCopiaPasajerosEsperando().
+	 * @return la cola de pasajeros.
 	 */
 	public Queue<Pasajero> getPasajerosEsperando() {
-		return pasajerosEsperando;
+		return this.pasajerosEsperando;
 	}
+
+	// =================================================================================
+	// MÉTODOS SOBREESCRITOS (Object)
+	// =================================================================================
 
 	@Override
 	public String toString() {
-		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", latitud=" + latitud
-				+ ", longitud=" + longitud + ", pasajerosEsperando=" + pasajerosEsperando.size() + '}';
+		return "Parada{" + "id='" + id + '\'' + ", direccion='" + direccion + '\'' + ", esperando=" + pasajerosEsperando.size() + '}';
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 		Parada parada = (Parada) o;
-		// La igualdad se basa únicamente en el ID, que es único.
-		return id.equals(parada.id);
+		return id.equals(parada.id); // La igualdad se basa únicamente en el ID.
 	}
 
 	@Override
 	public int hashCode() {
-		// El hashCode también debe basarse en el ID.
-		return id.hashCode();
+		return Objects.hash(id); // El hashCode también debe basarse en el ID.
 	}
 }

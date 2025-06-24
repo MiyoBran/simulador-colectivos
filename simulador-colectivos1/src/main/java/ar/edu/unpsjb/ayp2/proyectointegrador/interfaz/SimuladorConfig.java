@@ -6,8 +6,8 @@ import java.util.Properties;
  * Clase de utilidad para leer y validar la configuración del simulador desde un
  * archivo de propiedades.
  * <p>
- * Proporciona métodos estáticos para obtener de forma segura cada parámetro
- * de configuración, aplicando valores por defecto si no se encuentran o son
+ * Proporciona métodos estáticos para obtener de forma segura cada parámetro de
+ * configuración, aplicando valores por defecto si no se encuentran o son
  * inválidos.
  *
  * @author Miyo
@@ -102,8 +102,8 @@ public final class SimuladorConfig {
 	// =================================================================================
 
 	/**
-	 * Método de ayuda para obtener un valor entero de la configuración.
-	 * Asume que el valor mínimo válido es 1.
+	 * Método de ayuda para obtener un valor entero de la configuración. Asume que
+	 * el valor mínimo válido es 1.
 	 */
 	private static int obtenerEnteroDeConfig(Properties props, String clave, int valorPorDefecto) {
 		// Llama a la versión más específica del método con un valor mínimo de 1.
@@ -114,10 +114,11 @@ public final class SimuladorConfig {
 	 * Método de ayuda principal para obtener un valor entero de la configuración,
 	 * validando que sea mayor o igual a un mínimo especificado.
 	 *
-	 * @param props          El objeto de propiedades.
-	 * @param clave          La clave a buscar en las propiedades.
-	 * @param valorPorDefecto El valor a devolver si la clave no existe o es inválida.
-	 * @param valorMinimo    El valor mínimo aceptable para el parámetro.
+	 * @param props           El objeto de propiedades.
+	 * @param clave           La clave a buscar en las propiedades.
+	 * @param valorPorDefecto El valor a devolver si la clave no existe o es
+	 *                        inválida.
+	 * @param valorMinimo     El valor mínimo aceptable para el parámetro.
 	 * @return El valor entero leído y validado, o el valor por defecto.
 	 */
 	private static int obtenerEnteroDeConfig(Properties props, String clave, int valorPorDefecto, int valorMinimo) {
@@ -136,7 +137,8 @@ public final class SimuladorConfig {
 			}
 		}
 
-		// Si el valor es nulo, inválido, o no cumple el mínimo, se imprime un error y se devuelve el valor por defecto.
+		// Si el valor es nulo, inválido, o no cumple el mínimo, se imprime un error y
+		// se devuelve el valor por defecto.
 		System.err.println("Valor de '" + clave + "' inválido o no encontrado en configuración. Se usará '"
 				+ valorPorDefecto + "' por defecto.");
 		return valorPorDefecto;

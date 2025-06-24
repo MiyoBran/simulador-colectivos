@@ -3,23 +3,37 @@ package ar.edu.unpsjb.ayp2.proyectointegrador.modelo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Representa una línea de transporte público. Contiene un identificador único,
- * un nombre descriptivo y un recorrido que es una secuencia ordenada de
- * paradas.
- * 
+ * un nombre descriptivo y un recorrido como secuencia ordenada de paradas.
+ *
  * @author Miyo
- * @version 1.1
+ * @author Enzo
+ * 
+ * @version 1.2
  */
 public class Linea {
-	private String id;
-	private String nombre;
-	private List<Parada> recorrido;
+
+	// =================================================================================
+	// ATRIBUTOS
+	// =================================================================================
+
+	/** Identificador único de la línea (ej: "1"). */
+	private final String id;
+	/** Nombre descriptivo de la línea (ej: "Línea 1 - Ida"). */
+	private final String nombre;
+	/** Secuencia ordenada de paradas que componen el recorrido de la línea. */
+	private final List<Parada> recorrido;
+
+	// =================================================================================
+	// CONSTRUCTOR
+	// =================================================================================
 
 	/**
 	 * Constructor principal.
-	 * 
+	 *
 	 * @param id     El identificador único de la línea.
 	 * @param nombre El nombre descriptivo de la línea.
 	 * @throws IllegalArgumentException si id o nombre son nulos o vacíos.
@@ -36,49 +50,99 @@ public class Linea {
 		this.recorrido = new ArrayList<>();
 	}
 
-	// --- Getters ---
-	public String getId() {
-		return id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
+	// =================================================================================
+	// MÉTODOS DE GESTIÓN DEL RECORRIDO
+	// =================================================================================
 
 	/**
-	 * Devuelve una copia defensiva de la lista de paradas del recorrido.
-	 * 
-	 * @return Una nueva lista (ArrayList) con las paradas del recorrido.
-	 */
-	public List<Parada> getRecorrido() {
-		return new ArrayList<>(this.recorrido);
-	}
-
-	// --- Métodos de Gestión del Recorrido ---
-
-	/**
-	 * Añade una parada al final del recorrido de la línea. Evita silenciosamente la
-	 * adición de paradas duplicadas consecutivas.
-	 * 
+	 * Añade una parada al final del recorrido. Evita la adición de paradas nulas o
+	 * duplicados consecutivos.
+	 *
 	 * @param parada La parada a añadir.
-	 * @throws IllegalArgumentException si la parada es nula.
 	 */
 	public void agregarParadaAlRecorrido(Parada parada) {
 		if (parada == null) {
 			throw new IllegalArgumentException("No se puede agregar una parada nula al recorrido.");
 		}
-		// REFACTORING: Se elimina la impresión en consola. La lógica simplemente ignora
-		// el duplicado.
+		// Evita agregar la misma parada dos veces seguidas.
 		if (!this.recorrido.isEmpty() && this.recorrido.get(this.recorrido.size() - 1).equals(parada)) {
 			return;
 		}
 		this.recorrido.add(parada);
 	}
 
+	// =================================================================================
+	// MÉTODOS DE CONSULTA
+	// =================================================================================
+
+	/**
+	 * Verifica si una parada específica forma parte del recorrido de esta línea.
+	 *
+	 * @param parada La parada a buscar en el recorrido.
+	 * @return {@code true} si la parada está en el recorrido, {@code false} en caso
+	 *         contrario.
+	 */
+	public boolean tieneParadaEnRecorrido(Parada parada) {
+		return parada != null && this.recorrido.contains(parada);
+	}
+
+	/**
+	 * Determina si la parada dada es la terminal (última del recorrido).
+	 *
+	 * @param parada La parada a verificar.
+	 * @return true si es la última parada, false en caso contrario.
+	 */
+	public boolean esTerminal(Parada parada) {
+		return parada != null && !this.recorrido.isEmpty() && parada.equals(getUltimaParada());
+	}
+
+	/**
+	 * [Sugerencia de Legibilidad] Genera un reporte multilínea y formateado del
+	 * recorrido de la línea.
+	 *
+	 * @return Un String con el detalle de la línea y todas sus paradas.
+	 */
+	public String getReporteRecorrido() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("--- Detalle de Línea: ").append(this.nombre).append(" (ID: ").append(this.id).append(") ---\n");
+		if (recorrido.isEmpty()) {
+			sb.append("  Recorrido vacío.\n");
+		} else {
+			sb.append("  Recorrido con ").append(recorrido.size()).append(" paradas:\n");
+			for (int i = 0; i < recorrido.size(); i++) {
+				Parada p = recorrido.get(i);
+				sb.append(String.format("    %d. Parada %s - %s\n", i + 1, p.getId(), p.getDireccion()));
+			}
+		}
+		sb.append("----------------------------------------------------");
+		return sb.toString();
+	}
+
+	// =================================================================================
+	// GETTERS
+	// =================================================================================
+
+	public String getId() {
+		return this.id;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public List<Parada> getRecorrido() {
+		return new ArrayList<>(this.recorrido);
+	}
+
+	public int getIndiceParada(Parada parada) {
+		return parada == null ? -1 : this.recorrido.indexOf(parada);
+	}
+
 	/**
 	 * Obtiene una parada del recorrido por su índice.
 	 * 
 	 * @param indice El índice de la parada (0-based).
+	 * 
 	 * @return La parada en el índice especificado.
 	 * @throws IndexOutOfBoundsException si el índice está fuera de rango.
 	 */
@@ -90,93 +154,24 @@ public class Linea {
 		return this.recorrido.get(indice);
 	}
 
-	/**
-	 * Devuelve la cantidad de paradas en el recorrido.
-	 * 
-	 * @return El número de paradas.
-	 */
-	public int longitudRecorrido() {
-		return this.recorrido.size();
-	}
-
-	/**
-	 * Verifica si una parada específica forma parte del recorrido de esta línea.
-	 * 
-	 * @param parada La parada a buscar en el recorrido.
-	 * @return {@code true} si la parada está en el recorrido, {@code false} en caso
-	 *         contrario.
-	 */
-	public boolean tieneParadaEnRecorrido(Parada parada) {
-		if (parada == null) {
-			return false;
-		}
-		return this.recorrido.contains(parada);
-	}
-
-	/**
-	 * Encuentra el índice de una parada en el recorrido.
-	 * 
-	 * @param parada La parada cuyo índice se busca.
-	 * @return El índice de la parada (0-based) o -1 si no está en el recorrido.
-	 */
-	public int getIndiceParada(Parada parada) {
-		if (parada == null) {
-			return -1;
-		}
-		return this.recorrido.indexOf(parada);
-	}
-
-	// --- Métodos de Lógica de Negocio sobre el Recorrido ---
-
-	/**
-	 * Devuelve la primera parada del recorrido.
-	 * 
-	 * @return La primera parada, o null si el recorrido está vacío.
-	 */
 	public Parada getPrimeraParada() {
 		return this.recorrido.isEmpty() ? null : this.recorrido.get(0);
 	}
 
-	/**
-	 * Devuelve la última parada del recorrido.
-	 * 
-	 * @return La última parada, o null si el recorrido está vacío.
-	 */
 	public Parada getUltimaParada() {
 		return this.recorrido.isEmpty() ? null : this.recorrido.get(this.recorrido.size() - 1);
 	}
 
-	/**
-	 * Determina si la parada dada es la terminal (última del recorrido).
-	 * 
-	 * @param parada La parada a verificar.
-	 * @return true si es la última parada, false en caso contrario.
-	 */
-	public boolean esTerminal(Parada parada) {
-		if (!this.recorrido.isEmpty() && parada != null) {
-			return parada.equals(getUltimaParada());
-		}
-		return false;
-	}
-
-	// --- Sobrescritura de Métodos de Object ---
+	// =================================================================================
+	// MÉTODOS SOBREESCRITOS (Object)
+	// =================================================================================
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Linea{id='").append(id).append('\'');
-		sb.append(", nombre='").append(nombre).append('\'');
-		sb.append(", recorrido=[");
-		if (!this.recorrido.isEmpty()) {
-			for (int i = 0; i < this.recorrido.size(); i++) {
-				sb.append(this.recorrido.get(i).getId());
-				if (i < this.recorrido.size() - 1) {
-					sb.append(" -> ");
-				}
-			}
-		}
-		sb.append("]}");
-		return sb.toString();
+		// Versión mejorada usando Streams y String.join para mayor claridad.
+		String recorridoStr = this.recorrido.stream().map(Parada::getId).collect(Collectors.joining(" -> "));
+
+		return String.format("Linea{id='%s', nombre='%s', recorrido=[%s]}", id, nombre, recorridoStr);
 	}
 
 	@Override
