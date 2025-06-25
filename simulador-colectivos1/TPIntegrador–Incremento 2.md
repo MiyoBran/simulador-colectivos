@@ -60,13 +60,15 @@ El recorrido de una línea se construye una vez y luego se consulta frecuentemen
 
 **Justificación:**  
 Aunque `HashMap` ofrece un rendimiento promedio de $O(1)$, se eligió `TreeMap` ($O(\log n)$) deliberadamente por una ventaja clave para este proyecto: mantiene las claves ordenadas. Esta característica garantiza que al iterar sobre los datos cargados, el orden sea siempre predecible, lo que facilita enormemente la depuración y la reproducibilidad de los resultados de la simulación.
-3.4. Almacenamiento de Datos en Memoria para Impresión Ordenada
 
-• Componente: interfaz.SimuladorUI
-• TAD requerido: Mapa (Map), para asociar un ID único (String) con la lista de eventos (List<String>) de cada colectivo.
-• Implementación seleccionada: java.util.LinkedHashMap
 
-Justificación:
+### 3.4. Almacenamiento de Datos en Memoria para Impresión Ordenada
+
+- **Componente:** `interfaz.SimuladorUi`  
+- **TAD requerido:** Mapa (`Map`), para asociar un ID único (`String`) con la lista de eventos (`List<String>`) generados por cada colectivo.  
+- **Implementación seleccionada:** `java.util.LinkedHashMap`
+
+**Justificación:**  
 Aunque HashMap ofrece un rendimiento promedio de $O(1)$, se eligió LinkedHashMap por una ventaja clave: preserva el orden de inserción de las claves. Esto asegura que, al mostrar los resultados o eventos de la simulación al usuario, la salida respete el mismo orden en que se generaron los datos. Esta característica hace que la presentación sea más intuitiva y fácil de seguir, además de mantener la consistencia entre ejecuciones
 
 

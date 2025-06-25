@@ -13,7 +13,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
-		<!-- Definimos java.version para que el plugin de compilación lo use -->
 		<java.version>21</java.version>
 	</properties>
 
@@ -61,7 +60,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
 				<configuration>
-					<!-- Usamos la propiedad definida arriba -->
 					<release>${java.version}</release>
 				</configuration>
 			</plugin>
@@ -73,7 +71,7 @@
 					<archive>
 						<manifest>
 							<!-- Puedes configurar la clase principal aquí si lo deseas más adelante -->
-							<!-- <mainClass>ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp</mainClass> -->
+							<mainClass>proyectointegrador.interfaz.SimuladorColectivosApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

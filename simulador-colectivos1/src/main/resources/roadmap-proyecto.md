@@ -22,7 +22,7 @@ Esta etapa detalla los pasos para crear y configurar el proyecto Java con Maven 
 3. Asegurarse de que la casilla "Create a simple project (skip archetype selection)" **NO** esté marcada. Clic en Next.  
 4. En "Filter", buscar y seleccionar el arquetipo maven-archetype-quickstart. Clic en Next.  
 5. **Configurar las Coordenadas del Proyecto:**  
-   * **Group Id:** ar.edu.unpsjb.ayp2.proyectointegrador  
+   * **Group Id:** ar.edu.unpsjb.ay.2proyectointegrador  
    * **Artifact Id:** simulador-colectivos  
    * **Version:** 0.0.1-SNAPSHOT (o la que desees)  
    * **Package:** (Eclipse lo autocompletará basado en el Group Id y Artifact Id, ej: ar.edu.unpsjb.ayp2.proyectointegrador.simulador\_colectivos. El paquete base para tus clases será ar.edu.unpsjb.ayp2.proyectointegrador).  
@@ -100,7 +100,7 @@ Abre el archivo pom.xml que se encuentra en la raíz de tu proyecto recién crea
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>ar.edu.unpsjb.ayp2.proyectointegrador.interfaz.SimuladorColectivosApp</mainClass>
+							<mainClass>proyectointegrador.interfaz.SimuladorColectivosApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -122,15 +122,15 @@ Después de guardar el pom.xml, haz clic derecho en el proyecto en Eclipse y sel
 Maven crea una estructura estándar. Deberás crear los subpaquetes y carpetas de recursos manualmente si no existen, siguiendo esta guía:
 
 1. **Paquetes Java Principales (dentro de** src/main/java\*\*):\*\*  
-   * La ruta base para tus paquetes será: src/main/java/ar/edu/unpsjb/ayp2/proyectointegrador/  
-   * Dentro de esta ruta, crea los subpaquetes:  
+   * La ruta base para tus paquetes será: src/main/java/proyectointegrador/  
+   * Dentro de esta ruta, los subpaquetes:  
      * modelo  
      * datos  
      * logica  
      * interfaz  
 2. **Carpetas de Recursos Principales (dentro de** src/main/**):**  
    * Asegúrate de que exista la carpeta src/main/resources/.  
-   * Coloca los archivos proporcionados por la cátedra y tus documentos de planificación:  
+   * archivos proporcionados por la cátedra y tus documentos de planificación:  
    * (src/main/resources/):
    * paradas_pm_mapeadas.txt (Datos de paradas, vía config.properties)
    * lineas_pm_mapeadas.txt (Datos de líneas, vía config.properties)
@@ -138,20 +138,19 @@ Maven crea una estructura estándar. Deberás crear los subpaquetes y carpetas d
    * prompt-proyecto.md
    * roadmap-proyecto.md (este mismo archivo)
    * datos_pm/ (Para otros archivos de datos)
-		** horarios_pm.txt (Formato experimental: ID_Linea;Sentido;Rango_Dias;HH:MM_Inicio;HH:MM_Fin;Frecuencia_Minutos. Uso detallado para Inc. futuros, para Inc. 2 podría informar frecuencias básicas o tiempos de tramo si se decide).
+		** horarios_pm.txt (Formato experimental).
      
 3. **Paquetes** Java de Pruebas (dentro **de** src/test/java\*\*):\*\*  
-   * La ruta base será: src/test/java/ar/edu/unpsjb/ayp2/proyectointegrador/  
-   * Dentro de esta ruta, crea los subpaquetes:  
+   * La ruta base será: src/test/java/proyectointegrador/  
+   * Dentro de esta ruta, los subpaquetes:  
      * modelo  
      * datos  
      * logica  
 4. **Carpetas** de Recursos de Pruebas (dentro de src/test/**):**  
-   * Asegúrate de que exista la carpeta src/test/resources/.  
    * Dentro de src/test/resources/, crea la subcarpeta:  
-     * datos\_test (para archivos paradas\_test.txt, lineas\_test.txt que usarás en tus JUnit tests)
+     * datos\_test (para archivos paradas\_test.txt, lineas\_test.txt se usaran en JUnit tests)
 
-**Estructura Visual Final (resumida):**
+**Estructura Visual Final :**
 
 * simulador-colectivos/  
 ├── README.md
@@ -231,9 +230,9 @@ Maven crea una estructura estándar. Deberás crear los subpaquetes y carpetas d
     │               ├── explicacion-paradas-test.txt
     │               ├── lineas_test.txt
     │               └── paradas_test.txt
+	└──TPintegrador-Incremento2.md
 
 
-Con esto, el proyecto está correctamente configurado y listo para empezar a desarrollar las clases según el plan.
 
 ## **1. Introducción y Principios Guía (del Proyecto)**
 

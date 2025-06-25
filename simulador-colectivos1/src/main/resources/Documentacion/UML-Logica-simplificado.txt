@@ -12,15 +12,10 @@ class GestorEstadisticas {
   + calcularEstadisticas(): void
 }
 
-class PlanificadorRutas {
-  + PlanificadorRutas()
-  + planificarRuta(colectivo: Colectivo): List<Parada>
-}
 
 class Simulador {
   - generador: GeneradorPasajeros
   - gestor: GestorEstadisticas
-  - planificador: PlanificadorRutas
   - colectivos: List<Colectivo>
   - lineas: List<Linea>
   - paradas: List<Parada>
@@ -38,7 +33,7 @@ class SimuladorHelper {
 
 Simulador o-- GeneradorPasajeros : generador
 Simulador o-- GestorEstadisticas : gestor
-Simulador o-- PlanificadorRutas : planificador
+
 Simulador o-- "0..*" Colectivo : colectivos
 Simulador o-- "0..*" Linea : lineas
 Simulador o-- "0..*" Parada : paradas
@@ -48,9 +43,7 @@ GeneradorPasajeros ..> Pasajero
 GestorEstadisticas ..> Pasajero
 GestorEstadisticas ..> Colectivo
 GestorEstadisticas ..> Parada
-PlanificadorRutas ..> Linea
-PlanificadorRutas ..> Colectivo
-PlanificadorRutas ..> Parada
+
 SimuladorHelper ..> Pasajero
 SimuladorHelper ..> Linea
 
