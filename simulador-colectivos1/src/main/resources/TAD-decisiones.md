@@ -66,25 +66,20 @@ La elección clave aquí fue entre `HashMap` y `TreeMap`.
 Se eligió `TreeMap` deliberadamente por la **predictibilidad y facilidad de depuración**. Al iterar sobre el mapa de paradas o líneas, siempre se obtienen en el mismo orden (alfabético por ID), lo que hace que los reportes, los logs y el comportamiento de la simulación sean consistentes y reproducibles. En la fase de carga de datos, esta consistencia fue más valiosa que la pequeña ganancia de rendimiento de un `HashMap`.
 
 ---
+### 4. Almacenamiento de Datos en Memoria para Impresión Ordenada
 
-## 4. Red de Transporte y Cálculo de Rutas
-
--   **Componente/Clase:** `logica.PlanificadorRutas`
+-   **Componente/Clase:** `interfaz.SimuladorUi`
 -   **TAD Requerido:**
-    1.  **Grafo Dirigido Ponderado (Weighted Directed Graph)** para modelar la red.
-    2.  **Cola de Prioridad (Priority Queue)** para la implementación del algoritmo de Dijkstra.
+    1.  **Mapa (`Map`)** para asociar un ID único (`String`) con la lista de eventos (`List<String>`) generados por cada colectivo.
 -   **Implementación Elegida:**
-    1.  `net.datastructures.AdjacencyMapGraph`
-    2.  `java.util.PriorityQueue`
+    1.  `java.util.LinkedHashMap`
 
 #### Justificación:
 
-1.  **Grafo (`AdjacencyMapGraph`):**
-    -   Se utilizó la implementación provista por la cátedra, que se basa en una **lista de adyacencia** (implementada con un mapa). Esta estructura es ideal para **grafos dispersos**, como una red de transporte donde una parada solo se conecta directamente con unas pocas otras.
-    -   Permite obtener todas las aristas salientes de un vértice (una parada) de forma eficiente (complejidad $O(\text{deg}(v))$, donde $\text{deg}(v)$ es el número de conexiones de la parada), lo cual es la operación fundamental en los algoritmos de recorrido como Dijkstra.
+1.  **Mapa (`LinkedHashMap`):**
+    -   Aunque `HashMap` ofrece un rendimiento promedio de $O(1)$ para operaciones de acceso e inserción, se eligió `LinkedHashMap` debido a su capacidad de **preservar el orden de inserción de las claves**.
+    -   Esta característica es clave para la presentación ordenada de los eventos de la simulación al usuario. Al mantener el orden en que se agregan los eventos por colectivo, se mejora la **claridad temporal** y se garantiza una salida más **intuitiva y reproducible** entre ejecuciones.
+    -   En este contexto, cada entrada del mapa representa un colectivo, y la lista asociada contiene los eventos generados paso a paso durante la simulación.
 
-2.  **Cola de Prioridad (`PriorityQueue`):**
-    -   El algoritmo de Dijkstra necesita encontrar repetidamente el vértice no visitado con la menor distancia acumulada. Una `PriorityQueue`, implementada en Java como un **montículo binario (binary heap)**, es la estructura de datos canónica para esta tarea.
-    -   Las operaciones `add` (insertar un vértice con su distancia) y `poll` (extraer el vértice con la mínima distancia) tienen una complejidad de $O(\log n)$. Esto hace que la implementación de Dijkstra sea muy eficiente, con una complejidad total de $O(E \log V)$, donde $E$ es el número de aristas y $V$ el de vértices.
 
 ---
