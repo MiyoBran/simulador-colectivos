@@ -1,6 +1,6 @@
 # Documento de Decisiones sobre Tipos Abstractos de Datos (TADs)
 
-**Proyecto:** Simulador de Colectivos Urbanos
+**Proyecto:** Simulador de Colectivos Urbanos  
 **Fecha:** 2025-06-22
 
 Este documento fundamenta la elección de las implementaciones concretas para los Tipos Abstractos de Datos (TADs) utilizados en los componentes clave del proyecto. Las decisiones se basan en la eficiencia (Complejidad Algorítmica / Notación Big O) y la adecuación al caso de uso específico.

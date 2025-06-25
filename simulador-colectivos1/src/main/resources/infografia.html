@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Simulador de Colectivos Urbanos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+        .section-title {
+            font-weight: 900;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #8E2DE2, #4A00E0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .kpi-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: #8E2DE2;
+        }
+        .flowchart-node {
+            background-color: rgba(142, 45, 226, 0.1);
+            border: 1px solid #8E2DE2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .flowchart-arrow {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .flowchart-arrow::after {
+            content: '▼';
+            font-size: 2rem;
+            color: #1CB5E0;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 
+        Plan de la Infografía:
+        Narrativa: Contar la historia del proyecto "Simulador de Colectivos Urbanos" desde el desafío inicial hasta su estado final, destacando la arquitectura, funcionalidades, decisiones técnicas y logros.
+        Estructura: SPA de una sola página con scroll vertical. Cada sección del informe se convierte en un bloque visual.
+        1. Héroe: Título impactante.
+        2. Desafío: Problema a resolver.
+        3. Solución: Diagrama de flujo de la arquitectura.
+        4. Funcionalidades: Grid de tarjetas con iconos.
+        5. Decisiones Técnicas: Gráficos de Chart.js para comparar rendimiento de TADs.
+        6. Problemas Resueltos: Lista de logros de ingeniería.
+        7. Validación: Gran número y gráfico de dona para los tests.
+        8. Futuro: Grid de tarjetas para posibles mejoras.
+        9. Proceso Moderno: Sección sobre el uso de IA.
+        Paleta de Colores: "Vibrant & Captivating" (#8E2DE2, #4A00E0, #1CB5E0) sobre un fondo oscuro.
+        Confirmación: No se utilizaron Mermaid JS ni gráficos SVG. Todos los diagramas se implementan con HTML/CSS y los gráficos con Chart.js sobre Canvas.
+    -->
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center my-12 md:my-20">
+            <h1 class="text-4xl md:text-6xl font-black mb-4" style="background: linear-gradient(90deg, #1CB5E0, #8E2DE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Simulador de Colectivos Urbanos</h1>
+            <p class="text-lg md:text-xl text-gray-400">Un Vistazo Profundo a la Ingeniería Detrás de un Sistema de Transporte Inteligente</p>
+        </header>
+
+        <section id="desafio" class="my-16 md:my-24">
+            <h2 class="section-title text-center mb-8">🎯 1. El Desafío</h2>
+            <div class="kpi-card rounded-xl p-8 text-center text-lg md:text-xl leading-relaxed">
+                <p>Crear un simulador del sistema de transporte público de <span class="font-bold text-white">Puerto Madryn</span> para analizar su eficiencia y rendimiento, modelando la compleja interacción entre líneas, colectivos, paradas y pasajeros para generar métricas clave que evaluaran la calidad del servicio.</p>
+            </div>
+        </section>
+
+        <section id="solucion" class="my-16 md:my-24">
+            <h2 class="section-title text-center mb-12">🏗️ 2. La Solución: Una Arquitectura Modular</h2>
+            <div class="flex flex-col items-center">
+                <div class="flowchart-node w-full md:w-3/4 rounded-lg p-4 text-center mb-4">
+                    <h3 class="font-bold text-xl text-white">🖥️ Interfaz (UI/Controller)</h3>
+                    <p class="text-gray-300">Gestiona la interacción con el usuario y orquesta la aplicación.</p>
+                </div>
+                <div class="flowchart-arrow"></div>
+                <div class="flowchart-node w-full md:w-3/4 rounded-lg p-4 text-center">
+                    <h3 class="font-bold text-xl text-white">🧠 Lógica de Negocio</h3>
+                    <p class="text-gray-300">El cerebro: Simulador, Estadísticas, Planificador de Rutas.</p>
+                </div>
+                 <div class="flowchart-arrow"></div>
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flowchart-node rounded-lg p-4 text-center">
+                        <h3 class="font-bold text-xl text-white">🧩 Modelo</h3>
+                        <p class="text-gray-300">Entidades del dominio: Colectivo, Línea, Parada, Pasajero.</p>
+                    </div>
+                    <div class="flowchart-node rounded-lg p-4 text-center">
+                        <h3 class="font-bold text-xl text-white">📦 Datos y Reportes</h3>
+                        <p class="text-gray-300">Carga de datos y formato de reportes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="funcionalidades" class="my-16 md:my-24">
+            <h2 class="section-title text-center mb-12">✨ 3. Funcionalidades Clave Implementadas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Modelado de la Red</h3>
+                    <p class="text-gray-400">Representación de líneas, recorridos y múltiples colectivos.</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Gestión de Capacidad</h3>
+                    <p class="text-gray-400">Simulación de capacidad limitada (sentados/parados) y múltiples recorridos.</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Ciclo de Vida del Pasajero</h3>
+                    <p class="text-gray-400">Desde la espera en la parada hasta el descenso en su destino.</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Cálculo de Ruta Óptima</h3>
+                    <p class="text-gray-400">Implementación del algoritmo de Dijkstra para encontrar el mejor camino.</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6 col-span-1 md:col-span-2 lg:col-span-1">
+                    <h3 class="font-bold text-lg text-white mb-2">Indicadores de Rendimiento (KPIs)</h3>
+                    <p class="text-gray-400">Cálculo del Índice de Satisfacción y Ocupación Promedio.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="decisiones" class="my-16 md:my-24">
+            <h2 class="section-title text-center mb-12">💡 4. Decisiones Técnicas Inteligentes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-4 text-center">Rendimiento en Colas de Espera</h3>
+                    <div class="chart-container">
+                        <canvas id="queueChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400">Se eligió `LinkedList` (O(1)) por su eficiencia al añadir/quitar de la cola, frente a `ArrayList` (O(n)).</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-4 text-center">Rendimiento en Carga de Datos</h3>
+                    <div class="chart-container">
+                        <canvas id="mapChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400">Se priorizó `TreeMap` (O(log n)) por su orden predecible para depuración, sobre la velocidad pura de `HashMap` (O(1)).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ingenieria" class="my-16 md:my-24">
+             <h2 class="section-title text-center mb-12">⚙️ 5. Ingeniería de Software en Acción</h2>
+             <div class="space-y-6">
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">🧹 Calidad de Código</h3>
+                    <p class="text-gray-400">Profunda refactorización para mejorar el encapsulamiento, la documentación Javadoc y la organización general del código.</p>
+                </div>
+                 <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">🐞 Corrección de Bugs Críticos</h3>
+                    <p class="text-gray-400">Se solucionaron errores complejos relacionados con la inicialización de tests, el modelado del grafo (dirigido vs. no dirigido) y el cálculo de métricas.</p>
+                </div>
+                 <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">📈 Reportes Legibles</h3>
+                    <p class="text-gray-400">Se estandarizó y mejoró la salida por consola para crear reportes estructurados y claros para el usuario final.</p>
+                </div>
+             </div>
+        </section>
+
+        <section id="validacion" class="my-16 md:my-24">
+            <h2 class="section-title text-center mb-12">✅ 6. Validación Rigurosa</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center">
+                    <span class="text-8xl md:text-9xl font-black" style="color: #1CB5E0;">107</span>
+                    <p class="text-2xl font-bold text-white mt-2">Pruebas Unitarias</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-4 text-center">Cobertura de Pruebas</h3>
+                    <div class="chart-container h-64 md:h-72">
+                         <canvas id="testsChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400">Las pruebas cubren modelo, lógica, carga de datos y configuración, asegurando la robustez del sistema.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="futuro" class="my-16 md:my-24">
+             <h2 class="section-title text-center mb-12">🚀 7. El Futuro del Proyecto</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Gestión de Horarios y Demoras</h3>
+                    <p class="text-gray-400">Modelar frecuencias dinámicas y simular retrasos por tráfico.</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Interfaz Gráfica (GUI)</h3>
+                    <p class="text-gray-400">Visualizar la simulación en tiempo real.</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Generación Dinámica de Pasajeros</h3>
+                    <p class="text-gray-400">Crear pasajeros según franjas horarias (horas pico).</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-white mb-2">Logger Centralizado</h3>
+                    <p class="text-gray-400">Implementar un sistema de logging profesional.</p>
+                </div>
+             </div>
+        </section>
+        
+        <section id="proceso" class="my-16 md:my-24">
+            <h2 class="section-title text-center mb-12">🤖 8. Un Proceso de Desarrollo Moderno</h2>
+            <div class="kpi-card rounded-xl p-8 text-center">
+                <p class="text-lg md:text-xl leading-relaxed">El proyecto integró herramientas de **IA como asistentes de programación (LLMs y Copilot)** para acelerar la depuración, la generación de plantillas de tests, la refactorización y la revisión de código, demostrando una metodología de desarrollo actual y eficiente.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const chartTooltipPlugin = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                          return label.join(' ');
+                        } else {
+                          return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const chartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: chartTooltipPlugin,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                },
+                x: {
+                    ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                }
+            }
+        };
+
+        const barChartOptions = {
+            ...chartOptions,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { 
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        callback: function(value, index, values) {
+                           const labels = ['O(1)', 'O(log n)', 'O(n)'];
+                           return labels[index] || '';
+                        }
+                    },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    min: 0,
+                    max: 2, 
+                }
+            }
+        };
+
+
+        new Chart(document.getElementById('queueChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Añadir (offer)', 'Quitar (poll)'],
+                datasets: [{
+                    label: 'LinkedList',
+                    data: [0, 0], // O(1)
+                    backgroundColor: 'rgba(142, 45, 226, 0.6)',
+                    borderColor: '#8E2DE2',
+                    borderWidth: 1
+                }, {
+                    label: 'ArrayList',
+                    data: [0, 2], // O(1) y O(n)
+                    backgroundColor: 'rgba(28, 181, 224, 0.6)',
+                    borderColor: '#1CB5E0',
+                    borderWidth: 1
+                }]
+            },
+            options: barChartOptions
+        });
+
+        new Chart(document.getElementById('mapChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Acceso (get)', 'Inserción (put)'],
+                datasets: [{
+                    label: 'TreeMap',
+                    data: [1, 1], // O(log n)
+                    backgroundColor: 'rgba(142, 45, 226, 0.6)',
+                    borderColor: '#8E2DE2',
+                    borderWidth: 1
+                }, {
+                    label: 'HashMap',
+                    data: [0, 0], // O(1)
+                    backgroundColor: 'rgba(28, 181, 224, 0.6)',
+                    borderColor: '#1CB5E0',
+                    borderWidth: 1
+                }]
+            },
+            options: barChartOptions
+        });
+        
+        new Chart(document.getElementById('testsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Pasaron', 'Fallaron'],
+                datasets: [{
+                    label: '# de Pruebas',
+                    data: [107, 0],
+                    backgroundColor: [
+                        'rgba(28, 181, 224, 0.8)',
+                        'rgba(255, 99, 132, 0.8)'
+                    ],
+                    borderColor: [
+                        '#1CB5E0',
+                        '#FF6384'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    ...chartTooltipPlugin,
+                    legend: {
+                        labels: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
